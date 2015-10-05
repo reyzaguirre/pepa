@@ -19,4 +19,5 @@ pty <- function(x) {
 
 pty_df <- function(x) {
   rmarkdown::render("inst/df.Rmd", params = list(x = x))
+  browseURL("inst/df.html")
 }
