@@ -19,6 +19,12 @@ Then type:
 ```{r eval=F}
 devtools::install_github("reyzaguirre/pepa")
 ```
+and (if you have not installed this before)
+
+```{r eval=F}
+devtools::install_github("reyzaguirre/st4gi")
+```
+because `pepa` depends on `st4gi`.
 
 Usage
 -----
