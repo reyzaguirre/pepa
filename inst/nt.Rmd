@@ -1,0 +1,30 @@
+---
+title: "Descriptive report for a numeric trait"
+author: "International Potato Center"
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output: 
+  html_document:
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  word_document:
+    highlight: "tango"
+params: 
+  x: "no data"
+---
+
+```{r, echo = FALSE}
+nt = params$x
+```
+
+It looks like you have a numeric trait on a quantitative scale. A descriptive summary tells you that
+```{r, echo = FALSE}
+output <- summary(nt)
+output
+```
+the minimum is `r output[[1]]`, the maximum `r output[[6]]`, the median `r output[[3]]`, and the mean `r output[[4]]`. A boxplot could be a suitable plot for these data:
+
+```{r, echo = FALSE}
+boxplot(nt)
+```

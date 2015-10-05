@@ -14,10 +14,20 @@
 
 pty <- function(x) {
   if (class(x) == "data.frame") pty_df(x) else
-    print("I am sorry, this object is not in my list")
+    if (class(x) == "numeric") pty_nt(x) else
+      print("I am sorry, this object is not in my list")
 }
+
+# for data.frames
 
 pty_df <- function(x) {
   rmarkdown::render("inst/df.Rmd", params = list(x = x))
   browseURL("inst/df.html")
+}
+
+# for numeric traits
+
+pty_nt <- function(x) {
+  rmarkdown::render("inst/nt.Rmd", params = list(x = x))
+  browseURL("inst/nt.html")
 }
