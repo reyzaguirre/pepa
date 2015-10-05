@@ -20,6 +20,10 @@ It uses a set of templates to explain R objects in plain English.
 It aims to produce automatic reports for some standard statistical procedures, most
 of them included in the \code{st4gi} package.
 }
+\examples{
+# Pepa tells you something about a data frame:
+pty(pjpz09)
+}
 \author{
 Raul Eyzaguirre.
 }

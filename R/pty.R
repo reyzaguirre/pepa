@@ -7,6 +7,9 @@
 #' It aims to produce automatic reports for some standard statistical procedures, most
 #' of them included in the \code{st4gi} package.
 #' @return It returns an automatic report about the selected R object.
+#' @examples
+#' # Pepa tells you something about a data frame:
+#' pty(pjpz09)
 #' @export
 
 pty <- function(x) {

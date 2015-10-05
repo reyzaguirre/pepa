@@ -6,8 +6,8 @@ Date: 2015-10-05
 Author: Raul Eyzaguirre
 Maintainer: Raul Eyzaguirre <R.EYZAGUIRRE@CGIAR.ORG>
 Description: This packages creates automatic reports for different types of statistical methodologies.
-Depends: R (>= 3.0.0)
-Imports: lme4, shiny, st4gi
+Depends: R (>= 3.0.0), st4gi
+Imports: lme4, shiny
 License: MIT + file LICENSE
 Copyright: International Potato Center (2015)
 LazyData: true
