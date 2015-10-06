@@ -9,6 +9,7 @@
 #' @return It returns an automatic report about the selected R object.
 #' @examples
 #' # Pepa tells you something about a data frame:
+#' library(st4gi)
 #' pty(pjpz09)
 #' @export
 
