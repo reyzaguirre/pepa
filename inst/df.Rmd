@@ -1,5 +1,5 @@
 ---
-title: "Descriptive report for a data table"
+title: "Report for a data table"
 author: "International Potato Center"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 

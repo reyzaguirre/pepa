@@ -1,5 +1,5 @@
 ---
-title: "Descriptive report for an aov object"
+title: "Report for an aov object"
 author: "International Potato Center"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 
@@ -26,6 +26,6 @@ anova(model)
 ```
 
 Your model has `r noterms` terms
-`r if(sum(pvalues < 0.05) > 0) {"and some of them are significant. That is really good!" }`
+`r if(sum(pvalues < 0.05) > 0) {"and some of them are significant. That is really good! Have you checked your assumptions?" }`
 
 `r if(sum(pvalues < 0.05) == 0) {"but none of them is significant. I am really sorry, but don't forget that p-values are a function of sample size, so maybe you can try with more replications next time." }`
