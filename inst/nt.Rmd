@@ -15,25 +15,46 @@ params:
 ---
 
 ```{r, echo = FALSE}
-nt = params$x
-```
+object = params$x
 
-It looks like you have a numeric trait on a quantitative scale. A descriptive summary tells you that
-```{r, echo = FALSE}
-output <- summary(nt)
-output
-```
-the minimum is `r output[[1]]`, the maximum `r output[[6]]`, the median `r output[[3]]`, and the mean `r output[[4]]`. A boxplot could be a suitable plot for these data:
+# Some parameters
+p1 <- length(object)
+p2 <- max(table(object))
+p3 <- length(table(object))
 
-```{r, echo = FALSE}
-boxplot(nt)
-```
-
-```{r, echo = F}
 # Compute skewness parameter
-sk <- 3*(mean(nt) - median(nt))/sd(nt)
+sk <- 3*(mean(object) - median(object))/sd(object)
+```
+
+It looks like you have a numeric trait. You can see a descriptive summary below:
+```{r, echo = FALSE}
+output <- summary(object)
+output
 ```
 
 `r if(sk > 0.5) {"It looks like you have some positive skewness because your mean is quite larger than your median. Watch out with this if you want to fit a model that assumes normality." }`
 
 `r if(sk < -0.5) {"It looks like you have some negative skewness because your mean is quite smaller than your median. Watch out with this if you want to fit a model that assumes normality." }`
+
+`r if(p1 > 25 & (p1/p3 <= 2 | (p1/p3 > 2 & p3 > 20))) {"A boxplot could be a suitable plot for these data:"}`
+
+```{r, echo = FALSE}
+if(p1 > 25 & (p1/p3 <= 2 | (p1/p3 > 2 & p3 > 20))) boxplot(object)
+```
+`r if(p1 > 25 & p1/p3 > 2 & p3 <= 20) {"For this trait a frequency table could produce a good display of the data:"}`
+
+```{r, echo = FALSE}
+if(p1 > 25 & p1/p3 > 2 & p3 <= 20) table(object)
+```
+
+`r if(p1 <= 25) {"A dotplot could be a suitable plot for these data:"}`
+
+```{r, echo = FALSE}
+if(p1 <= 25) dotplot(object)
+```
+
+`r if(p1 > 25 & p1/p3 < 2 & p2/p1 > 0.05) {"Although your trait seems to be on a continuous scale, there are some values with a very high frequency. What out with this if you plan to fit a model that assumes normality. You can see these values and their frequency below:"}`
+
+```{r, echo = FALSE}
+if(p1 > 25 & p1/p3 < 2 & p2/p1 > 0.05) table(object)[table(object)/p1 > 0.05]
+```

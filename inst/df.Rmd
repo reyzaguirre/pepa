@@ -15,12 +15,12 @@ params:
 ---
 
 ```{r, echo = FALSE}
-df = params$x
+object = params$x
 ```
 
 You have a nice data table with `r dim(pjpz09)[1]` rows and `r dim(pjpz09)[2]` columns. The first six rows are shown below:
 ```{r, echo = FALSE}
-head(df)
+head(object)
 ```
 Remember that the table is the standard format for data analysis; it is the kind of data structure that any statistical package prefers. In a table you have:
 
