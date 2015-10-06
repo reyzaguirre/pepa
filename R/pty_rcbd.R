@@ -14,9 +14,14 @@
 #' @export
 
 pty_rcbd <- function(trait, treat, block, data) {
-  rmarkdown::render("inst/aov_rcbd.Rmd", params = list(trait = trait,
-                                                       treat = treat,
-                                                       block = block,
-                                                       data = data))
-  browseURL("inst/aov_rcbd.html")
+
+  dirfiles <- system.file(package = "pepa")
+  fileRmd <- paste(dirfiles, "/aov_rcbd.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/aov_rcbd.html", sep = "")
+
+  rmarkdown::render(fileRmd, params = list(trait = trait,
+                                           treat = treat,
+                                           block = block,
+                                           data = data))
+  browseURL(fileURL)
 }

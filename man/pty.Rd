@@ -22,7 +22,6 @@ of them included in the \code{st4gi} package.
 }
 \examples{
 # Pepa tells you something about a data frame:
-library(st4gi)
 pty(pjpz09)
 }
 \author{

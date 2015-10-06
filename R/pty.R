@@ -9,7 +9,6 @@
 #' @return It returns an automatic report about the selected R object.
 #' @examples
 #' # Pepa tells you something about a data frame:
-#' library(st4gi)
 #' pty(pjpz09)
 #' @export
 
@@ -21,30 +20,40 @@ pty <- function(x) {
   if (class(x) == "aov") pty_aov(x)
 }
 
+dirfiles <- system.file(package = "pepa")
+
 # Not available yet
 
 pty_na <- function(x) {
-  rmarkdown::render("inst/na.Rmd", params = list(x = x))
-  browseURL("inst/na.html")
+  fileRmd <- paste(dirfiles, "/na.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/na.html", sep = "")
+  rmarkdown::render(fileRmd, params = list(x = x))
+  browseURL(fileURL)
 }
 
 # for data.frames
 
 pty_df <- function(x) {
-  rmarkdown::render("inst/df.Rmd", params = list(x = x))
-  browseURL("inst/df.html")
+  fileRmd <- paste(dirfiles, "/df.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/df.html", sep = "")
+  rmarkdown::render(fileRmd, params = list(x = x))
+  browseURL(fileURL)
 }
 
 # for numeric traits
 
 pty_nt <- function(x) {
-  rmarkdown::render("inst/nt.Rmd", params = list(x = x))
-  browseURL("inst/nt.html")
+  fileRmd <- paste(dirfiles, "/nt.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/nt.html", sep = "")
+  rmarkdown::render(fileRmd, params = list(x = x))
+  browseURL(fileURL)
 }
 
 # for linear models with aov
 
 pty_aov <- function(x) {
-  rmarkdown::render("inst/aov.Rmd", params = list(x = x))
-  browseURL("inst/aov.html")
+  fileRmd <- paste(dirfiles, "/aov.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/aov.html", sep = "")
+  rmarkdown::render(fileRmd, params = list(x = x))
+  browseURL(fileURL)
 }
