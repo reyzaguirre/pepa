@@ -17,6 +17,7 @@ pty <- function(x) {
   if (class(x) %in% classlist == FALSE) pty_na(x)
   if (class(x) == "data.frame") pty_df(x)
   if (class(x) == "numeric") pty_nt(x)
+  if (class(x) == "aov") pty_aov(x)
 }
 
 # Not available yet
@@ -40,3 +41,9 @@ pty_nt <- function(x) {
   browseURL("inst/nt.html")
 }
 
+# for linear models with aov
+
+pty_aov <- function(x) {
+  rmarkdown::render("inst/aov.Rmd", params = list(x = x))
+  browseURL("inst/aov.html")
+}

@@ -15,7 +15,7 @@ params:
 ---
 
 ```{r, echo = FALSE}
-object = params$x
+object <- params$x
 ```
 
 You have a nice data table with `r dim(pjpz09)[1]` rows and `r dim(pjpz09)[2]` columns. The first six rows are shown below:

@@ -1,0 +1,31 @@
+---
+title: "Descriptive report for an aov object"
+author: "International Potato Center"
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output: 
+  html_document:
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  word_document:
+    highlight: "tango"
+params: 
+  x: "no data"
+---
+
+```{r, echo = FALSE}
+object <- params$x
+noterms <- dim(anova(model))[1] - 1
+pvalues <- anova(model)[1:noterms, 5]
+```
+
+Congratulations! You have fitted a linear model. The ANOVA table for your model is
+```{r, echo = FALSE}
+anova(model)
+```
+
+Your model has `r noterms` terms
+`r if(sum(pvalues < 0.05) > 0) {"and some of them are significant. That is really good!" }`
+
+`r if(sum(pvalues < 0.05) == 0) {"but none of them is significant. I am really sorry, but don't forget that p-values are a function of sample size, so maybe you can try with more replications next time." }`
