@@ -50,7 +50,7 @@ pty_nt <- function(x, author) {
   browseURL(fileURL)
 }
 
-# for linear models with aov
+# for linear models with aov or lm
 
 pty_aov <- function(x, author) {
   fileRmd <- paste(dirfiles, "/aov.Rmd", sep = "")
