@@ -1,6 +1,6 @@
 ---
 title: "Report for a RCBD"
-author: "International Potato Center"
+author: '`r params$author`'
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 
   html_document:
@@ -15,6 +15,7 @@ params:
   treat: "no data"
   block: "no data"
   data: "no data"
+  author: "no data"
 ---
 
 ```{r, echo = FALSE}

@@ -4,10 +4,12 @@
 \alias{pty}
 \title{Pepa tells you}
 \usage{
-pty(x)
+pty(x, author = "International Potato Center")
 }
 \arguments{
 \item{x}{An R object.}
+
+\item{author}{Author.}
 }
 \value{
 It returns an automatic report about the selected R object.

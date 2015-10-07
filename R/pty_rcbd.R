@@ -5,6 +5,7 @@
 #' @param treat The treatments.
 #' @param block The blocks.
 #' @param data The name of the data frame.
+#' @param author Author.
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a RCBD and explains the results.
 #' It also checks the assumptions.
@@ -13,7 +14,7 @@
 #' pty_rcbd("trw", "geno", "rep", pjpz09)
 #' @export
 
-pty_rcbd <- function(trait, treat, block, data) {
+pty_rcbd <- function(trait, treat, block, data, author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
   fileRmd <- paste(dirfiles, "/aov_rcbd.Rmd", sep = "")
@@ -22,6 +23,7 @@ pty_rcbd <- function(trait, treat, block, data) {
   rmarkdown::render(fileRmd, params = list(trait = trait,
                                            treat = treat,
                                            block = block,
-                                           data = data))
+                                           data = data,
+                                           author = author))
   browseURL(fileURL)
 }

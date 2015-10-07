@@ -1,6 +1,6 @@
 ---
 title: "Report for an aov object"
-author: "International Potato Center"
+author: '`r params$author`'
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 
   html_document:
@@ -12,17 +12,14 @@ output:
     highlight: "tango"
 params: 
   x: "no data"
+  author: "no data"
 ---
-
-```{r, echo = FALSE}
-object <- params$x
-noterms <- dim(anova(object))[1] - 1
-pvalues <- anova(object)[1:noterms, 5]
-```
 
 Congratulations! You have fitted a linear model. The ANOVA table for your model is
 ```{r, echo = FALSE}
-anova(object)
+anova(params$x)
+noterms <- dim(anova(params$x))[1] - 1
+pvalues <- anova(params$x)[1:noterms, 5]
 ```
 
 Your model has `r noterms` terms

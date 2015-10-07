@@ -1,6 +1,6 @@
 ---
 title: "Report for unknown object"
-author: "International Potato Center"
+author: '`r params$author`'
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 
   html_document:
@@ -12,6 +12,7 @@ output:
     highlight: "tango"
 params: 
   x: "no data"
+  author: "no data"
 ---
 
 I am sorry, this object is not in my list.

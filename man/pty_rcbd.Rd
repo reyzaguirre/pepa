@@ -4,7 +4,7 @@
 \alias{pty_rcbd}
 \title{Pepa tells you about RCBD}
 \usage{
-pty_rcbd(trait, treat, block, data)
+pty_rcbd(trait, treat, block, data, author = "International Potato Center")
 }
 \arguments{
 \item{trait}{The trait to analize.}
@@ -14,6 +14,8 @@ pty_rcbd(trait, treat, block, data)
 \item{block}{The blocks.}
 
 \item{data}{The name of the data frame.}
+
+\item{author}{Author.}
 }
 \value{
 It returns an automatic report about the RCBD fitted model.
