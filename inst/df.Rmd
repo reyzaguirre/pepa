@@ -18,7 +18,7 @@ params:
 object <- params$x
 ```
 
-You have a nice data table with `r dim(pjpz09)[1]` rows and `r dim(pjpz09)[2]` columns. The first six rows are shown below:
+You have a nice data table with `r dim(object)[1]` rows and `r dim(object)[2]` columns. The first six rows are shown below:
 ```{r, echo = FALSE}
 head(object)
 ```

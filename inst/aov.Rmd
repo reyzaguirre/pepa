@@ -16,13 +16,13 @@ params:
 
 ```{r, echo = FALSE}
 object <- params$x
-noterms <- dim(anova(model))[1] - 1
-pvalues <- anova(model)[1:noterms, 5]
+noterms <- dim(anova(object))[1] - 1
+pvalues <- anova(object)[1:noterms, 5]
 ```
 
 Congratulations! You have fitted a linear model. The ANOVA table for your model is
 ```{r, echo = FALSE}
-anova(model)
+anova(object)
 ```
 
 Your model has `r noterms` terms

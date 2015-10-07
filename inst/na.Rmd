@@ -14,8 +14,4 @@ params:
   x: "no data"
 ---
 
-```{r, echo = FALSE}
-object <- params$x
-```
-
 I am sorry, this object is not in my list.
