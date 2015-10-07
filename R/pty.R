@@ -14,11 +14,11 @@
 #' @export
 
 pty <- function(x, author = "International Potato Center") {
-  classlist <- c("data.frame", "numeric")
+  classlist <- c("data.frame", "numeric", "aov", "lm")
   if (class(x) %in% classlist == FALSE) pty_na(x, author = author)
   if (class(x) == "data.frame") pty_df(x, author = author)
   if (class(x) == "numeric") pty_nt(x, author = author)
-  if (class(x) == "aov") pty_aov(x, author = author)
+  if (sum(class(x) %in% c("aov", "lm")) > 0) pty_aov(x, author = author)
 }
 
 dirfiles <- system.file(package = "pepa")
