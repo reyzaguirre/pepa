@@ -29,6 +29,16 @@ To load the package type:
 library(pepa)
 ```
 
+and have some fun typing something like:
+
+```{r eval=F}
+y <- rnorm(30)
+d <- data.frame(a = gl(10, 3), b = rep(c(1,2,3), 10), y = y)
+pty(y)
+pty(d)
+pty(aov(y ~ a + b, data = d))
+```
+
 To see the documentation type:
 
 ```{r eval=F}
