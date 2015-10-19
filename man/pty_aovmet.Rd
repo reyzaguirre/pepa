@@ -2,33 +2,41 @@
 % Please edit documentation in R/pty_aovmet.R
 \name{pty_aovmet}
 \alias{pty_aovmet}
-\title{Pepa tells you about RCBD}
+\title{Pepa tells you about a MET with a RCBD}
 \usage{
-pty_aovmet(trait, treat, block, data, author = "International Potato Center")
+pty_aovmet(trait, geno, env, rep, data, maxp,
+  author = "International Potato Center")
 }
 \arguments{
 \item{trait}{The trait to analize.}
 
-\item{treat}{The treatments.}
+\item{geno}{The genotypes.}
 
-\item{block}{The blocks.}
+\item{env}{The environments.}
 
-\item{data}{The name of the data frame.}
+\item{rep}{The replications or blocks.}
+
+\item{data}{The name of the data frame containing the data.}
+
+\item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
 \item{author}{Author.}
 }
 \value{
-It returns an automatic report about the RCBD fitted model.
+It returns an automatic report about the MET with a RCBD fitted model.
 }
 \description{
-Explain a RCBD fitted model in plain English
+Explain a fitted model for a multi environment trial (MET) with a RCBD
+in each environment in plain English.
 }
 \details{
-It fits a linear model for a RCBD and explains the results.
-It also checks the assumptions.
+It fits a linear model for a MET with a RCBD and explains the results.
+If data is unbalanced, missing values are estimated up to an specified maximum
+proportion, 10\% by default. Genotypes and environments are considered as fixed
+factors while the blocks are considered as random and nested into the environments.
 }
 \examples{
-pty_aovmet("trw", "geno", "rep", pjpz09)
+pty_aovmet("y", "geno", "env", "rep", met8x12)
 }
 \author{
 Raul Eyzaguirre.

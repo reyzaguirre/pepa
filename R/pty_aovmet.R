@@ -1,29 +1,36 @@
-#' Pepa tells you about RCBD
+#' Pepa tells you about a MET with a RCBD
 #'
-#' Explain a RCBD fitted model in plain English
+#' Explain a fitted model for a multi environment trial (MET) with a RCBD
+#' in each environment in plain English.
 #' @param trait The trait to analize.
-#' @param treat The treatments.
-#' @param block The blocks.
-#' @param data The name of the data frame.
+#' @param geno The genotypes.
+#' @param env The environments.
+#' @param rep The replications or blocks.
+#' @param data The name of the data frame containing the data.
+#' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param author Author.
 #' @author Raul Eyzaguirre.
-#' @details It fits a linear model for a RCBD and explains the results.
-#' It also checks the assumptions.
-#' @return It returns an automatic report about the RCBD fitted model.
+#' @details It fits a linear model for a MET with a RCBD and explains the results.
+#' If data is unbalanced, missing values are estimated up to an specified maximum
+#' proportion, 10\% by default. Genotypes and environments are considered as fixed
+#' factors while the blocks are considered as random and nested into the environments.
+#' @return It returns an automatic report about the MET with a RCBD fitted model.
 #' @examples
-#' pty_aovmet("trw", "geno", "rep", pjpz09)
+#' pty_aovmet("y", "geno", "env", "rep", met8x12)
 #' @export
 
-pty_aovmet <- function(trait, treat, block, data, author = "International Potato Center") {
+pty_aovmet <- function(trait, geno, env, rep, data, maxp, author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
   fileRmd <- paste(dirfiles, "/aovmet.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/aovmet.html", sep = "")
 
   rmarkdown::render(fileRmd, params = list(trait = trait,
-                                           treat = treat,
-                                           block = block,
+                                           geno = geno,
+                                           env = env,
+                                           rep = rep,
                                            data = data,
+                                           maxp = maxp,
                                            author = author))
   browseURL(fileURL)
 }

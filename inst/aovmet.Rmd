@@ -1,5 +1,5 @@
 ---
-title: "Report for a RCBD"
+title: "Report for a MET with a RCBD"
 author: '`r params$author`'
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 
@@ -12,9 +12,11 @@ output:
     highlight: "tango"
 params: 
   trait: "no data"
-  treat: "no data"
-  block: "no data"
+  geno: "no data"
+  env: "no data"
+  rep: "no data"
   data: "no data"
+  maxp: "no data"
   author: "no data"
 ---
 
