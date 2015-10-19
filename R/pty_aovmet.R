@@ -11,14 +11,14 @@
 #' It also checks the assumptions.
 #' @return It returns an automatic report about the RCBD fitted model.
 #' @examples
-#' pty_rcbd("trw", "geno", "rep", pjpz09)
+#' pty_aovmet("trw", "geno", "rep", pjpz09)
 #' @export
 
-pty_rcbd <- function(trait, treat, block, data, author = "International Potato Center") {
+pty_aovmet <- function(trait, treat, block, data, author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
-  fileRmd <- paste(dirfiles, "/rcbd.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rcbd.html", sep = "")
+  fileRmd <- paste(dirfiles, "/aovmet.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/aovmet.html", sep = "")
 
   rmarkdown::render(fileRmd, params = list(trait = trait,
                                            treat = treat,
