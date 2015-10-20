@@ -30,12 +30,11 @@ maxp <- params$maxp
 model <- suppressWarnings(st4gi::aovmet(trait, geno, env, rep, data, maxp, anova = FALSE))
 ```
 
+`r if(model$lc$c1 == 1 & model$lc$c2 == 1) {"You have fitted a linear model for a multi environment trial (MET) with a RCBD in each environment. The ANOVA table for your model is:"}`
+
 ```{r, echo = FALSE}
 model$at
 ```
-```{r, echo = FALSE}
-model$lc
-```
-```{r, echo = FALSE}
-model$est.
-```
+
+`r if(model$lc$c3 == 0) paste("You have some missing values (", format(model$est.data$est.prop*100, digits = 4), "%) and they have been estimated before running ANOVA.")`
+
