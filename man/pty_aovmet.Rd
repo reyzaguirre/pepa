@@ -4,7 +4,7 @@
 \alias{pty_aovmet}
 \title{Pepa tells you about a MET with a RCBD}
 \usage{
-pty_aovmet(trait, geno, env, rep, data, maxp,
+pty_aovmet(trait, geno, env, rep, data, maxp = 0.1,
   author = "International Potato Center")
 }
 \arguments{
