@@ -29,7 +29,7 @@ data <- params$data
 maxp <- params$maxp
 
 lc <- st4gi::checkdata02(trait, geno, env, rep, data)
-model <- suppressWarnings(st4gi::aovmet(trait, geno, env, rep, data, maxp))
+at <- suppressWarnings(st4gi::aovmet(trait, geno, env, rep, data, maxp))
 if (lc$c3 == 0)
   data[, trait] <- st4gi::mvemet(trait, geno, env, rep, data, maxp)[, 5]
 ```
@@ -37,18 +37,18 @@ if (lc$c3 == 0)
 `r if(lc$c1 == 1 & lc$c2 == 1) {"You have fitted a linear model for a multi environment trial (MET) with a RCBD in each environment. The ANOVA table for your model is:"}`
 
 ```{r, echo = FALSE}
-model
+at
 ```
 
 `r if(lc$c3 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.")`
 
 The p-values for your model are:
 
-- `r format(model[1, 5], digits = 4)` for genotypes `r if(model[1, 5] < 0.05) {"which is significant at the 5% level."}` `r if(model[1, 5] > 0.05) {"which is not significant at the 5% level."}`
-- `r format(model[2, 5], digits = 4)` for environments `r if(model[2, 5] < 0.05) {"which is significant at the 5% level."}` `r if(model[2, 5] > 0.05) {"which is not significant at the 5% level."}`
-- `r format(model[4, 5], digits = 4)` for the genotypes by environments interaction `r if(model[4, 5] < 0.05) {"which is significant at the 5% level."}` `r if(model[4, 5] > 0.05) {"which is not significant at the 5% level."}`
+- `r format(at[1, 5], digits = 4)` for genotypes `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."}` `r if(at[1, 5] > 0.05) {"which is not significant at the 5% level."}`
+- `r format(at[2, 5], digits = 4)` for environments `r if(at[2, 5] < 0.05) {"which is significant at the 5% level."}` `r if(at[2, 5] > 0.05) {"which is not significant at the 5% level."}`
+- `r format(at[4, 5], digits = 4)` for the genotypes by environments interaction `r if(at[4, 5] < 0.05) {"which is significant at the 5% level."}` `r if(at[4, 5] > 0.05) {"which is not significant at the 5% level."}`
 
-`r if(model[4, 5] < 0.05) {"Because interaction is significant you should want to run a stability analysis. Keep also in mind that a significant interaction means that the differences in response of the genotypes are not the same in all the environments. Therefore, on an individual analysis you could find significant differences among genotypes for some environments and non-significant differences for some others, and the difference for any pair of genotypes could be in different directions and magnitudes depending on the environment."}`
+`r if(at[4, 5] < 0.05) {"Because interaction is significant you should want to run a stability analysis. Keep also in mind that a significant interaction means that the differences in response of the genotypes are not the same in all the environments. Therefore, on an individual analysis you could find significant differences among genotypes for some environments and non-significant differences for some others, and the difference for any pair of genotypes could be in different directions and magnitudes depending on the environment."}`
 
 Below you can see a table of means for genotypes, environments, and interaction:
 
