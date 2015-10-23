@@ -13,53 +13,48 @@ output:
 params: 
   trait: "no data"
   treat: "no data"
-  block: "no data"
+  rep: "no data"
   data: "no data"
+  maxp: "no data"
   author: "no data"
 ---
 
 ```{r, echo = FALSE}
 trait <- params$trait
 treat <- params$treat
-block <- params$block
+rep <- params$rep
 data <- params$data
-data[, treat] <- factor(data[, treat])
-data[, block] <- factor(data[, block])
-lc <- st4gi::checkdata01(trait, treat, data)
-nt <- nlevels(data[, treat])
+maxp <- params$maxp
+
+lc <- st4gi::checkdata01(trait, treat, rep, data)
+model <- suppressWarnings(st4gi::rcbd(trait, treat, rep, data, maxp))
+if (lc$c3 == 0)
+  data[, trait] <- st4gi::mveb(trait, treat, rep, data, maxp)[, 4]
 ```
 
-`r if(lc$c3 == 0 & lc$nmis/length(data[, trait]) < 0.05) {"You have fitted a linear model for a RCBD, but you have some missing values. It would be a good idea to estimate these missing values before fitting the model. Anyway, the ANOVA table for your model is:"}`
-`r if(lc$c3 == 0 & lc$nmis/length(data[, trait]) >= 0.05) {"You have fitted a linear model for a RCBD, but you have a lot of missing values. Maybe you should not try to fit this model. Anyway, the ANOVA table for your model is:"}`
-`r if(lc$c3 == 1) {"You have fitted a linear model for a RCBD. The ANOVA table for your model is:"}`
+`r if(lc$c1 == 1 & lc$c2 == 1) {"You have fitted a linear model for a RCBD. The ANOVA table for your model is:"}`
 
 ```{r, echo = FALSE}
-fff <- as.formula(paste(trait, "~", paste(treat, block, sep = "+")))
-model <- aov(fff, data = data)
-anova(model)
+model
 ```
 
-The p-value for treatments is `r format(anova(model)[1, 5], digits = 4)`
-`r if(anova(model)[1, 5] < 0.05) {"which is significant at the 5% level."}`
-`r if(anova(model)[1, 5] > 0.05) {"which is not significant at the 5% level."}`
+`r if(lc$c3 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.")`
+
+The p-value for treatments is `r format(model[1, 5], digits = 4)`
+`r if(model[1, 5] < 0.05) {"which is significant at the 5% level."}`
+`r if(model[1, 5] > 0.05) {"which is not significant at the 5% level."}`
 
 The means of your treatments are:
 ```{r, echo = FALSE}
-tapply(data[, trait], data[, treat], mean, na.rm = TRUE)
+tapply(data[, trait], data[, treat], mean)
 ```
 
-`r if(nt < 10) {"It is always good to have some visualization of the data. Because the number of treatments in your experiment is not so big, we can plot the data for each treatment:"}`
+`r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of treatments in your experiment is not so big, we can plot the data for each treatment:"}`
 
 ```{r, echo = FALSE}
-if (nt < 10) msdplot(trait, treat, data, conf = 1)
+if (lc$nt < 10) msdplot(trait, treat, data, conf = 1)
 ```
 
 Don't forget the assumptions of the model. It is supposed that the error has a normal distribution with the same variance for all the treatments. The following plots must help you evaluate this:
-
-```{r, echo = FALSE, fig.height = 5, fig.width = 10}
-par(mfrow = c(1, 2))
-plot(model, which = 1)
-plot(model, which = 2)
-```
 
 Funnel shapes for the first plot may suggest heterogeneity of variances while departures from the theoretical normal line are symptoms of lack of normality.

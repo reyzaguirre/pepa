@@ -4,16 +4,19 @@
 \alias{pty_rcbd}
 \title{Pepa tells you about RCBD}
 \usage{
-pty_rcbd(trait, treat, block, data, author = "International Potato Center")
+pty_rcbd(trait, treat, rep, data, maxp = 0.1,
+  author = "International Potato Center")
 }
 \arguments{
 \item{trait}{The trait to analize.}
 
 \item{treat}{The treatments.}
 
-\item{block}{The blocks.}
+\item{rep}{The replications.}
 
 \item{data}{The name of the data frame.}
+
+\item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
 \item{author}{Author.}
 }
