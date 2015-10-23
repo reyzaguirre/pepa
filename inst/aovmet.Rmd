@@ -44,9 +44,9 @@ at
 
 The p-values for your model are:
 
-- `r format(at[1, 5], digits = 4)` for genotypes `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."}` `r if(at[1, 5] > 0.05) {"which is not significant at the 5% level."}`
-- `r format(at[2, 5], digits = 4)` for environments `r if(at[2, 5] < 0.05) {"which is significant at the 5% level."}` `r if(at[2, 5] > 0.05) {"which is not significant at the 5% level."}`
-- `r format(at[4, 5], digits = 4)` for the genotypes by environments interaction `r if(at[4, 5] < 0.05) {"which is significant at the 5% level."}` `r if(at[4, 5] > 0.05) {"which is not significant at the 5% level."}`
+- `r format(at[1, 5], digits = 4)` for genotypes `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
+- `r format(at[2, 5], digits = 4)` for environments `r if(at[2, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
+- `r format(at[4, 5], digits = 4)` for the genotypes by environments interaction `r if(at[4, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
 
 `r if(at[4, 5] < 0.05) {"Because interaction is significant you should want to run a stability analysis. Keep also in mind that a significant interaction means that the differences in response of the genotypes are not the same in all the environments. Therefore, on an individual analysis you could find significant differences among genotypes for some environments and non-significant differences for some others, and the difference for any pair of genotypes could be in different directions and magnitudes depending on the environment."}`
 

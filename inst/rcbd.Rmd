@@ -43,8 +43,7 @@ at
 `r if(lc$c3 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.")`
 
 The p-value for treatments is `r format(at[1, 5], digits = 4)`
-`r if(at[1, 5] < 0.05) {"which is significant at the 5% level."}`
-`r if(at[1, 5] > 0.05) {"which is not significant at the 5% level."}`
+`r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
 
 The means of your treatments are:
 ```{r, echo = FALSE}
