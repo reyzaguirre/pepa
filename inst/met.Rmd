@@ -1,0 +1,32 @@
+---
+title: "Report for a MET with a RCBD"
+author: '`r params$author`'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output: 
+  html_document:
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  word_document:
+    highlight: "tango"
+params: 
+  traits: "no data"
+  geno: "no data"
+  env: "no data"
+  rep: "no data"
+  data: "no data"
+  maxp: "no data"
+  author: "no data"
+---
+
+```{r, echo = FALSE}
+traits <- params$traits
+geno <- params$geno
+env <- params$env
+rep <- params$rep
+data <- params$data
+maxp <- params$maxp
+```
+
+Bla bla bla

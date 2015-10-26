@@ -3,3 +3,4 @@
 export(pty)
 export(pty.aovmet)
 export(pty.rcbd)
+export(repo.met)
