@@ -4,11 +4,11 @@
 \alias{repo.met}
 \title{Authomatic report for a MET with a RCBD}
 \usage{
-repo.met(traits, geno, env, rep, data, maxp = 0.1,
+repo.met(trait, geno, env, rep, data, maxp = 0.1,
   author = "International Potato Center")
 }
 \arguments{
-\item{traits}{The list of traits to include.}
+\item{trait}{The trait to be evaluated.}
 
 \item{geno}{The genotypes.}
 
@@ -26,17 +26,17 @@ repo.met(traits, geno, env, rep, data, maxp = 0.1,
 It returns an automatic report about the MET with a RCBD fitted model.
 }
 \description{
-Produces an authomatic report for a set of selected traits in a multi environment
+Produces an authomatic report for a selected trait in a multi environment
 trial (MET) with a RCBD in each environment.
 }
 \details{
-It fits a linear model for a MET with a RCBD for each trait.
+It fits a linear model for a MET with a RCBD for the selected trait.
 If data is unbalanced, missing values are estimated up to an specified maximum
 proportion, 10\% by default. Genotypes and environments are considered as fixed
 factors while the blocks are considered as random and nested into the environments.
 }
 \examples{
-repo.met(c("rytha", "bc", "dm"), "geno", "loc", "rep", spg)
+repo.met("rytha", "geno", "env", "rep", megaclones)
 }
 \author{
 Raul Eyzaguirre.
