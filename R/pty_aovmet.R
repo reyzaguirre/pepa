@@ -5,7 +5,7 @@
 #' @param trait The trait to analize.
 #' @param geno The genotypes.
 #' @param env The environments.
-#' @param rep The replications or blocks.
+#' @param rep The replications.
 #' @param data The name of the data frame containing the data.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param author Author.
