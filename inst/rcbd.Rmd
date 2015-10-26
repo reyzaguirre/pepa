@@ -30,7 +30,6 @@ lc <- st4gi::checkdata01(trait, treat, rep, data)
 at <- suppressWarnings(st4gi::rcbd(trait, treat, rep, data, maxp))
 if (lc$c3 == 0)
   data[, trait] <- st4gi::mveb(trait, treat, rep, data, maxp)[, 4]
-
 model <- aov(data[, trait] ~ data[, treat] + data[, rep])
 ```
 
