@@ -15,17 +15,17 @@
 
 pty <- function(x, author = "International Potato Center") {
   classlist <- c("data.frame", "numeric", "aov", "lm")
-  if (class(x) %in% classlist == FALSE) pty_na(x, author = author)
-  if (class(x) == "data.frame") pty_df(x, author = author)
-  if (class(x) == "numeric") pty_nt(x, author = author)
-  if (sum(class(x) %in% c("aov", "lm")) > 0) pty_aov(x, author = author)
+  if (class(x) %in% classlist == FALSE) pty.na(x, author = author)
+  if (class(x) == "data.frame") pty.df(x, author = author)
+  if (class(x) == "numeric") pty.nt(x, author = author)
+  if (sum(class(x) %in% c("aov", "lm")) > 0) pty.aov(x, author = author)
 }
 
 dirfiles <- system.file(package = "pepa")
 
 # Not available yet
 
-pty_na <- function(x, author) {
+pty.na <- function(x, author) {
   fileRmd <- paste(dirfiles, "/na.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/na.html", sep = "")
   rmarkdown::render(fileRmd, params = list(x = x, author = author))
@@ -34,7 +34,7 @@ pty_na <- function(x, author) {
 
 # for data.frames
 
-pty_df <- function(x, author) {
+pty.df <- function(x, author) {
   fileRmd <- paste(dirfiles, "/df.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/df.html", sep = "")
   rmarkdown::render(fileRmd, params = list(x = x, author = author))
@@ -43,7 +43,7 @@ pty_df <- function(x, author) {
 
 # for numeric traits
 
-pty_nt <- function(x, author) {
+pty.nt <- function(x, author) {
   fileRmd <- paste(dirfiles, "/nt.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/nt.html", sep = "")
   rmarkdown::render(fileRmd, params = list(x = x, author = author))
@@ -52,7 +52,7 @@ pty_nt <- function(x, author) {
 
 # for linear models with aov or lm
 
-pty_aov <- function(x, author) {
+pty.aov <- function(x, author) {
   fileRmd <- paste(dirfiles, "/aov.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/aov.html", sep = "")
   rmarkdown::render(fileRmd, params = list(x = x, author = author))

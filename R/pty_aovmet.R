@@ -16,10 +16,10 @@
 #' factors while the blocks are considered as random and nested into the environments.
 #' @return It returns an automatic report about the MET with a RCBD fitted model.
 #' @examples
-#' pty_aovmet("y", "geno", "env", "rep", met8x12)
+#' pty.aovmet("y", "geno", "env", "rep", met8x12)
 #' @export
 
-pty_aovmet <- function(trait, geno, env, rep, data, maxp = 0.1,
+pty.aovmet <- function(trait, geno, env, rep, data, maxp = 0.1,
                        author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
