@@ -12,7 +12,7 @@ pty(x, author = "International Potato Center")
 \item{author}{Author.}
 }
 \value{
-It returns an automatic report about the selected R object.
+It returns an explanation about the selected R object.
 }
 \description{
 Explain an R object in plain English if she knows about it

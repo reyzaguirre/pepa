@@ -1,0 +1,93 @@
+---
+title: "Pesek Baker index"
+author: '`r params$author`'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output: 
+  html_document:
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  word_document:
+    highlight: "tango"
+params: 
+  traits: "no data"
+  geno: "no data"
+  env: "no data"
+  rep: "no data"
+  data: "no data"
+  means: "no data"
+  model: "no data"
+  dgg: "no data"
+  units: "no data"
+  sf: "no data"
+  author: "no data"
+---
+
+```{r, echo = FALSE}
+traits <- params$traits
+geno <- params$geno
+env <- params$env
+rep <- params$rep
+data <- params$data
+means <- params$means
+model <- params$model
+dgg <- params$dgg
+units <- params$units
+sf <- params$sf
+
+pbindex <- st4gi::pesekbaker(traits, geno, env, rep, data, means, model, dgg, units, sf)
+
+```
+
+### Desired genetic gains
+You have computed the Pesek-Baker index for traits `r traits` with the following desired genetic gains in actual units:
+```{r, echo = FALSE}
+pbindex$Desired.Genetic.Gains
+```
+
+### Standard deviations, genetic variances, and correlations
+The estimated standard deviations for these traits are
+```{r, echo = FALSE}
+pbindex$Standard.Deviations
+```
+the genetic variances
+```{r, echo = FALSE}
+pbindex$Genetic.Variances
+```
+and the correlation matrix among the traits included in the index computation
+```{r, echo = FALSE}
+pbindex$Correlation.Matrix
+```
+
+### The Pesek-Baker index
+
+The index coefficients for the Pesek-Baker index are:
+```{r, echo = FALSE}
+pbindex$Index.Coefficients
+```
+
+With this, the Pesek-Baker index for each genotype is shown below. As you see, genotype `r (pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = T, index.return = T)$ix, ])[1,1]` is the one with the highest value.
+```{r, echo = FALSE}
+pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = T,
+                               index.return = T)$ix, ]
+```
+
+`r if(model == 'gxe') {"### The response to selection"}`
+
+`r if(model == 'gxe') paste("For a selection fractin of ", sf, ", the response to selection in actual units for traits", sep = "")`
+`r if(model == 'gxe') traits`
+`r if(model == 'gxe') {"is"}`
+
+```{r, echo = FALSE}
+if(model == 'gxe') pbindex$Response.to.Selection
+```
+
+`r if(model == 'gxe') {"and in standardized units"}`
+
+```{r, echo = FALSE}
+if(model == 'gxe') pbindex$Std.Response.to.Selection
+```
+
+
+

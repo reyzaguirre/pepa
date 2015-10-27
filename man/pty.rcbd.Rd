@@ -21,7 +21,7 @@ pty.rcbd(trait, treat, rep, data, maxp = 0.1,
 \item{author}{Author.}
 }
 \value{
-It returns an automatic report about the RCBD fitted model.
+It returns an explanation about the RCBD fitted model.
 }
 \description{
 Explain a RCBD fitted model in plain English

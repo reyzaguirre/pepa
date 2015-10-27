@@ -23,7 +23,7 @@ pty.aovmet(trait, geno, env, rep, data, maxp = 0.1,
 \item{author}{Author.}
 }
 \value{
-It returns an automatic report about the MET with a RCBD fitted model.
+It returns an explanation about the MET with a RCBD fitted model.
 }
 \description{
 Explain a fitted model for a multi environment trial (MET) with a RCBD
