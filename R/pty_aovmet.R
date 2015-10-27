@@ -14,7 +14,7 @@
 #' If data is unbalanced, missing values are estimated up to an specified maximum
 #' proportion, 10\% by default. Genotypes and environments are considered as fixed
 #' factors while the blocks are considered as random and nested into the environments.
-#' @return It returns an automatic report about the MET with a RCBD fitted model.
+#' @return It returns an explanation about the MET with a RCBD fitted model.
 #' @examples
 #' pty.aovmet("y", "geno", "env", "rep", met8x12)
 #' @export

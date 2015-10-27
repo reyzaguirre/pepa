@@ -10,7 +10,7 @@
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a RCBD and explains the results.
 #' It also checks the assumptions.
-#' @return It returns an automatic report about the RCBD fitted model.
+#' @return It returns an explanation about the RCBD fitted model.
 #' @examples
 #' pty.rcbd("trw", "geno", "rep", pjpz09)
 #' @export
