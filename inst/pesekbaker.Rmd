@@ -37,7 +37,6 @@ units <- params$units
 sf <- params$sf
 
 pbindex <- st4gi::pesekbaker(traits, geno, env, rep, data, means, model, dgg, units, sf)
-
 ```
 
 ### Desired genetic gains
@@ -75,7 +74,7 @@ pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = 
 
 `r if(model == 'gxe') {"### The response to selection"}`
 
-`r if(model == 'gxe') paste("For a selection fractin of ", sf, ", the response to selection in actual units for traits", sep = "")`
+`r if(model == 'gxe') paste("For a selection fraction of ", sf, ", the response to selection in actual units for traits", sep = "")`
 `r if(model == 'gxe') traits`
 `r if(model == 'gxe') {"is"}`
 
@@ -88,6 +87,3 @@ if(model == 'gxe') pbindex$Response.to.Selection
 ```{r, echo = FALSE}
 if(model == 'gxe') pbindex$Std.Response.to.Selection
 ```
-
-
-
