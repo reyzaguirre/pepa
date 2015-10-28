@@ -2,6 +2,7 @@
 
 export(pty)
 export(pty.aovmet)
+export(pty.elston)
 export(pty.pesekbaker)
 export(pty.rcbd)
 export(repo.met)
