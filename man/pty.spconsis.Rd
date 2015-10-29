@@ -4,8 +4,7 @@
 \alias{pty.spconsis}
 \title{Pepa tells you about the consistency of your data}
 \usage{
-pty.spconsis(data, plot.size, f = 3, width = 240,
-  author = "International Potato Center")
+pty.spconsis(data, plot.size, f = 3, author = "International Potato Center")
 }
 \arguments{
 \item{data}{The name of the data frame.}
@@ -13,8 +12,6 @@ pty.spconsis(data, plot.size, f = 3, width = 240,
 \item{plot.size}{Plot size in square meters.}
 
 \item{f}{Factor for extreme values detection. See details.}
-
-\item{width}{Number of columns for the output.}
 
 \item{author}{Author.}
 }

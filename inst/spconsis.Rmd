@@ -14,12 +14,11 @@ params:
   data: "no data"
   plot.size: "no data"
   f: "no data"
-  width: "no data"
   author: "no data"
 ---
 
 #### Below is a list of possible problems with the data
 
 ```{r, echo = FALSE}
-st4gi::spconsis(params$data, params$plot.size, params$f, params$width, file = FALSE)
+st4gi::spconsis(params$data, params$plot.size, params$f, file = FALSE)
 ```

@@ -4,7 +4,6 @@
 #' @param data The name of the data frame.
 #' @param plot.size Plot size in square meters.
 #' @param f Factor for extreme values detection. See details.
-#' @param width Number of columns for the output.
 #' @param author Author.
 #' @author Raul Eyzaguirre.
 #' @details The data frame must use the labels (lower or upper case) specified in
@@ -19,8 +18,7 @@
 #' pty.spconsis(pjpz09, 4.5)
 #' @export
 
-pty.spconsis <- function(data, plot.size, f = 3, width = 240,
-                         author = "International Potato Center") {
+pty.spconsis <- function(data, plot.size, f = 3, author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
   fileRmd <- paste(dirfiles, "/spconsis.Rmd", sep = "")
@@ -29,7 +27,6 @@ pty.spconsis <- function(data, plot.size, f = 3, width = 240,
   rmarkdown::render(fileRmd, params = list(data = data,
                                            plot.size = plot.size,
                                            f = f,
-                                           width = width,
                                            author = author))
   browseURL(fileURL)
 }
