@@ -19,8 +19,8 @@ pty.rcbd <- function(trait, treat, rep, data, maxp = 0.1,
                      author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
-  fileRmd <- paste(dirfiles, "/rcbd.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rcbd.html", sep = "")
+  fileRmd <- paste(dirfiles, "/rmd/rcbd.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/rmd/rcbd.html", sep = "")
 
   rmarkdown::render(fileRmd, params = list(trait = trait,
                                            treat = treat,

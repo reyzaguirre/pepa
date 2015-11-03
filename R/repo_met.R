@@ -23,8 +23,8 @@ repo.met <- function(trait, geno, env, rep, data, maxp = 0.1,
                      author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
-  fileRmd <- paste(dirfiles, "/met.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/met.html", sep = "")
+  fileRmd <- paste(dirfiles, "/rmd/met.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/rmd/met.html", sep = "")
 
   rmarkdown::render(fileRmd, params = list(trait = trait,
                                            geno = geno,
