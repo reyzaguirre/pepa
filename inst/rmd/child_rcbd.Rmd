@@ -1,0 +1,42 @@
+
+## {{i+1}}. Analysis for trait `r traits[i]`
+
+```{r, echo = FALSE}
+lc <- st4gi::checkdata01(traits[i], treat, rep, data)
+at <- suppressWarnings(st4gi::rcbd(traits[i], treat, rep, data, maxp))
+if (lc$c3 == 0)
+  data[, traits[i]] <- st4gi::mveb(traits[i], treat, rep, data, maxp)[, 4]
+model <- aov(data[, traits[i]] ~ data[, treat] + data[, rep])
+```
+
+`r if(lc$c1 == 1 & lc$c2 == 1) {"You have fitted a linear model for a RCBD. The ANOVA table for your model is:"}`
+
+```{r, echo = FALSE}
+at
+```
+
+`r if(lc$c3 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.")`
+
+The p-value for treatments is `r format(at[1, 5], digits = 4)`
+`r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
+
+The means of your treatments are:
+```{r, echo = FALSE}
+tapply(data[, traits[i]], data[, treat], mean)
+```
+
+`r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of treatments in your experiment is not so big, we can plot the data for each treatment:"}`
+
+```{r, echo = FALSE}
+if (lc$nt < 10) msdplot(traits[i], treat, data, conf = 1)
+```
+
+Don't forget the assumptions of the model. It is supposed that the error has a normal distribution with the same variance for all the treatments. The following plots must help you evaluate this:
+
+```{r, echo = FALSE, fig.height = 5, fig.width = 10}
+par(mfrow = c(1, 2))
+plot(model, which = 1)
+plot(model, which = 2)
+```
+
+Funnel shapes for the first plot may suggest heterogeneity of variances while departures from the theoretical normal line are symptoms of lack of normality.

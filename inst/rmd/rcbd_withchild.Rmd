@@ -1,0 +1,55 @@
+---
+title: "ANOVA for a RCBD"
+author: '`r params$author`'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output: 
+  html_document:
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  word_document:
+    highlight: "tango"
+params: 
+  traits: "no data"
+  treat: "no data"
+  rep: "no data"
+  data: "no data"
+  maxp: "no data"
+  author: "no data"
+---
+
+```{r, echo = FALSE}
+library(knitr)
+
+traits <- params$traits
+treat <- params$treat
+rep <- params$rep
+data <- params$data
+maxp <- params$maxp
+```
+
+# 1. Model specification and data description
+
+There is data from `r nlevels(as.factor(data[, treat]))` treatments, evaluated using a randomize complete block design with `r nlevels(as.factor(data[, rep]))` blocks. The statistical model is
+$$
+y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
+$$
+where
+
+* $y_{ij}$ is the observed response with treatment $i$ and block $j$.
+* $\mu$ is the mean response over all treatments and blocks.
+* $\tau_i$ is the effect for treatment $i$.
+* $\beta_j$ is the effect for block $j$.
+* $\epsilon_{ij}$ is the error term.
+
+In this model we assume that the errors are independent and have a normal distribution with common variance, that is, $\epsilon_{ij} \sim N(0,\sigma_{\epsilon}^2)$.
+
+```{r run-numeric-md, include=FALSE}
+out = NULL
+for (i in 1:length(traits)) {
+  out = c(out, knit_expand('child_rcbd.rmd'))
+}
+```
+
+`r paste(knit(text = out), collapse = '\n')`
