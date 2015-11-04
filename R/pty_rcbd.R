@@ -1,7 +1,7 @@
 #' Pepa tells you about RCBD
 #'
 #' Explain a RCBD fitted model in plain English
-#' @param trait The trait to analize.
+#' @param traits The traits to analize.
 #' @param treat The treatments.
 #' @param rep The replications.
 #' @param data The name of the data frame.
@@ -12,17 +12,17 @@
 #' It also checks the assumptions.
 #' @return It returns an explanation about the RCBD fitted model.
 #' @examples
-#' pty.rcbd("trw", "geno", "rep", pjpz09)
+#' pty.rcbd(c("trw", "vw", "crw"), "geno", "rep", pjpz09)
 #' @export
 
-pty.rcbd <- function(trait, treat, rep, data, maxp = 0.1,
+pty.rcbd <- function(traits, treat, rep, data, maxp = 0.1,
                      author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
   fileRmd <- paste(dirfiles, "/rmd/rcbd.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/rmd/rcbd.html", sep = "")
 
-  rmarkdown::render(fileRmd, params = list(trait = trait,
+  rmarkdown::render(fileRmd, params = list(traits = traits,
                                            treat = treat,
                                            rep = rep,
                                            data = data,

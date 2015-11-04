@@ -4,11 +4,11 @@
 \alias{pty.rcbd}
 \title{Pepa tells you about RCBD}
 \usage{
-pty.rcbd(trait, treat, rep, data, maxp = 0.1,
+pty.rcbd(traits, treat, rep, data, maxp = 0.1,
   author = "International Potato Center")
 }
 \arguments{
-\item{trait}{The trait to analize.}
+\item{traits}{The traits to analize.}
 
 \item{treat}{The treatments.}
 
@@ -31,7 +31,7 @@ It fits a linear model for a RCBD and explains the results.
 It also checks the assumptions.
 }
 \examples{
-pty.rcbd("trw", "geno", "rep", pjpz09)
+pty.rcbd(c("trw", "vw", "crw"), "geno", "rep", pjpz09)
 }
 \author{
 Raul Eyzaguirre.

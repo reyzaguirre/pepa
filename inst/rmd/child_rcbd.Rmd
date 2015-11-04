@@ -1,3 +1,4 @@
+`r i = {{i}}`
 
 ## {{i+1}}. Analysis for trait `r traits[i]`
 

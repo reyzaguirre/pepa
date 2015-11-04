@@ -11,7 +11,7 @@ output:
   word_document:
     highlight: "tango"
 params: 
-  trait: "no data"
+  traits: "no data"
   treat: "no data"
   rep: "no data"
   data: "no data"
@@ -20,47 +20,35 @@ params:
 ---
 
 ```{r, echo = FALSE}
-trait <- params$trait
+library(knitr)
+
+traits <- params$traits
 treat <- params$treat
 rep <- params$rep
 data <- params$data
 maxp <- params$maxp
-
-lc <- st4gi::checkdata01(trait, treat, rep, data)
-at <- suppressWarnings(st4gi::rcbd(trait, treat, rep, data, maxp))
-if (lc$c3 == 0)
-  data[, trait] <- st4gi::mveb(trait, treat, rep, data, maxp)[, 4]
-model <- aov(data[, trait] ~ data[, treat] + data[, rep])
 ```
 
-`r if(lc$c1 == 1 & lc$c2 == 1) {"You have fitted a linear model for a RCBD. The ANOVA table for your model is:"}`
+# 1. Model specification and data description
 
-```{r, echo = FALSE}
-at
+There is data from `r nlevels(as.factor(data[, treat]))` treatments, evaluated using a randomize complete block design with `r nlevels(as.factor(data[, rep]))` blocks. The statistical model is
+$$
+y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
+$$
+where
+
+* $y_{ij}$ is the observed response with treatment $i$ and block $j$.
+* $\mu$ is the mean response over all treatments and blocks.
+* $\tau_i$ is the effect for treatment $i$.
+* $\beta_j$ is the effect for block $j$.
+* $\epsilon_{ij}$ is the error term.
+
+In this model we assume that the errors are independent and have a normal distribution with common variance, that is, $\epsilon_{ij} \sim N(0,\sigma_{\epsilon}^2)$.
+
+```{r, include = FALSE}
+out <- NULL
+for (i in 1:length(traits))
+  out <- c(out, knit_expand('child_rcbd.Rmd'))
 ```
 
-`r if(lc$c3 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.")`
-
-The p-value for treatments is `r format(at[1, 5], digits = 4)`
-`r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
-
-The means of your treatments are:
-```{r, echo = FALSE}
-tapply(data[, trait], data[, treat], mean)
-```
-
-`r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of treatments in your experiment is not so big, we can plot the data for each treatment:"}`
-
-```{r, echo = FALSE}
-if (lc$nt < 10) msdplot(trait, treat, data, conf = 1)
-```
-
-Don't forget the assumptions of the model. It is supposed that the error has a normal distribution with the same variance for all the treatments. The following plots must help you evaluate this:
-
-```{r, echo = FALSE, fig.height = 5, fig.width = 10}
-par(mfrow = c(1, 2))
-plot(model, which = 1)
-plot(model, which = 2)
-```
-
-Funnel shapes for the first plot may suggest heterogeneity of variances while departures from the theoretical normal line are symptoms of lack of normality.
+`r paste(knit(text = out), collapse = '\n')`
