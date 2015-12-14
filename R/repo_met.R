@@ -1,8 +1,8 @@
 #' Authomatic report for a MET with a RCBD
 #'
-#' Produces an authomatic report for a selected trait in a multi environment
+#' Produces an authomatic report for selected traits in a multi environment
 #' trial (MET) with a RCBD in each environment.
-#' @param trait The trait to be evaluated.
+#' @param traits The traits to analize.
 #' @param geno The genotypes.
 #' @param env The environments.
 #' @param rep The replications.
@@ -16,17 +16,17 @@
 #' factors while the blocks are considered as random and nested into the environments.
 #' @return It returns an automatic report about the MET with a RCBD fitted model.
 #' @examples
-#' repo.met("rytha", "geno", "env", "rep", megaclones)
+#' repo.met(c("rytha", "fytha"), "geno", "env", "rep", megaclones)
 #' @export
 
-repo.met <- function(trait, geno, env, rep, data, maxp = 0.1,
+repo.met <- function(traits, geno, env, rep, data, maxp = 0.1,
                      author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
   fileRmd <- paste(dirfiles, "/rmd/met.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/rmd/met.html", sep = "")
 
-  rmarkdown::render(fileRmd, params = list(trait = trait,
+  rmarkdown::render(fileRmd, params = list(traits = traits,
                                            geno = geno,
                                            env = env,
                                            rep = rep,
