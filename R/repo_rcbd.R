@@ -1,6 +1,6 @@
-#' Pepa tells you about RCBD
+#' Authomatic report for a RCBD
 #'
-#' Explain a RCBD fitted model in plain English
+#' Produces an authomatic report for selected traits in an experiment with a RCBD.
 #' @param traits The traits to analize.
 #' @param treat The treatments.
 #' @param rep The replications.
@@ -12,11 +12,11 @@
 #' It also checks the assumptions.
 #' @return It returns an explanation about the RCBD fitted model.
 #' @examples
-#' pty.rcbd(c("trw", "vw", "crw"), "geno", "rep", pjpz09)
+#' repo.rcbd(c("trw", "vw", "crw"), "geno", "rep", pjpz09)
 #' @export
 
-pty.rcbd <- function(traits, treat, rep, data, maxp = 0.1,
-                     author = "International Potato Center") {
+repo.rcbd <- function(traits, treat, rep, data, maxp = 0.1,
+                      author = "International Potato Center") {
 
   dirfiles <- system.file(package = "pepa")
   fileRmd <- paste(dirfiles, "/rmd/rcbd.Rmd", sep = "")
