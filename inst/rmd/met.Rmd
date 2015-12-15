@@ -11,7 +11,7 @@ output:
   word_document:
     highlight: "tango"
 params:
-  trait: "no data"
+  traits: "no data"
   geno: "no data"
   env: "no data"
   rep: "no data"
@@ -21,17 +21,14 @@ params:
 ---
 
 ```{r, echo = FALSE}
-trait <- params$trait
+library(knitr)
+
+traits <- params$traits
 geno <- params$geno
 env <- params$env
 rep <- params$rep
 data <- params$data
 maxp <- params$maxp
-
-lc <- st4gi::checkdata02(trait, geno, env, rep, data)
-if (lc$c3 == 0)
-  data$est <- st4gi::mvemet(trait, geno, env, rep, data, maxp)[, 5] else
-    data$est <- data[, trait]
 ```
 
 # 1. Model specification and data description
@@ -52,117 +49,10 @@ where
 
 In this model we assume that the errors are independent and have a normal distribution with common variance, that is, $\epsilon_{ijk} \sim N(0,\sigma_{\epsilon}^2)$.
 
-# 2. Analysis of `r trait`
-
-`r if(lc$c3 == 1) {"There are no missing values for this trait; the design es balanced."}`
-
-`r if(lc$c3 == 0) paste("There are some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated for the descriptive statistics and ANOVA sections.")`
-
-## 2.1. Descriptive statistics
-
-#### Means by genotypes
-
-```{r, echo = FALSE}
-tapply(data$est, data[, geno], mean)
+```{r, include = FALSE}
+out <- NULL
+for (i in 1:length(traits))
+  out <- c(out, knit_expand('child_met.Rmd'))
 ```
 
-#### Means by environments
-
-```{r, echo = FALSE}
-tapply(data$est, data[, env], mean)
-```
-
-#### Means by genotypes and environments
-
-```{r, echo = FALSE}
-tapply(data$est, list(data[, geno], data[, env]), mean)
-```
-
-## 2.2. ANOVA
-
-### 2.2.1. Checking assumptions
-
-As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the genotypes and evironments. The following plots help to evaluate this assumptions:
-
-```{r, echo = FALSE, fig.height = 5, fig.width = 10}
-model <- aov(data$est ~ data[, geno] + data[, env]
-             + data[, rep] %in% data[, env] + data[, geno]:data[, env])
-par(mfrow = c(1, 2))
-plot(model, which = 1)
-plot(model, which = 2)
-```
-
-Funnel shapes for the first plot may suggest heterogeneity of variances while departures from the theoretical normal line are symptoms of lack of normality.
-
-### 2.2.2. ANOVA table
-
-For this analysis it is assumed that genotypes and environments have fixed effects and that the blocks are random.
-```{r, echo = FALSE}
-at <- suppressWarnings(st4gi::aovmet(trait, geno, env, rep, data, maxp))
-at
-```
-The p-values for the model are:
-
-- `r format(at[1, 5], digits = 4)` for genotypes `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
-- `r format(at[2, 5], digits = 4)` for environments `r if(at[2, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
-- `r format(at[4, 5], digits = 4)` for the genotypes by environments interaction `r if(at[4, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
-
-### 2.2.3. Variance components estimation
-
-Under the assumption that all the factors (genotypes, environments, and blocks) have random effects, below it is shown the variance components estimation. Here the model is estimated by REML (Restricted Maximum Likelihood) and the original data without the estimation of missing values is used.
-
-```{r, echo = FALSE}
-ff <- as.formula(paste(trait, "~ (1|", geno, ") + (1|", geno, ":", env, ") + (1|",
-                       env, "/", rep, ")"))
-model.reml <- lme4::lmer(ff, data = data)
-summary(model.reml)
-```
-
-## 2.3. Stability analysis
-
-`r if(at[4, 5] > 0.05) {"Because interaction is non significant a stability analysis is not presented."}`
-`r if(at[4, 5] < 0.05) {"Because interaction is significant a stability analysis is presented."}`
-
-`r if(at[4, 5] < 0.05) {"### 2.3.1. AMMI"}`
-
-`r if(at[4, 5] < 0.05) {"#### AMMI biplots"}`
-```{r, echo = FALSE, fig.height = 7, fig.width = 7}
-if(at[4, 5] < 0.05) {
-  ammimodel <- ammi(trait, geno, env, rep, data, biplot = 1)
-  ammimodel <- ammi(trait, geno, env, rep, data, biplot = 2)
-}
-```
-
-`r if(at[4, 5] < 0.05) {"#### Interaction effects"}`
-```{r, echo = FALSE}
-if(at[4, 5] < 0.05) ammimodel$Interaction_effects
-```
-
-`r if(at[4, 5] < 0.05) {"#### PC-values for genotypes"}`
-```{r, echo = FALSE}
-if(at[4, 5] < 0.05) ammimodel$PC_values_genotypes
-```
-
-`r if(at[4, 5] < 0.05) {"#### PC-values for environments"}`
-```{r, echo = FALSE}
-if(at[4, 5] < 0.05) ammimodel$PC_values_environments
-```
-
-`r if(at[4, 5] < 0.05) {"#### PC contributions"}`
-```{r, echo = FALSE}
-if(at[4, 5] < 0.05) ammimodel$Contribution_PCs
-```
-
-`r if(at[4, 5] < 0.05) {"### 2.41. Tai stability analysis"}`
-
-`r if(at[4, 5] < 0.05) {"#### Tai plot"}`
-```{r, echo = FALSE, fig.height = 7, fig.width = 7}
-if(at[4, 5] < 0.05)
-  taimodel <- tai(trait, geno, env, rep, data)
-```
-
-`r if(at[4, 5] < 0.05) {"#### Tai alpha and lambda values"}`
-```{r, echo = FALSE}
-if(at[4, 5] < 0.05)
-  taimodel
-```
+`r paste(knit(text = out), collapse = '\n')`

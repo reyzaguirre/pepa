@@ -1,43 +1,123 @@
 `r i = {{i}}`
 
-## {{i+1}}. Analysis for trait `r traits[i]`
-
 ```{r, echo = FALSE}
-lc <- st4gi::checkdata01(traits[i], treat, rep, data)
-at <- suppressWarnings(st4gi::rcbd(traits[i], treat, rep, data, maxp))
+lc <- st4gi::checkdata02(traits[i], geno, env, rep, data)
 if (lc$c3 == 0)
-  data[, traits[i]] <- st4gi::mveb(traits[i], treat, rep, data, maxp)[, 4]
-model <- aov(data[, traits[i]] ~ data[, treat] + data[, rep])
+  data$est <- st4gi::mvemet(traits[i], geno, env, rep, data, maxp)[, 5] else
+    data$est <- data[, traits[i]]
 ```
+    
+# {{i+1}}. Analysis for trait `r traits[i]`
 
-`r if(lc$c1 == 1 & lc$c2 == 1) {"You have fitted a linear model for a RCBD. The ANOVA table for your model is:"}`
+`r if(lc$c3 == 1) {"There are no missing values for this trait; the design es balanced."}`
+
+`r if(lc$c3 == 0) paste("There are some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated for the descriptive statistics and ANOVA sections.")`
+
+## {{i+1}}.1. Descriptive statistics
+
+### {{i+1}}.1.1. Means by genotypes
 
 ```{r, echo = FALSE}
-at
+tapply(data$est, data[, geno], mean)
 ```
 
-`r if(lc$c3 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.")`
-
-The p-value for treatments is `r format(at[1, 5], digits = 4)`
-`r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
-
-The means of your treatments are:
-```{r, echo = FALSE}
-tapply(data[, traits[i]], data[, treat], mean)
-```
-
-`r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of treatments in your experiment is not so big, we can plot the data for each treatment:"}`
+### {{i+1}}.1.2. Means by environments
 
 ```{r, echo = FALSE}
-if (lc$nt < 10) msdplot(traits[i], treat, data, conf = 1)
+tapply(data$est, data[, env], mean)
 ```
 
-Don't forget the assumptions of the model. It is supposed that the error has a normal distribution with the same variance for all the treatments. The following plots must help you evaluate this:
+### {{i+1}}.1.3. Means by genotypes and environments
+
+```{r, echo = FALSE}
+tapply(data$est, list(data[, geno], data[, env]), mean)
+```
+
+## {{i+1}}.2. ANOVA
+
+### {{i+1}}.2.1. Checking assumptions
+
+As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the genotypes and evironments. The following plots help to evaluate this assumptions:
 
 ```{r, echo = FALSE, fig.height = 5, fig.width = 10}
+model <- aov(data$est ~ data[, geno] + data[, env]
+             + data[, rep] %in% data[, env] + data[, geno]:data[, env])
 par(mfrow = c(1, 2))
 plot(model, which = 1)
 plot(model, which = 2)
 ```
 
 Funnel shapes for the first plot may suggest heterogeneity of variances while departures from the theoretical normal line are symptoms of lack of normality.
+
+### {{i+1}}.2.2. ANOVA table
+
+For this analysis it is assumed that genotypes and environments have fixed effects and that the blocks are random.
+```{r, echo = FALSE}
+at <- suppressWarnings(st4gi::aovmet(traits[i], geno, env, rep, data, maxp))
+at
+```
+The p-values for the model are:
+
+- `r format(at[1, 5], digits = 4)` for genotypes `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
+- `r format(at[2, 5], digits = 4)` for environments `r if(at[2, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
+- `r format(at[4, 5], digits = 4)` for the genotypes by environments interaction `r if(at[4, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
+
+### {{i+1}}.2.3. Variance components estimation
+
+Under the assumption that all the factors (genotypes, environments, and blocks) have random effects, below it is shown the variance components estimation. Here the model is estimated by REML (Restricted Maximum Likelihood) and the original data without the estimation of missing values is used.
+
+```{r, echo = FALSE}
+ff <- as.formula(paste(traits[i], "~ (1|", geno, ") + (1|", geno, ":", env, ") + (1|",
+                       env, "/", rep, ")"))
+model.reml <- lme4::lmer(ff, data = data)
+summary(model.reml)
+```
+
+## {{i+1}}.3. Stability analysis
+
+`r if(at[4, 5] > 0.05) {"Because interaction is non significant a stability analysis is not presented."}`
+`r if(at[4, 5] < 0.05) {"Because interaction is significant a stability analysis is presented."}`
+
+`r if(at[4, 5] < 0.05) {paste("### ", {{i+1}}, ".3.1. AMMI", sep = "")}`
+
+`r if(at[4, 5] < 0.05) {"#### AMMI biplots"}`
+```{r, echo = FALSE, fig.height = 7, fig.width = 7}
+if(at[4, 5] < 0.05) {
+  ammimodel <- ammi(traits[i], geno, env, rep, data, biplot = 1)
+  ammimodel <- ammi(traits[i], geno, env, rep, data, biplot = 2)
+}
+```
+
+`r if(at[4, 5] < 0.05) {"#### Interaction effects"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) ammimodel$Interaction_effects
+```
+
+`r if(at[4, 5] < 0.05) {"#### PC-values for genotypes"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) ammimodel$PC_values_genotypes
+```
+
+`r if(at[4, 5] < 0.05) {"#### PC-values for environments"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) ammimodel$PC_values_environments
+```
+
+`r if(at[4, 5] < 0.05) {"#### PC contributions"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) ammimodel$Contribution_PCs
+```
+
+`r if(at[4, 5] < 0.05) {paste("### ", {{i+1}}, ".3.2. Tai stability analysis", sep = "")}`
+
+`r if(at[4, 5] < 0.05) {"#### Tai plot"}`
+```{r, echo = FALSE, fig.height = 7, fig.width = 7}
+if(at[4, 5] < 0.05)
+  taimodel <- tai(traits[i], geno, env, rep, data)
+```
+
+`r if(at[4, 5] < 0.05) {"#### Tai alpha and lambda values"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05)
+  taimodel
+```

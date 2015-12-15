@@ -1,6 +1,6 @@
 `r i = {{i}}`
 
-## {{i+1}}. Analysis for trait `r traits[i]`
+# {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r, echo = FALSE}
 lc <- st4gi::checkdata01(traits[i], treat, rep, data)
