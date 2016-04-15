@@ -1,5 +1,5 @@
 ---
-title: "ANOVA for a RCBD"
+title: "Authomatic report for a RCBD"
 author: '`r params$author`'
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 

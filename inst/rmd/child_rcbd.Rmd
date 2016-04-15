@@ -10,6 +10,8 @@ if (lc$c3 == 0)
 model <- aov(data[, traits[i]] ~ data[, treat] + data[, rep])
 ```
 
+## {{i+1}}.1. ANOVA
+
 `r if(lc$c1 == 1 & lc$c2 == 1) {"You have fitted a linear model for a RCBD. The ANOVA table for your model is:"}`
 
 ```{r, echo = FALSE}
@@ -21,16 +23,7 @@ at
 The p-value for treatments is `r format(at[1, 5], digits = 4)`
 `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
 
-The means of your treatments are:
-```{r, echo = FALSE}
-tapply(data[, traits[i]], data[, treat], mean)
-```
-
-`r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of treatments in your experiment is not so big, we can plot the data for each treatment:"}`
-
-```{r, echo = FALSE}
-if (lc$nt < 10) msdplot(traits[i], treat, data, conf = 1)
-```
+## {{i+1}}.2. Assumptions
 
 Don't forget the assumptions of the model. It is supposed that the error has a normal distribution with the same variance for all the treatments. The following plots must help you evaluate this:
 
@@ -41,3 +34,30 @@ plot(model, which = 2)
 ```
 
 Funnel shapes for the first plot may suggest heterogeneity of variances while departures from the theoretical normal line are symptoms of lack of normality.
+
+## {{i+1}}.3. Treatment means
+
+`r if(at[1, 5] < 0.05) {"Below are the sorted means for each treatment with letters indicating if there are significant differences using the multiple comparisons method of Tukey at the 5% level."} else {"The means of your treatments are:"}`
+
+```{r, echo = FALSE}
+if (at[1, 5] < 0.05)
+  agricolae::HSD.test(data[, traits[i]], data[, treat], at[3,1], at[3,3])$groups else
+    tapply(data[, traits[i]], data[, treat], mean)
+```
+
+`r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of treatments in your experiment is not so big, we can plot the data for each treatment:"}`
+
+```{r, echo = FALSE}
+if (lc$nt < 10) msdplot(traits[i], treat, data, conf = 1)
+```
+
+## {{i+1}}.4. Variance components
+
+Below are the variance components for this model, under the assumption that treatments and blocks are random. Here the model is fitted using REML and missing values are not estimated.
+
+```{r, echo = FALSE}
+ff <- as.formula(paste(traits[i], "~ (1|", treat, ") + (1|", rep, ")"))
+fm <- lme4::lmer(ff, data = data)
+lme4::VarCorr(fm)
+```
+
