@@ -12,8 +12,8 @@
 #'
 #' Under the assumption of fixed effects an ANOVA table is computed with missing values
 #' estimated up to a specified percentage (10\% by default). If the ANOVA results in
-#' a significant value for treatments then the Tukey HSD method for pairwise difference
-#' is applied. Assumptions of the model are illustrated with residual plots.
+#' a significant value for treatments then the Tukey HSD method for pairwise differences
+#' is applied. Assumptions of the model are evaluated with residual plots.
 #'
 #' Under the assumption of random effects the model is estimated using REML and the
 #' variance components are shown. Missing values are not estimated in this case.
