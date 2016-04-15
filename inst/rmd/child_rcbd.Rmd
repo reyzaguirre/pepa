@@ -25,7 +25,7 @@ The p-value for treatments is `r format(at[1, 5], digits = 4)`
 
 ## {{i+1}}.2. Assumptions
 
-Don't forget the assumptions of the model. It is supposed that the error has a normal distribution with the same variance for all the treatments. The following plots must help you evaluate this:
+Don't forget the assumptions of the model. It is supposed that the errors are independent with a normal distribution and with the same variance for all the treatments. The following plots must help you evaluate this:
 
 ```{r, echo = FALSE, fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
@@ -33,7 +33,7 @@ plot(model, which = 1)
 plot(model, which = 2)
 ```
 
-Funnel shapes for the first plot may suggest heterogeneity of variances while departures from the theoretical normal line are symptoms of lack of normality.
+Any trend in the residuals in the left plot would violate the assumption of independence while a trend in the variability of the residuals --for instance a funnel shape-- suggests heterogeneity of variances. Departures from the theoretical normal line on the right plot are symptoms of lack of normality.
 
 ## {{i+1}}.3. Treatment means
 
