@@ -36,7 +36,7 @@ maxp <- params$maxp
 
 # 1. Model specification and data description
 
-There is data from `r nlevels(as.factor(data[, treat]))` treatments, evaluated using a randomize complete block design with `r nlevels(as.factor(data[, rep]))` blocks. The statistical model is
+There are data from `r nlevels(as.factor(data[, treat]))` treatments, evaluated using a randomize complete block design with `r nlevels(as.factor(data[, rep]))` blocks. The statistical model is
 $$
 y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
 $$
