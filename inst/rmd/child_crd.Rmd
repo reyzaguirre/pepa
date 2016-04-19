@@ -16,6 +16,7 @@ You have fitted a linear model for a CRD. The ANOVA table for your model is:
 at
 ```
 
+The coefficient of variation for this experiment is `r format(agricolae::cv.model(model), digits = 4)`%.
 The p-value for treatments is `r format(at[1, 5], digits = 4)`
 `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
 

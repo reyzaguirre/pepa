@@ -40,7 +40,7 @@ tapply(data$est, list(data[, geno], data[, env]), mean)
 As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the genotypes and evironments. The following plots help to evaluate this assumptions:
 
 ```{r, echo = FALSE, fig.height = 5, fig.width = 10}
-model <- aov(data$est ~ data[, geno] + data[, env]
+model <- aov(data[, traits[i]] ~ data[, geno] + data[, env]
              + data[, rep] %in% data[, env] + data[, geno]:data[, env])
 par(mfrow = c(1, 2))
 plot(model, which = 1)
@@ -56,6 +56,7 @@ For this analysis it is assumed that genotypes and environments have fixed effec
 at <- suppressWarnings(st4gi::aovmet(traits[i], geno, env, rep, data, maxp))
 at
 ```
+The coefficient of variation for this experiment is `r format(agricolae::cv.model(model), digits = 4)`%.
 The p-values for the model are:
 
 - `r format(at[1, 5], digits = 4)` for genotypes `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
