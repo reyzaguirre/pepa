@@ -1,4 +1,4 @@
-#' Authomatic report for a CRD
+#' Authomatic report for a Completely Randomized Design (CRD)
 #'
 #' Produces an authomatic report for selected traits in an experiment with a CRD.
 #' @param traits The traits to analize.

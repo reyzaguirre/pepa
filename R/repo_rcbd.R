@@ -1,4 +1,4 @@
-#' Authomatic report for a RCBD
+#' Authomatic report for a Randomized Complete Block Design (RCBD)
 #'
 #' Produces an authomatic report for selected traits in an experiment with a RCBD.
 #' @param traits The traits to analize.
