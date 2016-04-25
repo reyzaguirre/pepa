@@ -2,7 +2,7 @@
 % Please edit documentation in R/repo_rcbd.R
 \name{repo.rcbd}
 \alias{repo.rcbd}
-\title{Authomatic report for a RCBD}
+\title{Authomatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
 repo.rcbd(traits, treat, rep, data, maxp = 0.1,
   author = "International Potato Center")

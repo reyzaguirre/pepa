@@ -2,7 +2,7 @@
 % Please edit documentation in R/repo_crd.R
 \name{repo.crd}
 \alias{repo.crd}
-\title{Authomatic report for a CRD}
+\title{Authomatic report for a Completely Randomized Design (CRD)}
 \usage{
 repo.crd(traits, treat, data, maxp = 0.1,
   author = "International Potato Center")
