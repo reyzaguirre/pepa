@@ -1,6 +1,6 @@
-#' Authomatic report for a Completely Randomized Design (CRD)
+#' Automatic report for a Completely Randomized Design (CRD)
 #'
-#' Produces an authomatic report for selected traits in an experiment with a CRD.
+#' Produces an automatic report for selected traits in an experiment with a CRD.
 #' @param traits The traits to analize.
 #' @param treat The treatments.
 #' @param data The name of the data frame.

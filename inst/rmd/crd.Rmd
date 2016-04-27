@@ -1,5 +1,5 @@
 ---
-title: "Authomatic report for a Completely Randomized Design (CRD)"
+title: "Automatic report for a Completely Randomized Design (CRD)"
 author: '`r params$author`'
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 

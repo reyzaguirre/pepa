@@ -1,6 +1,6 @@
-#' Authomatic report for an augmented block design (ABD)
+#' Automatic report for an augmented block design (ABD)
 #'
-#' Produces an authomatic report for selected traits in an experiment with an ABD.
+#' Produces an automatic report for selected traits in an experiment with an ABD.
 #' @param traits The traits to analize.
 #' @param treat The treatments.
 #' @param rep The replications.
@@ -16,6 +16,12 @@
 #' @examples
 #' # A subset that looks like an ABD
 #' temp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50), ]
+#' repo.abd(c("trw", "vw", "crw"), "geno", "rep", temp)
+#'
+#' # With some missing values
+#' temp[c(1, 2), "trw"] <- NA
+#' temp[c(1, 2, 3), "vw"] <- NA
+#' temp[c(1, 10, 15), "crw"] <- NA
 #' repo.abd(c("trw", "vw", "crw"), "geno", "rep", temp)
 #' @export
 

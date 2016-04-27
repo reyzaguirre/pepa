@@ -1,6 +1,6 @@
-#' Authomatic report for a MET with a RCBD
+#' Automatic report for a MET with a RCBD
 #'
-#' Produces an authomatic report for selected traits in a multi environment
+#' Produces an automatic report for selected traits in a multi environment
 #' trial (MET) with a RCBD in each environment.
 #' @param traits The traits to analize.
 #' @param geno The genotypes.

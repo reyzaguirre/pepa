@@ -1,5 +1,5 @@
 ---
-title: "Authomatic report for an Augmented Block Design (ABD)"
+title: "Automatic report for an Augmented Block Design (ABD)"
 author: '`r params$author`'
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 
@@ -52,8 +52,23 @@ In this model we assume that the errors are independent and have a normal distri
 
 ```{r, include = FALSE}
 out <- NULL
-for (i in 1:length(traits))
-  out <- c(out, knit_expand('child_abd.Rmd'))
+
+for (i in 1:length(traits)) {
+  
+  lc <- st4gi::check.abd(traits[i], treat, rep, data)
+  
+  if (lc$nt.check.0 > 0) {
+    temp <- subset(data, !(data[, treat] %in% lc$check.0) & !is.na(data[, traits[i]]))
+  } else {
+    temp <- subset(data, !is.na(data[, traits[i]]))
+  }
+  
+  if (lc$nt.check.2 > 1) {
+    out <- c(out, knit_expand('child_abd.Rmd'))
+  } else {
+    out <- c(out, knit_expand('child_abd_fail.Rmd'))
+  }
+}
 ```
 
 `r paste(knit(text = out), collapse = '\n')`
