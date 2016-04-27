@@ -2,7 +2,7 @@
 % Please edit documentation in R/repo_crd.R
 \name{repo.crd}
 \alias{repo.crd}
-\title{Authomatic report for a Completely Randomized Design (CRD)}
+\title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
 repo.crd(traits, treat, data, maxp = 0.1,
   author = "International Potato Center")
@@ -22,7 +22,7 @@ repo.crd(traits, treat, data, maxp = 0.1,
 It returns an explanation about the CRD fitted model.
 }
 \description{
-Produces an authomatic report for selected traits in an experiment with a CRD.
+Produces an automatic report for selected traits in an experiment with a CRD.
 }
 \details{
 It fits a linear model for a CRD and explains the results.

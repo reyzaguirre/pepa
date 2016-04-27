@@ -4,6 +4,12 @@
 
 
 ```{r, echo = FALSE}
+if (lc$nt.check.0 > 0) {
+    temp <- subset(data, !(data[, treat] %in% lc$check.0) & !is.na(data[, traits[i]]))
+  } else {
+    temp <- subset(data, !is.na(data[, traits[i]]))
+  }
+
 y <- temp[, traits[i]]
 model <- agricolae::DAU.test(factor(temp[, rep]), factor(temp[, treat]), y)
 model

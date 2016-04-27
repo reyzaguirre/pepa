@@ -2,7 +2,7 @@
 % Please edit documentation in R/repo_met.R
 \name{repo.met}
 \alias{repo.met}
-\title{Authomatic report for a MET with a RCBD}
+\title{Automatic report for a MET with a RCBD}
 \usage{
 repo.met(traits, geno, env, rep, data, maxp = 0.1,
   author = "International Potato Center")
@@ -26,7 +26,7 @@ repo.met(traits, geno, env, rep, data, maxp = 0.1,
 It returns an automatic report about the MET with a RCBD fitted model.
 }
 \description{
-Produces an authomatic report for selected traits in a multi environment
+Produces an automatic report for selected traits in a multi environment
 trial (MET) with a RCBD in each environment.
 }
 \details{

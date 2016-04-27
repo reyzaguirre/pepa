@@ -2,7 +2,7 @@
 % Please edit documentation in R/repo_rcbd.R
 \name{repo.rcbd}
 \alias{repo.rcbd}
-\title{Authomatic report for a Randomized Complete Block Design (RCBD)}
+\title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
 repo.rcbd(traits, treat, rep, data, maxp = 0.1,
   author = "International Potato Center")
@@ -24,7 +24,7 @@ repo.rcbd(traits, treat, rep, data, maxp = 0.1,
 It returns an explanation about the RCBD fitted model.
 }
 \description{
-Produces an authomatic report for selected traits in an experiment with a RCBD.
+Produces an automatic report for selected traits in an experiment with a RCBD.
 }
 \details{
 It fits a linear model for a RCBD and explains the results.
