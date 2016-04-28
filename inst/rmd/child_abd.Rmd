@@ -51,3 +51,8 @@ model$means
 model$statistics
 ```
 
+## {{i+1}}.4. LSD test
+
+```{r, echo = FALSE}
+model$groups
+```
