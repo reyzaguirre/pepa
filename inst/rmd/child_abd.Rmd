@@ -32,8 +32,22 @@ if(lc$nt.check.0 > 1) lc$check.0
 ```
 `r if(lc$nt.check.0 > 1) {"These checks have been removed."}`
 
+`r if(lc$nt.check.1 == 1) paste("There is one check with data in only one block: ", lc$check.1, ". Checks need at least two replications so this check has been removed.", sep = "")`
+`r if(lc$nt.check.1 > 1) paste("There are ", lc$nt.check.1, " checks with data in only one block: ", sep = "")`
+```{r, echo = FALSE}
+if(lc$nt.check.1 > 1) lc$check.1
+```
+`r if(lc$nt.check.1 > 1) {"Checks need at least two replications so these checks have been removed."}`
+
 ## {{i+1}}.2. Adjusted means
 
 ```{r, echo = FALSE}
-model
+model$means
 ```
+
+## {{i+1}}.3. Overall mean and CV
+
+```{r, echo = FALSE}
+model$statistics
+```
+
