@@ -109,7 +109,32 @@ if(at[4, 5] < 0.05) ammimodel$PC_values_environments
 if(at[4, 5] < 0.05) ammimodel$Contribution_PCs
 ```
 
-`r if(at[4, 5] < 0.05) {paste("### ", {{i+1}}, ".3.2. Tai stability analysis", sep = "")}`
+`r if(at[4, 5] < 0.05) {paste("### ", {{i+1}}, ".3.2. GGE", sep = "")}`
+
+`r if(at[4, 5] < 0.05) {"#### GGE biplots"}`
+```{r, echo = FALSE, fig.height = 7, fig.width = 7}
+if(at[4, 5] < 0.05) {
+  ggemodel <- ammi(traits[i], geno, env, rep, data, method = "GGE", biplot = 1)
+  ggemodel <- ammi(traits[i], geno, env, rep, data, method = "GGE", biplot = 2)
+}
+```
+
+`r if(at[4, 5] < 0.05) {"#### PC-values for genotypes"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) ggemodel$PC_values_genotypes
+```
+
+`r if(at[4, 5] < 0.05) {"#### PC-values for environments"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) ggemodel$PC_values_environments
+```
+
+`r if(at[4, 5] < 0.05) {"#### PC contributions"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) ggemodel$Contribution_PCs
+```
+
+`r if(at[4, 5] < 0.05) {paste("### ", {{i+1}}, ".3.3. Tai stability analysis", sep = "")}`
 
 `r if(at[4, 5] < 0.05) {"#### Tai plot"}`
 ```{r, echo = FALSE, fig.height = 7, fig.width = 7}
