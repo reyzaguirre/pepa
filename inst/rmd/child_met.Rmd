@@ -84,8 +84,8 @@ summary(model.reml)
 `r if(at[4, 5] < 0.05) {"#### AMMI biplots"}`
 ```{r, echo = FALSE, fig.height = 7, fig.width = 7}
 if(at[4, 5] < 0.05) {
-  ammimodel <- ammi(traits[i], geno, env, rep, data, biplot = 1)
-  ammimodel <- ammi(traits[i], geno, env, rep, data, biplot = 2)
+  ammimodel <- suppressWarnings(ammi(traits[i], geno, env, rep, data, biplot = 1))
+  ammimodel <- suppressWarnings(ammi(traits[i], geno, env, rep, data, biplot = 2))
 }
 ```
 
@@ -114,8 +114,8 @@ if(at[4, 5] < 0.05) ammimodel$Contribution_PCs
 `r if(at[4, 5] < 0.05) {"#### GGE biplots"}`
 ```{r, echo = FALSE, fig.height = 7, fig.width = 7}
 if(at[4, 5] < 0.05) {
-  ggemodel <- ammi(traits[i], geno, env, rep, data, method = "GGE", biplot = 1)
-  ggemodel <- ammi(traits[i], geno, env, rep, data, method = "GGE", biplot = 2)
+  ggemodel <- suppressWarnings(ammi(traits[i], geno, env, rep, data, method = "GGE", biplot = 1))
+  ggemodel <- suppressWarnings(ammi(traits[i], geno, env, rep, data, method = "GGE", biplot = 2))
 }
 ```
 
@@ -139,8 +139,30 @@ if(at[4, 5] < 0.05) ggemodel$Contribution_PCs
 ```{r, echo = FALSE}
 if(at[4, 5] < 0.05) {
   rsamodel <- suppressWarnings(rsa(traits[i], geno, env, rep, data))
-  rsamodel
 }
+```
+
+`r if(at[4, 5] < 0.05) {"#### ANOVA"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) rsamodel$ANOVA
+```
+
+`r if(at[4, 5] < 0.05) {"#### Stability measures for genotypes"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) rsamodel$Stability_for_genotypes
+```
+`r if(at[4, 5] < 0.05) {"Here: \n
+- a is the linear regression intercept, \n
+- b is the linear regression slope, \n
+- se is the slope standard error, \n
+- MSe is the error mean square, \n
+- MSentry is the variance of the means, and \n
+- MSinter is the variance of the interaction effects. \n
+The same is shown in the next section for each environment."}`
+
+`r if(at[4, 5] < 0.05) {"#### Stability measures for environments"}`
+```{r, echo = FALSE}
+if(at[4, 5] < 0.05) rsamodel$Stability_for_environments
 ```
 
 `r if(at[4, 5] < 0.05) {paste("### ", {{i+1}}, ".3.4. Tai stability analysis", sep = "")}`
