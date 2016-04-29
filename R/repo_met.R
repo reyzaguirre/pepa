@@ -13,7 +13,9 @@
 #' @details It fits a linear model for a MET with a RCBD for the selected trait.
 #' If data is unbalanced, missing values are estimated up to an specified maximum
 #' proportion, 10\% by default. Genotypes and environments are considered as fixed
-#' factors while the blocks are considered as random and nested into the environments.
+#' factors while the blocks are considered as random and nested into the environments
+#' for ANOVA. For variance components estimation all the factors
+#' are treated as random.
 #' @return It returns an automatic report about the MET with a RCBD fitted model.
 #' @examples
 #' repo.met(c("rytha", "fytha"), "geno", "env", "rep", megaclones)
