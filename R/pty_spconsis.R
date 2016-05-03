@@ -8,10 +8,7 @@
 #' @author Raul Eyzaguirre.
 #' @details The data frame must use the labels (lower or upper case) specified in
 #' the function \code{spconsis} of package \code{st4gi}. Type \code{?spconsis} to
-#' see the list.
-#' Extreme values are detected using the interquartile range.
-#' The rule is to detect any value out of the interval
-#' \eqn{[Q_1 - f \times IQR; Q_3 + f \times IQR]}. By default \code{f = 3}.
+#' see the list and for additional details.
 #' @return It returns a list of all rows with some kind of inconsistency and
 #' all rows with outliers.
 #' @examples
