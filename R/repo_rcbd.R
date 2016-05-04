@@ -7,6 +7,8 @@
 #' @param data The name of the data frame.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param author Author.
+#' @param format The output file format for the report, \code{"html"} by default.
+#' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a RCBD and explains the results.
 #'
@@ -27,17 +29,36 @@
 #' @export
 
 repo.rcbd <- function(traits, treat, rep, data, maxp = 0.1,
-                      author = "International Potato Center") {
+                      author = "International Potato Center",
+                      format = c("html", "word", "pdf")) {
+
+  format <- paste(match.arg(format), "_document", sep = "")
 
   dirfiles <- system.file(package = "pepa")
   fileRmd <- paste(dirfiles, "/rmd/rcbd.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/rmd/rcbd.html", sep = "")
+  fileDOCX <- paste(dirfiles, "/rmd/rcbd.docx", sep = "")
+  filePDF <- paste(dirfiles, "/rmd/rcbd.pdf", sep = "")
 
-  rmarkdown::render(fileRmd, params = list(traits = traits,
+  rmarkdown::render(fileRmd, output_format = format,
+                    params = list(traits = traits,
                                            treat = treat,
                                            rep = rep,
                                            data = data,
                                            maxp = maxp,
                                            author = author))
-  browseURL(fileURL)
+
+  if(format == "html_document") try(browseURL(fileURL))
+  if(format == "word_document") try(shell.exec(fileDOCX))
+  if(format == "pdf_document")  try(shell.exec(filePDF))
 }
+
+
+
+
+
+
+
+
+
+
