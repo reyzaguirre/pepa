@@ -72,7 +72,18 @@ ff <- as.formula(paste(traits[i], "~ (1|", geno, ") + (1|", geno, ":", env, ") +
                        env, "/", rep, ")"))
 model.reml <- lme4::lmer(ff, data = data)
 summary(model.reml)
+
+env.num <- nlevels(as.factor(data[, env]))
+numrep <- nlevels(as.factor(data[, rep]))
+
+vg <- lme4::VarCorr(model.reml)$geno[1]
+vgxe <- lme4::VarCorr(model.reml)$'geno:env'[1]
+vr <- attr(lme4::VarCorr(model.reml), "sc")^2
+
+h2 <- vg / (vg + vgxe / env.num + vr / env.num / numrep) * 100
 ```
+
+With these variance estimates, the broad sense heritability results `r paste(format(h2, digits = 4), "%", sep = "")`.
 
 ## {{i+1}}.3. Stability analysis
 
