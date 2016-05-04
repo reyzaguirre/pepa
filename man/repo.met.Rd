@@ -5,7 +5,7 @@
 \title{Automatic report for a MET with a RCBD}
 \usage{
 repo.met(traits, geno, env, rep, data, maxp = 0.1,
-  author = "International Potato Center")
+  author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -21,6 +21,9 @@ repo.met(traits, geno, env, rep, data, maxp = 0.1,
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
 \item{author}{Author.}
+
+\item{format}{The output file format for the report, \code{"html"} by default.
+Other options are \code{"word"} and \code{"pdf"}.}
 }
 \value{
 It returns an automatic report about the MET with a RCBD fitted model.

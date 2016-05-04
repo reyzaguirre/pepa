@@ -4,7 +4,8 @@
 \alias{repo.abd}
 \title{Automatic report for an augmented block design (ABD)}
 \usage{
-repo.abd(traits, treat, rep, data, author = "International Potato Center")
+repo.abd(traits, treat, rep, data, author = "International Potato Center",
+  format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -16,6 +17,9 @@ repo.abd(traits, treat, rep, data, author = "International Potato Center")
 \item{data}{The name of the data frame.}
 
 \item{author}{Author.}
+
+\item{format}{The output file format for the report, \code{"html"} by default.
+Other options are \code{"word"} and \code{"pdf"}.}
 }
 \value{
 It returns an explanation about the ABD fitted model.

@@ -6,6 +6,8 @@
 #' @param data The name of the data frame.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param author Author.
+#' @param format The output file format for the report, \code{"html"} by default.
+#' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a CRD and explains the results.
 #'
@@ -25,16 +27,25 @@
 #' @export
 
 repo.crd <- function(traits, treat, data, maxp = 0.1,
-                     author = "International Potato Center") {
+                     author = "International Potato Center",
+                     format = c("html", "word", "pdf")) {
+
+  format <- paste(match.arg(format), "_document", sep = "")
 
   dirfiles <- system.file(package = "pepa")
   fileRmd <- paste(dirfiles, "/rmd/crd.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
+  fileDOCX <- paste(dirfiles, "/rmd/crd.docx", sep = "")
+  filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
 
-  rmarkdown::render(fileRmd, params = list(traits = traits,
-                                           treat = treat,
-                                           data = data,
-                                           maxp = maxp,
-                                           author = author))
-  browseURL(fileURL)
+  rmarkdown::render(fileRmd, output_format = format,
+                    params = list(traits = traits,
+                                  treat = treat,
+                                  data = data,
+                                  maxp = maxp,
+                                  author = author))
+
+  if(format == "html_document") try(browseURL(fileURL))
+  if(format == "word_document") try(shell.exec(fileDOCX))
+  if(format == "pdf_document")  try(shell.exec(filePDF))
 }

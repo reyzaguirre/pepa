@@ -5,7 +5,7 @@
 \title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
 repo.crd(traits, treat, data, maxp = 0.1,
-  author = "International Potato Center")
+  author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -17,6 +17,9 @@ repo.crd(traits, treat, data, maxp = 0.1,
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
 \item{author}{Author.}
+
+\item{format}{The output file format for the report, \code{"html"} by default.
+Other options are \code{"word"} and \code{"pdf"}.}
 }
 \value{
 It returns an explanation about the CRD fitted model.
