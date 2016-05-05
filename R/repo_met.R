@@ -37,12 +37,12 @@ repo.met <- function(traits, geno, env, rep, data, maxp = 0.1,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                           geno = geno,
-                                           env = env,
-                                           rep = rep,
-                                           data = data,
-                                           maxp = maxp,
-                                           author = author))
+                                  geno = geno,
+                                  env = env,
+                                  rep = rep,
+                                  data = data,
+                                  maxp = maxp,
+                                  author = author))
 
   if(format == "html_document") try(browseURL(fileURL))
   if(format == "word_document") try(shell.exec(fileDOCX))

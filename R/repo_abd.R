@@ -37,10 +37,10 @@ repo.abd <- function(traits, treat, rep, data,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                           treat = treat,
-                                           rep = rep,
-                                           data = data,
-                                           author = author))
+                                  treat = treat,
+                                  rep = rep,
+                                  data = data,
+                                  author = author))
 
   if(format == "html_document") try(browseURL(fileURL))
   if(format == "word_document") try(shell.exec(fileDOCX))

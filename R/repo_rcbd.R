@@ -42,11 +42,11 @@ repo.rcbd <- function(traits, treat, rep, data, maxp = 0.1,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                           treat = treat,
-                                           rep = rep,
-                                           data = data,
-                                           maxp = maxp,
-                                           author = author))
+                                  treat = treat,
+                                  rep = rep,
+                                  data = data,
+                                  maxp = maxp,
+                                  author = author))
 
   if(format == "html_document") try(browseURL(fileURL))
   if(format == "word_document") try(shell.exec(fileDOCX))
