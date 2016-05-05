@@ -4,7 +4,8 @@
 \alias{pty.spconsis}
 \title{Pepa tells you about the consistency of your data}
 \usage{
-pty.spconsis(data, plot.size, f = 3, author = "International Potato Center")
+pty.spconsis(data, plot.size, f = 3, author = "International Potato Center",
+  format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{data}{The name of the data frame.}
@@ -14,6 +15,9 @@ pty.spconsis(data, plot.size, f = 3, author = "International Potato Center")
 \item{f}{Factor for extreme values detection. See details.}
 
 \item{author}{Author.}
+
+\item{format}{The output file format for the report, \code{"html"} by default.
+Other options are \code{"word"} and \code{"pdf"}.}
 }
 \value{
 It returns a list of all rows with some kind of inconsistency and

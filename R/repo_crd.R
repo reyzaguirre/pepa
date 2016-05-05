@@ -31,8 +31,8 @@ repo.crd <- function(traits, treat, data, maxp = 0.1,
                      format = c("html", "word", "pdf")) {
 
   format <- paste(match.arg(format), "_document", sep = "")
-
   dirfiles <- system.file(package = "pepa")
+
   fileRmd <- paste(dirfiles, "/rmd/crd.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
   fileDOCX <- paste(dirfiles, "/rmd/crd.docx", sep = "")

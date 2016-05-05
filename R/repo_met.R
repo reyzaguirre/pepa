@@ -28,8 +28,8 @@ repo.met <- function(traits, geno, env, rep, data, maxp = 0.1,
                      format = c("html", "word", "pdf")) {
 
   format <- paste(match.arg(format), "_document", sep = "")
-
   dirfiles <- system.file(package = "pepa")
+
   fileRmd <- paste(dirfiles, "/rmd/met.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/rmd/met.html", sep = "")
   fileDOCX <- paste(dirfiles, "/rmd/met.docx", sep = "")

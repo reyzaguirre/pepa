@@ -6,7 +6,7 @@
 \usage{
 pty.pesekbaker(traits, geno, env, rep = NULL, data, means = "single",
   model = "gxe", dgg = NULL, units = "sdu", sf = 0.1,
-  author = "International Potato Center")
+  author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{List of traits.}
@@ -32,6 +32,9 @@ for a model without interaction. The default is \code{"gxe"}. See details for mo
 \item{sf}{Selected fraction. The default is 0.1.}
 
 \item{author}{Author.}
+
+\item{format}{The output file format for the report, \code{"html"} by default.
+Other options are \code{"word"} and \code{"pdf"}.}
 }
 \value{
 It returns an explanation about the Pesek-Baker index.

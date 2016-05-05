@@ -33,8 +33,8 @@ repo.rcbd <- function(traits, treat, rep, data, maxp = 0.1,
                       format = c("html", "word", "pdf")) {
 
   format <- paste(match.arg(format), "_document", sep = "")
-
   dirfiles <- system.file(package = "pepa")
+
   fileRmd <- paste(dirfiles, "/rmd/rcbd.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/rmd/rcbd.html", sep = "")
   fileDOCX <- paste(dirfiles, "/rmd/rcbd.docx", sep = "")

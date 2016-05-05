@@ -3,6 +3,8 @@
 #' Explain an R object in plain English if she knows about it
 #' @param x An R object.
 #' @param author Author.
+#' @param format The output file format for the report, \code{"html"} by default.
+#' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
 #' @details It uses a set of templates to explain R objects in plain English.
 #' It aims to produce automatic reports for some standard statistical procedures, most
@@ -13,48 +15,38 @@
 #' pty(pjpz09)
 #' @export
 
-pty <- function(x, author = "International Potato Center") {
+pty <- function(x, author = "International Potato Center",
+                format = c("html", "word", "pdf")) {
+
+  format <- paste(match.arg(format), "_document", sep = "")
   classlist <- c("data.frame", "numeric", "aov", "lm")
-  if (class(x) %in% classlist == FALSE) pty.na(x, author = author)
-  if (class(x) == "data.frame") pty.df(x, author = author)
-  if (class(x) == "numeric") pty.nt(x, author = author)
-  if (sum(class(x) %in% c("aov", "lm")) > 0) pty.aov(x, author = author)
-}
+  dirfiles <- system.file(package = "pepa")
 
-dirfiles <- system.file(package = "pepa")
+  if (class(x) %in% classlist == FALSE) {
+    fileRmd <- paste(dirfiles, "/na.Rmd", sep = "")  # Not available yet
+    output <- "na"
+  }
+  if (class(x) == "data.frame") {
+    fileRmd <- paste(dirfiles, "/df.Rmd", sep = "")  # for data.frames
+    output <- "df"
+  }
+  if (class(x) == "numeric") {
+    fileRmd <- paste(dirfiles, "/nt.Rmd", sep = "")  # for numeric traits
+    output <- "nt"
+  }
+  if (sum(class(x) %in% c("aov", "lm")) > 0) {
+    fileRmd <- paste(dirfiles, "/aov.Rmd", sep = "") # for linear models with aov or lm
+    output <- "aov"
+  }
 
-# Not available yet
+  fileURL <- paste(dirfiles, "/", output, ".html", sep = "")
+  fileDOCX <- paste(dirfiles, "/", output, ".docx", sep = "")
+  filePDF <- paste(dirfiles, "/", output, ".pdf", sep = "")
 
-pty.na <- function(x, author) {
-  fileRmd <- paste(dirfiles, "/na.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/na.html", sep = "")
-  rmarkdown::render(fileRmd, params = list(x = x, author = author))
-  browseURL(fileURL)
-}
+  rmarkdown::render(fileRmd, output_format = format,
+                    params = list(x = x, author = author))
 
-# for data.frames
-
-pty.df <- function(x, author) {
-  fileRmd <- paste(dirfiles, "/df.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/df.html", sep = "")
-  rmarkdown::render(fileRmd, params = list(x = x, author = author))
-  browseURL(fileURL)
-}
-
-# for numeric traits
-
-pty.nt <- function(x, author) {
-  fileRmd <- paste(dirfiles, "/nt.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/nt.html", sep = "")
-  rmarkdown::render(fileRmd, params = list(x = x, author = author))
-  browseURL(fileURL)
-}
-
-# for linear models with aov or lm
-
-pty.aov <- function(x, author) {
-  fileRmd <- paste(dirfiles, "/aov.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/aov.html", sep = "")
-  rmarkdown::render(fileRmd, params = list(x = x, author = author))
-  browseURL(fileURL)
+  if(format == "html_document") try(browseURL(fileURL))
+  if(format == "word_document") try(shell.exec(fileDOCX))
+  if(format == "pdf_document")  try(shell.exec(filePDF))
 }

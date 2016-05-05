@@ -4,12 +4,16 @@
 \alias{pty}
 \title{Pepa tells you}
 \usage{
-pty(x, author = "International Potato Center")
+pty(x, author = "International Potato Center", format = c("html", "word",
+  "pdf"))
 }
 \arguments{
 \item{x}{An R object.}
 
 \item{author}{Author.}
+
+\item{format}{The output file format for the report, \code{"html"} by default.
+Other options are \code{"word"} and \code{"pdf"}.}
 }
 \value{
 It returns an explanation about the selected R object.

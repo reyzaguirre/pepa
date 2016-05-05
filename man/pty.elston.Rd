@@ -5,7 +5,8 @@
 \title{Pepa tells you about the Elston index}
 \usage{
 pty.elston(traits, geno, env = NULL, rep = NULL, data, means = "single",
-  model = "gxe", lb = 1, author = "International Potato Center")
+  model = "gxe", lb = 1, author = "International Potato Center",
+  format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{List of traits.}
@@ -29,6 +30,9 @@ The default is \code{"gxe"}. See details for more information.}
 \eqn{k = (n \times min(x) - max(x)) / (n - 1)}}
 
 \item{author}{Author.}
+
+\item{format}{The output file format for the report, \code{"html"} by default.
+Other options are \code{"word"} and \code{"pdf"}.}
 }
 \value{
 It returns an explanation about the Elston index.

@@ -28,8 +28,8 @@ repo.abd <- function(traits, treat, rep, data,
                      format = c("html", "word", "pdf")) {
 
   format <- paste(match.arg(format), "_document", sep = "")
-
   dirfiles <- system.file(package = "pepa")
+
   fileRmd <- paste(dirfiles, "/rmd/abd.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/rmd/abd.html", sep = "")
   fileDOCX <- paste(dirfiles, "/rmd/abd.docx", sep = "")

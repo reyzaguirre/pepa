@@ -14,6 +14,8 @@
 #' @param units Units for dgg, \code{"actual"} or \code{"sdu"}. See details for more information.
 #' @param sf Selected fraction. The default is 0.1.
 #' @param author Author.
+#' @param format The output file format for the report, \code{"html"} by default.
+#' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
 #' @details Type \code{?pesekbaker} for additional details.
 #' @return It returns an explanation about the Pesek-Baker index.
@@ -23,22 +25,31 @@
 
 pty.pesekbaker <- function(traits, geno, env, rep = NULL, data, means = "single",
                            model = "gxe", dgg = NULL, units = "sdu", sf = 0.1,
-                           author = "International Potato Center") {
+                           author = "International Potato Center",
+                           format = c("html", "word", "pdf")) {
 
+  format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
+
   fileRmd <- paste(dirfiles, "/pesekbaker.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/pesekbaker.html", sep = "")
+  fileDOCX <- paste(dirfiles, "/pesekbaker.docx", sep = "")
+  filePDF <- paste(dirfiles, "/pesekbaker.pdf", sep = "")
 
-  rmarkdown::render(fileRmd, params = list(traits = traits,
-                                           geno = geno,
-                                           env = env,
-                                           rep = rep,
-                                           data = data,
-                                           means = means,
-                                           model = model,
-                                           dgg = dgg,
-                                           units = units,
-                                           sf = sf,
-                                           author = author))
-  browseURL(fileURL)
+  rmarkdown::render(fileRmd, output_format = format,
+                    params = list(traits = traits,
+                                  geno = geno,
+                                  env = env,
+                                  rep = rep,
+                                  data = data,
+                                  means = means,
+                                  model = model,
+                                  dgg = dgg,
+                                  units = units,
+                                  sf = sf,
+                                  author = author))
+
+  if(format == "html_document") try(browseURL(fileURL))
+  if(format == "word_document") try(shell.exec(fileDOCX))
+  if(format == "pdf_document")  try(shell.exec(filePDF))
 }

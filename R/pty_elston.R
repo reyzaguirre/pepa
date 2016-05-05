@@ -14,6 +14,8 @@
 #' @param lb Lower bound. \code{1} for \eqn{k = min(x)} and \code{2} for
 #' \eqn{k = (n \times min(x) - max(x)) / (n - 1)}
 #' @param author Author.
+#' @param format The output file format for the report, \code{"html"} by default.
+#' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
 #' @details Type \code{?elston} for additional details.
 #' @return It returns an explanation about the Elston index.
@@ -21,21 +23,31 @@
 #' pty.elston(c("rytha", "bc", "dm", "star", "nocr"), "geno", data = spg)
 #' @export
 
-pty.elston <- function(traits, geno, env = NULL, rep = NULL, data, means = "single",
-                       model = "gxe", lb = 1, author = "International Potato Center") {
+pty.elston <- function(traits, geno, env = NULL, rep = NULL, data,
+                       means = "single", model = "gxe", lb = 1,
+                       author = "International Potato Center",
+                       format = c("html", "word", "pdf")) {
 
+  format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
+
   fileRmd <- paste(dirfiles, "/elston.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/elston.html", sep = "")
+  fileDOCX <- paste(dirfiles, "/elston.docx", sep = "")
+  filePDF <- paste(dirfiles, "/elston.pdf", sep = "")
 
-  rmarkdown::render(fileRmd, params = list(traits = traits,
-                                           geno = geno,
-                                           env = env,
-                                           rep = rep,
-                                           data = data,
-                                           means = means,
-                                           model = model,
-                                           lb = lb,
-                                           author = author))
-  browseURL(fileURL)
+  rmarkdown::render(fileRmd, output_format = format,
+                    params = list(traits = traits,
+                                  geno = geno,
+                                  env = env,
+                                  rep = rep,
+                                  data = data,
+                                  means = means,
+                                  model = model,
+                                  lb = lb,
+                                  author = author))
+
+  if(format == "html_document") try(browseURL(fileURL))
+  if(format == "word_document") try(shell.exec(fileDOCX))
+  if(format == "pdf_document")  try(shell.exec(filePDF))
 }
