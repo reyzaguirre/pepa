@@ -10,10 +10,6 @@
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model for an ABD and explains the results.
-#'
-#' The Tukey HSD method for pairwise differences is applied.
-#' Assumptions of the model are evaluated with residual plots.
-#'
 #' @return It returns an explanation about the ABD fitted model.
 #' @examples
 #' # A subset that looks like an ABD
