@@ -2,7 +2,7 @@
 #'
 #' Produces an automatic report for selected traits in an experiment with a RCBD.
 #' @param traits The traits to analize.
-#' @param treat The treatments.
+#' @param geno The genotypes.
 #' @param rep The replications.
 #' @param data The name of the data frame.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
@@ -14,7 +14,7 @@
 #'
 #' Under the assumption of fixed effects an ANOVA table is computed with missing values
 #' estimated up to a specified percentage (10\% by default). If the ANOVA results in
-#' a significant value for treatments then the Tukey HSD method for pairwise differences
+#' a significant value for genotypes then the Tukey HSD method for pairwise differences
 #' is applied. Assumptions of the model are evaluated with residual plots.
 #'
 #' Under the assumption of random effects the model is estimated using REML and the
@@ -28,7 +28,7 @@
 #' repo.rcbd(c("trw", "vw", "crw"), "geno", "rep", temp)
 #' @export
 
-repo.rcbd <- function(traits, treat, rep, data, maxp = 0.1,
+repo.rcbd <- function(traits, geno, rep, data, maxp = 0.1,
                       author = "International Potato Center",
                       format = c("html", "word", "pdf")) {
 
@@ -42,7 +42,7 @@ repo.rcbd <- function(traits, treat, rep, data, maxp = 0.1,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                  treat = treat,
+                                  geno = geno,
                                   rep = rep,
                                   data = data,
                                   maxp = maxp,
@@ -52,13 +52,3 @@ repo.rcbd <- function(traits, treat, rep, data, maxp = 0.1,
   if(format == "word_document") try(shell.exec(fileDOCX))
   if(format == "pdf_document")  try(shell.exec(filePDF))
 }
-
-
-
-
-
-
-
-
-
-

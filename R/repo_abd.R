@@ -2,7 +2,7 @@
 #'
 #' Produces an automatic report for selected traits in an experiment with an ABD.
 #' @param traits The traits to analize.
-#' @param treat The treatments.
+#' @param geno The genotypes.
 #' @param rep The replications.
 #' @param data The name of the data frame.
 #' @param author Author.
@@ -23,7 +23,7 @@
 #' repo.abd(c("nocr", "trw", "vw", "crw"), "geno", "rep", temp)
 #' @export
 
-repo.abd <- function(traits, treat, rep, data,
+repo.abd <- function(traits, geno, rep, data,
                      author = "International Potato Center",
                      format = c("html", "word", "pdf")) {
 
@@ -37,7 +37,7 @@ repo.abd <- function(traits, treat, rep, data,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                  treat = treat,
+                                  geno = geno,
                                   rep = rep,
                                   data = data,
                                   author = author))

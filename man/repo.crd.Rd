@@ -4,13 +4,13 @@
 \alias{repo.crd}
 \title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
-repo.crd(traits, treat, data, maxp = 0.1,
+repo.crd(traits, geno, data, maxp = 0.1,
   author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{The traits to analize.}
 
-\item{treat}{The treatments.}
+\item{geno}{The genotypes.}
 
 \item{data}{The name of the data frame.}
 

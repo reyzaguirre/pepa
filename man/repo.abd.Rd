@@ -4,13 +4,13 @@
 \alias{repo.abd}
 \title{Automatic report for an augmented block design (ABD)}
 \usage{
-repo.abd(traits, treat, rep, data, author = "International Potato Center",
+repo.abd(traits, geno, rep, data, author = "International Potato Center",
   format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{The traits to analize.}
 
-\item{treat}{The treatments.}
+\item{geno}{The genotypes.}
 
 \item{rep}{The replications.}
 

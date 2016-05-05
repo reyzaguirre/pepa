@@ -4,13 +4,13 @@
 \alias{repo.rcbd}
 \title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
-repo.rcbd(traits, treat, rep, data, maxp = 0.1,
+repo.rcbd(traits, geno, rep, data, maxp = 0.1,
   author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{The traits to analize.}
 
-\item{treat}{The treatments.}
+\item{geno}{The genotypes.}
 
 \item{rep}{The replications.}
 
@@ -34,7 +34,7 @@ It fits a linear model for a RCBD and explains the results.
 
 Under the assumption of fixed effects an ANOVA table is computed with missing values
 estimated up to a specified percentage (10\% by default). If the ANOVA results in
-a significant value for treatments then the Tukey HSD method for pairwise differences
+a significant value for genotypes then the Tukey HSD method for pairwise differences
 is applied. Assumptions of the model are evaluated with residual plots.
 
 Under the assumption of random effects the model is estimated using REML and the

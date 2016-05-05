@@ -17,7 +17,7 @@ output:
     toc_depth: 3
 params: 
   traits: "no data"
-  treat: "no data"
+  geno: "no data"
   rep: "no data"
   data: "no data"
   author: "no data"
@@ -27,11 +27,11 @@ params:
 library(knitr)
 
 traits <- params$traits
-treat <- params$treat
+geno <- params$geno
 rep <- params$rep
 data <- params$data
 
-lc <- check.abd(traits[1], treat, rep, data)
+lc <- check.abd(traits[1], geno, rep, data)
 ```
 
 # 1. Model specification and data description
@@ -42,9 +42,9 @@ y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
 $$
 where
 
-* $y_{ij}$ is the observed response with treatment $i$ and block $j$.
-* $\mu$ is the mean response over all treatments and blocks.
-* $\tau_i$ is the effect for treatment $i$.
+* $y_{ij}$ is the observed response with genotype $i$ and block $j$.
+* $\mu$ is the mean response over all genotypes and blocks.
+* $\tau_i$ is the effect for genotype $i$.
 * $\beta_j$ is the effect for block $j$.
 * $\epsilon_{ij}$ is the error term.
 
@@ -55,7 +55,7 @@ out <- NULL
 
 for (i in 1:length(traits)) {
   
-  lc <- check.abd(traits[i], treat, rep, data)
+  lc <- check.abd(traits[i], geno, rep, data)
 
   if (lc$nt.check.2 > 1) {
     out <- c(out, knit_expand('child_abd.Rmd'))

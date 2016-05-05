@@ -2,7 +2,7 @@
 #'
 #' Produces an automatic report for selected traits in an experiment with a CRD.
 #' @param traits The traits to analize.
-#' @param treat The treatments.
+#' @param geno The genotypes.
 #' @param data The name of the data frame.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param author Author.
@@ -26,7 +26,7 @@
 #' repo.crd(c("trw", "vw", "crw"), "geno", temp)
 #' @export
 
-repo.crd <- function(traits, treat, data, maxp = 0.1,
+repo.crd <- function(traits, geno, data, maxp = 0.1,
                      author = "International Potato Center",
                      format = c("html", "word", "pdf")) {
 
@@ -40,7 +40,7 @@ repo.crd <- function(traits, treat, data, maxp = 0.1,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                  treat = treat,
+                                  geno = geno,
                                   data = data,
                                   maxp = maxp,
                                   author = author))
