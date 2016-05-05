@@ -68,19 +68,17 @@ The p-values for the model are:
 Under the assumption that all the factors (genotypes, environments, and blocks) have random effects, below it is shown the variance components estimation. Here the model is estimated by REML (Restricted Maximum Likelihood) and the original data without the estimation of missing values is used.
 
 ```{r, echo = FALSE}
-ff <- as.formula(paste(traits[i], "~ (1|", geno, ") + (1|", geno, ":", env, ") + (1|",
-                       env, "/", rep, ")"))
+ff <- as.formula(paste(traits[i], "~ (1|", geno, ") + (1|", geno, ":", env, ") +
+                       (1|", env, "/", rep, ")"))
 model.reml <- lme4::lmer(ff, data = data)
 summary(model.reml)
 
-env.num <- nlevels(as.factor(data[, env]))
-numrep <- nlevels(as.factor(data[, rep]))
+vc <- data.frame(lme4::VarCorr(model.reml))
+vg <- vc[vc$grp == geno, "vcov"]
+vgxe <- vc[vc$grp == paste(geno, ":", env, sep = ""), "vcov"]
+vr <- vc[vc$grp == "Residual", "vcov"]
 
-vg <- lme4::VarCorr(model.reml)$geno[1]
-vgxe <- lme4::VarCorr(model.reml)$'geno:env'[1]
-vr <- attr(lme4::VarCorr(model.reml), "sc")^2
-
-h2 <- vg / (vg + vgxe / env.num + vr / env.num / numrep) * 100
+h2 <- vg / (vg + vgxe / lc$ne + vr / lc$ne / lc$nr) * 100
 ```
 
 With these variance estimates, the broad sense heritability results `r paste(format(h2, digits = 4), "%", sep = "")`.
