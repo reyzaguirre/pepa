@@ -32,7 +32,7 @@ means <- params$means
 model <- params$model
 lb <- params$lb
 
-eindex <- st4gi::elston(traits, geno, env, rep, data, means, model, lb)
+eindex <- elston(traits, geno, env, rep, data, means, model, lb)
 ```
 
 ### The Elston index

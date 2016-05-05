@@ -36,7 +36,7 @@ dgg <- params$dgg
 units <- params$units
 sf <- params$sf
 
-pbindex <- st4gi::pesekbaker(traits, geno, env, rep, data, means, model, dgg, units, sf)
+pbindex <- pesekbaker(traits, geno, env, rep, data, means, model, dgg, units, sf)
 ```
 
 ### Desired genetic gains

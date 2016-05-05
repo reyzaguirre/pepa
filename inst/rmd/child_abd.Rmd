@@ -3,7 +3,7 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r, echo = FALSE}
-lc <- st4gi::check.abd(traits[i], treat, rep, data)
+lc <- check.abd(traits[i], treat, rep, data)
 
 if (lc$nt.check.0 > 0) {
     temp <- subset(data, !(data[, treat] %in% lc$check.0) & !is.na(data[, traits[i]]))

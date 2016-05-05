@@ -1,9 +1,9 @@
 `r i = {{i}}`
 
 ```{r, echo = FALSE}
-lc <- st4gi::check.met(traits[i], geno, env, rep, data)
+lc <- check.met(traits[i], geno, env, rep, data)
 if (lc$c3 == 0)
-  data$est <- st4gi::mvemet(traits[i], geno, env, rep, data, maxp)[, 5] else
+  data$est <- mvemet(traits[i], geno, env, rep, data, maxp)[, 5] else
     data$est <- data[, traits[i]]
 ```
     
@@ -53,7 +53,7 @@ Funnel shapes for the first plot may suggest heterogeneity of variances while de
 
 For this analysis it is assumed that genotypes and environments have fixed effects and that the blocks are random.
 ```{r, echo = FALSE}
-at <- suppressWarnings(st4gi::aovmet(traits[i], geno, env, rep, data, maxp))
+at <- suppressWarnings(aovmet(traits[i], geno, env, rep, data, maxp))
 at
 ```
 The coefficient of variation for this experiment is `r format(agricolae::cv.model(model), digits = 4)`%.

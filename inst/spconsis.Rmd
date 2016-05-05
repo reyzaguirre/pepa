@@ -20,5 +20,5 @@ params:
 #### Below is a list of possible problems with the data
 
 ```{r, echo = FALSE}
-st4gi::spconsis(params$data, params$plot.size, params$f, file = FALSE)
+spconsis(params$data, params$plot.size, params$f, file = FALSE)
 ```
