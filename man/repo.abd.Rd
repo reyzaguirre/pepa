@@ -29,9 +29,6 @@ Produces an automatic report for selected traits in an experiment with an ABD.
 }
 \details{
 It fits a linear model for an ABD and explains the results.
-
-The Tukey HSD method for pairwise differences is applied.
-Assumptions of the model are evaluated with residual plots.
 }
 \examples{
 # A subset that looks like an ABD
