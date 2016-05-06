@@ -2,7 +2,7 @@
 
 # {{i+1}}. Analysis for trait `r traits[i]`
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, results = 'hide'}
 y <- data[, traits[i]]
 model <- agricolae::PBIB.test(factor(data[, block]), factor(data[, geno]),
                               factor(data[, rep]), y, k)
