@@ -21,6 +21,8 @@
 #' @return It returns an explanation about the Elston index.
 #' @examples
 #' pty.elston(c("rytha", "bc", "dm", "star", "nocr"), "geno", data = spg)
+#' @import st4gi
+#' @importFrom utils browseURL
 #' @export
 
 pty.elston <- function(traits, geno, env = NULL, rep = NULL, data,

@@ -26,6 +26,8 @@
 #' # With a small data set
 #' temp <- pjpz09[1:18, ]
 #' repo.rcbd(c("trw", "vw", "crw"), "geno", "rep", temp)
+#' @import st4gi
+#' @importFrom utils browseURL
 #' @export
 
 repo.rcbd <- function(traits, geno, rep, data, maxp = 0.1,

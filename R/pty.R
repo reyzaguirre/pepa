@@ -13,6 +13,7 @@
 #' @examples
 #' # Pepa tells you something about a data frame:
 #' pty(pjpz09)
+#' @importFrom utils browseURL
 #' @export
 
 pty <- function(x, author = "International Potato Center",

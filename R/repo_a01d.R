@@ -18,6 +18,8 @@
 #' @return It returns an explanation about the alpha (0,1) design fitted model.
 #' @examples
 #' repo.a01d("yield", "geno", "rep", "block", k = 3, alpha01data)
+#' @import st4gi
+#' @importFrom utils browseURL
 #' @export
 
 repo.a01d <- function(traits, geno, rep, block, k, data,

@@ -21,6 +21,8 @@
 #' temp[c(1, 2, 3), "vw"] <- NA
 #' temp[c(1, 10, 15), "crw"] <- NA
 #' repo.abd(c("nocr", "trw", "vw", "crw"), "geno", "rep", temp)
+#' @import st4gi
+#' @importFrom utils browseURL
 #' @export
 
 repo.abd <- function(traits, geno, rep, data,

@@ -24,6 +24,8 @@
 #' # With a small data set
 #' temp <- pjpz09[1:18, ]
 #' repo.crd(c("trw", "vw", "crw"), "geno", temp)
+#' @import st4gi
+#' @importFrom utils browseURL
 #' @export
 
 repo.crd <- function(traits, geno, data, maxp = 0.1,

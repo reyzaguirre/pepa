@@ -15,6 +15,8 @@
 #' all rows with outliers.
 #' @examples
 #' pty.spconsis(pjpz09, 4.5)
+#' @import st4gi
+#' @importFrom utils browseURL
 #' @export
 
 pty.spconsis <- function(data, plot.size, f = 3,

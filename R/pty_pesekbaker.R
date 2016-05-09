@@ -21,6 +21,8 @@
 #' @return It returns an explanation about the Pesek-Baker index.
 #' @examples
 #' pty.pesekbaker(c("rytha", "bc", "dm", "star", "nocr"), "geno", "loc", "rep", spg)
+#' @import st4gi
+#' @importFrom utils browseURL
 #' @export
 
 pty.pesekbaker <- function(traits, geno, env, rep = NULL, data, means = "single",

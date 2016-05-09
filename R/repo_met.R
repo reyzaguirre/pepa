@@ -21,6 +21,8 @@
 #' @return It returns an automatic report about the MET with a RCBD fitted model.
 #' @examples
 #' repo.met(c("rytha", "fytha"), "geno", "env", "rep", megaclones)
+#' @import st4gi
+#' @importFrom utils browseURL
 #' @export
 
 repo.met <- function(traits, geno, env, rep, data, maxp = 0.1,

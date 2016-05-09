@@ -19,6 +19,8 @@
 #' @return It returns an explanation about the MET with a RCBD fitted model.
 #' @examples
 #' pty.aovmet("y", "geno", "env", "rep", met8x12)
+#' @import st4gi
+#' @importFrom utils browseURL
 #' @export
 
 pty.aovmet <- function(trait, geno, env, rep, data, maxp = 0.1,
