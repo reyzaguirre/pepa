@@ -6,15 +6,16 @@
 lc <- check.abd(traits[i], geno, rep, data)
 
 if (lc$nt.check.0 > 0) {
-    cond1 <- !(data[, geno] %in% lc$check.0)
-    temp <- subset(data, cond1 & !is.na(data[, traits[i]]))
+    cond <- !(data[, geno] %in% lc$check.0) & !is.na(data[, traits[i]])
+    temp <- subset(data, cond)
   } else {
-    temp <- subset(data, !is.na(data[, traits[i]]))
+    cond <- !is.na(data[, traits[i]])
+    temp <- subset(data, cond)
   }
 
 if (lc$nt.check.1 > 0){
-  cond1 <- !(temp[, geno] %in% lc$check.1)
-  temp <- subset(temp, cond1)
+  cond <- !(temp[, geno] %in% lc$check.1)
+  temp <- subset(temp, cond)
 }
 
 y <- temp[, traits[i]]
