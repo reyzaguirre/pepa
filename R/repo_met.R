@@ -21,7 +21,7 @@
 #' @return It returns an automatic report about the MET with a RCBD fitted model.
 #' @examples
 #' repo.met(c("rytha", "fytha"), "geno", "env", "rep", megaclones)
-#' @import st4gi
+#' @import st4gi agricolae
 #' @importFrom utils browseURL
 #' @export
 
