@@ -83,7 +83,7 @@ vr <- vc[vc[, 1] == "Residual", 4]
 vc[vc[, 1] == "fg", 1] <- geno
 vc[vc[, 1] == "fe", 1] <- env
 vc[vc[, 1] == "fg:fe", 1] <- paste(geno, ":", env, sep = "")
-vc[vc[, 1] == "fr:fe", 1] <- paste(rep, ":", env, sep = "")
+vc[vc[, 1] == "fr:fe", 1] <- paste(rep, "(", env, ")", sep = "")
 rownames(vc) <- vc[, 1]
 vc <- vc[, c(4, 5)]
 colnames(vc) <- c("Variance", "Std.Dev.")
