@@ -59,7 +59,12 @@ y <- data[, traits[i]]
 fg <- data[, geno]
 fr <- data[, rep]
 ff <- as.formula(y ~ (1|fg) + (1|fr))
-fm <- lme4::lmer(ff)
-vc <- lme4::VarCorr(fm)
+model <- lme4::lmer(ff)
+vc <- data.frame(lme4::VarCorr(model))
+vc[vc[, 1] == "fg", 1] <- geno
+vc[vc[, 1] == "fr", 1] <- rep
+rownames(vc) <- vc[, 1]
+vc <- vc[, c(4, 5)]
+colnames(vc) <- c("Variance", "Std.Dev.")
 vc
 ```
