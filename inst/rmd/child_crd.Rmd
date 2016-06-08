@@ -53,8 +53,12 @@ if (nt < 10) msdplot(traits[i], geno, data, conf = 1)
 Below are the variance components for this model, under the assumption that genotypes are random. Here the model is fitted using REML.
 
 ```{r, echo = FALSE}
-ff <- as.formula(paste(traits[i], "~ (1|", geno, ")"))
-fm <- lme4::lmer(ff, data = data)
-lme4::VarCorr(fm)
+y <- data[, traits[i]]
+fg <- data[, geno]
+ff <- as.formula(y ~ (1|fg))
+fm <- lme4::lmer(ff)
+vc <- lme4::VarCorr(fm)
+names(vc) <- geno
+vc
 ```
 
