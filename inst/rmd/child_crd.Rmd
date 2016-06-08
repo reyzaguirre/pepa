@@ -5,7 +5,9 @@
 ```{r, echo = FALSE}
 nt <- nlevels(as.factor(data[, geno]))
 model <- aov(data[, traits[i]] ~ data[, geno])
+model$terms[[2]] <- traits[i]
 at <- anova(model)
+rownames(at)[1] <- geno
 ```
 
 ## {{i+1}}.1. ANOVA
@@ -56,9 +58,12 @@ Below are the variance components for this model, under the assumption that geno
 y <- data[, traits[i]]
 fg <- data[, geno]
 ff <- as.formula(y ~ (1|fg))
-fm <- lme4::lmer(ff)
-vc <- lme4::VarCorr(fm)
-names(vc) <- geno
+model <- lme4::lmer(ff)
+vc <- data.frame(lme4::VarCorr(model))
+vc[1, 1] <- geno
+rownames(vc) <- vc[, 1]
+vc <- vc[, c(4, 5)]
+colnames(vc) <- c("Variance", "Std.Dev.")
 vc
 ```
 

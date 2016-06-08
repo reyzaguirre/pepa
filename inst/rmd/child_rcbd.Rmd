@@ -61,6 +61,5 @@ fr <- data[, rep]
 ff <- as.formula(y ~ (1|fg) + (1|fr))
 fm <- lme4::lmer(ff)
 vc <- lme4::VarCorr(fm)
-#names(vc) <- c(geno, rep)
 vc
 ```
