@@ -48,6 +48,6 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
                                   author = author))
 
   if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(shell.exec(fileDOCX))
-  if(format == "pdf_document")  try(shell.exec(filePDF))
+  if(format == "word_document") try(system(paste("open", fileDOCX)))
+  if(format == "pdf_document")  try(system(paste("open", filePDF)))
 }
