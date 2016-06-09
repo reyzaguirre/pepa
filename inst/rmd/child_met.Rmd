@@ -37,7 +37,7 @@ tapply(data$est, list(data[, geno], data[, env]), mean)
 
 ### {{i+1}}.2.1. Checking assumptions
 
-As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the genotypes and evironments. The following plots help to evaluate this assumptions:
+As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the genotypes and environments. The following plots help to evaluate this assumptions:
 
 ```{r, echo = FALSE, fig.height = 5, fig.width = 10}
 model <- aov(data[, traits[i]] ~ data[, geno] + data[, env]
