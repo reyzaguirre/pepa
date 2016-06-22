@@ -5,6 +5,8 @@
 #' @param geno The genotypes.
 #' @param data The name of the data frame.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
+#' @param title The title.
+#' @param subtitle The subtitle.
 #' @param author Author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
@@ -29,6 +31,8 @@
 #' @export
 
 repo.crd <- function(traits, geno, data, maxp = 0.1,
+                     title = "Automatic report for a Completely Randomized Design (CRD)",
+                     subtitle = NULL,
                      author = "International Potato Center",
                      format = c("html", "word", "pdf")) {
 
@@ -45,6 +49,8 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
                                   geno = geno,
                                   data = data,
                                   maxp = maxp,
+                                  title = title,
+                                  subtitle = subtitle,
                                   author = author))
 
   if(format == "html_document") try(browseURL(fileURL))

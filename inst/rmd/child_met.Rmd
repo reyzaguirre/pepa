@@ -102,14 +102,14 @@ With these variance estimates, the broad sense heritability results `r paste(for
 
 `r if(at[4, 5] < 0.05) {"#### AMMI biplots"}`
 
-```{r, echo = FALSE, fig.align = 'center', fig.width = 7, fig.height = 7}
+```{r, echo = FALSE, fig.align = 'center', fig.width = 8, fig.height = 8}
 if(at[4, 5] < 0.05) {
   ammimodel <- suppressWarnings(ammi(traits[i], geno, env, rep, data))
   plot(ammimodel, biplot = 1)
 }
 ```
 
-```{r, echo = FALSE, fig.align = 'center', fig.height = 7, fig.width = 7}
+```{r, echo = FALSE, fig.align = 'center', fig.height = 8, fig.width = 8}
 if(at[4, 5] < 0.05) {
   plot(ammimodel, biplot = 2)
 }
@@ -142,14 +142,14 @@ if(at[4, 5] < 0.05) ammimodel$Contribution_PCs
 
 `r if(at[4, 5] < 0.05) {"#### GGE biplots"}`
 
-```{r, echo = FALSE, fig.align = 'center', fig.height = 7, fig.width = 7}
+```{r, echo = FALSE, fig.align = 'center', fig.height = 8, fig.width = 8}
 if(at[4, 5] < 0.05) {
   ggemodel <- suppressWarnings(ammi(traits[i], geno, env, rep, data, method = "GGE"))
   plot(ggemodel, biplot = 1)
 }
 ```
 
-```{r, echo = FALSE, fig.align = 'center', fig.height = 7, fig.width = 7}
+```{r, echo = FALSE, fig.align = 'center', fig.height = 8, fig.width = 8}
 if(at[4, 5] < 0.05) {
   plot(ggemodel, biplot = 2)
 }
@@ -212,7 +212,7 @@ if(at[4, 5] < 0.05) rsamodel$Stability_for_environments
 
 `r if(at[4, 5] < 0.05) {"#### Tai plot"}`
 
-```{r, echo = FALSE, fig.align = 'center', fig.height = 7, fig.width = 7}
+```{r, echo = FALSE, fig.align = 'center', fig.height = 8, fig.width = 8}
 if(at[4, 5] < 0.05) {
   taimodel <- suppressWarnings(tai(traits[i], geno, env, rep, data))
   plot(taimodel)

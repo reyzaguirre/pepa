@@ -5,6 +5,8 @@
 #' @param geno The genotypes.
 #' @param rep The replications.
 #' @param data The name of the data frame.
+#' @param title The title.
+#' @param subtitle The subtitle.
 #' @param author Author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
@@ -26,6 +28,8 @@
 #' @export
 
 repo.abd <- function(traits, geno, rep, data,
+                     title = "Automatic report for an Augmented Block Design (ABD)",
+                     subtitle = NULL,
                      author = "International Potato Center",
                      format = c("html", "word", "pdf")) {
 
@@ -42,6 +46,8 @@ repo.abd <- function(traits, geno, rep, data,
                                   geno = geno,
                                   rep = rep,
                                   data = data,
+                                  title = title,
+                                  subtitle = subtitle,
                                   author = author))
 
   if(format == "html_document") try(browseURL(fileURL))

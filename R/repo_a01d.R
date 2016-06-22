@@ -8,6 +8,8 @@
 #' @param block The blocks.
 #' @param k The size of the blocks.
 #' @param data The name of the data frame.
+#' @param title The title.
+#' @param subtitle The subtitle.
 #' @param author Author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
@@ -23,6 +25,8 @@
 #' @export
 
 repo.a01d <- function(traits, geno, rep, block, k, data,
+                      title = "Automatic report for an alpha (0,1) design",
+                      subtitle = NULL,
                       author = "International Potato Center",
                       format = c("html", "word", "pdf")) {
 
@@ -41,6 +45,8 @@ repo.a01d <- function(traits, geno, rep, block, k, data,
                                   block = block,
                                   k = k,
                                   data = data,
+                                  title = title,
+                                  subtitle = subtitle,
                                   author = author))
 
   if(format == "html_document") try(browseURL(fileURL))

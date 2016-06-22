@@ -1,5 +1,6 @@
 ---
-title: "Automatic report for an alpha (0,1) design"
+title: "`r params$title`"
+subtitle: '`r params$subtitle`'
 author: '`r params$author`'
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 
@@ -22,6 +23,8 @@ params:
   block: "no data"
   k: "no data"
   data: "no data"
+  title: "no data"
+  subtitle: "no data"
   author: "no data"
 ---
 
