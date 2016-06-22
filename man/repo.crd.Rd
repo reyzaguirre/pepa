@@ -5,7 +5,9 @@
 \title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
 repo.crd(traits, geno, data, maxp = 0.1,
-  author = "International Potato Center", format = c("html", "word", "pdf"))
+  title = "Automatic report for a Completely Randomized Design (CRD)",
+  subtitle = NULL, author = "International Potato Center",
+  format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -15,6 +17,10 @@ repo.crd(traits, geno, data, maxp = 0.1,
 \item{data}{The name of the data frame.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
+
+\item{title}{The title.}
+
+\item{subtitle}{The subtitle.}
 
 \item{author}{Author.}
 

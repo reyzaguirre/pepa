@@ -4,7 +4,9 @@
 \alias{repo.abd}
 \title{Automatic report for an augmented block design (ABD)}
 \usage{
-repo.abd(traits, geno, rep, data, author = "International Potato Center",
+repo.abd(traits, geno, rep, data,
+  title = "Automatic report for an Augmented Block Design (ABD)",
+  subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"))
 }
 \arguments{
@@ -15,6 +17,10 @@ repo.abd(traits, geno, rep, data, author = "International Potato Center",
 \item{rep}{The replications.}
 
 \item{data}{The name of the data frame.}
+
+\item{title}{The title.}
+
+\item{subtitle}{The subtitle.}
 
 \item{author}{Author.}
 

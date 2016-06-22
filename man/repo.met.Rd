@@ -5,6 +5,7 @@
 \title{Automatic report for a MET with a RCBD}
 \usage{
 repo.met(traits, geno, env, rep, data, maxp = 0.1,
+  title = "Automatic report for a MET with a RCBD", subtitle = NULL,
   author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
@@ -19,6 +20,10 @@ repo.met(traits, geno, env, rep, data, maxp = 0.1,
 \item{data}{The name of the data frame containing the data.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
+
+\item{title}{The title.}
+
+\item{subtitle}{The subtitle.}
 
 \item{author}{Author.}
 

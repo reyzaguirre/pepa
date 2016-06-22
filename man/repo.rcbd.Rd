@@ -5,7 +5,9 @@
 \title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
 repo.rcbd(traits, geno, rep, data, maxp = 0.1,
-  author = "International Potato Center", format = c("html", "word", "pdf"))
+  title = "Automatic report for a Randomized Complete Block Design (RCBD)",
+  subtitle = NULL, author = "International Potato Center",
+  format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -17,6 +19,10 @@ repo.rcbd(traits, geno, rep, data, maxp = 0.1,
 \item{data}{The name of the data frame.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
+
+\item{title}{The title.}
+
+\item{subtitle}{The subtitle.}
 
 \item{author}{Author.}
 

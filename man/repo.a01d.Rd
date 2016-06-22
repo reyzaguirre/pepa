@@ -5,6 +5,7 @@
 \title{Automatic report for an alpha (0,1) design.}
 \usage{
 repo.a01d(traits, geno, rep, block, k, data,
+  title = "Automatic report for an alpha (0,1) design", subtitle = NULL,
   author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
@@ -19,6 +20,10 @@ repo.a01d(traits, geno, rep, block, k, data,
 \item{k}{The size of the blocks.}
 
 \item{data}{The name of the data frame.}
+
+\item{title}{The title.}
+
+\item{subtitle}{The subtitle.}
 
 \item{author}{Author.}
 
