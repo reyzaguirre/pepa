@@ -16,7 +16,7 @@ model <- aov(data[, traits[i]] ~ data[, geno] + data[, rep])
 at
 ```
 
-`r if(lc$c3 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.")`
+`r if(lc$c3 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.", sep = "")`
 
 The coefficient of variation for this experiment is `r format(agricolae::cv.model(model), digits = 4)`%.
 The p-value for genotypes is `r format(at[1, 5], digits = 4)`
