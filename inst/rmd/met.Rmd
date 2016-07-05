@@ -41,7 +41,7 @@ maxp <- params$maxp
 
 # 1. Model specification and data description
 
-There is data from `r nlevels(as.factor(data[, env]))` environments and `r nlevels(as.factor(data[, geno]))` genotypes. In each environment the genotypes were evaluated using a randomized complete block design with `r nlevels(as.factor(data[, rep]))` blocks. The statistical model is
+The data frame has `r nlevels(as.factor(data[, env]))` environments and `r nlevels(as.factor(data[, geno]))` genotypes. In each environment the genotypes were evaluated using a randomized complete block design with `r nlevels(as.factor(data[, rep]))` blocks. The statistical model is
 $$
 y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \gamma_{k(j)} + \epsilon_{ijk}
 $$
