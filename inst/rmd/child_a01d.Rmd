@@ -4,8 +4,7 @@
 
 ```{r, echo = FALSE, results = 'hide'}
 y <- data[, traits[i]]
-model <- agricolae::PBIB.test(factor(data[, block]), factor(data[, geno]),
-                              factor(data[, rep]), y, k)
+model <- agricolae::PBIB.test(data[, block], data[, geno], data[, rep], y, k)
 ```
 
 ## {{i+1}}.1. ANOVA

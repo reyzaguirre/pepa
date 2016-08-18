@@ -36,6 +36,9 @@ rep <- params$rep
 data <- params$data
 maxp <- params$maxp
 
+data[, geno] <- as.character(data[, geno])
+data[, rep] <- as.character(data[, rep])
+
 lc <- check.rcbd(traits[1], geno, rep, data)
 ```
 

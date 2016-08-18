@@ -37,6 +37,10 @@ env <- params$env
 rep <- params$rep
 data <- params$data
 maxp <- params$maxp
+
+data[, geno] <- as.character(data[, geno])
+data[, env] <- as.character(data[, env])
+data[, rep] <- as.character(data[, rep])
 ```
 
 # 1. Model specification and data description

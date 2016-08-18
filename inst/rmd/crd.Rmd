@@ -33,6 +33,8 @@ traits <- params$traits
 geno <- params$geno
 data <- params$data
 maxp <- params$maxp
+
+data[, geno] <- as.character(data[, geno])
 ```
 
 # 1. Model specification and data description

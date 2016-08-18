@@ -19,7 +19,7 @@ if (lc$nt.check.1 > 0){
 }
 
 y <- temp[, traits[i]]
-model <- agricolae::DAU.test(factor(temp[, rep]), factor(temp[, geno]), y)
+model <- agricolae::DAU.test(temp[, rep], temp[, geno], y)
 ```
 
 ## {{i+1}}.1. General setting
