@@ -164,7 +164,7 @@ if (at[4, 5] < 0.05 & lc$c1 == 1 & lc$ne > 2) ammimodel$Contribution_PCs
 
 ```{r, echo = FALSE, fig.align = 'center', fig.height = 8, fig.width = 8}
 if (at[4, 5] < 0.05 & lc$c1 == 1 & lc$ne > 2) {
-  ggemodel <- suppressWarnings(ammi(traits[i], geno, env, rep, data, method = "GGE"))
+  ggemodel <- suppressWarnings(ammi(traits[i], geno, env, rep, data, method = "gge"))
   plot(ggemodel, biplot = 1)
 }
 ```
