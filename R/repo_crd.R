@@ -21,7 +21,7 @@
 #' variance components are shown.
 #' @return It returns an explanation about the CRD fitted model.
 #' @examples
-#' repo.crd(c("trw", "vw", "crw"), "geno", pjpz09)
+#' repo.crd(c("trw", "vw"), "geno", pjpz09)
 #'
 #' # With a small data set
 #' temp <- pjpz09[1:18, ]

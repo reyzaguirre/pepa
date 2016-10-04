@@ -23,7 +23,7 @@
 #' variance components are shown. Missing values are not estimated in this case.
 #' @return It returns an explanation about the RCBD fitted model.
 #' @examples
-#' repo.rcbd(c("trw", "vw", "crw"), "geno", "rep", pjpz09)
+#' repo.rcbd(c("trw", "vw"), "geno", "rep", pjpz09)
 #'
 #' # With a small data set
 #' temp <- pjpz09[1:18, ]
