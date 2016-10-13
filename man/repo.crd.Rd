@@ -44,7 +44,7 @@ Under the assumption of random effects the model is estimated using REML and the
 variance components are shown.
 }
 \examples{
-repo.crd(c("trw", "vw", "crw"), "geno", pjpz09)
+repo.crd(c("trw", "vw"), "geno", pjpz09)
 
 # With a small data set
 temp <- pjpz09[1:18, ]

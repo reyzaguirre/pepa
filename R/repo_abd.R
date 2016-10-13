@@ -16,13 +16,12 @@
 #' @examples
 #' # A subset that looks like an ABD
 #' temp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50, 203, 204), ]
-#' repo.abd(c("trw", "vw", "crw"), "geno", "rep", temp)
+#' repo.abd(c("trw", "vw"), "geno", "rep", temp)
 #'
 #' # With some missing values
-#' temp[c(1, 2, 3, 4), "trw"] <- NA
-#' temp[c(1, 2, 3), "vw"] <- NA
-#' temp[c(1, 10, 15), "crw"] <- NA
-#' repo.abd(c("nocr", "trw", "vw", "crw"), "geno", "rep", temp)
+#' temp[c(1, 2, 3), "trw"] <- NA
+#' temp[c(1, 10, 15), "vw"] <- NA
+#' repo.abd(c("nocr", "trw", "vw"), "geno", "rep", temp)
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export

@@ -47,7 +47,7 @@ Under the assumption of random effects the model is estimated using REML and the
 variance components are shown. Missing values are not estimated in this case.
 }
 \examples{
-repo.rcbd(c("trw", "vw", "crw"), "geno", "rep", pjpz09)
+repo.rcbd(c("trw", "vw"), "geno", "rep", pjpz09)
 
 # With a small data set
 temp <- pjpz09[1:18, ]
