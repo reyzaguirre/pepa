@@ -1,8 +1,8 @@
 Package: pepa
 Type: Package
 Title: Package for the Execution of Pre Cooked Analysis
-Version: 0.3.5
-Date: 2016-08-18
+Version: 0.3.6
+Date: 2016-10-20
 Author: Raul Eyzaguirre
 Maintainer: Raul Eyzaguirre <R.EYZAGUIRRE@CGIAR.ORG>
 Description: This packages creates automatic reports for different types of

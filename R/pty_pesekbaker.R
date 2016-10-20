@@ -8,8 +8,6 @@
 #' @param data The name of the data frame containing the data.
 #' @param means The genotypic means to compute the index, \code{"single"}
 #' or \code{"fitted"}. The default is \code{"single"}. See details for more information.
-#' @param model Type of model, \code{"gxe"} for a model with gxe interaction or \code{"g+e"}
-#' for a model without interaction. The default is \code{"gxe"}. See details for more information.
 #' @param dgg Desired genetic gains. The default is one standard deviation for each trait.
 #' @param units Units for dgg, \code{"actual"} or \code{"sdu"}. See details for more information.
 #' @param sf Selected fraction. The default is 0.1.
@@ -26,7 +24,7 @@
 #' @export
 
 pty.pesekbaker <- function(traits, geno, env, rep = NULL, data, means = "single",
-                           model = "gxe", dgg = NULL, units = "sdu", sf = 0.1,
+                           dgg = NULL, units = "sdu", sf = 0.1,
                            author = "International Potato Center",
                            format = c("html", "word", "pdf")) {
 
@@ -45,7 +43,6 @@ pty.pesekbaker <- function(traits, geno, env, rep = NULL, data, means = "single"
                                   rep = rep,
                                   data = data,
                                   means = means,
-                                  model = model,
                                   dgg = dgg,
                                   units = units,
                                   sf = sf,

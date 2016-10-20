@@ -17,7 +17,6 @@ params:
   rep: "no data"
   data: "no data"
   means: "no data"
-  model: "no data"
   dgg: "no data"
   units: "no data"
   sf: "no data"
@@ -31,12 +30,11 @@ env <- params$env
 rep <- params$rep
 data <- params$data
 means <- params$means
-model <- params$model
 dgg <- params$dgg
 units <- params$units
 sf <- params$sf
 
-pbindex <- pesekbaker(traits, geno, env, rep, data, means, model, dgg, units, sf)
+pbindex <- pesekbaker(traits, geno, env, rep, data, means, dgg, units, sf)
 ```
 
 ### Desired genetic gains
@@ -45,18 +43,10 @@ You have computed the Pesek-Baker index for traits `r traits` with the following
 pbindex$Desired.Genetic.Gains
 ```
 
-### Standard deviations, genetic variances, and correlations
-The estimated standard deviations for these traits are
+### Standard deviation
+The estimated genotypic standard deviations for these traits are:
 ```{r, echo = FALSE}
 pbindex$Standard.Deviations
-```
-the genetic variances
-```{r, echo = FALSE}
-pbindex$Genetic.Variances
-```
-and the correlation matrix among the traits included in the index computation
-```{r, echo = FALSE}
-pbindex$Correlation.Matrix
 ```
 
 ### The Pesek-Baker index
@@ -72,18 +62,13 @@ pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = 
                                index.return = T)$ix, ]
 ```
 
-`r if(model == 'gxe') {"### The response to selection"}`
+### The response to selection
 
-`r if(model == 'gxe') paste("For a selection fraction of ", sf, ", the response to selection in actual units for traits", sep = "")`
-`r if(model == 'gxe') traits`
-`r if(model == 'gxe') {"is"}`
-
+For a selection fraction of `r sf`, the responses to selection in actual units are:
 ```{r, echo = FALSE}
-if(model == 'gxe') pbindex$Response.to.Selection
+pbindex$Response.to.Selection
 ```
-
-`r if(model == 'gxe') {"and in standardized units"}`
-
+and in standardized units:
 ```{r, echo = FALSE}
-if(model == 'gxe') pbindex$Std.Response.to.Selection
+pbindex$Std.Response.to.Selection
 ```

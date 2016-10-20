@@ -17,7 +17,6 @@ params:
   rep: "no data"
   data: "no data"
   means: "no data"
-  model: "no data"
   lb: "no data"
   author: "no data"
 ---
@@ -29,10 +28,9 @@ env <- params$env
 rep <- params$rep
 data <- params$data
 means <- params$means
-model <- params$model
 lb <- params$lb
 
-eindex <- elston(traits, geno, env, rep, data, means, model, lb)
+eindex <- elston(traits, geno, env, rep, data, means, lb)
 ```
 
 ### The Elston index

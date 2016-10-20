@@ -8,9 +8,6 @@
 #' @param data The name of the data frame containing the data.
 #' @param means The genotypic means to compute the index, \code{"single"}
 #' or \code{"fitted"}. The default is \code{"single"}. See details for more information.
-#' @param model Type of model to fit means, \code{"gxe"} for
-#' a model with gxe interaction or \code{"g+e"} for a model without interaction.
-#' The default is \code{"gxe"}. See details for more information.
 #' @param lb Lower bound. \code{1} for \eqn{k = min(x)} and \code{2} for
 #' \eqn{k = (n \times min(x) - max(x)) / (n - 1)}
 #' @param author Author.
@@ -26,7 +23,7 @@
 #' @export
 
 pty.elston <- function(traits, geno, env = NULL, rep = NULL, data,
-                       means = "single", model = "gxe", lb = 1,
+                       means = "single", lb = 1,
                        author = "International Potato Center",
                        format = c("html", "word", "pdf")) {
 
@@ -45,7 +42,6 @@ pty.elston <- function(traits, geno, env = NULL, rep = NULL, data,
                                   rep = rep,
                                   data = data,
                                   means = means,
-                                  model = model,
                                   lb = lb,
                                   author = author))
 
