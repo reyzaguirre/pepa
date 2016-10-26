@@ -1,7 +1,7 @@
 `r i = {{i}}`
 
 ```{r, echo = FALSE}
-lc <- check.AxB(traits[i], geno, env, rep, data)
+lc <- check.2f(traits[i], geno, env, rep, data)
 if (lc$c3 == 0)
   data$est <- mvemet(traits[i], geno, env, rep, data, maxp)[, 5] else
     data$est <- data[, traits[i]]
