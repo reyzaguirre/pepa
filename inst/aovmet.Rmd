@@ -28,7 +28,7 @@ rep <- params$rep
 data <- params$data
 maxp <- params$maxp
 
-lc <- check.met(trait, geno, env, rep, data)
+lc <- check.AxB(trait, geno, env, rep, data)
 at <- suppressWarnings(aovmet(trait, geno, env, rep, data, maxp))
 if (lc$c3 == 0)
   data[, trait] <- mvemet(trait, geno, env, rep, data, maxp)[, 5]
