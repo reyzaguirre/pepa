@@ -57,7 +57,7 @@ Funnel shapes for the first plot may suggest heterogeneity of variances while de
 
 ```{r, echo = FALSE}
 if (lc$c1 == 1) {
-  at <- suppressWarnings(aovmet(traits[i], geno, env, rep, data, maxp))
+  at <- suppressWarnings(aov.met(traits[i], geno, env, rep, data, maxp))
   at
 }
 ```

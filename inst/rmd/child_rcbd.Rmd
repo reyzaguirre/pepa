@@ -4,7 +4,7 @@
 
 ```{r, echo = FALSE}
 lc <- check.rcbd(traits[i], geno, rep, data)
-at <- suppressWarnings(rcbd(traits[i], geno, rep, data, maxp))
+at <- suppressWarnings(aov.rcbd(traits[i], geno, rep, data, maxp))
 model <- aov(data[, traits[i]] ~ data[, geno] + data[, rep])
 ```
 
