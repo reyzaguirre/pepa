@@ -2,16 +2,16 @@
 
 ```{r, echo = FALSE}
 lc <- check.2f(traits[i], A, B, rep, data)
-if (lc$c3 == 0)
+if (lc$c4 == 0)
   data$est <- mve.2f(traits[i], A, B, rep, design, data, maxp)[, 5] else
     data$est <- data[, traits[i]]
 ```
     
 # {{i+1}}. Analysis for trait `r traits[i]`
 
-`r if (lc$c3 == 1) {"There are no missing values for this trait; the design is balanced."}`
+`r if (lc$c4 == 1) {"There are no missing values for this trait; the design is balanced."}`
 
-`r if (lc$c3 == 0) paste("There are some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated for the descriptive statistics and ANOVA.", sep = "")`
+`r if (lc$c4 == 0) paste("There are some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated for the descriptive statistics and ANOVA.", sep = "")`
 
 ## {{i+1}}.1. Descriptive statistics
 

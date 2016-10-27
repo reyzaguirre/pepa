@@ -30,7 +30,7 @@ maxp <- params$maxp
 
 lc <- check.2f(trait, geno, env, rep, data)
 at <- suppressWarnings(aov.met(trait, geno, env, rep, data, maxp))
-if (lc$c3 == 0)
+if (lc$c4 == 0)
   data[, trait] <- mve.met(trait, geno, env, rep, data, maxp)[, 5]
 model <- aov(data[, trait] ~ data[, geno] + data[, env]
              + data[, rep] %in% data[, env] + data[, geno]:data[, env])
@@ -42,7 +42,7 @@ model <- aov(data[, trait] ~ data[, geno] + data[, env]
 at
 ```
 
-`r if(lc$c3 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.")`
+`r if(lc$c4 == 0) paste("You have some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated before running ANOVA.")`
 
 The p-values for your model are:
 
