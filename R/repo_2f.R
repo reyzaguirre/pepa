@@ -35,13 +35,18 @@ repo.2f <- function(traits, A, B, rep, design, data, maxp = 0.1,
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
 
-  if (design == "crd")
+  if (design == "crd") {
     fileRmd <- paste(dirfiles, "/rmd/2fcrd.Rmd", sep = "")
-  if (design == "rcbd")
+    fileURL <- paste(dirfiles, "/rmd/2fcrd.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/2fcrd.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/2fcrd.pdf", sep = "")
+  }
+  if (design == "rcbd") {
     fileRmd <- paste(dirfiles, "/rmd/2frcbd.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rmd/2f.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/2f.docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/2f.pdf", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/2frcbd.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/2frcbd.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/2frcbd.pdf", sep = "")
+  }
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
