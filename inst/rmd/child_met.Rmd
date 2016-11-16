@@ -3,7 +3,7 @@
 ```{r, echo = FALSE}
 lc <- check.2f(traits[i], geno, env, rep, data)
 if (lc$c4 == 0)
-  data$est <- mvemet(traits[i], geno, env, rep, data, maxp)[, 5] else
+  data$est <- mve.met(traits[i], geno, env, rep, data, maxp)[, 5] else
     data$est <- data[, traits[i]]
 ```
     
