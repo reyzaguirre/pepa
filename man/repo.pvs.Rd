@@ -4,13 +4,13 @@
 \alias{repo.pvs}
 \title{Report for PVS}
 \usage{
-repo.pvs(book, x, title = "Automatic report for PVS", subtitle = NULL,
+repo.pvs(x, form, title = "Automatic report for PVS", subtitle = NULL,
   author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
-\item{book}{Name of the PVS book.}
+\item{x}{A data frame with data for a pvs form.}
 
-\item{x}{Form number on the PVS book.}
+\item{form}{Form number.}
 
 \item{title}{The title.}
 
@@ -32,7 +32,7 @@ bla bla bla.
 }
 \examples{
 # bla bla bla
-pvsrepo(book, 1)
+repo.pvs(pvsf1, 1)
 }
 \author{
 Raul Eyzaguirre.

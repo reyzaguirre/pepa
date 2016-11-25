@@ -1,7 +1,8 @@
 #' Report for PVS
 #'
 #' Produce standard reports for PVS data
-#' @param x A data frame with .
+#' @param x A data frame with data for a pvs form.
+#' @param form Form number.
 #' @param title The title.
 #' @param subtitle The subtitle.
 #' @param author Author.
@@ -12,10 +13,10 @@
 #' @return It returns automatic reports for the different forms on a PVS book.
 #' @examples
 #' # bla bla bla
-#' pvsrepo(book, 1)
+#' repo.pvs(pvsf1, 1)
 #' @export
 
-repo.pvs <- function(x = c(NULL, "f1", "f2", "f3", ""),
+repo.pvs <- function(x, form,
                      title = "Automatic report for PVS",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -24,32 +25,51 @@ repo.pvs <- function(x = c(NULL, "f1", "f2", "f3", ""),
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
 
-  if (x == 1) {
+  if (form == 1) {
+    subtitle <- "Selection criteria for clones"
     fileRmd <- paste(dirfiles, "/rmd/pvs1.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs1.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs1.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs1.pdf", sep = "")
   }
-  if (x == 2) {
+  if (form == 2) {
+    subtitle <- "Best clones at flowering"
     fileRmd <- paste(dirfiles, "/rmd/pvs2.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs2.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs2.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs2.pdf", sep = "")
   }
-  if (x == 3) {
+  if (form == 3) {
+    subtitle <- "Best clones at harvest"
     fileRmd <- paste(dirfiles, "/rmd/pvs3.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs3.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs3.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs3.pdf", sep = "")
   }
-  if (x == 6) {
+  if (form == 6) {
+    subtitle <- "Organoleptic analysis at mother trial"
     fileRmd <- paste(dirfiles, "/rmd/pvs6.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs6.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs6.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs6.pdf", sep = "")
   }
-  if (x == 7) {
+  if (form == 7) {
+    subtitle <- "Organoleptic analysis at baby trials"
     fileRmd <- paste(dirfiles, "/rmd/pvs7.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs7.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs7.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs7.pdf", sep = "")
   }
-  if (x == 9) {
+  if (form == 9) {
+    subtitle <- "Best clones at post-harvest"
     fileRmd <- paste(dirfiles, "/rmd/pvs9.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs9.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs9.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs9.pdf", sep = "")
   }
-
-  fileURL <- paste(dirfiles, "/rmd/pvs.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/pvs.docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/pvs.pdf", sep = "")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(book = book,
-                                  x = x,
+                    params = list(x = x,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

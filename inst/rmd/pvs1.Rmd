@@ -17,7 +17,6 @@ output:
     toc_depth: 3
     highlight: "tango"
 params:
-  book: "no data"
   x: "no data"
   title: "no data"
   subtitle: "no data"
