@@ -1,8 +1,7 @@
 #' Report for PVS
 #'
 #' Produce standard reports for PVS data
-#' @param book Name of the PVS book.
-#' @param x Form number on the PVS book.
+#' @param x A data frame with .
 #' @param title The title.
 #' @param subtitle The subtitle.
 #' @param author Author.
@@ -16,7 +15,7 @@
 #' pvsrepo(book, 1)
 #' @export
 
-repo.pvs <- function(book, x,
+repo.pvs <- function(x = c(NULL, "f1", "f2", "f3", ""),
                      title = "Automatic report for PVS",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -43,7 +42,7 @@ repo.pvs <- function(book, x,
   if (x == 9) {
     fileRmd <- paste(dirfiles, "/rmd/pvs9.Rmd", sep = "")
   }
-  
+
   fileURL <- paste(dirfiles, "/rmd/pvs.html", sep = "")
   fileDOCX <- paste(dirfiles, "/rmd/pvs.docx", sep = "")
   filePDF <- paste(dirfiles, "/rmd/pvs.pdf", sep = "")
