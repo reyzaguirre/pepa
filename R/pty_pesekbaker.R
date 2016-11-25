@@ -31,10 +31,10 @@ pty.pesekbaker <- function(traits, geno, env, rep = NULL, data, means = "single"
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
 
-  fileRmd <- paste(dirfiles, "/pesekbaker.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/pesekbaker.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/pesekbaker.docx", sep = "")
-  filePDF <- paste(dirfiles, "/pesekbaker.pdf", sep = "")
+  fileRmd <- paste(dirfiles, "/rmd/pesekbaker.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/rmd/pesekbaker.html", sep = "")
+  fileDOCX <- paste(dirfiles, "/rmd/pesekbaker.docx", sep = "")
+  filePDF <- paste(dirfiles, "/rmd/pesekbaker.pdf", sep = "")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
@@ -49,6 +49,6 @@ pty.pesekbaker <- function(traits, geno, env, rep = NULL, data, means = "single"
                                   author = author))
 
   if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(shell.exec(fileDOCX))
-  if(format == "pdf_document")  try(shell.exec(filePDF))
+  if(format == "word_document") try(system(paste("open", fileDOCX)))
+  if(format == "pdf_document")  try(system(paste("open", filePDF)))
 }

@@ -30,10 +30,10 @@ pty.aovmet <- function(trait, geno, env, rep, data, maxp = 0.1,
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
 
-  fileRmd <- paste(dirfiles, "/aovmet.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/aovmet.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/aovmet.docx", sep = "")
-  filePDF <- paste(dirfiles, "/aovmet.pdf", sep = "")
+  fileRmd <- paste(dirfiles, "/rmd/aovmet.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/rmd/aovmet.html", sep = "")
+  fileDOCX <- paste(dirfiles, "/rmd/aovmet.docx", sep = "")
+  filePDF <- paste(dirfiles, "/rmd/aovmet.pdf", sep = "")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(trait = trait,
@@ -45,6 +45,6 @@ pty.aovmet <- function(trait, geno, env, rep, data, maxp = 0.1,
                                   author = author))
 
   if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(shell.exec(fileDOCX))
-  if(format == "pdf_document")  try(shell.exec(filePDF))
+  if(format == "word_document") try(system(paste("open", fileDOCX)))
+  if(format == "pdf_document")  try(system(paste("open", filePDF)))
 }

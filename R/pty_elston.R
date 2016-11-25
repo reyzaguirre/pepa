@@ -30,10 +30,10 @@ pty.elston <- function(traits, geno, env = NULL, rep = NULL, data,
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
 
-  fileRmd <- paste(dirfiles, "/elston.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/elston.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/elston.docx", sep = "")
-  filePDF <- paste(dirfiles, "/elston.pdf", sep = "")
+  fileRmd <- paste(dirfiles, "/rmd/elston.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/rmd/elston.html", sep = "")
+  fileDOCX <- paste(dirfiles, "/rmd/elston.docx", sep = "")
+  filePDF <- paste(dirfiles, "/rmd/elston.pdf", sep = "")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
@@ -46,6 +46,6 @@ pty.elston <- function(traits, geno, env = NULL, rep = NULL, data,
                                   author = author))
 
   if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(shell.exec(fileDOCX))
-  if(format == "pdf_document")  try(shell.exec(filePDF))
+  if(format == "word_document") try(system(paste("open", fileDOCX)))
+  if(format == "pdf_document")  try(system(paste("open", filePDF)))
 }
