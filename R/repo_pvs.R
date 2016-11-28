@@ -9,10 +9,12 @@
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
-#' @details bla bla bla.
+#' @details This produce a report for form 1 of the Mother & Baby methodology
+#' implemented by CIP.
 #' @return It returns automatic reports for the different forms on a PVS book.
 #' @examples
 #' repo.pvs(pvsf1, 1)
+#' @import ggplot2
 #' @export
 
 repo.pvs <- function(x, form,

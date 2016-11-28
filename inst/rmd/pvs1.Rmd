@@ -105,7 +105,7 @@ Votes are recorded for men and women.
 
 # 2. Flowering
 
-For this face we have the vote of `r nmflow` men and `r nwflow` women.
+For this phase we have the vote of `r nmflow` men and `r nwflow` women.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(flow, aes(x = variable, y = value, fill = Criteria)) +
@@ -130,7 +130,7 @@ ggplot(flowp, aes(x = variable, y = value, fill = Criteria)) +
 
 # 3. Harvest
 
-For this face we have the vote of `r nmharv` men and `r nwharv` women.
+For this phase we have the vote of `r nmharv` men and `r nwharv` women.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(harv, aes(x = variable, y = value, fill = Criteria)) +
@@ -155,7 +155,7 @@ ggplot(harvp, aes(x = variable, y = value, fill = Criteria)) +
 
 # 4. Post-harvest (storage)
 
-For this face we have the vote of `r nmstor` men and `r nwstor` women.
+For this phase we have the vote of `r nmstor` men and `r nwstor` women.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(stor, aes(x = variable, y = value, fill = Criteria)) +
