@@ -24,14 +24,20 @@ params:
 ---
 
 ```{r echo=FALSE}
+## Data
+
 x <- params$x
 x$IDENTIFIED_CRITERIA <- as.character(x$IDENTIFIED_CRITERIA)
 colnames(x) <- c("phase", "Criteria", "Men", "Women", "Global")
 x <- tidyr::gather(x, variable, value, Men:Global)
 
+## Split by phase
+
 flow <- x[x$phase == "Flowering", ]
 harv <- x[x$phase == "Harvest", ]
 stor <- x[x$phase == "Storage", ]
+
+## Sort by number of votes
 
 temp <- flow[flow$variable == "Global", c("Criteria", "value")]
 orden <- temp$Criteria[sort(temp$value, decreasing = T, index.return = T)$ix]
@@ -45,6 +51,8 @@ temp <- stor[stor$variable == "Global", c("Criteria", "value")]
 orden <- temp$Criteria[sort(temp$value, decreasing = T, index.return = T)$ix]
 stor$Criteria <- factor(stor$Criteria, levels = orden)
 
+## Count number of votes
+
 nvmflow <- sum(flow[flow$variable == "Men", "value"], na.rm = T)
 nvmharv <- sum(harv[harv$variable == "Men", "value"], na.rm = T)
 nvmstor <- sum(stor[stor$variable == "Men", "value"], na.rm = T)
@@ -53,6 +61,8 @@ nvwflow <- sum(flow[flow$variable == "Women", "value"], na.rm = T)
 nvwharv <- sum(harv[harv$variable == "Women", "value"], na.rm = T)
 nvwstor <- sum(stor[stor$variable == "Women", "value"], na.rm = T)
 
+## Count number of voters
+
 nmflow <- round(nvmflow/6)
 nmharv <- round(nvmharv/6)
 nmstor <- round(nvmstor/6)
@@ -60,6 +70,8 @@ nmstor <- round(nvmstor/6)
 nwflow <- round(nvwflow/6)
 nwharv <- round(nvwharv/6)
 nwstor <- round(nvwstor/6)
+
+## Compute percentage adjusted by gender
 
 flowp <- flow[flow$variable == "Global", ]
 flowp$value <- flowp$value / (nvmflow + nvwflow)
