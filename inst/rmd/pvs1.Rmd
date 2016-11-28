@@ -62,6 +62,7 @@ nwharv <- round(nvwharv/6)
 nwstor <- round(nvwstor/6)
 
 flowp <- flow[flow$variable == "Global", ]
+flowp$variable <- "Global unadjusted"
 flowp$value <- flowp$value / (nvmflow + nvwflow)
 temp <- flow[flow$variable == "Global", c("phase", "Criteria")]
 temp$variable <- "Global adjusted"
@@ -71,6 +72,7 @@ flowp <- rbind(flowp, temp)
 flowp$value <- round(flowp$value * 100, 1)
 
 harvp <- harv[harv$variable == "Global", ]
+harvp$variable <- "Global unadjusted"
 harvp$value <- harvp$value / (nvmharv + nvwharv)
 temp <- harv[harv$variable == "Global", c("phase", "Criteria")]
 temp$variable <- "Global adjusted"
@@ -80,6 +82,7 @@ harvp <- rbind(harvp, temp)
 harvp$value <- round(harvp$value * 100, 1)
 
 storp <- stor[stor$variable == "Global", ]
+storp$variable <- "Global unadjusted"
 storp$value <- storp$value / (nvmstor + nvwstor)
 temp <- stor[stor$variable == "Global", c("phase", "Criteria")]
 temp$variable <- "Global adjusted"
@@ -107,74 +110,74 @@ Votes are recorded for men and women.
 
 For this face we have the vote of `r nmflow` men and `r nwflow` women.
 
-```{r echo = FALSE}
+```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(flow, aes(x = variable, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at flowering stage", 
        x = "Group", y = "Number of votes") +
   geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3.5)
+             position = position_dodge(0.9), size = 3)
 ```
 
 Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
 
-```{r echo = FALSE}
+```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(flowp, aes(x = variable, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at flowering stage",
-       subtitle = "Percentages non-adjusted and adjusted by gender",
+       subtitle = "Percentages unadjusted and adjusted by gender",
        x = "Group", y = "Percentage of votes") +
   geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3.5)
+             position = position_dodge(0.9), size = 3)
 ```
 
 # 3. Harvest
 
 For this face we have the vote of `r nmharv` men and `r nwharv` women.
 
-```{r echo = FALSE}
+```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(harv, aes(x = variable, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at harvest stage", 
        x = "Group", y = "Number of votes") +
   geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3.5)
+             position = position_dodge(0.9), size = 3)
 ```
 
 Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
 
-```{r echo = FALSE}
+```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(harvp, aes(x = variable, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at harvest stage",
-       subtitle = "Percentages non-adjusted and adjusted by gender",
+       subtitle = "Percentages unadjusted and adjusted by gender",
        x = "Group", y = "Percentage of votes") +
   geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3.5)
+             position = position_dodge(0.9), size = 3)
 ```
 
 # 4. Post-harvest (storage)
 
 For this face we have the vote of `r nmstor` men and `r nwstor` women.
 
-```{r echo = FALSE}
+```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(stor, aes(x = variable, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at post-harvest stage", 
        x = "Group", y = "Number of votes") +
   geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3.5)
+             position = position_dodge(0.9), size = 3)
 ```
 
 Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
 
-```{r echo = FALSE}
+```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(storp, aes(x = variable, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at post-harvest stage",
-       subtitle = "Percentages non-adjusted and adjusted by gender",
+       subtitle = "Percentages unadjusted and adjusted by gender",
        x = "Group", y = "Percentage of votes") +
   geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3.5)
+             position = position_dodge(0.9), size = 3)
 ```
 
