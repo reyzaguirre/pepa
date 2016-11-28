@@ -62,7 +62,6 @@ nwharv <- round(nvwharv/6)
 nwstor <- round(nvwstor/6)
 
 flowp <- flow[flow$variable == "Global", ]
-flowp$variable <- "Global unadjusted"
 flowp$value <- flowp$value / (nvmflow + nvwflow)
 temp <- flow[flow$variable == "Global", c("phase", "Criteria")]
 temp$variable <- "Global adjusted"
@@ -72,7 +71,6 @@ flowp <- rbind(flowp, temp)
 flowp$value <- round(flowp$value * 100, 1)
 
 harvp <- harv[harv$variable == "Global", ]
-harvp$variable <- "Global unadjusted"
 harvp$value <- harvp$value / (nvmharv + nvwharv)
 temp <- harv[harv$variable == "Global", c("phase", "Criteria")]
 temp$variable <- "Global adjusted"
@@ -82,7 +80,6 @@ harvp <- rbind(harvp, temp)
 harvp$value <- round(harvp$value * 100, 1)
 
 storp <- stor[stor$variable == "Global", ]
-storp$variable <- "Global unadjusted"
 storp$value <- storp$value / (nvmstor + nvwstor)
 temp <- stor[stor$variable == "Global", c("phase", "Criteria")]
 temp$variable <- "Global adjusted"
