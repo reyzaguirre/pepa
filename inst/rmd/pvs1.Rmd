@@ -23,7 +23,96 @@ params:
   author: "no data"
 ---
 
-bla bla bla
-codigo
-mas codigo
-bla bla bla
+```{r echo=FALSE}
+x <- params$x
+x$IDENTIFIED_CRITERIA <- as.character(x$IDENTIFIED_CRITERIA)
+colnames(x) <- c("phase", "Criteria", "Men", "Women", "Global")
+x <- tidyr::gather(x, variable, value, Men:Global)
+
+flow <- x[x$phase == "Flowering", ]
+harv <- x[x$phase == "Harvest", ]
+stor <- x[x$phase == "Storage", ]
+
+temp <- flow[flow$variable == "Global", c("Criteria", "value")]
+orden <- temp$Criteria[sort(temp$value, decreasing = T, index.return = T)$ix]
+flow$Criteria <- factor(flow$Criteria, levels = orden)
+
+temp <- harv[harv$variable == "Global", c("Criteria", "value")]
+orden <- temp$Criteria[sort(temp$value, decreasing = T, index.return = T)$ix]
+harv$Criteria <- factor(harv$Criteria, levels = orden)
+
+temp <- stor[stor$variable == "Global", c("Criteria", "value")]
+orden <- temp$Criteria[sort(temp$value, decreasing = T, index.return = T)$ix]
+stor$Criteria <- factor(stor$Criteria, levels = orden)
+
+nvmflow <- sum(flow[flow$variable == "Men", "value"], na.rm = T)
+nvmharv <- sum(harv[harv$variable == "Men", "value"], na.rm = T)
+nvmstor <- sum(stor[stor$variable == "Men", "value"], na.rm = T)
+
+nvwflow <- sum(flow[flow$variable == "Women", "value"], na.rm = T)
+nvwharv <- sum(harv[harv$variable == "Women", "value"], na.rm = T)
+nvwstor <- sum(stor[stor$variable == "Women", "value"], na.rm = T)
+
+nmflow <- round(nvmflow/6)
+nmharv <- round(nvmharv/6)
+nmstor <- round(nvmstor/6)
+
+nwflow <- round(nvwflow/6)
+nwharv <- round(nvwharv/6)
+nwstor <- round(nvwstor/6)
+```
+
+# 1. Identification of selection criteria and voting process
+
+A group of farmers, men and women, and other stakeholders are gathered and, after explanation of the overall objectives of the trial, they are asked: What do you look for in a new variety of potato when the crop is at the flowering/harvest/post-harvest stage? In other words: When do you say that a variety is good or bad, when evaluating at this stage?
+
+A list is compiled of all the criteria mentioned by the different participants (i.e. free listing). Each criterium is listed and written on a paper bag (or card with accompanying container). Then, in order to select the most important traits for farmers a voting process is conducted.
+
+Farmers are requested to select the three criteria that each considers the most important with the following scheme. They can give:
+
+- Three votes for the most important characteristic.
+- Two votes for the second most important characteristic.
+- One vote for the third most important characteristic.
+
+Votes are recorded for men and women.
+
+# 2. Flowering
+
+For this face we have the vote of `r nmflow` men and `r nwflow` women.
+
+```{r echo = FALSE}
+ggplot2::ggplot(flow, aes(x = variable, y = value, fill = Criteria)) +
+  geom_bar(stat = "identity", position = "dodge", color = "black") + 
+  labs(title = "Voting for selection criteria of new varieties at flowering stage", 
+       x = "Group", y = "Number of votes") +
+  geom_text(aes(label = value), vjust = 1.6, color = "white",
+             position = position_dodge(0.9), size = 3.5)
+```
+
+# 3. Harvest
+
+For this face we have the vote of `r nmharv` men and `r nwharv` women.
+
+```{r echo = FALSE}
+ggplot2::ggplot(harv, aes(x = variable, y = value, fill = Criteria)) +
+  geom_bar(stat = "identity", position = "dodge", color = "black") + 
+  labs(title = "Voting for selection criteria of new varieties at harvest stage", 
+       x = "Group", y = "Number of votes") +
+  geom_text(aes(label = value), vjust = 1.6, color = "white",
+             position = position_dodge(0.9), size = 3.5)
+```
+
+# 4. Post-harvest (storage)
+
+For this face we have the vote of `r nmstor` men and `r nwstor` women.
+
+```{r echo = FALSE}
+ggplot2::ggplot(stor, aes(x = variable, y = value, fill = Criteria)) +
+  geom_bar(stat = "identity", position = "dodge", color = "black") + 
+  labs(title = "Voting for selection criteria of new varieties at post-harvest stage", 
+       x = "Group", y = "Number of votes") +
+  geom_text(aes(label = value), vjust = 1.6, color = "white",
+             position = position_dodge(0.9), size = 3.5)
+```
+
+

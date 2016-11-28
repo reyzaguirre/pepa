@@ -12,7 +12,6 @@
 #' @details bla bla bla.
 #' @return It returns automatic reports for the different forms on a PVS book.
 #' @examples
-#' # bla bla bla
 #' repo.pvs(pvsf1, 1)
 #' @export
 
@@ -26,7 +25,7 @@ repo.pvs <- function(x, form,
   dirfiles <- system.file(package = "pepa")
 
   if (form == 1) {
-    subtitle <- "Selection criteria for clones"
+    subtitle <- "Identification of selection criteria for clones"
     fileRmd <- paste(dirfiles, "/rmd/pvs1.Rmd", sep = "")
     fileURL <- paste(dirfiles, "/rmd/pvs1.html", sep = "")
     fileDOCX <- paste(dirfiles, "/rmd/pvs1.docx", sep = "")

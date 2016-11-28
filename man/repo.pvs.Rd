@@ -31,7 +31,6 @@ Produce standard reports for PVS data
 bla bla bla.
 }
 \examples{
-# bla bla bla
 repo.pvs(pvsf1, 1)
 }
 \author{
