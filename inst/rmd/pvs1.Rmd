@@ -118,7 +118,7 @@ Farmers are requested to select the three criteria that each considers the most 
 
 Votes are recorded for men and women.
 
-# 2. Flowering
+# 2. Selection criteria at flowering
 
 For this phase we have the vote of `r nmflow` men and `r nwflow` women.
 
@@ -143,7 +143,7 @@ ggplot(flowp, aes(x = group, y = value, fill = Criteria)) +
              position = position_dodge(0.9), size = 3)
 ```
 
-# 3. Harvest
+# 3. Selection criteria at harvest
 
 For this phase we have the vote of `r nmharv` men and `r nwharv` women.
 
@@ -168,7 +168,7 @@ ggplot(harvp, aes(x = group, y = value, fill = Criteria)) +
              position = position_dodge(0.9), size = 3)
 ```
 
-# 4. Post-harvest (storage)
+# 4. Selection criteria at post-harvest (storage)
 
 For this phase we have the vote of `r nmstor` men and `r nwstor` women.
 
