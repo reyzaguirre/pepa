@@ -14,6 +14,7 @@
 #' @return It returns automatic reports for the different forms on a PVS book.
 #' @examples
 #' repo.pvs(pvsf1, 1)
+#' repo.pvs(pvsf2, 2)
 #' @import ggplot2
 #' @export
 

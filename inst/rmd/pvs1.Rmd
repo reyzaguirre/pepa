@@ -120,7 +120,7 @@ Votes are recorded for men and women.
 
 # 2. Selection criteria at flowering
 
-For this phase we have the vote of `r nmflow` men and `r nwflow` women.
+For this phase there are the votes of `r nmflow` men and `r nwflow` women.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(flow, aes(x = group, y = value, fill = Criteria)) +
@@ -145,7 +145,7 @@ ggplot(flowp, aes(x = group, y = value, fill = Criteria)) +
 
 # 3. Selection criteria at harvest
 
-For this phase we have the vote of `r nmharv` men and `r nwharv` women.
+For this phase there are the votes of `r nmharv` men and `r nwharv` women.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(harv, aes(x = group, y = value, fill = Criteria)) +
@@ -170,7 +170,7 @@ ggplot(harvp, aes(x = group, y = value, fill = Criteria)) +
 
 # 4. Selection criteria at post-harvest (storage)
 
-For this phase we have the vote of `r nmstor` men and `r nwstor` women.
+For this phase there are the votes of `r nmstor` men and `r nwstor` women.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(stor, aes(x = group, y = value, fill = Criteria)) +

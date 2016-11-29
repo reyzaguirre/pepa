@@ -28,10 +28,12 @@ It returns automatic reports for the different forms on a PVS book.
 Produce standard reports for PVS data
 }
 \details{
-bla bla bla.
+It produces a report for form 1 of the Mother & Baby methodology
+implemented by CIP.
 }
 \examples{
 repo.pvs(pvsf1, 1)
+repo.pvs(pvsf2, 2)
 }
 \author{
 Raul Eyzaguirre.
