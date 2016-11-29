@@ -34,6 +34,7 @@ implemented by CIP.
 \examples{
 repo.pvs(pvsf1, 1)
 repo.pvs(pvsf2, 2)
+repo.pvs(pvsf3, 3)
 }
 \author{
 Raul Eyzaguirre.

@@ -15,6 +15,7 @@
 #' @examples
 #' repo.pvs(pvsf1, 1)
 #' repo.pvs(pvsf2, 2)
+#' repo.pvs(pvsf3, 3)
 #' @import ggplot2
 #' @export
 
@@ -36,17 +37,17 @@ repo.pvs <- function(x, form,
   }
   if (form == 2) {
     subtitle <- "Best genotypes at flowering"
-    fileRmd <- paste(dirfiles, "/rmd/pvs2.Rmd", sep = "")
-    fileURL <- paste(dirfiles, "/rmd/pvs2.html", sep = "")
-    fileDOCX <- paste(dirfiles, "/rmd/pvs2.docx", sep = "")
-    filePDF <- paste(dirfiles, "/rmd/pvs2.pdf", sep = "")
+    fileRmd <- paste(dirfiles, "/rmd/pvs23.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs23.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs23.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs23.pdf", sep = "")
   }
   if (form == 3) {
     subtitle <- "Best genotypes at harvest"
-    fileRmd <- paste(dirfiles, "/rmd/pvs3.Rmd", sep = "")
-    fileURL <- paste(dirfiles, "/rmd/pvs3.html", sep = "")
-    fileDOCX <- paste(dirfiles, "/rmd/pvs3.docx", sep = "")
-    filePDF <- paste(dirfiles, "/rmd/pvs3.pdf", sep = "")
+    fileRmd <- paste(dirfiles, "/rmd/pvs23.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs23.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs23.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs23.pdf", sep = "")
   }
   if (form == 6) {
     subtitle <- "Organoleptic analysis at mother trial"
@@ -72,6 +73,7 @@ repo.pvs <- function(x, form,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(x = x,
+                                  form = form,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))
