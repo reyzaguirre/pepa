@@ -27,21 +27,21 @@ repo.pvs <- function(x, form,
   dirfiles <- system.file(package = "pepa")
 
   if (form == 1) {
-    subtitle <- "Identification of selection criteria for clones"
+    subtitle <- "Identification of selection criteria for genotypes"
     fileRmd <- paste(dirfiles, "/rmd/pvs1.Rmd", sep = "")
     fileURL <- paste(dirfiles, "/rmd/pvs1.html", sep = "")
     fileDOCX <- paste(dirfiles, "/rmd/pvs1.docx", sep = "")
     filePDF <- paste(dirfiles, "/rmd/pvs1.pdf", sep = "")
   }
   if (form == 2) {
-    subtitle <- "Best clones at flowering"
+    subtitle <- "Best genotypes at flowering"
     fileRmd <- paste(dirfiles, "/rmd/pvs2.Rmd", sep = "")
     fileURL <- paste(dirfiles, "/rmd/pvs2.html", sep = "")
     fileDOCX <- paste(dirfiles, "/rmd/pvs2.docx", sep = "")
     filePDF <- paste(dirfiles, "/rmd/pvs2.pdf", sep = "")
   }
   if (form == 3) {
-    subtitle <- "Best clones at harvest"
+    subtitle <- "Best genotypes at harvest"
     fileRmd <- paste(dirfiles, "/rmd/pvs3.Rmd", sep = "")
     fileURL <- paste(dirfiles, "/rmd/pvs3.html", sep = "")
     fileDOCX <- paste(dirfiles, "/rmd/pvs3.docx", sep = "")
@@ -62,7 +62,7 @@ repo.pvs <- function(x, form,
     filePDF <- paste(dirfiles, "/rmd/pvs7.pdf", sep = "")
   }
   if (form == 9) {
-    subtitle <- "Best clones at post-harvest"
+    subtitle <- "Best genotypes at post-harvest"
     fileRmd <- paste(dirfiles, "/rmd/pvs9.Rmd", sep = "")
     fileURL <- paste(dirfiles, "/rmd/pvs9.html", sep = "")
     fileDOCX <- paste(dirfiles, "/rmd/pvs9.docx", sep = "")
