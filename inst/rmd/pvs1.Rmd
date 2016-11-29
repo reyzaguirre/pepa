@@ -29,7 +29,7 @@ params:
 x <- params$x
 x$IDENTIFIED_CRITERIA <- as.character(x$IDENTIFIED_CRITERIA)
 colnames(x) <- c("phase", "Criteria", "Men", "Women", "Global")
-x <- tidyr::gather(x, variable, value, Men:Global)
+x <- tidyr::gather(x, group, value, Men:Global)
 
 ## Split by phase
 
@@ -39,27 +39,27 @@ stor <- x[x$phase == "Storage", ]
 
 ## Sort by number of votes
 
-temp <- flow[flow$variable == "Global", c("Criteria", "value")]
+temp <- flow[flow$group == "Global", c("Criteria", "value")]
 orden <- temp$Criteria[sort(temp$value, decreasing = T, index.return = T)$ix]
 flow$Criteria <- factor(flow$Criteria, levels = orden)
 
-temp <- harv[harv$variable == "Global", c("Criteria", "value")]
+temp <- harv[harv$group == "Global", c("Criteria", "value")]
 orden <- temp$Criteria[sort(temp$value, decreasing = T, index.return = T)$ix]
 harv$Criteria <- factor(harv$Criteria, levels = orden)
 
-temp <- stor[stor$variable == "Global", c("Criteria", "value")]
+temp <- stor[stor$group == "Global", c("Criteria", "value")]
 orden <- temp$Criteria[sort(temp$value, decreasing = T, index.return = T)$ix]
 stor$Criteria <- factor(stor$Criteria, levels = orden)
 
 ## Count number of votes
 
-nvmflow <- sum(flow[flow$variable == "Men", "value"], na.rm = T)
-nvmharv <- sum(harv[harv$variable == "Men", "value"], na.rm = T)
-nvmstor <- sum(stor[stor$variable == "Men", "value"], na.rm = T)
+nvmflow <- sum(flow[flow$group == "Men", "value"], na.rm = T)
+nvmharv <- sum(harv[harv$group == "Men", "value"], na.rm = T)
+nvmstor <- sum(stor[stor$group == "Men", "value"], na.rm = T)
 
-nvwflow <- sum(flow[flow$variable == "Women", "value"], na.rm = T)
-nvwharv <- sum(harv[harv$variable == "Women", "value"], na.rm = T)
-nvwstor <- sum(stor[stor$variable == "Women", "value"], na.rm = T)
+nvwflow <- sum(flow[flow$group == "Women", "value"], na.rm = T)
+nvwharv <- sum(harv[harv$group == "Women", "value"], na.rm = T)
+nvwstor <- sum(stor[stor$group == "Women", "value"], na.rm = T)
 
 ## Count number of voters
 
@@ -73,30 +73,33 @@ nwstor <- round(nvwstor/6)
 
 ## Compute percentage adjusted by gender
 
-flowp <- flow[flow$variable == "Global", ]
+flowp <- flow[flow$group == "Global", ]
 flowp$value <- flowp$value / (nvmflow + nvwflow)
-temp <- flow[flow$variable == "Global", c("phase", "Criteria")]
-temp$variable <- "Global adjusted"
-temp$value <- flow[flow$variable == "Men", "value"] / nvmflow / 2 +
-  flow[flow$variable == "Women", "value"] / nvwflow / 2
+temp <- flow[flow$group != "Global", ]
+temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvmflow / 2
+temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvwflow / 2
+temp <- docomp("sum", "value", "Criteria", "phase", temp)
+temp$group <- "Global adjusted"
 flowp <- rbind(flowp, temp)
 flowp$value <- round(flowp$value * 100, 1)
 
-harvp <- harv[harv$variable == "Global", ]
+harvp <- harv[harv$group == "Global", ]
 harvp$value <- harvp$value / (nvmharv + nvwharv)
-temp <- harv[harv$variable == "Global", c("phase", "Criteria")]
-temp$variable <- "Global adjusted"
-temp$value <- harv[harv$variable == "Men", "value"] / nvmharv / 2 +
-  harv[harv$variable == "Women", "value"] / nvwharv / 2
+temp <- harv[harv$group != "Global", ]
+temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvmharv / 2
+temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvwharv / 2
+temp <- docomp("sum", "value", "Criteria", "phase", temp)
+temp$group <- "Global adjusted"
 harvp <- rbind(harvp, temp)
 harvp$value <- round(harvp$value * 100, 1)
 
-storp <- stor[stor$variable == "Global", ]
+storp <- stor[stor$group == "Global", ]
 storp$value <- storp$value / (nvmstor + nvwstor)
-temp <- stor[stor$variable == "Global", c("phase", "Criteria")]
-temp$variable <- "Global adjusted"
-temp$value <- stor[stor$variable == "Men", "value"] / nvmstor / 2 +
-  stor[stor$variable == "Women", "value"] / nvwstor / 2
+temp <- stor[stor$group != "Global", ]
+temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvmstor / 2
+temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvwstor / 2
+temp <- docomp("sum", "value", "Criteria", "phase", temp)
+temp$group <- "Global adjusted"
 storp <- rbind(storp, temp)
 storp$value <- round(storp$value * 100, 1)
 ```
@@ -120,7 +123,7 @@ Votes are recorded for men and women.
 For this phase we have the vote of `r nmflow` men and `r nwflow` women.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(flow, aes(x = variable, y = value, fill = Criteria)) +
+ggplot(flow, aes(x = group, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at flowering stage", 
        x = "Group", y = "Number of votes") +
@@ -131,7 +134,7 @@ ggplot(flow, aes(x = variable, y = value, fill = Criteria)) +
 Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(flowp, aes(x = variable, y = value, fill = Criteria)) +
+ggplot(flowp, aes(x = group, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at flowering stage",
        subtitle = "Percentages unadjusted and adjusted by gender",
@@ -145,7 +148,7 @@ ggplot(flowp, aes(x = variable, y = value, fill = Criteria)) +
 For this phase we have the vote of `r nmharv` men and `r nwharv` women.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(harv, aes(x = variable, y = value, fill = Criteria)) +
+ggplot(harv, aes(x = group, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at harvest stage", 
        x = "Group", y = "Number of votes") +
@@ -156,7 +159,7 @@ ggplot(harv, aes(x = variable, y = value, fill = Criteria)) +
 Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(harvp, aes(x = variable, y = value, fill = Criteria)) +
+ggplot(harvp, aes(x = group, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at harvest stage",
        subtitle = "Percentages unadjusted and adjusted by gender",
@@ -170,7 +173,7 @@ ggplot(harvp, aes(x = variable, y = value, fill = Criteria)) +
 For this phase we have the vote of `r nmstor` men and `r nwstor` women.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(stor, aes(x = variable, y = value, fill = Criteria)) +
+ggplot(stor, aes(x = group, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at post-harvest stage", 
        x = "Group", y = "Number of votes") +
@@ -181,7 +184,7 @@ ggplot(stor, aes(x = variable, y = value, fill = Criteria)) +
 Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(storp, aes(x = variable, y = value, fill = Criteria)) +
+ggplot(storp, aes(x = group, y = value, fill = Criteria)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for selection criteria of new varieties at post-harvest stage",
        subtitle = "Percentages unadjusted and adjusted by gender",
