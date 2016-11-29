@@ -16,8 +16,11 @@
 #' repo.pvs(pvsf1, 1)
 #' repo.pvs(pvsf2, 2)
 #' repo.pvs(pvsf3, 3)
+#' repo.pvs(pvsf6, 6)
+#' repo.pvs(pvsf7, 7)
 #' repo.pvs(pvsf9, 9)
 #' @import ggplot2
+#' @importFrom factoextra fviz_pca
 #' @export
 
 repo.pvs <- function(x, form,
@@ -52,17 +55,17 @@ repo.pvs <- function(x, form,
   }
   if (form == 6) {
     subtitle <- "Organoleptic analysis at mother trial"
-    fileRmd <- paste(dirfiles, "/rmd/pvs6.Rmd", sep = "")
-    fileURL <- paste(dirfiles, "/rmd/pvs6.html", sep = "")
-    fileDOCX <- paste(dirfiles, "/rmd/pvs6.docx", sep = "")
-    filePDF <- paste(dirfiles, "/rmd/pvs6.pdf", sep = "")
+    fileRmd <- paste(dirfiles, "/rmd/pvs67.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs67.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs67.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs67.pdf", sep = "")
   }
   if (form == 7) {
     subtitle <- "Organoleptic analysis at baby trials"
-    fileRmd <- paste(dirfiles, "/rmd/pvs7.Rmd", sep = "")
-    fileURL <- paste(dirfiles, "/rmd/pvs7.html", sep = "")
-    fileDOCX <- paste(dirfiles, "/rmd/pvs7.docx", sep = "")
-    filePDF <- paste(dirfiles, "/rmd/pvs7.pdf", sep = "")
+    fileRmd <- paste(dirfiles, "/rmd/pvs67.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs67.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs67.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs67.pdf", sep = "")
   }
   if (form == 9) {
     subtitle <- "Best genotypes at post-harvest"

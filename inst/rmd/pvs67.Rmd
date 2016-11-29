@@ -1,0 +1,89 @@
+---
+title: "`r params$title`"
+subtitle: '`r params$subtitle`'
+author: '`r params$author`'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output: 
+  html_document:
+    theme: united
+    toc: true
+    toc_depth: 3
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    highlight: zenburn
+  word_document:
+    toc: true
+    toc_depth: 3
+    highlight: "tango"
+params:
+  x: "no data"
+  form: "no data"
+  title: "no data"
+  subtitle: "no data"
+  author: "no data"
+---
+
+```{r echo=FALSE}
+
+## Data
+
+x <- params$x
+colnames(x)[2:4] <- c("Appearance", "Taste", "Texture")
+
+## Count number of men and women
+
+temp <- x[x$Sex == "M", ]
+nm <- nlevels(factor(temp$PanelNo))
+temp <- x[x$Sex == "F", ]
+nw <- nlevels(factor(temp$PanelNo))
+
+## Format data
+
+xg <- docomp("sum", c("Appearance", "Taste", "Texture"), "INSTN", data = x)
+x <- docomp("sum", c("Appearance", "Taste", "Texture"), c("INSTN", "Sex"), data = x)
+xm <- x[x$Sex == "M", ]
+xf <- x[x$Sex == "F", ]
+colnames(xm)[3:5] <- c("Appearance-M", "Taste-M", "Texture-M")
+colnames(xf)[3:5] <- c("Appearance-F", "Taste-F", "Texture-F")
+x <- cbind(xm[, c(1, 3:5)], xf[, 3:5])
+
+rownames(x) <- x$INST
+rownames(xg) <- xg$INSTN
+
+x <- x[, -1]
+xg <- xg[, -1]
+
+```
+
+# 1. Gathering of data
+
+Samples of all genotypes are boiled and presented on plates. Each genotype is evaluated by `r nm` men and `r nw` women about appearance and taste with the options:
+
+- 5 excellent,
+- 3 fair,
+- 1 poor,
+
+and about texture with:
+
+- 5 mealy or floury,
+- 3 intermediate (3),
+- 1 soggy or watery.
+
+# 2. Results
+
+A principal components analysis is shown to see the associations among the genotypes and the attributes, first with all the panelists together and then with panelists opinions differentiated by gender.
+
+```{r echo = FALSE, fig.height = 6, fig.width = 6}
+princip <- prcomp(xg, center = T, scale. = T)
+summary(princip)
+factoextra::fviz_pca(princip, repel = T,
+                     title = "Biplot of genotypes and attributes")
+```
+
+```{r echo = FALSE, fig.height = 6, fig.width = 6}
+princip <- prcomp(x, center = T, scale. = T)
+summary(princip)
+factoextra::fviz_pca(princip, repel = T,
+                     title = "Biplot of genotypes and attributes by gender")
+```
