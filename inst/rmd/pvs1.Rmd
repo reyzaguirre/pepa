@@ -18,12 +18,14 @@ output:
     highlight: "tango"
 params:
   x: "no data"
+  form: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
 ---
 
 ```{r echo=FALSE}
+
 ## Data
 
 x <- params$x
@@ -63,13 +65,13 @@ nvwstor <- sum(stor[stor$group == "Women", "value"], na.rm = T)
 
 ## Count number of voters
 
-nmflow <- round(nvmflow/6)
-nmharv <- round(nvmharv/6)
-nmstor <- round(nvmstor/6)
+nmflow <- round(nvmflow / 6)
+nmharv <- round(nvmharv / 6)
+nmstor <- round(nvmstor / 6)
 
-nwflow <- round(nvwflow/6)
-nwharv <- round(nvwharv/6)
-nwstor <- round(nvwstor/6)
+nwflow <- round(nvwflow / 6)
+nwharv <- round(nvwharv / 6)
+nwstor <- round(nvwstor / 6)
 
 ## Compute percentage adjusted by gender
 
@@ -102,6 +104,7 @@ temp <- docomp("sum", "value", "Criteria", "phase", temp)
 temp$group <- "Global adjusted"
 storp <- rbind(storp, temp)
 storp$value <- round(storp$value * 100, 1)
+
 ```
 
 # 1. Identification of selection criteria and voting process

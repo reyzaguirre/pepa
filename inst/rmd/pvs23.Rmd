@@ -25,6 +25,7 @@ params:
 ---
 
 ```{r echo=FALSE}
+
 ## Form
 
 if (params$form == 2) stage <- "flowering"
@@ -74,11 +75,11 @@ nvwboth <- nvwmoth + nvwbaby
 
 ## Count number of voters
 
-nmmoth <- round(nvmmoth/6/nr)
-nmbaby <- round(nvmbaby/6/nr)
+nmmoth <- round(nvmmoth / 6 / nr)
+nmbaby <- round(nvmbaby / 6 / nr)
 
-nwmoth <- round(nvwmoth/6/nr)
-nwbaby <- round(nvwbaby/6/nr)
+nwmoth <- round(nvwmoth / 6 / nr)
+nwbaby <- round(nvwbaby / 6 / nr)
 
 ## Compute percentage adjusted by gender
 
@@ -111,6 +112,7 @@ temp <- docomp("sum", "value", "INSTN", data = temp)
 temp$group <- "Global adjusted"
 bothp <- rbind(bothp, temp)
 bothp$value <- round(bothp$value * 100, 1)
+
 ```
 
 # 1. Voting process for the identification of best genotypes at `r stage`
