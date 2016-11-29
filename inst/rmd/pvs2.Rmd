@@ -124,7 +124,7 @@ There are the votes of `r nmmoth` men and `r nwmoth` women with `r nr` replicati
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(moth, aes(x = group, y = value, fill = INSTN)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
-  labs(title = "Voting for best genotypes at flowering stage", 
+  labs(title = "Voting for best genotypes at flowering stage in the mother plot", 
        x = "Group", y = "Number of votes") +
   geom_text(aes(label = value), vjust = 1.6, color = "white",
              position = position_dodge(0.9), size = 3)
