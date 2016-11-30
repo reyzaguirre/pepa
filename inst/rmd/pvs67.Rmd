@@ -67,7 +67,7 @@ Samples of all genotypes are boiled and presented on plates. Each genotype is ev
 and about texture with:
 
 - 5 mealy or floury,
-- 3 intermediate (3),
+- 3 intermediate,
 - 1 soggy or watery.
 
 # 2. Results
