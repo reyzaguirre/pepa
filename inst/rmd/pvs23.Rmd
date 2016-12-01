@@ -155,50 +155,59 @@ ggplot(mothp, aes(x = group, y = value, fill = INSTN)) +
 
 # 3. Best genotypes at the baby plots
 
-The genotypes have been planted in `r nrb` baby plots. At each baby plot the complete set of genotypes is planted. A group of men and women voted independently for the best genotypes at each baby plot.
+`r if (nrb == 0) {"There were no data for baby plots."}`
+`r if (nrb > 0) paste("The genotypes have been planted in", nrb, "baby plots. At each baby plot the complete set of genotypes is planted. A group of men and women voted independently for the best genotypes at each baby plot.")`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(baby, aes(x = group, y = value, fill = INSTN)) +
-  geom_bar(stat = "identity", position = "dodge", color = "black") + 
-  labs(title = paste("Voting for best genotypes at", stage, "stage in the baby plots"), 
-       x = "Group", y = "Number of votes") +
-  geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3)
+if (nrb > 0) {
+  ggplot(baby, aes(x = group, y = value, fill = INSTN)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the baby plots"), 
+         x = "Group", y = "Number of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)  
+}
 ```
 
-Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
+`r if (nrb > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(babyp, aes(x = group, y = value, fill = INSTN)) +
-  geom_bar(stat = "identity", position = "dodge", color = "black") + 
-  labs(title = paste("Voting for best genotypes at", stage, "stage in the baby plots"),
-       subtitle = "Percentages unadjusted and adjusted by gender",
-       x = "Group", y = "Percentage of votes") +
-  geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3)
+if (nrb > 0) {
+  ggplot(babyp, aes(x = group, y = value, fill = INSTN)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the baby plots"),
+         subtitle = "Percentages unadjusted and adjusted by gender",
+         x = "Group", y = "Percentage of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
 ```
 
-# 4. Best genotypes at both, mother and baby plots
+`r if (nrb > 0) {"# 4. Best genotypes at both, mother and baby plots"}`
 
-Here all the votes on the mother and baby plots are pooled together.
+`r if (nrb > 0) {"Here all the votes on the mother and baby plots are pooled together."}`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(both, aes(x = group, y = value, fill = INSTN)) +
-  geom_bar(stat = "identity", position = "dodge", color = "black") + 
-  labs(title = paste("Voting for best genotypes at", stage, "stage in the mother and baby plots"),
-       x = "Group", y = "Number of votes") +
-  geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3)
+if (nrb > 0) {
+  ggplot(both, aes(x = group, y = value, fill = INSTN)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the mother and baby plots"),
+         x = "Group", y = "Number of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
 ```
 
-Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
+`r if (nrb > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(bothp, aes(x = group, y = value, fill = INSTN)) +
-  geom_bar(stat = "identity", position = "dodge", color = "black") + 
-  labs(title = paste("Voting for best genotypes at", stage, "stage in the mother and baby plots"),
-       subtitle = "Percentages unadjusted and adjusted by gender",
-       x = "Group", y = "Percentage of votes") +
-  geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3)
+if (nrb > 0) {
+  ggplot(bothp, aes(x = group, y = value, fill = INSTN)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the mother and baby plots"),
+         subtitle = "Percentages unadjusted and adjusted by gender",
+         x = "Group", y = "Percentage of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
 ```
