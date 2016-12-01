@@ -29,6 +29,7 @@ params:
 ## Data
 
 x <- params$x
+x <- x[, c("PHASE", "IDENTIFIED_CRITERIA", "SCORE_MEN", "SCORE_WOMEN", "SCORE_GLOBAL")]
 x$IDENTIFIED_CRITERIA <- as.character(x$IDENTIFIED_CRITERIA)
 colnames(x) <- c("phase", "Criteria", "Men", "Women", "Global")
 x <- tidyr::gather(x, group, value, Men:Global)
