@@ -76,7 +76,7 @@ Votes are recorded for men and women.
 
 # 2. Best genotypes
 
-There are the votes of `r nm` men and `r nw` women with `r nr` replications (the complete set of genotypes is evaluated `r nr` times, and each men and women have voted for each replication).
+The genotypes have been planted following a randomized complete block design with `r nr` blocks. A group of men and women voted independently for the best genotypes at each block, so each men and women voted `r nr` times.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(x, aes(x = group, y = value, fill = INSTN)) +

@@ -34,7 +34,10 @@ if (params$form == 3) stage <- "harvest"
 ## Data
 
 x <- params$x
-nr <- nlevels(factor(x$REP))
+temp <- x[!is.na(x$MSGLO), ]
+nrm <- nlevels(factor(temp$REP))
+temp <- x[!is.na(x$BSGLO), ]
+nrb <- nlevels(factor(temp$REP))
 x <- docomp("sum", c("MSM", "MSWM", "MSGLO", "BSM", "BSWM", "BSGLO"), "INSTN", data = x)
 x <- tidyr::gather(x, group, value, MSM:BSGLO)
 x[x$group %in% c("MSM", "MSWM", "MSGLO"), "trial"] <- "mother"
@@ -75,11 +78,11 @@ nvwboth <- nvwmoth + nvwbaby
 
 ## Count number of voters
 
-nmmoth <- round(nvmmoth / 6 / nr)
-nmbaby <- round(nvmbaby / 6 / nr)
+nmmoth <- round(nvmmoth / 6 / nrm)
+nmbaby <- round(nvmbaby / 6 / nrb)
 
-nwmoth <- round(nvwmoth / 6 / nr)
-nwbaby <- round(nvwbaby / 6 / nr)
+nwmoth <- round(nvwmoth / 6 / nrm)
+nwbaby <- round(nvwbaby / 6 / nrb)
 
 ## Compute percentage adjusted by gender
 
@@ -127,7 +130,7 @@ Votes are recorded for men and women.
 
 # 2. Best genotypes at the mother plot
 
-There are the votes of `r nmmoth` men and `r nwmoth` women with `r nr` replications (the complete set of genotypes has been planted `r nr` times, and each men and women have voted for each replication).
+The genotypes have been planted following a randomized complete block design with `r nrm` blocks. A group of men and women voted independently for the best genotypes at each block, so each men and women voted `r nrm` times.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(moth, aes(x = group, y = value, fill = INSTN)) +
@@ -152,7 +155,7 @@ ggplot(mothp, aes(x = group, y = value, fill = INSTN)) +
 
 # 3. Best genotypes at the baby plots
 
-There are the votes of `r nmbaby` men and `r nwbaby` women with `r nr` replications (the complete set of genotypes has been planted `r nr` times, and each men and women have voted for each replication).
+The genotypes have been planted in `r nrb` baby plots. At each baby plot the complete set of genotypes is planted. A group of men and women voted independently for the best genotypes at each baby plot.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(baby, aes(x = group, y = value, fill = INSTN)) +
@@ -177,7 +180,7 @@ ggplot(babyp, aes(x = group, y = value, fill = INSTN)) +
 
 # 4. Best genotypes at both, mother and baby plots
 
-There are the votes of `r nmmoth` men and `r nwmoth` women in the mother plot and `r nmbaby` men and `r nwbaby` women at the baby plots with `r nr` replications in each case.
+Here all the votes on the mother and baby plots are pooled together.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 ggplot(both, aes(x = group, y = value, fill = INSTN)) +
