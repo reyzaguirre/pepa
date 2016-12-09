@@ -29,6 +29,7 @@ params:
 ## Data
 
 x <- params$x
+x <- x[, c("REP","INSTN", "STYPE", "SCORE_MEN","SCORE_WOMEN" ,"SCORE_GLOBAL")]
 colnames(x)[4:6] <- c("Men", "Women", "Global")
 nr <- nlevels(factor(x$REP))
 x <- docomp("sum", c("Men", "Women", "Global"), "INSTN", data = x)
