@@ -9,7 +9,7 @@
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
-#' @details It produces a report for form 1 of the Mother & Baby methodology
+#' @details It produces a report for different forms of the Mother & Baby methodology
 #' implemented by CIP.
 #' @return It returns automatic reports for the different forms on a PVS book.
 #' @examples

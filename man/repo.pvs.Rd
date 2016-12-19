@@ -28,7 +28,7 @@ It returns automatic reports for the different forms on a PVS book.
 Produce standard reports for PVS data
 }
 \details{
-It produces a report for form 1 of the Mother & Baby methodology
+It produces a report for different forms of the Mother & Baby methodology
 implemented by CIP.
 }
 \examples{
