@@ -67,3 +67,12 @@ NULL
 #' @format A data frame with 6 columns and 18 rows.
 #' @source International Potato Center, potato data.
 NULL
+#' @name pvssg
+#' @title PVS summary global
+#' @docType data
+#' @aliases pvssg
+#' @description This data set has summaries (means, standard deviations) for several traits.
+#' @usage pvssg
+#' @format A data frame with 163 columns and 6 rows.
+#' @source International Potato Center, potato data.
+NULL
