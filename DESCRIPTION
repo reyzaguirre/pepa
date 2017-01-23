@@ -20,7 +20,9 @@ Imports:
     rmarkdown,
     rprojroot,
     tidyr,
-    yaml
+    yaml,
+    magrittr,
+    purrr
 License: MIT + file LICENSE
 Copyright: International Potato Center (2015)
 LazyData: true
