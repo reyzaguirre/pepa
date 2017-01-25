@@ -125,9 +125,11 @@ Votes are recorded for men and women.
 # 2. Selection criteria at flowering
 
 `r if (nrow(flow) == 0) {"There were no data for selection criteria at flowering."}`
+`r if (all(is.na(flow$Criteria))) {"There were no data for selection criteria at flowering."}`
+
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-if (nrow(flow) > 0){
+if (nrow(flow) > 0 && !all(is.na(flow$Criteria)) ){
   ggplot(flow, aes(x = group, y = value, fill = Criteria)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") +
     labs(title = "Voting for selection criteria of new varieties at flowering stage",
@@ -137,10 +139,13 @@ if (nrow(flow) > 0){
 }
 ```
 
-`r if (nrow(flow) > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
+`r if (nrow(flow) > 0  && !all(is.na(flow$Criteria)) ) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
+
+
+
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-if (nrow(flow) > 0) {
+if (nrow(flow) > 0  && !all(is.na(flow$Criteria)) ) {
   ggplot(flowp, aes(x = group, y = value, fill = Criteria)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
     labs(title = "Voting for selection criteria of new varieties at flowering stage",
@@ -154,9 +159,11 @@ if (nrow(flow) > 0) {
 # 3. Selection criteria at harvest
 
 `r if (nrow(harv) == 0) {"There were no data for selection criteria at harvest."}`
+`r if (all(is.na(harv$Criteria))) {"There were no data for selection criteria at flowering."}`
+
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-if (nrow(harv) > 0) {
+if (nrow(harv) > 0   && !all(is.na(harv$Criteria)) ) {
   ggplot(harv, aes(x = group, y = value, fill = Criteria)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
     labs(title = "Voting for selection criteria of new varieties at harvest stage", 
@@ -166,10 +173,10 @@ if (nrow(harv) > 0) {
 }
 ```
 
-`r if (nrow(harv) > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
+`r if (nrow(harv) > 0  && !all(is.na(harv$Criteria)) ) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-if (nrow(harv) > 0) {
+if (nrow(harv) > 0  && !all(is.na(harv$Criteria)) ) {
   ggplot(harvp, aes(x = group, y = value, fill = Criteria)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
     labs(title = "Voting for selection criteria of new varieties at harvest stage",
@@ -183,9 +190,11 @@ if (nrow(harv) > 0) {
 # 4. Selection criteria at post-harvest (storage)
 
 `r if (nrow(stor) == 0) {"There were no data for selection criteria at post-harvest."}`
+`r if (all(is.na(stor$Criteria))) {"There were no data for selection criteria at flowering."}`
+
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-if (nrow(stor) > 0) {
+if (nrow(stor) > 0  && !all(is.na(stor$Criteria)) ) {
   ggplot(stor, aes(x = group, y = value, fill = Criteria)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
     labs(title = "Voting for selection criteria of new varieties at post-harvest stage", 
@@ -195,10 +204,10 @@ if (nrow(stor) > 0) {
 }
 ```
 
-`r if (nrow(stor) > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
+`r if (nrow(stor) > 0  && !all(is.na(stor$Criteria)) ) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-if (nrow(stor) > 0) {
+if (nrow(stor) > 0  && !all(is.na(stor$Criteria)) ) {
   ggplot(storp, aes(x = group, y = value, fill = Criteria)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
     labs(title = "Voting for selection criteria of new varieties at post-harvest stage",

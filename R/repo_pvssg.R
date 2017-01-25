@@ -17,6 +17,8 @@
 #' repo.pvssg(traits, pvssg)
 #' @import ggplot2
 #' @importFrom factoextra fviz_pca
+#' @importFrom magrittr %>%
+#' @importFrom purrr map
 #' @export
 
 repo.pvssg <- function(traits,

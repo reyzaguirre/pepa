@@ -33,17 +33,17 @@ colnames(x)[2:4] <- c("Appe", "Tast", "Text")
 
 ## Count number of men and women
 
-temp <- x[x$Sex == "M", ]
+temp <- x[x$Sex == "M" | x$Sex == "Male", ]
 nm <- nlevels(factor(temp$PanelNo))
-temp <- x[x$Sex == "F", ]
+temp <- x[x$Sex == "F" | x$Sex == "Female", ]
 nw <- nlevels(factor(temp$PanelNo))
 
 ## Format data
 
 xg <- docomp("sum", c("Appe", "Tast", "Text"), "INSTN", data = x)
 x <- docomp("sum", c("Appe", "Tast", "Text"), c("INSTN", "Sex"), data = x)
-xm <- x[x$Sex == "M", ]
-xf <- x[x$Sex == "F", ]
+xm <- x[x$Sex == "M" | x$Sex == "Male", ]
+xf <- x[x$Sex == "F" | x$Sex == "Female", ]
 colnames(xm)[3:5] <- c("Appe-M", "Tast-M", "Text-M")
 colnames(xf)[3:5] <- c("Appe-F", "Tast-F", "Text-F")
 x <- cbind(xm[, c(1, 3:5)], xf[, 3:5])

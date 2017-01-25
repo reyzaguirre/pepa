@@ -32,12 +32,25 @@ traits <- params$traits
 x <- params$x
 rownames(x) <- x[, "INSTN"]
 x <- x[, traits]
+
+# Determ what traits have missing values
+lit <- map(x, anyNA) %>% unlist()
+lgc_lit <-  lit %>% as.vector()
+lgc_val <- any(lgc_lit == TRUE)
+names_trait <- names(lit[lgc_lit])
+msg <- paste(names_trait, collapse = ", ") %>% paste("The next traits have missing values: ",., sep="")
 ```
 
-A principal components analysis is shown to see the associations among the genotypes and some attributes.
+`r if(lgc_val)   {"There are missing values in some traits. For this reason, we could not perform a principal components analysis"}`
+```{r conditional, echo = FALSE, eval=  lgc_val, echo = FALSE}
+cat(msg)
+```
 
-```{r echo = FALSE, fig.height = 6, fig.width = 6}
-princip <- prcomp(x, center = T, scale. = T)
+`r if(!lgc_val) { "A principal components analysis is shown to see the associations among the genotypes and some attributes."} `
+
+
+```{r echo = FALSE, eval= !lgc_val , fig.height = 6, fig.width = 6}
+princip <- prcomp(x, center = T, scale = T)
 summary(princip)
 factoextra::fviz_pca(princip, repel = T,
                      title = "Biplot of genotypes and attributes")
