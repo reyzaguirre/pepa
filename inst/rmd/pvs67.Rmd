@@ -38,21 +38,21 @@ nm <- nlevels(factor(temp$PanelNo))
 temp <- data[data$Sex == "F" | data$Sex == "Female", ]
 nw <- nlevels(factor(temp$PanelNo))
 
-## Format data
+## Aggregate data for principal components
 
-datag <- docomp("sum", c("Appe", "Tast", "Text"), "INSTN", data = data)
-data <- docomp("sum", c("Appe", "Tast", "Text"), c("INSTN", "Sex"), data = data)
-datam <- data[data$Sex == "M" | data$Sex == "Male", ]
-dataf <- data[data$Sex == "F" | data$Sex == "Female", ]
-colnames(datam)[3:5] <- c("Appe-M", "Tast-M", "Text-M")
-colnames(dataf)[3:5] <- c("Appe-F", "Tast-F", "Text-F")
-data <- cbind(datam[, c(1, 3:5)], dataf[, 3:5])
+adg <- docomp("sum", c("Appe", "Tast", "Text"), "INSTN", data = data)
+temp <- docomp("sum", c("Appe", "Tast", "Text"), c("INSTN", "Sex"), data = data)
+adm <- temp[temp$Sex == "M" | temp$Sex == "Male", ]
+adf <- temp[temp$Sex == "F" | temp$Sex == "Female", ]
+colnames(adm)[3:5] <- c("Appe-M", "Tast-M", "Text-M")
+colnames(adf)[3:5] <- c("Appe-F", "Tast-F", "Text-F")
+ads <- cbind(adm[, c(1, 3:5)], adf[, 3:5])
 
-rownames(data) <- data$INST
-rownames(datag) <- datag$INSTN
+rownames(ads) <- ads$INSTN
+rownames(adg) <- adg$INSTN
 
-data <- data[, -1]
-datag <- datag[, -1]
+ads <- ads[, -1]
+adg <- adg[, -1]
 
 ```
 
@@ -87,15 +87,47 @@ For the graphs below, the following abbreviations are used:
 A principal components analysis is shown to see the associations among the genotypes and the attributes, first with all the panelists together and then with panelists opinions differentiated by gender.
 
 ```{r echo = FALSE, fig.height = 6, fig.width = 6}
-princip <- prcomp(datag, center = T, scale. = T)
+princip <- prcomp(adg, center = T, scale. = T)
 summary(princip)
 factoextra::fviz_pca(princip, repel = T,
                      title = "Biplot of genotypes and attributes")
 ```
 
 ```{r echo = FALSE, fig.height = 6, fig.width = 6}
-princip <- prcomp(data, center = T, scale. = T)
+princip <- prcomp(ads, center = T, scale. = T)
 summary(princip)
 factoextra::fviz_pca(princip, repel = T,
                      title = "Biplot of genotypes and attributes by gender")
+```
+
+# 3. Friedman test for genotypes
+
+## 3.1. Analysis for appearance
+
+```{r echo = FALSE}
+ft <- with(data, friedman(PanelNo, INSTN, Appe, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(PanelNo, INSTN, Appe, group = F)) 
+ft$comparison
+```
+
+## 3.2. Analysis for taste
+
+```{r echo = FALSE}
+ft <- with(data, friedman(PanelNo, INSTN, Tast, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(PanelNo, INSTN, Tast, group = F)) 
+ft$comparison
+```
+
+## 3.3. Analysis for texture
+
+```{r echo = FALSE}
+ft <- with(data, friedman(PanelNo, INSTN, Text, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(PanelNo, INSTN, Text, group = F)) 
+ft$comparison
 ```
