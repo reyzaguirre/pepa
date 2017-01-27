@@ -159,7 +159,7 @@ if (nrow(flow) > 0  && !all(is.na(flow$Criteria)) ) {
 # 3. Selection criteria at harvest
 
 `r if (nrow(harv) == 0) {"There were no data for selection criteria at harvest."}`
-`r if (all(is.na(harv$Criteria))) {"There were no data for selection criteria at flowering."}`
+`r if (all(is.na(harv$Criteria))) {"There were no data for selection criteria at harvest."}`
 
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
@@ -190,7 +190,7 @@ if (nrow(harv) > 0  && !all(is.na(harv$Criteria)) ) {
 # 4. Selection criteria at post-harvest (storage)
 
 `r if (nrow(stor) == 0) {"There were no data for selection criteria at post-harvest."}`
-`r if (all(is.na(stor$Criteria))) {"There were no data for selection criteria at flowering."}`
+`r if (all(is.na(stor$Criteria))) {"There were no data for selection criteria at post-harvest."}`
 
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
