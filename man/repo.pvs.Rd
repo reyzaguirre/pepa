@@ -4,11 +4,11 @@
 \alias{repo.pvs}
 \title{Report for PVS}
 \usage{
-repo.pvs(x, form, title = "Automatic report for PVS", subtitle = NULL,
+repo.pvs(data, form, title = "Automatic report for PVS", subtitle = NULL,
   author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
-\item{x}{A data frame with data for a pvs form.}
+\item{data}{A data frame with data for a pvs form.}
 
 \item{form}{Form number.}
 

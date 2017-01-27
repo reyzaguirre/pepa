@@ -4,14 +4,14 @@
 \alias{repo.pvssg}
 \title{Report for PVS - Global summary}
 \usage{
-repo.pvssg(traits, x, title = "Automatic report for PVS",
+repo.pvssg(traits, data, title = "Automatic report for PVS",
   subtitle = "Global summary data", author = "International Potato Center",
   format = c("html", "word", "pdf"))
 }
 \arguments{
 \item{traits}{A list of traits to be included in the report.}
 
-\item{x}{A data frame with data for a pvs global summary form.}
+\item{data}{A data frame with data for a pvs global summary form.}
 
 \item{title}{The title.}
 

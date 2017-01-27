@@ -1,7 +1,7 @@
 #' Report for PVS
 #'
 #' Produce standard reports for PVS data
-#' @param x A data frame with data for a pvs form.
+#' @param data A data frame with data for a pvs form.
 #' @param form Form number.
 #' @param title The title.
 #' @param subtitle The subtitle.
@@ -23,7 +23,7 @@
 #' @importFrom factoextra fviz_pca
 #' @export
 
-repo.pvs <- function(x, form,
+repo.pvs <- function(data, form,
                      title = "Automatic report for PVS",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -76,7 +76,7 @@ repo.pvs <- function(x, form,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(x = x,
+                    params = list(data = data,
                                   form = form,
                                   title = title,
                                   subtitle = subtitle,

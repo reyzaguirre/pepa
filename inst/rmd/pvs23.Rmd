@@ -17,7 +17,7 @@ output:
     toc_depth: 3
     highlight: "tango"
 params:
-  x: "no data"
+  data: "no data"
   form: "no data"
   title: "no data"
   subtitle: "no data"
@@ -33,24 +33,24 @@ if (params$form == 3) stage <- "harvest"
 
 ## Data
 
-x <- params$x
-temp <- x[!is.na(x$MSGLO), ]
+data <- params$data
+temp <- data[!is.na(data$MSGLO), ]
 nrm <- nlevels(factor(temp$REP))
-temp <- x[!is.na(x$BSGLO), ]
+temp <- data[!is.na(data$BSGLO), ]
 nrb <- nlevels(factor(temp$REP))
-x <- docomp("sum", c("MSM", "MSWM", "MSGLO", "BSM", "BSWM", "BSGLO"), "INSTN", data = x)
-x <- tidyr::gather(x, group, value, MSM:BSGLO)
-x[x$group %in% c("MSM", "MSWM", "MSGLO"), "trial"] <- "mother"
-x[x$group %in% c("BSM", "BSWM", "BSGLO"), "trial"] <- "baby"
-x[x$group %in% c("MSM", "BSM"), "group"] <- "Men"
-x[x$group %in% c("MSWM", "BSWM"), "group"] <- "Women"
-x[x$group %in% c("MSGLO", "BSGLO"), "group"] <- "Global"
+ds <- docomp("sum", c("MSM", "MSWM", "MSGLO", "BSM", "BSWM", "BSGLO"), "INSTN", data = data)
+ds <- tidyr::gather(ds, group, value, MSM:BSGLO)
+ds[ds$group %in% c("MSM", "MSWM", "MSGLO"), "trial"] <- "mother"
+ds[ds$group %in% c("BSM", "BSWM", "BSGLO"), "trial"] <- "baby"
+ds[ds$group %in% c("MSM", "BSM"), "group"] <- "Men"
+ds[ds$group %in% c("MSWM", "BSWM"), "group"] <- "Women"
+ds[ds$group %in% c("MSGLO", "BSGLO"), "group"] <- "Global"
 
 ## Split by trial
 
-moth <- x[x$trial == "mother", -4]
-baby <- x[x$trial == "baby", -4]
-both <- docomp("sum", "value", c("INSTN", "group"), data = x)
+moth <- ds[ds$trial == "mother", -4]
+baby <- ds[ds$trial == "baby", -4]
+both <- docomp("sum", "value", c("INSTN", "group"), data = ds)
 
 ## Sort by number of votes
 
@@ -210,4 +210,66 @@ if (nrb > 0) {
     geom_text(aes(label = value), vjust = 1.6, color = "white",
               position = position_dodge(0.9), size = 3)
 }
+```
+
+# 4. Friedman test for genotypes
+
+## 4.1. Men's votes at mother trial
+
+```{r echo = FALSE}
+ft <- with(data, friedman(REP, INSTN, MSM, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(REP, INSTN, MSM, group = F)) 
+ft$comparison
+```
+
+## 4.2. Women's votes at mother trial
+
+```{r echo = FALSE}
+ft <- with(data, friedman(REP, INSTN, MSWM, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(REP, INSTN, MSWM, group = F)) 
+ft$comparison
+```
+
+## 4.3. Total votes at mother trial
+
+```{r echo = FALSE}
+ft <- with(data, friedman(REP, INSTN, MSGLO, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(REP, INSTN, MSGLO, group = F)) 
+ft$comparison
+```
+
+## 4.4. Men's votes at baby trials
+
+```{r echo = FALSE}
+ft <- with(data, friedman(REP, INSTN, BSM, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(REP, INSTN, BSM, group = F)) 
+ft$comparison
+```
+
+## 4.5. Women's votes at baby trials
+
+```{r echo = FALSE}
+ft <- with(data, friedman(REP, INSTN, BSWM, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(REP, INSTN, BSWM, group = F)) 
+ft$comparison
+```
+
+## 4.6. Total votes at baby trials
+
+```{r echo = FALSE}
+ft <- with(data, friedman(REP, INSTN, BSGLO, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(REP, INSTN, BSGLO, group = F)) 
+ft$comparison
 ```

@@ -2,7 +2,7 @@
 #'
 #' Produce a report for PVS data global summary sheet
 #' @param traits A list of traits to be included in the report.
-#' @param x A data frame with data for a pvs global summary form.
+#' @param data A data frame with data for a pvs global summary form.
 #' @param title The title.
 #' @param subtitle The subtitle.
 #' @param author Author.
@@ -22,7 +22,7 @@
 #' @export
 
 repo.pvssg <- function(traits,
-                       x,
+                       data,
                        title = "Automatic report for PVS",
                        subtitle = "Global summary data",
                        author = "International Potato Center",
@@ -38,7 +38,7 @@ repo.pvssg <- function(traits,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                  x = x,
+                                  data = data,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

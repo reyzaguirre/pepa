@@ -17,7 +17,7 @@ output:
     toc_depth: 3
     highlight: "tango"
 params:
-  x: "no data"
+  data: "no data"
   form: "no data"
   title: "no data"
   subtitle: "no data"
@@ -28,23 +28,23 @@ params:
 
 ## Data
 
-x <- params$x
-x <- x[, c("REP","INSTN", "STYPE", "SCORE_MEN","SCORE_WOMEN" ,"SCORE_GLOBAL")]
-colnames(x)[4:6] <- c("Men", "Women", "Global")
-nr <- nlevels(factor(x$REP))
-x <- docomp("sum", c("Men", "Women", "Global"), "INSTN", data = x)
-x <- tidyr::gather(x, group, value, Men:Global)
+data <- params$data
+data <- data[, c("REP","INSTN", "STYPE", "SCORE_MEN","SCORE_WOMEN" ,"SCORE_GLOBAL")]
+colnames(data)[4:6] <- c("Men", "Women", "Global")
+nr <- nlevels(factor(data$REP))
+ds <- docomp("sum", c("Men", "Women", "Global"), "INSTN", data = data)
+ds <- tidyr::gather(ds, group, value, Men:Global)
 
 ## Sort by number of votes
 
-temp <- x[x$group == "Global", c("INSTN", "value")]
+temp <- ds[ds$group == "Global", c("INSTN", "value")]
 orden <- temp$INSTN[sort(temp$value, decreasing = T, index.return = T)$ix]
-x$INSTN <- factor(x$INSTN, levels = orden)
+ds$INSTN <- factor(ds$INSTN, levels = orden)
 
 ## Count number of votes
 
-nvm <- sum(x[x$group == "Men", "value"], na.rm = T)
-nvw <- sum(x[x$group == "Women", "value"], na.rm = T)
+nvm <- sum(ds[ds$group == "Men", "value"], na.rm = T)
+nvw <- sum(ds[ds$group == "Women", "value"], na.rm = T)
 
 ## Count number of voters
 
@@ -53,15 +53,15 @@ nw <- round(nvw / 6 / nr)
 
 ## Compute percentage adjusted by gender
 
-xp <- x[x$group == "Global", ]
-xp$value <- xp$value / (nvm + nvw)
-temp <- x[x$group != "Global", ]
+dsp <- ds[ds$group == "Global", ]
+dsp$value <- dsp$value / (nvm + nvw)
+temp <- ds[ds$group != "Global", ]
 temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvm / 2
 temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvw / 2
 temp <- docomp("sum", "value", "INSTN", data = temp)
 temp$group <- "Global adjusted"
-xp <- rbind(xp, temp)
-xp$value <- round(xp$value * 100, 1)
+dsp <- rbind(dsp, temp)
+dsp$value <- round(dsp$value * 100, 1)
 
 ```
 
@@ -80,7 +80,7 @@ Votes are recorded for men and women.
 The genotypes have been planted following a randomized complete block design with `r nr` blocks. A group of men and women voted independently for the best genotypes at each block, so each men and women voted `r nr` times.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(x, aes(x = group, y = value, fill = INSTN)) +
+ggplot(ds, aes(x = group, y = value, fill = INSTN)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for best genotypes at post-harvest stage",
        x = "Group", y = "Number of votes") +
@@ -91,11 +91,43 @@ ggplot(x, aes(x = group, y = value, fill = INSTN)) +
 Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(xp, aes(x = group, y = value, fill = INSTN)) +
+ggplot(dsp, aes(x = group, y = value, fill = INSTN)) +
   geom_bar(stat = "identity", position = "dodge", color = "black") + 
   labs(title = "Voting for best genotypes at post-harvest stage",
        subtitle = "Percentages unadjusted and adjusted by gender",
        x = "Group", y = "Percentage of votes") +
   geom_text(aes(label = value), vjust = 1.6, color = "white",
              position = position_dodge(0.9), size = 3)
+```
+
+# 3. Friedman test for genotypes
+
+## 3.1. Men's votes
+
+```{r echo = FALSE}
+ft <- with(data, friedman(REP, INSTN, Men, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(REP, INSTN, Men, group = F)) 
+ft$comparison
+```
+
+## 3.2. Women's votes
+
+```{r echo = FALSE}
+ft <- with(data, friedman(REP, INSTN, Women, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(REP, INSTN, Women, group = F)) 
+ft$comparison
+```
+
+## 3.3. Total votes
+
+```{r echo = FALSE}
+ft <- with(data, friedman(REP, INSTN, Global, group = T)) 
+ft$statistics
+ft$groups
+ft <- with(data, friedman(REP, INSTN, Global, group = F)) 
+ft$comparison
 ```
