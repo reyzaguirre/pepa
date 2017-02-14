@@ -22,7 +22,8 @@ Imports:
     tidyr,
     yaml,
     magrittr,
-    purrr
+    purrr,
+    backports
 License: MIT + file LICENSE
 Copyright: International Potato Center (2015)
 LazyData: true
