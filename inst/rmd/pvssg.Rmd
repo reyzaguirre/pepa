@@ -53,6 +53,7 @@ cat(msg)
 ```{r echo = FALSE, eval= !lgc_val , fig.height = 6, fig.width = 6}
 princip <- prcomp(data, center = T, scale = T)
 summary(princip)
+print(princip$x)
 factoextra::fviz_pca(princip, repel = T,
                      title = "Biplot of genotypes and attributes")
 ```
