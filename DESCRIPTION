@@ -23,7 +23,9 @@ Imports:
     yaml,
     magrittr,
     purrr,
-    backports
+    backports,
+    MASS,
+    nlme
 License: MIT + file LICENSE
 Copyright: International Potato Center (2015)
 LazyData: true

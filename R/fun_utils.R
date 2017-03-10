@@ -16,6 +16,7 @@
 #' @param sdtdif standard deviation of difference in BIB
 #' @param vartau matrix var-cov in PBIB
 #' @param console logical, print output
+#' @importFrom stats formula lm na.omit pt ptukey qt qtukey sd vcov AIC BIC anova deviance df.residual
 #' @export
 
 
