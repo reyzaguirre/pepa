@@ -53,4 +53,3 @@ repo.crd(c("trw", "vw", "crw"), "geno", temp)
 \author{
 Raul Eyzaguirre.
 }
-

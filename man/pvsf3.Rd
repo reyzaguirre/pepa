@@ -17,4 +17,3 @@ and global voting (\code{MSGLO}) in the mother plot, and the voting of men
 (\code{BSM}), women (\code{BSWM}), and global voting (\code{BSGLO}) in the baby
 plots for the best clones (\code{INSTN}) at harvest.
 }
-

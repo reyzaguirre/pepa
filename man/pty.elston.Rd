@@ -45,4 +45,3 @@ pty.elston(c("rytha", "bc", "dm", "star", "nocr"), "geno", data = spg)
 \author{
 Raul Eyzaguirre.
 }
-

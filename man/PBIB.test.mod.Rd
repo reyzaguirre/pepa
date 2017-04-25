@@ -36,4 +36,3 @@ using alpha design experiment
 \author{
 Omar Benites
 }
-

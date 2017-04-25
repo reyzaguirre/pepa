@@ -16,4 +16,3 @@ This data set has the voting of men (\code{SCORE_MEN}), women
 (\code{SCORE_WOMEN}), and global voting (\code{SCORE_GLOBAL}) for the best
 clones (\code{INSTN}) at post-harvest with different storage types (\code{STYPE}).
 }
-

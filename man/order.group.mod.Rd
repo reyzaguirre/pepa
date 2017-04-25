@@ -41,4 +41,3 @@ Extesion of the collection of letters and numbers for comparison means.
 \author{
 Omar Benites
 }
-

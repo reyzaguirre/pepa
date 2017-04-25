@@ -5,7 +5,7 @@
 \title{Automatic report for a 2-factor factorial}
 \usage{
 repo.2f(traits, A, B, rep, design, data, maxp = 0.1,
-  title = "Automatic report for a MET with a RCBD", subtitle = NULL,
+  title = "Automatic report for a 2-factor factorial", subtitle = NULL,
   author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
@@ -51,4 +51,3 @@ repo.2f(c("asc.dw", "asc.fw"), "geno", "treat", "rep", "crd", asc)
 \author{
 Raul Eyzaguirre.
 }
-

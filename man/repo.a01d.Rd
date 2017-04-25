@@ -48,4 +48,3 @@ repo.a01d("yield", "geno", "rep", "block", k = 3, alpha01data)
 \author{
 Raul Eyzaguirre.
 }
-

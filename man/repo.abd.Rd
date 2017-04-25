@@ -49,4 +49,3 @@ repo.abd(c("nocr", "trw", "vw"), "geno", "rep", temp)
 \author{
 Raul Eyzaguirre.
 }
-

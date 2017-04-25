@@ -17,4 +17,3 @@ women (\code{SCORE_WOMEN}), and global voting (\code{SCORE_GLOBAL}) for
 the more importan selection criteria (\code{IDENTIFIED_CRITERIA}) on
 different phases (\code{PHASE}).
 }
-

@@ -56,4 +56,3 @@ repo.rcbd(c("trw", "vw", "crw"), "geno", "rep", temp)
 \author{
 Raul Eyzaguirre.
 }
-

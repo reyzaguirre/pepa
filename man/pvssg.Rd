@@ -14,4 +14,3 @@ pvssg
 \description{
 This data set has summaries (means, standard deviations) for several traits.
 }
-

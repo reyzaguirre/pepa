@@ -48,4 +48,3 @@ pty.pesekbaker(c("rytha", "bc", "dm", "star", "nocr"), "geno", "loc", "rep", spg
 \author{
 Raul Eyzaguirre.
 }
-

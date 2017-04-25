@@ -16,4 +16,3 @@ This data set has the scores given by men and women to several clones
 (\code{INSTN}), for attributes \code{APPEARANCE}, \code{TASTE}, and \code{TEXTURE}
 at the baby trials.
 }
-

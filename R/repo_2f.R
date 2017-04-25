@@ -27,7 +27,7 @@
 #' @export
 
 repo.2f <- function(traits, A, B, rep, design, data, maxp = 0.1,
-                     title = "Automatic report for a MET with a RCBD",
+                     title = "Automatic report for a 2-factor factorial",
                      subtitle = NULL,
                      author = "International Potato Center",
                      format = c("html", "word", "pdf")) {

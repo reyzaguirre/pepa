@@ -44,4 +44,3 @@ pty.aovmet("y", "geno", "env", "rep", met8x12)
 \author{
 Raul Eyzaguirre.
 }
-
