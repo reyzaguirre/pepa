@@ -17,12 +17,12 @@
 #' @examples
 #' library(agricolae)
 #' data(LxT)
-#' repo.LxT("yield", "line", "tester", "replication", LxT)
+#' repo.lxt("yield", "line", "tester", "replication", LxT)
 #' @import agricolae
 #' @importFrom utils browseURL
 #' @export
 
-repo.LxT <- function(traits, line, tester, rep, data,
+repo.lxt <- function(traits, line, tester, rep, data,
                      title = "Automatic report for a Line x Tester genetic design",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -31,10 +31,10 @@ repo.LxT <- function(traits, line, tester, rep, data,
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
 
-  fileRmd <- paste(dirfiles, "/rmd/LxT.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rmd/LxT.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/LxT.docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/LxT.pdf", sep = "")
+  fileRmd <- paste(dirfiles, "/rmd/lxt.Rmd", sep = "")
+  fileURL <- paste(dirfiles, "/rmd/lxt.html", sep = "")
+  fileDOCX <- paste(dirfiles, "/rmd/lxt.docx", sep = "")
+  filePDF <- paste(dirfiles, "/rmd/lxt.pdf", sep = "")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,

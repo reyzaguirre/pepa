@@ -45,7 +45,7 @@ This is a Line x Tester genetic design.
 out <- NULL
 
 for (i in 1:length(traits))
-  out <- c(out, knit_expand('child_LxT.Rmd'))
+  out <- c(out, knit_expand('child_lxt.Rmd'))
 ```
 
 `r paste(knit(text = out), collapse = '\n')`
