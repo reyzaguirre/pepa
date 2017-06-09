@@ -3,6 +3,14 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r, echo = FALSE}
-agricolae::lineXtester(data[, rep], data[, line], data[, tester], data[, traits[i]])
+ddd <- data.frame(
+  set = data[, set],
+  male = data[, male],
+  female = data[, female],
+  progeny = data[, progeny],
+  rep = data[, rep],
+  yield = data[, traits[i]]
+)
+agricolae::carolina(model, ddd)
 ```
 

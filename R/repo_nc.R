@@ -1,8 +1,14 @@
 #' Automatic report for a North Carolina genetic design.
 #'
 #' Produces an automatic report for a North Carolina I, II or III genetic design analysis.
+#' @param traits The traits to analize.
+#' @param set The set.
+#' @param male The male.
+#' @param female The female.
+#' @param progeny The progeny (only for Carolina I design).
+#' @param rep The replication.
 #' @param model 1, 2 or 3.
-#' @param data A data frame with the appropiate columns. See details
+#' @param data The data frame.
 #' @param title The title.
 #' @param subtitle The subtitle.
 #' @param author Author.
@@ -16,18 +22,17 @@
 #' library(agricolae)
 #' data(DC)
 #' carolina1 <- DC$carolina1
-#' repo.nc(1, carolina1)
+#' repo.nc("yield", "set", "male", "female", "progenie", "rep", 1, carolina1)
 #' @import agricolae
 #' @importFrom utils browseURL
 #' @export
 
-repo.nc <- function(model = c(1, 2, 3), data,
+repo.nc <- function(traits, set, male, female, progeny, rep, model = NULL, data,
                     title = "Automatic report for a North Carolina genetic design",
                     subtitle = NULL,
                     author = "International Potato Center",
                     format = c("html", "word", "pdf")) {
 
-  model <- match.arg(model)
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
 
@@ -37,7 +42,13 @@ repo.nc <- function(model = c(1, 2, 3), data,
   filePDF <- paste(dirfiles, "/rmd/nc.pdf", sep = "")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(model = model,
+                    params = list(traits = traits,
+                                  set = set,
+                                  male = male,
+                                  female = female,
+                                  progeny = progeny,
+                                  rep = rep,
+                                  model = model,
                                   data = data,
                                   title = title,
                                   subtitle = subtitle,

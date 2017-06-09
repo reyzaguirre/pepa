@@ -4,15 +4,27 @@
 \alias{repo.nc}
 \title{Automatic report for a North Carolina genetic design.}
 \usage{
-repo.nc(model = c(1, 2, 3), data,
+repo.nc(traits, set, male, female, progeny, rep, model = NULL, data,
   title = "Automatic report for a North Carolina genetic design",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"))
 }
 \arguments{
+\item{traits}{The traits to analize.}
+
+\item{set}{The set.}
+
+\item{male}{The male.}
+
+\item{female}{The female.}
+
+\item{progeny}{The progeny (only for Carolina I design).}
+
+\item{rep}{The replication.}
+
 \item{model}{1, 2 or 3.}
 
-\item{data}{A data frame with the appropiate columns. See details}
+\item{data}{The data frame.}
 
 \item{title}{The title.}
 
@@ -37,7 +49,7 @@ genetic design.
 library(agricolae)
 data(DC)
 carolina1 <- DC$carolina1
-repo.nc(1, carolina1)
+repo.nc("yield", "set", "male", "female", "progenie", "rep", 1, carolina1)
 }
 \author{
 Raul Eyzaguirre.
