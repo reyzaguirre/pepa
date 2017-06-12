@@ -23,15 +23,26 @@
 #' data(DC)
 #' carolina1 <- DC$carolina1
 #' repo.nc("yield", "set", "male", "female", "progenie", "rep", 1, carolina1)
+#' carolina2 <- DC$carolina2
+#' carolina2 <- carolina2[carolina2$Loc == 1, c(2, 5, 4, 3, 7, 8)]
+#' repo.nc(c("yield", "tuber"), "set", "male", "female", NULL, "rep", 2, carolina2)
+#' carolina3 <- DC$carolina3
+#' repo.nc("yield", "set", "male", "female", NULL, "rep", 3, carolina3)
 #' @import agricolae
 #' @importFrom utils browseURL
 #' @export
 
-repo.nc <- function(traits, set, male, female, progeny, rep, model = NULL, data,
-                    title = "Automatic report for a North Carolina genetic design",
-                    subtitle = NULL,
+repo.nc <- function(traits, set, male, female, progeny = NULL, rep, model = NULL, data,
+                    title = NULL, subtitle = NULL,
                     author = "International Potato Center",
                     format = c("html", "word", "pdf")) {
+
+  if (model == 1)
+    title <- "Automatic report for a North Carolina I genetic design"
+  if (model == 2)
+    title <- "Automatic report for a North Carolina II genetic design"
+  if (model == 3)
+    title <- "Automatic report for a North Carolina III genetic design"
 
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
