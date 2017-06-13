@@ -1,0 +1,16 @@
+`r i = {{i}}`
+
+# {{i+1}}. Analysis for trait `r traits[i]`
+
+```{r, echo = FALSE}
+lc <- check.2f(traits[i], geno, env, rep, data)
+```
+
+`r if (lc$c1 == 0) {"The table below shows the frequencies of valid data for each genotype in each environment. There are some genotypes with zero frequency in some environments. A MET analysis cannot be produce with zero frequencies so you should remove genotypes or environments to proceed."}`
+
+`r if (lc$pmis > maxp) paste("There are too many missing values (", format(lc$pmis * 100, digits = 3), "%). The table below shows the frequencies of valid data for each genotype in each environment. This procedure estimates up to 10%. Remove some genotypes or environments to proceed.", sep = "")`
+
+```{r, echo = FALSE}
+lc$tfreq
+```
+

@@ -63,8 +63,13 @@ In this model we assume that the errors are independent and have a normal distri
 
 ```{r, include = FALSE}
 out <- NULL
-for (i in 1:length(traits))
-  out <- c(out, knit_expand('child_met.Rmd'))
+for (i in 1:length(traits)) {
+  lc <- check.2f(traits[i], geno, env, rep, data)
+  if (lc$c1 == 1 & lc$pmis <= maxp)
+    out <- c(out, knit_expand('child_met.Rmd'))
+  if (lc$c1 == 0 | lc$pmis > maxp)
+    out <- c(out, knit_expand('child_met_fail.Rmd'))
+}
 ```
 
 `r paste(knit(text = out), collapse = '\n')`
