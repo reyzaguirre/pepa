@@ -53,11 +53,7 @@ Funnel shapes for the first plot may suggest heterogeneity of variances while de
 
 ### {{i+1}}.2.2. ANOVA table
 
-`r if (lc$c1 == 0) {"There is at least one combination of factor A and factor B levels without data. Remove the corresponding level of factor A or B to proceed with this analysis."}`
-
 ```{r, echo = FALSE}
-if (lc$c1 == 1) {
-  at <- suppressWarnings(aov.2f(traits[i], A, B, rep, design, data, maxp))
-  at
-}
+at <- suppressWarnings(aov.2f(traits[i], A, B, rep, design, data, maxp))
+at
 ```
