@@ -48,10 +48,10 @@ repo.pvs <- function(data, form,
   }
   if (form == 3) {
     subtitle <- "Best genotypes at harvest"
-    fileRmd <- paste(dirfiles, "/rmd/pvs3.Rmd", sep = "")
-    fileURL <- paste(dirfiles, "/rmd/pvs3.html", sep = "")
-    fileDOCX <- paste(dirfiles, "/rmd/pvs3.docx", sep = "")
-    filePDF <- paste(dirfiles, "/rmd/pvs3.pdf", sep = "")
+    fileRmd <- paste(dirfiles, "/rmd/pvs23.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs23.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs23.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs23.pdf", sep = "")
   }
   if (form == 6) {
     subtitle <- "Organoleptic analysis at mother trial"
@@ -62,10 +62,10 @@ repo.pvs <- function(data, form,
   }
   if (form == 7) {
     subtitle <- "Organoleptic analysis at baby trials"
-    fileRmd <- paste(dirfiles, "/rmd/pvs7.Rmd", sep = "")
-    fileURL <- paste(dirfiles, "/rmd/pvs7.html", sep = "")
-    fileDOCX <- paste(dirfiles, "/rmd/pvs7.docx", sep = "")
-    filePDF <- paste(dirfiles, "/rmd/pvs7.pdf", sep = "")
+    fileRmd <- paste(dirfiles, "/rmd/pvs67.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/pvs67.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/pvs67.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/pvs67.pdf", sep = "")
   }
   if (form == 9) {
     subtitle <- "Best genotypes at post-harvest"
