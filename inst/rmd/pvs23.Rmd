@@ -24,7 +24,7 @@ params:
   author: "no data"
 ---
 
-```{r echo=FALSE}
+```{r echo = FALSE}
 
 ## Form
 
@@ -130,27 +130,32 @@ Votes are recorded for men and women.
 
 # 2. Best genotypes at the mother plot
 
-The genotypes have been planted following a randomized complete block design with `r nrm` blocks. A group of men and women voted independently for the best genotypes at each block, so each men and women voted `r nrm` times.
+`r if (nrm == 0) {"There were no data for the mother plot."}`
+`r if (nrm > 0) paste("The genotypes have been planted following a randomized complete block design with", nrm, "blocks. A group of men and women voted independently for the best genotypes at each block, so each men and women voted", nrm, "times.")`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(moth, aes(x = group, y = value, fill = INSTN)) +
-  geom_bar(stat = "identity", position = "dodge", color = "black") + 
-  labs(title = paste("Voting for best genotypes at", stage, "stage in the mother plot"),
-       x = "Group", y = "Number of votes") +
-  geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3)
+if (nrm > 0) {
+  ggplot(moth, aes(x = group, y = value, fill = INSTN)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the mother plot"),
+         x = "Group", y = "Number of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
 ```
 
-Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample.
+`r if (nrm > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-ggplot(mothp, aes(x = group, y = value, fill = INSTN)) +
-  geom_bar(stat = "identity", position = "dodge", color = "black") + 
-  labs(title = paste("Voting for best genotypes at", stage, "stage in the mother plot"),
-       subtitle = "Percentages unadjusted and adjusted by gender",
-       x = "Group", y = "Percentage of votes") +
-  geom_text(aes(label = value), vjust = 1.6, color = "white",
-             position = position_dodge(0.9), size = 3)
+if (nrm > 0) {
+  ggplot(mothp, aes(x = group, y = value, fill = INSTN)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the mother plot"),
+         subtitle = "Percentages unadjusted and adjusted by gender",
+         x = "Group", y = "Percentage of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
 ```
 
 # 3. Best genotypes at the baby plots
@@ -183,12 +188,15 @@ if (nrb > 0) {
 }
 ```
 
-`r if (nrb > 0) {"# 4. Best genotypes at both, mother and baby plots"}`
+# 4. Best genotypes at both, mother and baby plots
 
-`r if (nrb > 0) {"Here all the votes on the mother and baby plots are pooled together."}`
+`r if (nrm == 0) {"There were no data for the mother plot."}`
+`r if (nrb == 0) {"There were no data for baby plots."}`
+
+`r if (nrb > 0 & nrm > 0) {"Here all the votes on the mother and baby plots are pooled together."}`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-if (nrb > 0) {
+if (nrb > 0 & nrm > 0) {
   ggplot(both, aes(x = group, y = value, fill = INSTN)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
     labs(title = paste("Voting for best genotypes at", stage, "stage in the mother and baby plots"),
@@ -198,10 +206,10 @@ if (nrb > 0) {
 }
 ```
 
-`r if (nrb > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
+`r if (nrb > 0 & nrm > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
-if (nrb > 0) {
+if (nrb > 0 & nrm > 0) {
   ggplot(bothp, aes(x = group, y = value, fill = INSTN)) +
     geom_bar(stat = "identity", position = "dodge", color = "black") + 
     labs(title = paste("Voting for best genotypes at", stage, "stage in the mother and baby plots"),
@@ -212,64 +220,100 @@ if (nrb > 0) {
 }
 ```
 
-# 4. Friedman test for genotypes
+# 5. Friedman test for genotypes
 
-## 4.1. Men's votes at mother trial
-
-```{r echo = FALSE}
-ft <- with(data, friedman(REP, INSTN, MSM, group = T)) 
-ft$statistics
-ft$groups
-ft <- with(data, friedman(REP, INSTN, MSM, group = F)) 
-ft$comparison
-```
-
-## 4.2. Women's votes at mother trial
+## 5.1. Men's votes at mother trial
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(REP, INSTN, MSWM, group = T)) 
-ft$statistics
-ft$groups
-ft <- with(data, friedman(REP, INSTN, MSWM, group = F)) 
-ft$comparison
+check <- st4gi::check.rcbd("MSM", "INSTN", "REP", data)
+if (max(check$tfreq) > 0 & check$c4 == 1) {
+  ft <- with(data, friedman(REP, INSTN, MSM, group = T))
+  ft$statistics
+  ft$groups
+  ft <- with(data, friedman(REP, INSTN, MSM, group = F))
+  ft$comparison  
+}
 ```
 
-## 4.3. Total votes at mother trial
+`r if (max(check$tfreq) == 0) {"There were no data for men on the mother plot."}`
+`r if (max(check$tfreq) > 0 & check$c4 == 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.2. Women's votes at mother trial
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(REP, INSTN, MSGLO, group = T)) 
-ft$statistics
-ft$groups
-ft <- with(data, friedman(REP, INSTN, MSGLO, group = F)) 
-ft$comparison
+check <- st4gi::check.rcbd("MSWM", "INSTN", "REP", data)
+if (max(check$tfreq) > 0 & check$c4 == 1) {
+  ft <- with(data, friedman(REP, INSTN, MSWM, group = T))
+  ft$statistics
+  ft$groups
+  ft <- with(data, friedman(REP, INSTN, MSWM, group = F))
+  ft$comparison
+}
 ```
 
-## 4.4. Men's votes at baby trials
+`r if (max(check$tfreq) == 0) {"There were no data for women on the mother plot."}`
+`r if (max(check$tfreq) > 0 & check$c4 == 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.3. Total votes at mother trial
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(REP, INSTN, BSM, group = T)) 
-ft$statistics
-ft$groups
-ft <- with(data, friedman(REP, INSTN, BSM, group = F)) 
-ft$comparison
+check <- st4gi::check.rcbd("MSGLO", "INSTN", "REP", data)
+if (max(check$tfreq) > 0 & check$c4 == 1) {
+  ft <- with(data, friedman(REP, INSTN, MSGLO, group = T))
+  ft$statistics
+  ft$groups
+  ft <- with(data, friedman(REP, INSTN, MSGLO, group = F))
+  ft$comparison
+}
 ```
 
-## 4.5. Women's votes at baby trials
+`r if (max(check$tfreq) == 0) {"There were no data on the mother plot."}`
+`r if (max(check$tfreq) > 0 & check$c4 == 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.4. Men's votes at baby trials
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(REP, INSTN, BSWM, group = T)) 
-ft$statistics
-ft$groups
-ft <- with(data, friedman(REP, INSTN, BSWM, group = F)) 
-ft$comparison
+check <- st4gi::check.rcbd("BSM", "INSTN", "REP", data)
+if (max(check$tfreq) > 0 & check$c4 == 1) {
+  ft <- with(data, friedman(REP, INSTN, BSM, group = T))
+  ft$statistics
+  ft$groups
+  ft <- with(data, friedman(REP, INSTN, BSM, group = F)) 
+  ft$comparison
+}
 ```
 
-## 4.6. Total votes at baby trials
+`r if (max(check$tfreq) == 0) {"There were no data for men on the baby plots."}`
+`r if (max(check$tfreq) > 0 & check$c4 == 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.5. Women's votes at baby trials
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(REP, INSTN, BSGLO, group = T)) 
-ft$statistics
-ft$groups
-ft <- with(data, friedman(REP, INSTN, BSGLO, group = F)) 
-ft$comparison
+check <- st4gi::check.rcbd("BSWM", "INSTN", "REP", data)
+if (max(check$tfreq) > 0 & check$c4 == 1) {
+  ft <- with(data, friedman(REP, INSTN, BSWM, group = T))
+  ft$statistics
+  ft$groups
+  ft <- with(data, friedman(REP, INSTN, BSWM, group = F))
+  ft$comparison
+}
 ```
+
+`r if (max(check$tfreq) == 0) {"There were no data for women on the baby plots."}`
+`r if (max(check$tfreq) > 0 & check$c4 == 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.6. Total votes at baby trials
+
+```{r echo = FALSE}
+check <- st4gi::check.rcbd("BSGLO", "INSTN", "REP", data)
+if (max(check$tfreq) > 0 & check$c4 == 1) {
+  ft <- with(data, friedman(REP, INSTN, BSGLO, group = T))
+  ft$statistics
+  ft$groups
+  ft <- with(data, friedman(REP, INSTN, BSGLO, group = F))
+  ft$comparison
+}
+```
+
+`r if (max(check$tfreq) == 0) {"There were no data on the baby plots."}`
+`r if (max(check$tfreq) > 0 & check$c4 == 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
