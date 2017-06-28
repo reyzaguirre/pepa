@@ -43,6 +43,31 @@ if(lc$nt.check.1 > 1) lc$check.1
 ```
 `r if(lc$nt.check.1 > 1) {"Checks need at least two replications so these checks have been removed."}`
 
+<!-- # omar code  -->
+
+
+```{r, echo = FALSE}
+nt <- nlevels(as.factor(data[, geno]))
+model_dau <- aov(data[, traits[i]] ~ data[, geno] + data[, rep])
+model_dau$terms[[2]] <- traits[i]
+at <- anova(model_dau)
+rownames(at)[1] <- geno 
+```
+
+## {{i+1}}.1.1 ANOVA
+
+You have fitted a linear model for a Augmented Block Design (ABD). The ANOVA table for your model is:
+
+```{r, echo = FALSE}
+at
+```
+
+<!-- #end omar code -->
+
+
+
+
+
 ## {{i+1}}.2. Adjusted means
 
 ```{r, echo = FALSE}
