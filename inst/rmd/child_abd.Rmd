@@ -48,9 +48,9 @@ if(lc$nt.check.1 > 1) lc$check.1
 
 ```{r, echo = FALSE}
 nt <- nlevels(as.factor(data[, geno]))
-model <- aov(data[, traits[i]] ~ data[, geno] + data[, rep])
-model$terms[[2]] <- traits[i]
-at <- anova(model)
+model_dau <- aov(data[, traits[i]] ~ data[, geno] + data[, rep])
+model_dau$terms[[2]] <- traits[i]
+at <- anova(model_dau)
 rownames(at)[1] <- geno 
 ```
 
