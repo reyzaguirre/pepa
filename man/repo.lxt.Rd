@@ -4,7 +4,7 @@
 \alias{repo.lxt}
 \title{Automatic report for a Line x Tester genetic design.}
 \usage{
-repo.lxt(traits, line, tester, rep, data,
+repo.lxt(traits, lines, testers, rep, data,
   title = "Automatic report for a Line x Tester genetic design",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"))
@@ -12,9 +12,9 @@ repo.lxt(traits, line, tester, rep, data,
 \arguments{
 \item{traits}{The traits to analize.}
 
-\item{line}{The lines.}
+\item{lines}{The lines.}
 
-\item{tester}{The testers.}
+\item{testers}{The testers.}
 
 \item{rep}{The replications.}
 
@@ -39,9 +39,7 @@ Produces an automatic report for a Line x Tester genetic design analysis.
 It fits a linear model to data from a Line x Tester genetic design.
 }
 \examples{
-library(agricolae)
-data(LxT)
-repo.lxt("yield", "line", "tester", "replication", LxT)
+repo.lxt("yield", "line", "tester", "rep", lxt)
 }
 \author{
 Raul Eyzaguirre.

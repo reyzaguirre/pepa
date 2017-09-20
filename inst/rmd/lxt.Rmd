@@ -18,8 +18,8 @@ output:
     toc_depth: 3
 params: 
   traits: "no data"
-  line: "no data"
-  tester: "no data"
+  lines: "no data"
+  testers: "no data"
   rep: "no data"
   data: "no data"
   title: "no data"
@@ -31,15 +31,11 @@ params:
 library(knitr)
 
 traits <- params$traits
-line <- params$line
-tester <- params$tester
+lines <- params$lines
+testers <- params$testers
 rep <- params$rep
 data <- params$data
 ```
-
-# 1. Model specification and data description
-
-This is a Line x Tester genetic design.
 
 ```{r, include = FALSE}
 out <- NULL

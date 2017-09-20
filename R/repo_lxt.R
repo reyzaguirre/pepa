@@ -2,8 +2,8 @@
 #'
 #' Produces an automatic report for a Line x Tester genetic design analysis.
 #' @param traits The traits to analize.
-#' @param line The lines.
-#' @param tester The testers.
+#' @param lines The lines.
+#' @param testers The testers.
 #' @param rep The replications.
 #' @param data The name of the data frame.
 #' @param title The title.
@@ -15,14 +15,11 @@
 #' @details It fits a linear model to data from a Line x Tester genetic design.
 #' @return It returns an ANOVA and related quantities.
 #' @examples
-#' library(agricolae)
-#' data(LxT)
-#' repo.lxt("yield", "line", "tester", "replication", LxT)
-#' @import agricolae
+#' repo.lxt("yield", "line", "tester", "rep", lxt)
 #' @importFrom utils browseURL
 #' @export
 
-repo.lxt <- function(traits, line, tester, rep, data,
+repo.lxt <- function(traits, lines, testers, rep, data,
                      title = "Automatic report for a Line x Tester genetic design",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -38,8 +35,8 @@ repo.lxt <- function(traits, line, tester, rep, data,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                  line = line,
-                                  tester = tester,
+                                  lines = lines,
+                                  testers = testers,
                                   rep = rep,
                                   data = data,
                                   title = title,

@@ -1,8 +1,8 @@
 `r i = {{i}}`
 
-# {{i+1}}. Analysis for trait `r traits[i]`
+# {{i}}. Analysis for trait `r traits[i]`
 
 ```{r, echo = FALSE}
-agricolae::lineXtester(data[, rep], data[, line], data[, tester], data[, traits[i]])
+model <- aov.lxt(traits[i], lines, testers, rep, data)
 ```
 
