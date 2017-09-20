@@ -120,40 +120,65 @@ aov.lxt <- function(trait, lines, testers, rep, data) {
   c1 <- matriz[6, 2] * 100 / matriz[5, 2]
   c2 <- matriz[7, 2] * 100 / matriz[5, 2]
   c3 <- matriz[8, 2] * 100 / matriz[5, 2]
-  cat("ANOVA with parents and crosses", "\n==============================\n")
+
+  # P values
+
+  GCA.lines.p <- round(pt(abs(GCA.lines) / s1, matriz[9, 1], lower.tail = F) * 2, 4)
+  GCA.testers.p <- round(pt(abs(GCA.testers) / s2, matriz[9, 1], lower.tail = F) * 2, 4)
+
+  GCA.le <- t(matrix(c(GCA.lines, GCA.lines.p), nrow = 2, byrow = T))
+  rownames(GCA.le) <- names(GCA.lines)
+  colnames(GCA.le) <- c("Effects", "p-values")
+
+  GCA.te <- t(matrix(c(GCA.testers, GCA.testers.p), nrow = 2, byrow = T))
+  rownames(GCA.te) <- names(GCA.testers)
+  colnames(GCA.te) <- c("Effects", "p-values")
+
+  SCA.p <- round(pt(abs(SCA) / s3, matriz[9, 1], lower.tail = F) * 2, 4)
+
+  cat("ANOVA for parents and crosses",
+    "\n=============================\n")
   matriz1 <- matriz[c(1, 2, 3, 4, 5, 9, 10), ]
   print(matriz1, na.print = "")
-  cat("\nANOVA for line X tester analysis", "\n================================\n")
+  cat("\nANOVA for line x tester",
+      "\n=======================\n")
   matriz1 <- matriz[6:9, ]
   print(matriz1, na.print = "")
-  cat("\nANOVA for line X tester analysis including parents",
-      "\n==================================================\n")
+  cat("\nANOVA for line x tester including parents",
+      "\n=========================================\n")
   print(matriz, na.print = "")
-  cat("\nGCA Effects:", "\n===========")
-  cat("\nLines Effects:\n")
-  print(GCA.lines)
-  cat("\nTesters Effects:\n")
-  print(GCA.testers)
-  cat("\nSCA Effects:", "\n===========\n")
+  cat("\nGCA effects",
+      "\n===========")
+  cat("\nLines:\n")
+  print(GCA.le)
+  cat("\nTesters:\n")
+  print(GCA.te)
+  cat("\nSCA effects",
+      "\n===========\n")
+  cat("\nEffects:\n")
   print(SCA)
-  cat("\nStandard Errors for Combining Ability Effects:", "\n=============================================")
-  cat("\nS.E. (gca for line)   :", s1)
-  cat("\nS.E. (gca for tester) :", s2)
-  cat("\nS.E. (sca effect)     :", s3)
-  cat("\nS.E. (gi - gj)line    :", s4)
-  cat("\nS.E. (gi - gj)tester  :", s5)
-  cat("\nS.E. (sij - skl)tester:", s6, "\n")
-  cat("\nGenetic Components:", "\n==================")
+  cat("\np-values:\n")
+  print(SCA.p)
+  cat("\nStandard errors for combining ability effects",
+      "\n=============================================")
+  cat("\nS.E. (gca for lines)   :", s1)
+  cat("\nS.E. (gca for testers) :", s2)
+  cat("\nS.E. (sca effect)      :", s3)
+  cat("\nS.E. (gi - gj)line     :", s4)
+  cat("\nS.E. (gi - gj)tester   :", s5)
+  cat("\nS.E. (sij - skl)tester :", s6, "\n")
+  cat("\nGenetic components",
+      "\n==================")
   cat("\nCov H.S. (line)   :", cov1)
   cat("\nCov H.S. (tester) :", cov2)
   cat("\nCov H.S. (average):", cov3)
   cat("\nCov F.S. (average):", cov4)
-  cat("\nF = 0, Adittive genetic variance:", var.A0)
-  cat("\nF = 1, Adittive genetic variance:", var.A1)
-  cat("\nF = 0, Variance due to Dominance:", var.D0)
-  cat("\nF = 1, Variance due to Dominance:", var.D1, "\n")
-  cat("\nProportional contribution of lines, testers", "\n and their interactions to total variance",
-      "\n===========================================")
+  cat("\nF = 0, adittive genetic variance:", var.A0)
+  cat("\nF = 1, adittive genetic variance:", var.A1)
+  cat("\nF = 0, variance due to dominance:", var.D0)
+  cat("\nF = 1, variance due to dominance:", var.D1, "\n")
+  cat("\nProportional contributions to total variance",
+      "\n============================================")
   cat("\nContributions of lines  :", c1)
   cat("\nContributions of testers:", c2)
   cat("\nContributions of lxt    :", c3, "\n")
