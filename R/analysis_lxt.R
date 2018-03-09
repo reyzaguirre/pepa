@@ -182,4 +182,8 @@ aov.lxt <- function(trait, lines, testers, rep, data) {
   cat("\nContributions of lines  :", c1)
   cat("\nContributions of testers:", c2)
   cat("\nContributions of lxt    :", c3, "\n")
+
+  # Return
+
+  list(GCA.le = GCA.le)
 }
