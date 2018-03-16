@@ -43,7 +43,7 @@ An alpha (0,1) design is an incomplete block design that is resolvable.
 In a resolvable design the incomplete blocks group together in complete replications.
 }
 \examples{
-repo.a01d("yield", "geno", "rep", "block", k = 3, alpha01data)
+repo.a01d("yield", "geno", "rep", "block", k = 3, a01data)
 }
 \author{
 Raul Eyzaguirre.

@@ -19,7 +19,7 @@
 #' In a resolvable design the incomplete blocks group together in complete replications.
 #' @return It returns an explanation about the alpha (0,1) design fitted model.
 #' @examples
-#' repo.a01d("yield", "geno", "rep", "block", k = 3, alpha01data)
+#' repo.a01d("yield", "geno", "rep", "block", k = 3, a01data)
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
