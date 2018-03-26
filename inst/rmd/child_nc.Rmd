@@ -1,6 +1,6 @@
 `r i = {{i}}`
 
-# {{i+1}}. Analysis for trait `r traits[i]`
+# {{i}}. Analysis for trait `r traits[i]`
 
 ```{r, echo = FALSE}
 if (model == 1) {

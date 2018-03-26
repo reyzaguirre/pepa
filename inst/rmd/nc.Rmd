@@ -43,12 +43,6 @@ model <- params$model
 data <- params$data
 ```
 
-# 1. Model specification and data description
-
-`r if (model == 1) {"This is a North Carolina I genetic design."}`
-`r if (model == 2) {"This is a North Carolina II genetic design."}`
-`r if (model == 3) {"This is a North Carolina III genetic design."}`
-
 ```{r, include = FALSE}
 out <- NULL
 
