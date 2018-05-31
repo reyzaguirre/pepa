@@ -10,7 +10,8 @@
 #' @param author Author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' @param server logical
-#' @param server_file_name file name in the server
+#' @param server_dir_name directory name in the server
+#' @param server_file_name  file name in the server, without extensions
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a CRD and explains the results.
@@ -38,7 +39,8 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
                      author = "International Potato Center",
                      format = c("html", "word", "pdf"),
                      server = FALSE,
-                     server_file_name = "foo"
+                     server_dir_name = "foo",
+                     server_file_name = "foo2"
                      ) {
 
 
@@ -54,18 +56,20 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
     fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
     fileDOCX <- paste(dirfiles, "/rmd/crd.docx", sep = "")
     filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
+
   } else{
 
-    dirfiles <-  server_file_name
+    dirfiles <-  server_dir_name
 
-    fileRmd <-  paste0(dirfiles, "crd.Rmd")#paste(dirfiles, "/rmd/crd.Rmd", sep = "")
+    fileRmd <-  paste0(dirfiles, "crd.Rmd")   #paste(dirfiles, "/rmd/crd.Rmd", sep = "")
+    fileRmd_server_name <-  paste0(dirfiles,  server_file_name, ".Rmd") #r.arias
+
     #fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
-    fileDOCX <- paste0(dirfiles, "crd.docx")  #paste(dirfiles, "/rmd/crd.docx", sep = "")
+    fileDOCX <-  paste0(dirfiles, "crd.docx")
+    fileDOCX_server_name <- paste0(dirfiles, server_file_name , ".docx")  #paste(dirfiles, "/rmd/crd.docx", sep = "")
     #filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
 
   }
-
-
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
@@ -75,6 +79,11 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))
+
+  #Important Note: #this code copy the word file and create a new one with a unique_name.docx.
+  if(server){
+      file.copy(fileDOCX, fileDOCX_server_name, overwrite = TRUE)
+  }
 
   if(!server){
       if(format == "html_document") try(browseURL(fileURL))

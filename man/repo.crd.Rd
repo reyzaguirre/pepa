@@ -8,7 +8,7 @@ repo.crd(traits, geno, data, maxp = 0.1,
   title = "Automatic report for a Completely Randomized Design (CRD)",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
-  server_file_name = "foo")
+  server_dir_name = "foo", server_file_name = "foo2")
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -29,7 +29,9 @@ repo.crd(traits, geno, data, maxp = 0.1,
 
 \item{server}{logical}
 
-\item{server_file_name}{file name in the server
+\item{server_dir_name}{directory name in the server}
+
+\item{server_file_name}{file name in the server, without extensions
 Other options are \code{"word"} and \code{"pdf"}.}
 }
 \value{
