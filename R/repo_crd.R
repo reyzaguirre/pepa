@@ -56,11 +56,11 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
     filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
   } else{
 
-    dirfiles <- server_file_name
+    dirfiles <-  server_file_name
 
     fileRmd <-  file.path(dirfiles, "crd.Rmd")#paste(dirfiles, "/rmd/crd.Rmd", sep = "")
     #fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
-    fileDOCX <- file.path(fdirfiles, "crd.docx")  #paste(dirfiles, "/rmd/crd.docx", sep = "")
+    fileDOCX <- file.path(dirfiles, "crd.docx")  #paste(dirfiles, "/rmd/crd.docx", sep = "")
     #filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
 
   }
