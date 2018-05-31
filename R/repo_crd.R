@@ -46,15 +46,22 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
 
+ server<- server
 
+  if(!server){
 
+    fileRmd <- paste(dirfiles, "/rmd/crd.Rmd", sep = "")
+    fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
+    fileDOCX <- paste(dirfiles, "/rmd/crd.docx", sep = "")
+    filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
+  } else{
 
+    fileRmd <- file.path(fbglobal::get_base_dir(), "crd.Rmd")#paste(dirfiles, "/rmd/crd.Rmd", sep = "")
+    #fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
+    fileDOCX <- file.path(fbglobal::get_base_dir(), "crd.docx")  #paste(dirfiles, "/rmd/crd.docx", sep = "")
+    #filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
 
-  fileRmd <- paste(dirfiles, "/rmd/crd.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/crd.docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
-
+  }
 
 
 
