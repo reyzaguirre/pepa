@@ -10,6 +10,7 @@
 #' @param author Author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' @param server logical
+#' @param server_file_name file name in the server
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a CRD and explains the results.
@@ -36,16 +37,26 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
                      subtitle = NULL,
                      author = "International Potato Center",
                      format = c("html", "word", "pdf"),
-                     server = FALSE
+                     server = FALSE,
+                     server_file_name = "foo"
                      ) {
+
+
 
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
+
+
+
+
 
   fileRmd <- paste(dirfiles, "/rmd/crd.Rmd", sep = "")
   fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
   fileDOCX <- paste(dirfiles, "/rmd/crd.docx", sep = "")
   filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
+
+
+
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
