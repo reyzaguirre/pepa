@@ -9,6 +9,7 @@
 #' @param subtitle The subtitle.
 #' @param author Author.
 #' @param format The output file format for the report, \code{"html"} by default.
+#' @param server logical
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a CRD and explains the results.
@@ -34,7 +35,9 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
                      title = "Automatic report for a Completely Randomized Design (CRD)",
                      subtitle = NULL,
                      author = "International Potato Center",
-                     format = c("html", "word", "pdf")) {
+                     format = c("html", "word", "pdf"),
+                     server = FALSE
+                     ) {
 
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
@@ -53,7 +56,9 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
                                   subtitle = subtitle,
                                   author = author))
 
-  if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(system(paste("open", fileDOCX)))
-  if(format == "pdf_document")  try(system(paste("open", filePDF)))
+  if(server){
+      if(format == "html_document") try(browseURL(fileURL))
+      if(format == "word_document") try(system(paste("open", fileDOCX)))
+      if(format == "pdf_document")  try(system(paste("open", filePDF)))
+  }
 }

@@ -7,7 +7,7 @@
 repo.crd(traits, geno, data, maxp = 0.1,
   title = "Automatic report for a Completely Randomized Design (CRD)",
   subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"))
+  format = c("html", "word", "pdf"), server = FALSE)
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -24,7 +24,9 @@ repo.crd(traits, geno, data, maxp = 0.1,
 
 \item{author}{Author.}
 
-\item{format}{The output file format for the report, \code{"html"} by default.
+\item{format}{The output file format for the report, \code{"html"} by default.}
+
+\item{server}{logical
 Other options are \code{"word"} and \code{"pdf"}.}
 }
 \value{
