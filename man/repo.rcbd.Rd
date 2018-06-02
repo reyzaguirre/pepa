@@ -7,7 +7,8 @@
 repo.rcbd(traits, geno, rep, data, maxp = 0.1,
   title = "Automatic report for a Randomized Complete Block Design (RCBD)",
   subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"))
+  format = c("html", "word", "pdf"), server = FALSE,
+  server_dir_name = "foo", server_file_name = "foo2")
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -28,6 +29,12 @@ repo.rcbd(traits, geno, rep, data, maxp = 0.1,
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
+
+\item{server}{logical}
+
+\item{server_dir_name}{directory name in the server}
+
+\item{server_file_name}{file name in the server, without extensions}
 }
 \value{
 It returns an explanation about the RCBD fitted model.
