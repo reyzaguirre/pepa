@@ -54,8 +54,13 @@ In this model we assume that the errors are independent and have a normal distri
 
 ```{r, include = FALSE}
 out <- NULL
-for (i in 1:length(traits))
-  out <- c(out, knit_expand('child_crd.Rmd'))
+for (i in 1:length(traits)) {
+  lc <- check.crd(traits[i], geno, data)
+  if (lc$c1 == 1 & lc$c2 == 1 & lc$nt > 2)
+    out <- c(out, knit_expand('child_crd.Rmd'))
+  else
+    out <- c(out, knit_expand('child_crd_fail.Rmd'))
+}
 ```
 
 `r paste(knit(text = out), collapse = '\n')`

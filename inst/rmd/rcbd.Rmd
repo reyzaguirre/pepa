@@ -65,7 +65,6 @@ for (i in 1:length(traits)) {
   else
     out <- c(out, knit_expand('child_rcbd_fail.Rmd'))
 }
-
 ```
 
 `r paste(knit(text = out), collapse = '\n')`

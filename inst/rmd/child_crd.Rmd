@@ -3,7 +3,7 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r, echo = FALSE}
-nt <- nlevels(as.factor(data[, geno]))
+lc <- check.crd(traits[i], geno, data)
 model <- aov(data[, traits[i]] ~ data[, geno])
 model$terms[[2]] <- traits[i]
 at <- anova(model)
@@ -44,10 +44,10 @@ if (at[1, 5] < 0.05)
     tapply(data[, traits[i]], data[, geno], mean, na.rm = TRUE)
 ```
 
-`r if(nt < 10) {"It is always good to have some visualization of the data. Because the number of genotypes in your experiment is not so big, we can plot the data for each genotypes:"}`
+`r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of genotypes in your experiment is not so big, we can plot the data for each genotypes:"}`
 
 ```{r, echo = FALSE}
-if (nt < 10) msdplot(traits[i], geno, data, conf = 1)
+if (lc$nt < 10) msdplot(traits[i], geno, data, conf = 1)
 ```
 
 ## {{i+1}}.4. Variance components
