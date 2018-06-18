@@ -225,7 +225,7 @@ if (nrb > 0 & nrm > 0) {
 ## 5.1. Men's votes at mother trial
 
 ```{r echo = FALSE}
-check <- st4gi::check.rcbd("MSM", "INSTN", "REP", data)
+check <- st4gi::ck.rcbd("MSM", "INSTN", "REP", data)
 if (max(check$tfreq) > 0 & check$c4 == 1) {
   ft <- with(data, friedman(REP, INSTN, MSM, group = T))
   ft$statistics
@@ -241,7 +241,7 @@ if (max(check$tfreq) > 0 & check$c4 == 1) {
 ## 5.2. Women's votes at mother trial
 
 ```{r echo = FALSE}
-check <- st4gi::check.rcbd("MSWM", "INSTN", "REP", data)
+check <- st4gi::ck.rcbd("MSWM", "INSTN", "REP", data)
 if (max(check$tfreq) > 0 & check$c4 == 1) {
   ft <- with(data, friedman(REP, INSTN, MSWM, group = T))
   ft$statistics
@@ -257,7 +257,7 @@ if (max(check$tfreq) > 0 & check$c4 == 1) {
 ## 5.3. Total votes at mother trial
 
 ```{r echo = FALSE}
-check <- st4gi::check.rcbd("MSGLO", "INSTN", "REP", data)
+check <- st4gi::ck.rcbd("MSGLO", "INSTN", "REP", data)
 if (max(check$tfreq) > 0 & check$c4 == 1) {
   ft <- with(data, friedman(REP, INSTN, MSGLO, group = T))
   ft$statistics
@@ -273,7 +273,7 @@ if (max(check$tfreq) > 0 & check$c4 == 1) {
 ## 5.4. Men's votes at baby trials
 
 ```{r echo = FALSE}
-check <- st4gi::check.rcbd("BSM", "INSTN", "REP", data)
+check <- st4gi::ck.rcbd("BSM", "INSTN", "REP", data)
 if (max(check$tfreq) > 0 & check$c4 == 1) {
   ft <- with(data, friedman(REP, INSTN, BSM, group = T))
   ft$statistics
@@ -289,7 +289,7 @@ if (max(check$tfreq) > 0 & check$c4 == 1) {
 ## 5.5. Women's votes at baby trials
 
 ```{r echo = FALSE}
-check <- st4gi::check.rcbd("BSWM", "INSTN", "REP", data)
+check <- st4gi::ck.rcbd("BSWM", "INSTN", "REP", data)
 if (max(check$tfreq) > 0 & check$c4 == 1) {
   ft <- with(data, friedman(REP, INSTN, BSWM, group = T))
   ft$statistics
@@ -305,7 +305,7 @@ if (max(check$tfreq) > 0 & check$c4 == 1) {
 ## 5.6. Total votes at baby trials
 
 ```{r echo = FALSE}
-check <- st4gi::check.rcbd("BSGLO", "INSTN", "REP", data)
+check <- st4gi::ck.rcbd("BSGLO", "INSTN", "REP", data)
 if (max(check$tfreq) > 0 & check$c4 == 1) {
   ft <- with(data, friedman(REP, INSTN, BSGLO, group = T))
   ft$statistics

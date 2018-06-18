@@ -3,7 +3,7 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r, echo = FALSE}
-lc <- check.crd(traits[i], geno, data)
+lc <- ck.crd(traits[i], geno, data)
 model <- aov(data[, traits[i]] ~ data[, geno])
 model$terms[[2]] <- traits[i]
 at <- anova(model)

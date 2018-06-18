@@ -34,7 +34,7 @@ geno <- params$geno
 rep <- params$rep
 data <- params$data
 
-lc <- check.abd(traits[1], geno, rep, data)
+lc <- ck.abd(traits[1], geno, rep, data)
 ```
 
 # 1. Model specification and data description
@@ -58,7 +58,7 @@ out <- NULL
 
 for (i in 1:length(traits)) {
   
-  lc <- check.abd(traits[i], geno, rep, data)
+  lc <- ck.abd(traits[i], geno, rep, data)
 
   if (lc$nt.check.2 > 1) {
     out <- c(out, knit_expand('child_abd.Rmd'))

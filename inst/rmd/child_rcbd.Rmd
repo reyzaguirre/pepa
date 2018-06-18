@@ -3,7 +3,7 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r, echo = FALSE}
-lc <- check.rcbd(traits[i], geno, rep, data)
+lc <- ck.rcbd(traits[i], geno, rep, data)
 at <- suppressWarnings(aov.rcbd(traits[i], geno, rep, data, maxp))
 model <- aov(data[, traits[i]] ~ data[, geno] + data[, rep])
 ```

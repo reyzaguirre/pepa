@@ -1,7 +1,7 @@
 `r i = {{i}}`
 
 ```{r, echo = FALSE}
-lc <- check.2f(traits[i], A, B, rep, data)
+lc <- ck.2f(traits[i], A, B, rep, data)
 if (lc$c4 == 0)
   data$est <- mve.2f(traits[i], A, B, rep, design, data, maxp)[, 5] else
     data$est <- data[, traits[i]]
