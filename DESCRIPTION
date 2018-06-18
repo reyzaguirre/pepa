@@ -13,17 +13,10 @@ Depends:
     ggplot2
 Imports:
     agricolae,
-    evaluate,
     factoextra,
-    htmltools,
-    knitr,
     rmarkdown,
-    rprojroot,
-    tidyr,
-    yaml,
     magrittr,
     purrr,
-    backports,
     MASS,
     nlme
 License: MIT + file LICENSE
