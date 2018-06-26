@@ -14,6 +14,9 @@
 #' @param author Author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
+#' @param server logical
+#' @param server_dir_name directory name in the server
+#' @param server_file_name  file name in the server, without extensions
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a 2-factor factorial with a CRD or RCBD for
 #' the selected trait. If data is unbalanced, missing values are estimated up to an
@@ -30,22 +33,49 @@ repo.2f <- function(traits, A, B, rep, design, data, maxp = 0.1,
                      title = "Automatic report for a 2-factor factorial",
                      subtitle = NULL,
                      author = "International Potato Center",
-                     format = c("html", "word", "pdf")) {
+                     format = c("html", "word", "pdf"),
+                     server = FALSE,
+                     server_dir_name = "foo",
+                     server_file_name = "foo2"
+                    ) {
 
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
+  server<- server
+
 
   if (design == "crd") {
-    fileRmd <- paste(dirfiles, "/rmd/2fcrd.Rmd", sep = "")
-    fileURL <- paste(dirfiles, "/rmd/2fcrd.html", sep = "")
-    fileDOCX <- paste(dirfiles, "/rmd/2fcrd.docx", sep = "")
-    filePDF <- paste(dirfiles, "/rmd/2fcrd.pdf", sep = "")
-  }
+
+    if(!server){
+      fileRmd <- paste(dirfiles, "/rmd/2fcrd.Rmd", sep = "")
+      fileURL <- paste(dirfiles, "/rmd/2fcrd.html", sep = "")
+      fileDOCX <- paste(dirfiles, "/rmd/2fcrd.docx", sep = "")
+      filePDF <- paste(dirfiles, "/rmd/2fcrd.pdf", sep = "")
+    } else {
+
+      dirfiles <-  server_dir_name
+      fileRmd <-  paste0(dirfiles, "2fcrd.Rmd")
+      fileRmd_server_name <-  paste0(dirfiles,  server_file_name, ".Rmd") #r.arias
+      fileDOCX <-  paste0(dirfiles, "2fcrd.docx")
+      fileDOCX_server_name <- paste0(dirfiles, server_file_name , ".docx")
+    }
+}
+
+
   if (design == "rcbd") {
-    fileRmd <- paste(dirfiles, "/rmd/2frcbd.Rmd", sep = "")
-    fileURL <- paste(dirfiles, "/rmd/2frcbd.html", sep = "")
-    fileDOCX <- paste(dirfiles, "/rmd/2frcbd.docx", sep = "")
-    filePDF <- paste(dirfiles, "/rmd/2frcbd.pdf", sep = "")
+
+    if(!server){
+      fileRmd <- paste(dirfiles, "/rmd/2frcbd.Rmd", sep = "")
+      fileURL <- paste(dirfiles, "/rmd/2frcbd.html", sep = "")
+      fileDOCX <- paste(dirfiles, "/rmd/2frcbd.docx", sep = "")
+      filePDF <- paste(dirfiles, "/rmd/2frcbd.pdf", sep = "")
+    } else {
+      dirfiles <-  server_dir_name
+      fileRmd <-  paste0(dirfiles, "2frcbd.Rmd")
+      fileRmd_server_name <-  paste0(dirfiles,  server_file_name, ".Rmd") #r.arias
+      fileDOCX <-  paste0(dirfiles, "2frcbd.docx")
+      fileDOCX_server_name <- paste0(dirfiles, server_file_name , ".docx")
+    }
   }
 
   rmarkdown::render(fileRmd, output_format = format,
@@ -60,7 +90,13 @@ repo.2f <- function(traits, A, B, rep, design, data, maxp = 0.1,
                                   subtitle = subtitle,
                                   author = author))
 
-  if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(system(paste("open", fileDOCX)))
-  if(format == "pdf_document")  try(system(paste("open", filePDF)))
+  if(server){
+    file.copy(fileDOCX, fileDOCX_server_name, overwrite = TRUE)
+  }
+
+  if(!server){
+    if(format == "html_document") try(browseURL(fileURL))
+    if(format == "word_document") try(system(paste("open", fileDOCX)))
+    if(format == "pdf_document")  try(system(paste("open", filePDF)))
+  }
 }

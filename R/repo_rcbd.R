@@ -60,6 +60,7 @@ repo.rcbd <- function(traits, geno, rep, data, maxp = 0.1,
       fileURL <- paste(dirfiles, "/rmd/rcbd.html", sep = "")
       fileDOCX <- paste(dirfiles, "/rmd/rcbd.docx", sep = "")
       filePDF <- paste(dirfiles, "/rmd/rcbd.pdf", sep = "")
+
   }  else{
 
       dirfiles <-  server_dir_name

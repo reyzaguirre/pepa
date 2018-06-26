@@ -43,12 +43,9 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
                      server_file_name = "foo2"
                      ) {
 
-
-
   format <- paste(match.arg(format), "_document", sep = "")
   dirfiles <- system.file(package = "pepa")
-
- server<- server
+  server<- server
 
   if(!server){
 
