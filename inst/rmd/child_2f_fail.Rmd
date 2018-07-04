@@ -3,7 +3,7 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r, echo = FALSE}
-lc <- ck.f(traits[i], c(A, B), rep, data)
+lc <- ck.f(traits[i], factors, rep, data)
 ```
 
 `r if (lc$c2 == 0) {"There is only one replication. Analysis is not possible with one replication."}`
