@@ -7,7 +7,8 @@
 repo.crd(traits, geno, data, maxp = 0.1,
   title = "Automatic report for a Completely Randomized Design (CRD)",
   subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"))
+  format = c("html", "word", "pdf"), server = FALSE,
+  server_dir_name = "directory", server_file_name = "filename")
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -26,6 +27,12 @@ repo.crd(traits, geno, data, maxp = 0.1,
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
+
+\item{server}{logical If \code{"FALSE"} works local machines. Otherwise works in server environments}
+
+\item{server_dir_name}{If \code{"server=TRUE"}, directory name in the server.}
+
+\item{server_file_name}{If \code{"server=TRUE"}, file name in the server.}
 }
 \value{
 It returns an explanation about the CRD fitted model.
