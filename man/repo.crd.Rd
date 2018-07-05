@@ -28,11 +28,12 @@ repo.crd(traits, geno, data, maxp = 0.1,
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
 
-\item{server}{logical If \code{"FALSE"} works local machines. Otherwise works in server environments}
+\item{server}{Logical. If \code{"FALSE"} works with local machines.
+Otherwise works in server environments.}
 
-\item{server_dir_name}{If \code{"server=TRUE"}, directory name in the server.}
+\item{server_dir_name}{If \code{"server = TRUE"}, this is the directory name in the server.}
 
-\item{server_file_name}{If \code{"server=TRUE"}, file name in the server.}
+\item{server_file_name}{If \code{"server = TRUE"}, this is the file name in the server.}
 }
 \value{
 It returns an explanation about the CRD fitted model.

@@ -49,7 +49,7 @@ repo.abd <- function(traits, geno, rep, data,
                                   subtitle = subtitle,
                                   author = author))
 
-  if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(shell.exec(fileDOCX))
-  if(format == "pdf_document")  try(shell.exec(filePDF))
+  if (format == "html_document") try(browseURL(fileURL))
+  if (format == "word_document") try(shell.exec(fileDOCX))
+  if (format == "pdf_document") try(shell.exec(filePDF))
 }

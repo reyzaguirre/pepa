@@ -2,9 +2,12 @@
 
 ```{r, echo = FALSE}
 lc <- ck.f(traits[i], factors, rep, data)
-if (lc$c4 == 0)
-  data$est <- mve.2f(traits[i], factors[1], factors[2], rep, design, data, maxp)[, 5] else
+if (lc$c4 == 0) {
+  trait.est <- paste(traits[i], ".est", sep = "")
+  data$est <- mve.f(traits[i], factors, rep, design, data, maxp)[, trait.est]
+  } else {
     data$est <- data[, traits[i]]
+  }
 ```
     
 # {{i+1}}. Analysis for trait `r traits[i]`
@@ -54,6 +57,6 @@ Funnel shapes for the first plot may suggest heterogeneity of variances while de
 ### {{i+1}}.2.2. ANOVA table
 
 ```{r, echo = FALSE}
-at <- suppressWarnings(aov.2f(traits[i], factors[1], factors[2], rep, design, data, maxp))
+at <- suppressWarnings(aov.f(traits[i], factors, rep, design, data, maxp))
 at
 ```
