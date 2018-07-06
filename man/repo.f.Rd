@@ -6,12 +6,14 @@
 \usage{
 repo.f(traits, factors, rep, design, data, maxp = 0.1,
   title = "Automatic report for a factorial experiment", subtitle = NULL,
-  author = "International Potato Center", format = c("html", "word", "pdf"))
+  author = "International Potato Center", format = c("html", "word", "pdf"),
+  server = FALSE, server_dir_name = "directory",
+  server_file_name = "filename")
 }
 \arguments{
 \item{traits}{The traits to analize.}
 
-\item{factors}{The factors (up to 3).}
+\item{factors}{The factors.}
 
 \item{rep}{The replications or blocks.}
 
@@ -29,6 +31,13 @@ repo.f(traits, factors, rep, design, data, maxp = 0.1,
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
+
+\item{server}{Logical. If \code{"FALSE"} works with local machines.
+Otherwise works in server environments.}
+
+\item{server_dir_name}{If \code{"server = TRUE"}, this is the directory name in the server.}
+
+\item{server_file_name}{If \code{"server = TRUE"}, this is the file name in the server.}
 }
 \value{
 It returns an automatic report for the factorial experiment with a CRD or

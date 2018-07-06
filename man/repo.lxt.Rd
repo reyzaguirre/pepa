@@ -7,7 +7,8 @@
 repo.lxt(traits, lines, testers, rep, data,
   title = "Automatic report for a Line x Tester genetic design",
   subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"))
+  format = c("html", "word", "pdf"), server = FALSE,
+  server_dir_name = "directory", server_file_name = "filename")
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -28,6 +29,13 @@ repo.lxt(traits, lines, testers, rep, data,
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
+
+\item{server}{Logical. If \code{"FALSE"} works with local machines.
+Otherwise works in server environments.}
+
+\item{server_dir_name}{If \code{"server = TRUE"}, this is the directory name in the server.}
+
+\item{server_file_name}{If \code{"server = TRUE"}, this is the file name in the server.}
 }
 \value{
 It returns an ANOVA and related quantities.

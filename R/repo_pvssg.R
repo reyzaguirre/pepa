@@ -8,6 +8,10 @@
 #' @param author Author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
+#' @param server Logical. If \code{"FALSE"} works with local machines.
+#' Otherwise works in server environments.
+#' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
+#' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
 #' @author Raul Eyzaguirre.
 #' @details It produces a report for global summary sheet of the Mother & Baby methodology
 #' implemented by CIP.
@@ -26,15 +30,33 @@ repo.pvssg <- function(traits,
                        title = "Automatic report for PVS",
                        subtitle = "Global summary data",
                        author = "International Potato Center",
-                       format = c("html", "word", "pdf")) {
+                       format = c("html", "word", "pdf"),
+                       server = FALSE,
+                       server_dir_name = "directory",
+                       server_file_name = "filename") {
 
-  format <- paste(match.arg(format), "_document", sep = "")
+  format <- paste0(match.arg(format), "_document")
   dirfiles <- system.file(package = "pepa")
 
-  fileRmd <- paste(dirfiles, "/rmd/pvssg.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rmd/pvssg.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/pvssg.docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/pvssg.pdf", sep = "")
+  if (!server) {
+
+    fileRmd <- paste0(dirfiles, "/rmd/pvssg.Rmd")
+    fileURL <- paste0(dirfiles, "/rmd/pvssg.html")
+    fileDOCX <- paste0(dirfiles, "/rmd/pvssg.docx")
+    filePDF <- paste0(dirfiles, "/rmd/pvssg.pdf")
+
+  } else {
+
+    dirfiles <- server_dir_name
+
+    # Only Markdown and Word files
+
+    fileRmd <- paste0(dirfiles, "pvssg.Rmd")
+    fileRmd_server_name <- paste0(dirfiles, server_file_name, ".Rmd")
+    fileDOCX <- paste0(dirfiles, "pvssg.docx")
+    fileDOCX_server_name <- paste0(dirfiles, server_file_name, ".docx")
+
+  }
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
@@ -43,7 +65,17 @@ repo.pvssg <- function(traits,
                                   subtitle = subtitle,
                                   author = author))
 
-  if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(system(paste("open", fileDOCX)))
-  if(format == "pdf_document")  try(system(paste("open", filePDF)))
+  if (!server) {
+
+    if (format == "html_document") try(browseURL(fileURL))
+    if (format == "word_document") try(system(paste("open", fileDOCX)))
+    if (format == "pdf_document") try(system(paste("open", filePDF)))
+
+  } else {
+
+    file.copy(fileDOCX, fileDOCX_server_name, overwrite = TRUE)
+
+  }
+
 }
+

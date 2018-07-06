@@ -14,6 +14,10 @@
 #' @param author Author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
+#' @param server Logical. If \code{"FALSE"} works with local machines.
+#' Otherwise works in server environments.
+#' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
+#' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
 #' @author Raul Eyzaguirre.
 #' @details It fits a linear model to data from a North Carolina I, II or III
 #' genetic design.
@@ -35,7 +39,10 @@
 repo.nc <- function(traits, set, male, female, progeny = NULL, rep, model = NULL, data,
                     title = NULL, subtitle = NULL,
                     author = "International Potato Center",
-                    format = c("html", "word", "pdf")) {
+                    format = c("html", "word", "pdf"),
+                    server = FALSE,
+                    server_dir_name = "directory",
+                    server_file_name = "filename") {
 
   if (model == 1)
     title <- "Automatic report for a North Carolina I genetic design"
@@ -44,13 +51,28 @@ repo.nc <- function(traits, set, male, female, progeny = NULL, rep, model = NULL
   if (model == 3)
     title <- "Automatic report for a North Carolina III genetic design"
 
-  format <- paste(match.arg(format), "_document", sep = "")
+  format <- paste0(match.arg(format), "_document")
   dirfiles <- system.file(package = "pepa")
 
-  fileRmd <- paste(dirfiles, "/rmd/nc.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rmd/nc.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/nc.docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/nc.pdf", sep = "")
+  if (!server) {
+
+    fileRmd <- paste0(dirfiles, "/rmd/nc.Rmd")
+    fileURL <- paste0(dirfiles, "/rmd/nc.html")
+    fileDOCX <- paste0(dirfiles, "/rmd/nc.docx")
+    filePDF <- paste0(dirfiles, "/rmd/nc.pdf")
+
+  } else {
+
+    dirfiles <- server_dir_name
+
+    # Only Markdown and Word files
+
+    fileRmd <- paste0(dirfiles, "nc.Rmd")
+    fileRmd_server_name <- paste0(dirfiles, server_file_name, ".Rmd")
+    fileDOCX <- paste0(dirfiles, "nc.docx")
+    fileDOCX_server_name <- paste0(dirfiles, server_file_name, ".docx")
+
+  }
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
@@ -65,7 +87,16 @@ repo.nc <- function(traits, set, male, female, progeny = NULL, rep, model = NULL
                                   subtitle = subtitle,
                                   author = author))
 
-  if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(shell.exec(fileDOCX))
-  if(format == "pdf_document")  try(shell.exec(filePDF))
+  if (!server) {
+
+    if (format == "html_document") try(browseURL(fileURL))
+    if (format == "word_document") try(system(paste("open", fileDOCX)))
+    if (format == "pdf_document") try(system(paste("open", filePDF)))
+
+  } else {
+
+    file.copy(fileDOCX, fileDOCX_server_name, overwrite = TRUE)
+
+  }
+
 }

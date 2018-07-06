@@ -43,27 +43,26 @@ repo.crd <- function(traits, geno, data, maxp = 0.1,
                      server_dir_name = "directory",
                      server_file_name = "filename") {
 
-  format <- paste(match.arg(format), "_document", sep = "")
+  format <- paste0(match.arg(format), "_document")
   dirfiles <- system.file(package = "pepa")
-  server <- server
 
   if (!server) {
 
-    fileRmd <- paste(dirfiles, "/rmd/crd.Rmd", sep = "")
-    fileURL <- paste(dirfiles, "/rmd/crd.html", sep = "")
-    fileDOCX <- paste(dirfiles, "/rmd/crd.docx", sep = "")
-    filePDF <- paste(dirfiles, "/rmd/crd.pdf", sep = "")
+    fileRmd <- paste0(dirfiles, "/rmd/crd.Rmd")
+    fileURL <- paste0(dirfiles, "/rmd/crd.html")
+    fileDOCX <- paste0(dirfiles, "/rmd/crd.docx")
+    filePDF <- paste0(dirfiles, "/rmd/crd.pdf")
 
   } else {
 
     dirfiles <- server_dir_name
 
-    # Markdown and Word files
+    # Only Markdown and Word files
 
-    fileRmd <- paste0(dirfiles, "crd.Rmd") # paste(dirfiles, "/rmd/crd.Rmd", sep = "")
-    fileRmd_server_name <- paste0(dirfiles, server_file_name, ".Rmd") # r.arias
+    fileRmd <- paste0(dirfiles, "crd.Rmd")
+    fileRmd_server_name <- paste0(dirfiles, server_file_name, ".Rmd")
     fileDOCX <- paste0(dirfiles, "crd.docx")
-    fileDOCX_server_name <- paste0(dirfiles, server_file_name, ".docx") # paste(dirfiles, "/rmd/crd.docx", sep = "")
+    fileDOCX_server_name <- paste0(dirfiles, server_file_name, ".docx")
 
   }
 

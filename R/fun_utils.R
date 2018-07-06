@@ -1,4 +1,4 @@
-#order.group2: funcion que genera las letras
+# order.group2: funcion que genera las letras
 
 #' A modified version of order.group of agricolae package
 #' @description Extesion of the collection of letters and numbers for comparison means.
@@ -22,8 +22,7 @@
 
 order.group.mod <- function (trt, means, N, MSerror, Tprob, std.err, parameter = 1,
             snk = 0, DFerror = NULL, alpha = NULL, sdtdif = NULL, vartau = NULL,
-            console)
-  {
+            console) {
     replications <- N
     n <- length(means)
     z <- data.frame(trt, means, N = N, std.err, replications)
@@ -159,7 +158,6 @@ order.group.mod <- function (trt, means, N, MSerror, Tprob, std.err, parameter =
   }
 
 
-
 #' A modified version of Analysis of the Partially Balanced Incomplete Block Design
 #' @description This modified version of PBIB.test (agricolae pkg) aims to analyze alpha design experiment, in case, it
 #' surpass 50 treatments.
@@ -177,9 +175,10 @@ order.group.mod <- function (trt, means, N, MSerror, Tprob, std.err, parameter =
 #' @param group logical, groups
 #' @export
 
-PBIB.test.mod <- function (block, trt, replication, y, k, method = c("REML", "ML",
-                                                                  "VC"), test = c("lsd", "tukey"), alpha = 0.05, console = FALSE, group = TRUE)
-{
+PBIB.test.mod <- function (block, trt, replication, y, k,
+                           method = c("REML", "ML", "VC"),
+                           test = c("lsd", "tukey"),
+                           alpha = 0.05, console = FALSE, group = TRUE) {
   test <- match.arg(test)
   if (test == "lsd")
     snk = 3
@@ -431,16 +430,3 @@ PBIB.test.mod <- function (block, trt, replication, y, k, method = c("REML", "ML
                  means = means, groups = groups, vartau = vartau)
   invisible(output)
 }
-
-
-# #
-# fp <-"SPAgronomic052016_CIPSRM-1.xlsx"
-# library(agricolae)
-# fp <- file.choose()
-# datos <- readxl::read_excel(fp,"Fieldbook")
-# datos <- as.data.frame(datos)
-# model <-PBIB.test2(datos[, "BLOCK"], datos[, "INSTN"], datos[, "REP"], datos[,"AVINDIA1"], 4)
-# #
-#
-# #
-#

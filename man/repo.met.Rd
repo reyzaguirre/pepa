@@ -6,7 +6,9 @@
 \usage{
 repo.met(traits, geno, env, rep, data, maxp = 0.1,
   title = "Automatic report for a MET with a RCBD", subtitle = NULL,
-  author = "International Potato Center", format = c("html", "word", "pdf"))
+  author = "International Potato Center", format = c("html", "word", "pdf"),
+  server = FALSE, server_dir_name = "directory",
+  server_file_name = "filename")
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -29,6 +31,13 @@ repo.met(traits, geno, env, rep, data, maxp = 0.1,
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
+
+\item{server}{Logical. If \code{"FALSE"} works with local machines.
+Otherwise works in server environments.}
+
+\item{server_dir_name}{If \code{"server = TRUE"}, this is the directory name in the server.}
+
+\item{server_file_name}{If \code{"server = TRUE"}, this is the file name in the server.}
 }
 \value{
 It returns an automatic report about the MET with a RCBD fitted model.
