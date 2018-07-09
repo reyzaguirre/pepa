@@ -41,10 +41,18 @@ repo.f <- function(traits, factors, rep, design, data, maxp = 0.1,
   format <- paste0(match.arg(format), "_document")
   dirfiles <- system.file(package = "pepa")
 
-  if (design == "crd")
+  # Number of factors
+
+  nf <- length(factors)
+
+  # Select names for files
+
+  if (design == "crd" & nf == 2)
     fn <- "2fcrd"
-  if (design == "rcbd")
+  if (design == "rcbd" & nf == 2)
     fn <- "2frcbd"
+  if (nf > 2)
+    fn <- "factorial"
 
   if (!server) {
 

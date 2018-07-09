@@ -38,28 +38,36 @@ design <- params$design
 data <- params$data
 maxp <- params$maxp
 
-data[, factors[1]] <- as.character(data[, factors[1]])
-data[, factors[2]] <- as.character(data[, factors[2]])
+# Compute checks with one trait
+
+lc <- ck.f(traits[1], factors, rep, data)
+
+# Texts for levels
+
+text.levels <- lc$nl[1]
+for (i in 2:(lc$nf - 1))
+  text.levels <- paste0(text.levels, ', ', lc$nl[i])
+text.levels <- paste0(text.levels, ', and ' lc$nl[lc$nf])
+
+# Text for design
+
+if (design == 'crd')
+  text.design <- 'completely randomized design'
+if (design == 'rcbd')
+  text.design <- 'randomized complete block design'
+  
+# Everything as character
+
+for (i in 1:nf) 
+  data[, factors[i]] <- as.character(data[, factors[i]])
 data[, rep] <- as.character(data[, rep])
 ```
 
 # 1. Model specification and data description
 
-The data frame has two factors with `r nlevels(as.factor(data[, factors[1]]))` and `r nlevels(as.factor(data[, factors[2]]))` levels. The experimental design is a randomized complete block design with `r nlevels(as.factor(data[, rep]))` blocks. The statistical model is
-$$
-y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \gamma_k + \epsilon_{ijk}
-$$
-where
+The data frame has data for a full factorial with `r lc$nf` factors with `r text.levels` levels. The experimental design is a `r text.design` with `r nlevels(as.factor(data[, rep]))` replications. 
 
-* $y_{ijk}$ is the observed response with level $i$ of factor A, level $j$ of factor B, and block $k$.
-* $\mu$ is the mean response over all levels of factor A, factor B, and blocks.
-* $\alpha_i$ is the effect for level $i$ of factor A.
-* $\beta_j$ is the effect for level $j$ of factor B.
-* $(\alpha\beta)_{ij}$ is the interaction effect between level $i$ of factor A and level $j$ of factor B.
-* $\gamma_k$ is the effect of block $k$.
-* $\epsilon_{ijk}$ is the error term.
-
-In this model we assume that the errors are independent and have a normal distribution with common variance, that is, $\epsilon_{ijk} \sim N(0,\sigma_{\epsilon}^2)$.
+In this model we assume that the errors are independent and have a normal distribution with common variance.
 
 ```{r, include = FALSE}
 out <- NULL
