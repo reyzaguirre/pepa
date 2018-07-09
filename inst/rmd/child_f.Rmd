@@ -21,8 +21,9 @@ if (lc$c4 == 0) {
 ### {{i+1}}.1.1. Means by individual factor levels
 
 ```{r, echo = FALSE}
-for (j in 1:lc$nf)
-  tapply(data$est, data[, factors[j]], mean)
+for (j in 1:nf) {
+  print(tapply(data$est, data[, factors[j]], mean))
+}
 ```
 
 ### {{i+1}}.1.2. Means by factor levels combinations
