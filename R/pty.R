@@ -19,30 +19,30 @@
 pty <- function(x, author = "International Potato Center",
                 format = c("html", "word", "pdf")) {
 
-  format <- paste(match.arg(format), "_document", sep = "")
+  format <- paste0(match.arg(format), "_document")
   classlist <- c("data.frame", "numeric", "aov", "lm")
   dirfiles <- system.file(package = "pepa")
 
   if (class(x) %in% classlist == FALSE) {
-    fileRmd <- paste(dirfiles, "/rmd/na.Rmd", sep = "")  # Not available yet
+    fileRmd <- paste0(dirfiles, "/rmd/na.Rmd")  # Not available yet
     output <- "na"
   }
   if (class(x) == "data.frame") {
-    fileRmd <- paste(dirfiles, "/rmd/df.Rmd", sep = "")  # for data.frames
+    fileRmd <- paste0(dirfiles, "/rmd/df.Rmd")  # for data.frames
     output <- "df"
   }
   if (class(x) == "numeric") {
-    fileRmd <- paste(dirfiles, "/rmd/nt.Rmd", sep = "")  # for numeric traits
+    fileRmd <- paste0(dirfiles, "/rmd/nt.Rmd")  # for numeric traits
     output <- "nt"
   }
   if (sum(class(x) %in% c("aov", "lm")) > 0) {
-    fileRmd <- paste(dirfiles, "/rmd/aov.Rmd", sep = "") # for linear models with aov or lm
+    fileRmd <- paste0(dirfiles, "/rmd/aov.Rmd") # for linear models with aov or lm
     output <- "aov"
   }
 
-  fileURL <- paste(dirfiles, "/rmd/", output, ".html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/", output, ".docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/", output, ".pdf", sep = "")
+  fileURL <- paste0(dirfiles, "/rmd/", output, ".html")
+  fileDOCX <- paste0(dirfiles, "/rmd/", output, ".docx")
+  filePDF <- paste0(dirfiles, "/rmd/", output, ".pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(x = x, author = author))

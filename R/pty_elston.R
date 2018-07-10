@@ -27,13 +27,13 @@ pty.elston <- function(traits, geno, env = NULL, rep = NULL, data,
                        author = "International Potato Center",
                        format = c("html", "word", "pdf")) {
 
-  format <- paste(match.arg(format), "_document", sep = "")
+  format <- paste0(match.arg(format), "_document")
   dirfiles <- system.file(package = "pepa")
 
-  fileRmd <- paste(dirfiles, "/rmd/elston.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rmd/elston.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/elston.docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/elston.pdf", sep = "")
+  fileRmd <- paste0(dirfiles, "/rmd/elston.Rmd")
+  fileURL <- paste0(dirfiles, "/rmd/elston.html")
+  fileDOCX <- paste0(dirfiles, "/rmd/elston.docx")
+  filePDF <- paste0(dirfiles, "/rmd/elston.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,

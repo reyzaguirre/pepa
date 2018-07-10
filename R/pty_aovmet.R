@@ -27,13 +27,13 @@ pty.aovmet <- function(trait, geno, env, rep, data, maxp = 0.1,
                        author = "International Potato Center",
                        format = c("html", "word", "pdf")) {
 
-  format <- paste(match.arg(format), "_document", sep = "")
+  format <- paste0(match.arg(format), "_document")
   dirfiles <- system.file(package = "pepa")
 
-  fileRmd <- paste(dirfiles, "/rmd/aovmet.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rmd/aovmet.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/aovmet.docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/aovmet.pdf", sep = "")
+  fileRmd <- paste0(dirfiles, "/rmd/aovmet.Rmd")
+  fileURL <- paste0(dirfiles, "/rmd/aovmet.html")
+  fileDOCX <- paste0(dirfiles, "/rmd/aovmet.docx")
+  filePDF <- paste0(dirfiles, "/rmd/aovmet.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(trait = trait,

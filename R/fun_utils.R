@@ -79,15 +79,15 @@ order.group.mod <- function (trt, means, N, MSerror, Tprob, std.err, parameter =
         s <- abs(w[i, 2] - w[j, 2]) <= minimo
         if (s) {
           if (lastC(M[i]) != letras[k])
-            M[i] <- paste(M[i], letras[k], sep = "")
+            M[i] <- paste0(M[i], letras[k])
         }
         else {
           k <- k + 1
           cambio <- i
           cambio1 <- 0
           ja <- j
-          for (jj in cambio:n) M[jj] <- paste(M[jj], sep = "")
-          M[cambio] <- paste(M[cambio], letras[k], sep = "")
+          for (jj in cambio:n) M[jj] <- paste0(M[jj])
+          M[cambio] <- paste0(M[cambio], letras[k])
           for (v in ja:cambio) {
             nx <- abs(v - cambio) + 1
             if (nx == 1)
@@ -222,9 +222,8 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
   CMerror <- as.numeric(deviance(model)/glerror)
   Mean <- mean(y, na.rm = TRUE)
   if (method == "VC") {
-    rownames(ANOVA) <- c(name.r, paste(name.t, ".unadj",
-                                       sep = ""), paste(name.b, "/", name.r, sep = ""),
-                         "Residual")
+    rownames(ANOVA) <- c(name.r, paste0(name.t, ".unadj"),
+                         paste0(name.b, "/", name.r), "Residual")
   }
   if (method == "REML" | method == "ML") {
     if (requireNamespace("nlme", quietly = TRUE)) {
@@ -250,8 +249,7 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
       CMerror <- as.numeric(VarRand[3, 1])
       VarRand <- data.frame(VarRand)
       names(VarRand) <- "Variance"
-      rownames(VarRand) <- c(paste(name.b, ":", name.r,
-                                   sep = ""), name.r, "Residual")
+      rownames(VarRand) <- c(paste0(name.b, ":", name.r), name.r, "Residual")
       ANOVA <- ANOVA[c(2, 4), ]
       ANOVA[2, 3] <- CMerror
       ANOVA[1, 1] <- Afm[2, 1]
@@ -366,10 +364,8 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
   }
   CV <- sqrt(CMerror) * 100/media
   design <- data.frame(. = c(ntr, k, b/r, r))
-  rownames(design) <- c(name.t, paste(name.b, "size"), paste(name.b,
-                                                             "/", name.r, sep = ""), name.r)
-  E <- (ntr - 1) * (r - 1)/((ntr - 1) * (r - 1) + r * (s -
-                                                         1))
+  rownames(design) <- c(name.t, paste(name.b, "size"), paste0(name.b, "/", name.r), name.r)
+  E <- (ntr - 1) * (r - 1)/((ntr - 1) * (r - 1) + r * (s - 1))
   if (console) {
     print(ANOVA)
     cat("\ncoefficient of variation:", round(CV, 1), "%\n")

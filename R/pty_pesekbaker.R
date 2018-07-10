@@ -28,13 +28,13 @@ pty.pesekbaker <- function(traits, geno, env, rep = NULL, data, means = "single"
                            author = "International Potato Center",
                            format = c("html", "word", "pdf")) {
 
-  format <- paste(match.arg(format), "_document", sep = "")
+  format <- paste0(match.arg(format), "_document")
   dirfiles <- system.file(package = "pepa")
 
-  fileRmd <- paste(dirfiles, "/rmd/pesekbaker.Rmd", sep = "")
-  fileURL <- paste(dirfiles, "/rmd/pesekbaker.html", sep = "")
-  fileDOCX <- paste(dirfiles, "/rmd/pesekbaker.docx", sep = "")
-  filePDF <- paste(dirfiles, "/rmd/pesekbaker.pdf", sep = "")
+  fileRmd <- paste0(dirfiles, "/rmd/pesekbaker.Rmd")
+  fileURL <- paste0(dirfiles, "/rmd/pesekbaker.html")
+  fileDOCX <- paste0(dirfiles, "/rmd/pesekbaker.docx")
+  filePDF <- paste0(dirfiles, "/rmd/pesekbaker.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
