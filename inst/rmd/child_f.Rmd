@@ -3,7 +3,7 @@
 ```{r, echo = FALSE}
 lc <- ck.f(traits[i], factors, rep, data)
 if (lc$c4 == 0) {
-  trait.est <- paste(traits[i], ".est", sep = "")
+  trait.est <- paste0(traits[i], ".est")
   data$est <- mve.f(traits[i], factors, rep, design, data, maxp)[, trait.est]
   } else {
     data$est <- data[, traits[i]]
@@ -14,7 +14,7 @@ if (lc$c4 == 0) {
 
 `r if (lc$c4 == 1) {"There are no missing values for this trait; the design is balanced."}`
 
-`r if (lc$c4 == 0) paste("There are some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated for the descriptive statistics and ANOVA.", sep = "")`
+`r if (lc$c4 == 0) paste0("There are some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated for the descriptive statistics and ANOVA.")`
 
 ## {{i+1}}.1. Descriptive statistics
 
@@ -34,9 +34,9 @@ for (j in 1:nf) {
 lf.expr <- 'list(data[, factors[1]]'
   
 for (j in 2:nf)
-  lf.expr <- paste(lf.expr, ', data[, factors[', j, ']]', sep = "")
+  lf.expr <- paste0(lf.expr, ', data[, factors[', j, ']]')
   
-lf.expr <- paste(lf.expr, ')', sep = "")
+lf.expr <- paste0(lf.expr, ')')
 
 # Compute means over replications
 

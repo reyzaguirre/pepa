@@ -39,7 +39,7 @@ lit <- map(data, anyNA) %>% unlist()
 lgc_lit <- lit %>% as.vector()
 lgc_val <- any(lgc_lit == TRUE)
 names_trait <- names(lit[lgc_lit])
-msg <- paste(names_trait, collapse = ", ") %>% paste("The next traits have missing values: ",., sep = "")
+msg <- paste(names_trait, collapse = ", ") %>% paste0("The next traits have missing values: ", .)
 ```
 
 `r if(lgc_val)   {"There are missing values in some traits. For this reason, we could not perform a principal components analysis"}`

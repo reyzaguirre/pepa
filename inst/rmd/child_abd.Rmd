@@ -29,15 +29,15 @@ model <- agricolae::DAU.test(temp[, rep], temp[, geno], y)
 `r if(lc$nmis.new > 1) paste("There are", lc$nmis.new, "genotypes with missing values. These genotypes have been removed.")`
 `r if(lc$nmis.new > 0) paste("Therefore, there are", lc$nt.new - lc$nmis.new, "genotypes included in the analysis.")`
 
-`r if(lc$nt.check.0 == 1) paste("There is one check without data: ", lc$check.0, ". This check has been removed.", sep = "")`
-`r if(lc$nt.check.0 > 1) paste("There are ", lc$nt.check.0, " checks without data: ", sep = "")`
+`r if(lc$nt.check.0 == 1) paste0("There is one check without data: ", lc$check.0, ". This check has been removed.")`
+`r if(lc$nt.check.0 > 1) paste0("There are ", lc$nt.check.0, " checks without data: ")`
 ```{r, echo = FALSE}
 if(lc$nt.check.0 > 1) lc$check.0
 ```
 `r if(lc$nt.check.0 > 1) {"These checks have been removed."}`
 
-`r if(lc$nt.check.1 == 1) paste("There is one check with data in only one block: ", lc$check.1, ". Checks need at least two replications so this check has been removed.", sep = "")`
-`r if(lc$nt.check.1 > 1) paste("There are ", lc$nt.check.1, " checks with data in only one block: ", sep = "")`
+`r if(lc$nt.check.1 == 1) paste0("There is one check with data in only one block: ", lc$check.1, ". Checks need at least two replications so this check has been removed.")`
+`r if(lc$nt.check.1 > 1) paste0("There are ", lc$nt.check.1, " checks with data in only one block: ")`
 ```{r, echo = FALSE}
 if(lc$nt.check.1 > 1) lc$check.1
 ```
