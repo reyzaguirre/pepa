@@ -51,4 +51,5 @@ pty.pesekbaker <- function(traits, geno, env, rep = NULL, data, means = "single"
   if(format == "html_document") try(browseURL(fileURL))
   if(format == "word_document") try(system(paste("open", fileDOCX)))
   if(format == "pdf_document")  try(system(paste("open", filePDF)))
+
 }

@@ -26,21 +26,21 @@ aov.lxt <- function(trait, lines, testers, rep, data) {
                     testers = data[, testers],
                     rep = data[, rep])
 
-  # Everything as factor
+  # Everything as character
 
-  ddd$lines <- factor(ddd$lines)
-  ddd$testers <- factor(ddd$testers)
-  ddd$rep <- factor(ddd$rep)
+  ddd$lines <- as.character(ddd$lines)
+  ddd$testers <- as.character(ddd$testers)
+  ddd$rep <- as.character(ddd$rep)
 
   # Number of lines, testers and reps
 
-  nl <- nlevels(ddd$lines)
-  nt <- nlevels(ddd$testers)
-  nr <- nlevels(ddd$rep)
+  nl <- length(unique(ddd$lines))
+  nt <- length(unique(ddd$testers))
+  nr <- length(unique(ddd$rep))
 
   # Models
 
-  ddd$treat <- as.factor(paste(ddd$lines, ddd$testers))
+  ddd$treat <- paste(ddd$lines, ddd$testers)
 
   model.1 <- aov(trait ~ rep + treat, data = ddd)
   anova.1 <- as.matrix(anova(model.1))
@@ -186,4 +186,5 @@ aov.lxt <- function(trait, lines, testers, rep, data) {
   # Return
 
   list(GCA.le = GCA.le)
+
 }

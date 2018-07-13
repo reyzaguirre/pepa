@@ -47,4 +47,5 @@ pty.aovmet <- function(trait, geno, env, rep, data, maxp = 0.1,
   if(format == "html_document") try(browseURL(fileURL))
   if(format == "word_document") try(system(paste("open", fileDOCX)))
   if(format == "pdf_document")  try(system(paste("open", filePDF)))
+
 }

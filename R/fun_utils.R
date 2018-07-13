@@ -19,10 +19,10 @@
 #' @importFrom stats formula lm na.omit pt ptukey qt qtukey sd vcov AIC BIC anova deviance df.residual
 #' @export
 
-
 order.group.mod <- function (trt, means, N, MSerror, Tprob, std.err, parameter = 1,
             snk = 0, DFerror = NULL, alpha = NULL, sdtdif = NULL, vartau = NULL,
             console) {
+
     replications <- N
     n <- length(means)
     z <- data.frame(trt, means, N = N, std.err, replications)
@@ -155,6 +155,7 @@ order.group.mod <- function (trt, means, N, MSerror, Tprob, std.err, parameter =
     }
     output <- data.frame(trt, means, M, N = replications, std.err)
     invisible(output)
+
   }
 
 
@@ -179,6 +180,7 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
                            method = c("REML", "ML", "VC"),
                            test = c("lsd", "tukey"),
                            alpha = 0.05, console = FALSE, group = TRUE) {
+
   test <- match.arg(test)
   if (test == "lsd")
     snk = 3
@@ -425,4 +427,5 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
                  statistics = statistics, Fstat = Fstat, comparison = comparison,
                  means = means, groups = groups, vartau = vartau)
   invisible(output)
+
 }
