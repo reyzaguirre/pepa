@@ -6,12 +6,6 @@
 y <- data[, traits[i]]
 n_geno <- length(unique(data[, geno]))
 
-data[, block] <- factor(data[, block])
-data[, geno] <- factor(data[, geno])
-data[, rep] <- factor(data[, rep])
-
-
-
 if(n_geno>=50){
   model <- pepa::PBIB.test.mod(data[, block], data[, geno], data[, rep], y, k, method = "VC")
 } else {

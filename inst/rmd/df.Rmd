@@ -23,5 +23,3 @@ Remember that the table is the standard format for data analysis; it is the kind
 
 * one row for each observation (e.g. a plot, a pot or a plant) and
 * one column for each variable (e.g. a trait like root yield or a factor like genotypes).
-
-Maybe you would like to read [this](https://github.com/reyzaguirre/MoreStats/tree/master/GoodDataPractices).
