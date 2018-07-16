@@ -24,7 +24,7 @@ params:
   author: "no data"
 ---
 
-```{r echo=FALSE}
+```{r echo = FALSE}
 
 ## Data
 
@@ -34,9 +34,9 @@ colnames(data)[2:4] <- c("Appe", "Tast", "Text")
 ## Count number of men and women
 
 temp <- data[data$Sex == "M" | data$Sex == "Male", ]
-nm <- nlevels(factor(temp$PanelNo))
+nm <- length(unique(temp$PanelNo))
 temp <- data[data$Sex == "F" | data$Sex == "Female", ]
-nw <- nlevels(factor(temp$PanelNo))
+nw <- length(unique(temp$PanelNo))
 
 ## Aggregate data for principal components
 
@@ -87,16 +87,16 @@ For the graphs below, the following abbreviations are used:
 A principal components analysis is shown to see the associations among the genotypes and the attributes, first with all the panelists together and then with panelists opinions differentiated by gender.
 
 ```{r echo = FALSE, fig.height = 6, fig.width = 6}
-princip <- prcomp(adg, center = T, scale. = T)
+princip <- prcomp(adg, center = TRUE, scale. = TRUE)
 summary(princip)
-factoextra::fviz_pca(princip, repel = T,
+factoextra::fviz_pca(princip, repel = TRUE,
                      title = "Biplot of genotypes and attributes")
 ```
 
 ```{r echo = FALSE, fig.height = 6, fig.width = 6}
-princip <- prcomp(ads, center = T, scale. = T)
+princip <- prcomp(ads, center = TRUE, scale. = TRUE)
 summary(princip)
-factoextra::fviz_pca(princip, repel = T,
+factoextra::fviz_pca(princip, repel = TRUE,
                      title = "Biplot of genotypes and attributes by gender")
 ```
 
@@ -105,29 +105,29 @@ factoextra::fviz_pca(princip, repel = T,
 ## 3.1. Analysis for appearance
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(PanelNo, INSTN, Appe, group = T)) 
+ft <- with(data, friedman(PanelNo, INSTN, Appe, group = TRUE)) 
 ft$statistics
 ft$groups
-ft <- with(data, friedman(PanelNo, INSTN, Appe, group = F)) 
+ft <- with(data, friedman(PanelNo, INSTN, Appe, group = FALSE)) 
 ft$comparison
 ```
 
 ## 3.2. Analysis for taste
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(PanelNo, INSTN, Tast, group = T)) 
+ft <- with(data, friedman(PanelNo, INSTN, Tast, group = TRUE)) 
 ft$statistics
 ft$groups
-ft <- with(data, friedman(PanelNo, INSTN, Tast, group = F)) 
+ft <- with(data, friedman(PanelNo, INSTN, Tast, group = FALSE)) 
 ft$comparison
 ```
 
 ## 3.3. Analysis for texture
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(PanelNo, INSTN, Text, group = T)) 
+ft <- with(data, friedman(PanelNo, INSTN, Text, group = TRUE)) 
 ft$statistics
 ft$groups
-ft <- with(data, friedman(PanelNo, INSTN, Text, group = F)) 
+ft <- with(data, friedman(PanelNo, INSTN, Text, group = FALSE)) 
 ft$comparison
 ```

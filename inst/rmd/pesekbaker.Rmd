@@ -56,10 +56,10 @@ The index coefficients for the Pesek-Baker index are:
 pbindex$Index.Coefficients
 ```
 
-With this, the Pesek-Baker index for each genotype is shown below. As you see, genotype `r (pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = T, index.return = T)$ix, ])[1,1]` is the one with the highest value.
+With this, the Pesek-Baker index for each genotype is shown below. As you see, genotype `r (pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = TRUE, index.return = TRUE)$ix, ])[1,1]` is the one with the highest value.
 ```{r, echo = FALSE}
-pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = T,
-                               index.return = T)$ix, ]
+pbindex$Pesek.Baker.Index[sort(pbindex$Pesek.Baker.Index$PB.Index, decreasing = TRUE,
+                               index.return = TRUE)$ix, ]
 ```
 
 ### The response to selection

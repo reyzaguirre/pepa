@@ -24,27 +24,27 @@ params:
   author: "no data"
 ---
 
-```{r echo=FALSE}
+```{r echo = FALSE}
 
 ## Data
 
 data <- params$data
-data <- data[, c("REP","INSTN", "STYPE", "SCORE_MEN","SCORE_WOMEN" ,"SCORE_GLOBAL")]
+data <- data[, c("REP", "INSTN", "STYPE", "SCORE_MEN", "SCORE_WOMEN", "SCORE_GLOBAL")]
 colnames(data)[4:6] <- c("Men", "Women", "Global")
-nr <- nlevels(factor(data$REP))
+nr <- length(unique(data$REP))
 ds <- docomp("sum", c("Men", "Women", "Global"), "INSTN", data = data)
 ds <- tidyr::gather(ds, group, value, Men:Global)
 
 ## Sort by number of votes
 
 temp <- ds[ds$group == "Global", c("INSTN", "value")]
-orden <- temp$INSTN[sort(temp$value, decreasing = T, index.return = T)$ix]
+orden <- temp$INSTN[sort(temp$value, decreasing = TRUE, index.return = TRUE)$ix]
 ds$INSTN <- factor(ds$INSTN, levels = orden)
 
 ## Count number of votes
 
-nvm <- sum(ds[ds$group == "Men", "value"], na.rm = T)
-nvw <- sum(ds[ds$group == "Women", "value"], na.rm = T)
+nvm <- sum(ds[ds$group == "Men", "value"], na.rm = TRUE)
+nvw <- sum(ds[ds$group == "Women", "value"], na.rm = TRUE)
 
 ## Count number of voters
 
@@ -105,29 +105,29 @@ ggplot(dsp, aes(x = group, y = value, fill = INSTN)) +
 ## 3.1. Men's votes
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(REP, INSTN, Men, group = T)) 
+ft <- with(data, friedman(REP, INSTN, Men, group = TRUE)) 
 ft$statistics
 ft$groups
-ft <- with(data, friedman(REP, INSTN, Men, group = F)) 
+ft <- with(data, friedman(REP, INSTN, Men, group = FALSE)) 
 ft$comparison
 ```
 
 ## 3.2. Women's votes
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(REP, INSTN, Women, group = T)) 
+ft <- with(data, friedman(REP, INSTN, Women, group = TRUE)) 
 ft$statistics
 ft$groups
-ft <- with(data, friedman(REP, INSTN, Women, group = F)) 
+ft <- with(data, friedman(REP, INSTN, Women, group = FALSE)) 
 ft$comparison
 ```
 
 ## 3.3. Total votes
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(REP, INSTN, Global, group = T)) 
+ft <- with(data, friedman(REP, INSTN, Global, group = TRUE)) 
 ft$statistics
 ft$groups
-ft <- with(data, friedman(REP, INSTN, Global, group = F)) 
+ft <- with(data, friedman(REP, INSTN, Global, group = FALSE)) 
 ft$comparison
 ```

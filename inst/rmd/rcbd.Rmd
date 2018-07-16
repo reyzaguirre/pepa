@@ -35,14 +35,11 @@ geno <- params$geno
 rep <- params$rep
 data <- params$data
 maxp <- params$maxp
-
-data[, geno] <- as.character(data[, geno])
-data[, rep] <- as.character(data[, rep])
 ```
 
 # 1. Model specification and data description
 
-There are data from `r nlevels(as.factor(data[, geno]))` genotypes evaluated using a randomize complete block design with `r nlevels(as.factor(data[, rep]))` blocks. The statistical model is
+There are data from `r length(unique(data[, geno]))` genotypes evaluated using a randomize complete block design with `r length(unique(data[, rep]))` blocks. The statistical model is
 $$
 y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
 $$
