@@ -66,7 +66,6 @@ data[, rep] <- as.character(data[, rep])
 # 1. Model specification and data description
 
 The data frame has data for a full factorial with `r lc$nf` factors with `r text.levels` levels. The experimental design is a `r text.design` with `r nlevels(as.factor(data[, rep]))` replications. 
-
 In this model we assume that the errors are independent and have a normal distribution with common variance.
 
 ```{r, include = FALSE}

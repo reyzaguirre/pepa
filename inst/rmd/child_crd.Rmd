@@ -66,4 +66,3 @@ vc <- vc[, c(4, 5)]
 colnames(vc) <- c("Variance", "Std.Dev.")
 vc
 ```
-
