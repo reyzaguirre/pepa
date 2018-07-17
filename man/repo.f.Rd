@@ -54,6 +54,18 @@ specified maximum proportion, 10\% by default. All factors are considered as fix
 }
 \examples{
 repo.f(c("asc.dw", "asc.fw"), c("geno", "treat"), "rep", "crd", asc)
+
+# Create design with 3 factors
+fnames <- c('A', 'B', 'C')
+flevels <- list(c('a1', 'a2'), c('b1', 'b2'), c('c1', 'c2', 'c3'))
+design <- 'rcbd'
+nrep <- 2
+nc <- 10
+temp <- cr.f(fnames, flevels, design, nrep, nc)$book
+# Simulate random data
+temp$y <- rnorm(24)
+# Run report
+repo.f('y', c('A', 'B', 'C'), 'block', 'rcbd', temp)
 }
 \author{
 Raul Eyzaguirre.

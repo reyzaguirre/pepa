@@ -47,7 +47,7 @@ lc <- ck.f(traits[1], factors, rep, data)
 text.levels <- lc$nl[1]
 for (i in 2:(lc$nf - 1))
   text.levels <- paste0(text.levels, ', ', lc$nl[i])
-text.levels <- paste0(text.levels, ', and ' lc$nl[lc$nf])
+text.levels <- paste0(text.levels, ', and ', lc$nl[lc$nf])
 
 # Text for design
 
