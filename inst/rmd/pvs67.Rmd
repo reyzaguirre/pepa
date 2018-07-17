@@ -25,7 +25,6 @@ params:
 ---
 
 ```{r echo = FALSE}
-
 ## Data
 
 data <- params$data
@@ -53,7 +52,6 @@ rownames(adg) <- adg$INSTN
 
 ads <- ads[, -1]
 adg <- adg[, -1]
-
 ```
 
 # 1. Gathering of data

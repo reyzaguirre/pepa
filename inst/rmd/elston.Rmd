@@ -21,7 +21,7 @@ params:
   author: "no data"
 ---
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 traits <- params$traits
 geno <- params$geno
 env <- params$env

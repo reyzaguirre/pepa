@@ -62,7 +62,6 @@ temp <- docomp("sum", "value", "INSTN", data = temp)
 temp$group <- "Global adjusted"
 dsp <- rbind(dsp, temp)
 dsp$value <- round(dsp$value * 100, 1)
-
 ```
 
 # 1. Voting process for the identification of best genotypes at post-harvest stage

@@ -30,7 +30,7 @@ params:
   author: "no data"
 ---
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 library(knitr)
 
 traits <- params$traits
@@ -43,7 +43,7 @@ model <- params$model
 data <- params$data
 ```
 
-```{r, include = FALSE}
+```{r include = FALSE}
 out <- NULL
 
 for (i in 1:length(traits))

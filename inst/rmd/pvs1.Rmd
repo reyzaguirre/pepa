@@ -25,7 +25,6 @@ params:
 ---
 
 ```{r echo=FALSE}
-
 ## Data
 
 data <- params$data
@@ -105,7 +104,6 @@ temp <- docomp("sum", "value", "Criteria", "phase", temp)
 temp$group <- "Global adjusted"
 storp <- rbind(storp, temp)
 storp$value <- round(storp$value * 100, 1)
-
 ```
 
 # 1. Identification of selection criteria and voting process
@@ -126,7 +124,6 @@ Votes are recorded for men and women.
 
 `r if (nrow(flow) == 0) {"There were no data for selection criteria at flowering."}`
 `r if (all(is.na(flow$Criteria))) {"There were no data for selection criteria at flowering."}`
-
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 8}
 if (nrow(flow) > 0 && !all(is.na(flow$Criteria))) {

@@ -2,7 +2,7 @@
 
 # {{i}}. Analysis for trait `r traits[i]`
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 if (model == 1) {
   ddd <- data.frame (
       set = data[, set],
