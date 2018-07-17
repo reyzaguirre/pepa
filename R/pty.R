@@ -23,7 +23,7 @@ pty <- function(x, author = "International Potato Center",
   classlist <- c("data.frame", "numeric", "aov", "lm")
   dirfiles <- system.file(package = "pepa")
 
-  if (class(x) %in% classlist == FALSE) {
+  if (!(class(x) %in% classlist)) {
     fileRmd <- paste0(dirfiles, "/rmd/na.Rmd")  # Not available yet
     output <- "na"
   }
@@ -47,8 +47,13 @@ pty <- function(x, author = "International Potato Center",
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(x = x, author = author))
 
-  if(format == "html_document") try(browseURL(fileURL))
-  if(format == "word_document") try(system(paste("open", fileDOCX)))
-  if(format == "pdf_document")  try(system(paste("open", filePDF)))
+  if(format == "html_document")
+    try(browseURL(fileURL))
+
+  if(format == "word_document")
+    try(system(paste("open", fileDOCX)))
+
+  if(format == "pdf_document")
+    try(system(paste("open", filePDF)))
 
 }

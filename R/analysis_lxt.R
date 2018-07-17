@@ -108,8 +108,8 @@ aov.lxt <- function(trait, lines, testers, rep, data) {
   s6 <- sqrt(2 * cm / nr)
   cov1 <- (matriz[6, 3] - matriz[8, 3]) / (nr * nt)
   cov2 <- (matriz[7, 3] - matriz[8, 3]) / (nr * nl)
-  cov3 <- (((nl - 1) * matriz[6, 3] + (nt - 1) * matriz[7, 3]) / (nl + nt - 2)
-           - matriz[8, 3]) / (nr * (2 * nl * nt - nl - nt))
+  cov3 <- (((nl - 1) * matriz[6, 3] + (nt - 1) * matriz[7, 3]) / (nl + nt - 2) -
+             matriz[8, 3]) / (nr * (2 * nl * nt - nl - nt))
   cov4 <- ((matriz[6, 3] - matriz[9, 3]) + (matriz[7, 3] - matriz[9, 3]) +
              (matriz[8, 3] - matriz[9, 3])) / (3 * nr) +
           (6 * nr * cov3 - nr * (nl + nt) * cov3) / (3 * nr)
@@ -123,18 +123,18 @@ aov.lxt <- function(trait, lines, testers, rep, data) {
 
   # P values
 
-  GCA.lines.p <- round(pt(abs(GCA.lines) / s1, matriz[9, 1], lower.tail = F) * 2, 4)
-  GCA.testers.p <- round(pt(abs(GCA.testers) / s2, matriz[9, 1], lower.tail = F) * 2, 4)
+  GCA.lines.p <- round(pt(abs(GCA.lines) / s1, matriz[9, 1], lower.tail = FALSE) * 2, 4)
+  GCA.testers.p <- round(pt(abs(GCA.testers) / s2, matriz[9, 1], lower.tail = FALSE) * 2, 4)
 
-  GCA.le <- t(matrix(c(GCA.lines, GCA.lines.p), nrow = 2, byrow = T))
+  GCA.le <- t(matrix(c(GCA.lines, GCA.lines.p), nrow = 2, byrow = TRUE))
   rownames(GCA.le) <- names(GCA.lines)
   colnames(GCA.le) <- c("Effects", "p-values")
 
-  GCA.te <- t(matrix(c(GCA.testers, GCA.testers.p), nrow = 2, byrow = T))
+  GCA.te <- t(matrix(c(GCA.testers, GCA.testers.p), nrow = 2, byrow = TRUE))
   rownames(GCA.te) <- names(GCA.testers)
   colnames(GCA.te) <- c("Effects", "p-values")
 
-  SCA.p <- round(pt(abs(SCA) / s3, matriz[9, 1], lower.tail = F) * 2, 4)
+  SCA.p <- round(pt(abs(SCA) / s3, matriz[9, 1], lower.tail = FALSE) * 2, 4)
 
   cat("ANOVA for parents and crosses",
     "\n=============================\n")

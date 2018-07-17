@@ -19,145 +19,131 @@
 #' @importFrom stats formula lm na.omit pt ptukey qt qtukey sd vcov AIC BIC anova deviance df.residual
 #' @export
 
-order.group.mod <- function (trt, means, N, MSerror, Tprob, std.err, parameter = 1,
-            snk = 0, DFerror = NULL, alpha = NULL, sdtdif = NULL, vartau = NULL,
-            console) {
-
-    replications <- N
-    n <- length(means)
-    z <- data.frame(trt, means, N = N, std.err, replications)
-    letras <- c(letters[1:25], LETTERS[1:25], 1:1000)
-    w <- z[order(z[, 2], decreasing = TRUE), ]
-    M <- rep("", n)
-    k <- 1
-    j <- 1
-    k <- 1
-    cambio <- n
-    cambio1 <- 0
-    chequeo = 0
-    M[1] <- letras[k]
-    N <- w$N
-    while (j < n) {
-      chequeo <- chequeo + 1
-      if (chequeo > n)
-        break
-      for (i in j:n) {
-        nx <- abs(i - j) + 1
-        if (nx == 1)
-          nx = 2
-        if (snk == 1)
-          Tprob <- qtukey(p = 1 - alpha, nmeans = nx, df = DFerror)
-        if (snk == 2)
-          Tprob <- qtukey(p = (1 - alpha)^(nx - 1), nmeans = nx,
-                          df = DFerror)
-        if (snk == 7) {
-          if (nx <= n - 2)
-            Tprob <- qtukey(p = (1 - alpha)^(nx/n), nx,
-                            df = DFerror)
-          if (nx > n - 2)
-            Tprob <- qtukey(p = (1 - alpha), nx, df = DFerror)
-        }
-        if (!is.null(vartau)) {
-          ii0 <- w[i, 1]
-          jj0 <- w[j, 1]
-          if (snk == 3 | snk == 4)
-            sdtdif <- sqrt(vartau[ii0, ii0] + vartau[jj0,
-                                                     jj0] - 2 * vartau[ii0, jj0])
-          if (snk == 5 | snk == 6)
-            sdtdif <- sqrt(vartau[ii0, jj0])
-          if (snk == 3 | snk == 5)
-            Tprob <- qt(p = (1 - alpha/2), df = DFerror)
-          if (snk == 4 | snk == 6)
-            Tprob <- qtukey(p = (1 - alpha), nmeans = n,
-                            df = DFerror)
-        }
-        if (is.null(sdtdif))
-          minimo <- Tprob * sqrt(parameter * MSerror *
-                                   (1/N[i] + 1/N[j]))
-        if (!is.null(sdtdif))
-          minimo <- Tprob * sdtdif
-        s <- abs(w[i, 2] - w[j, 2]) <= minimo
-        if (s) {
-          if (lastC(M[i]) != letras[k])
-            M[i] <- paste0(M[i], letras[k])
-        }
-        else {
-          k <- k + 1
-          cambio <- i
-          cambio1 <- 0
-          ja <- j
-          for (jj in cambio:n) M[jj] <- paste0(M[jj])
-          M[cambio] <- paste0(M[cambio], letras[k])
-          for (v in ja:cambio) {
-            nx <- abs(v - cambio) + 1
-            if (nx == 1)
-              nx = 2
-            if (snk == 1)
-              Tprob <- qtukey(p = 1 - alpha, nmeans = nx,
-                              df = DFerror)
-            if (snk == 2)
-              Tprob <- qtukey(p = (1 - alpha)^(nx - 1),
-                              nmeans = nx, df = DFerror)
-            if (snk == 7) {
-              if (nx <= n - 2)
-                Tprob <- qtukey(p = (1 - alpha)^(nx/n),
-                                nx, df = DFerror)
-              if (nx > n - 2)
-                Tprob <- qtukey(p = (1 - alpha), nx, df = DFerror)
-            }
-            if (!is.null(vartau)) {
-              ii0 <- w[i, 1]
-              jj0 <- w[j, 1]
-              if (snk == 3 | snk == 4)
-                sdtdif <- sqrt(vartau[ii0, ii0] + vartau[jj0,
-                                                         jj0] - 2 * vartau[ii0, jj0])
-              if (snk == 5 | snk == 6)
-                sdtdif <- sqrt(vartau[ii0, jj0])
-              if (snk == 3 | snk == 5)
-                Tprob <- qt(p = (1 - alpha/2), df = DFerror)
-              if (snk == 4 | snk == 6)
-                Tprob <- qtukey(p = (1 - alpha), nmeans = n,
-                                df = DFerror)
-            }
-            if (is.null(sdtdif))
-              minimo <- Tprob * sqrt(parameter * MSerror *
-                                       (1/N[i] + 1/N[j]))
-            if (!is.null(sdtdif))
-              minimo <- Tprob * sdtdif
-            if (abs(w[v, 2] - w[cambio, 2]) > minimo) {
-              j <- j + 1
-              cambio1 <- 1
-            }
-            else break
-          }
-          break
-        }
+order.group.mod <- function(trt, means, N, MSerror, Tprob, std.err, parameter = 1,
+                            snk = 0, DFerror = NULL, alpha = NULL, sdtdif = NULL,
+                            vartau = NULL, console) {
+  replications <- N
+  n <- length(means)
+  z <- data.frame(trt, means, N = N, std.err, replications)
+  letras <- c(letters[1:25], LETTERS[1:25], 1:1000)
+  w <- z[order(z[, 2], decreasing = TRUE), ]
+  M <- rep("", n)
+  k <- 1
+  j <- 1
+  k <- 1
+  cambio <- n
+  cambio1 <- 0
+  chequeo = 0
+  M[1] <- letras[k]
+  N <- w$N
+  while (j < n) {
+    chequeo <- chequeo + 1
+    if (chequeo > n)
+      break
+    for (i in j:n) {
+      nx <- abs(i - j) + 1
+      if (nx == 1)
+        nx = 2
+      if (snk == 1)
+        Tprob <- qtukey(p = 1 - alpha, nmeans = nx, df = DFerror)
+      if (snk == 2)
+        Tprob <- qtukey(p = (1 - alpha)^(nx - 1), nmeans = nx, df = DFerror)
+      if (snk == 7) {
+        if (nx <= n - 2)
+          Tprob <- qtukey(p = (1 - alpha)^(nx/n), nx, df = DFerror)
+        if (nx > n - 2)
+          Tprob <- qtukey(p = (1 - alpha), nx, df = DFerror)
       }
-      if (cambio1 == 0)
-        j <- j + 1
+      if (!is.null(vartau)) {
+        ii0 <- w[i, 1]
+        jj0 <- w[j, 1]
+        if (snk == 3 | snk == 4)
+          sdtdif <- sqrt(vartau[ii0, ii0] + vartau[jj0, jj0] - 2 * vartau[ii0, jj0])
+        if (snk == 5 | snk == 6)
+          sdtdif <- sqrt(vartau[ii0, jj0])
+        if (snk == 3 | snk == 5)
+          Tprob <- qt(p = (1 - alpha/2), df = DFerror)
+        if (snk == 4 | snk == 6)
+          Tprob <- qtukey(p = (1 - alpha), nmeans = n, df = DFerror)
+      }
+      if (is.null(sdtdif))
+        minimo <- Tprob * sqrt(parameter * MSerror * (1/N[i] + 1/N[j]))
+      if (!is.null(sdtdif))
+        minimo <- Tprob * sdtdif
+      s <- abs(w[i, 2] - w[j, 2]) <= minimo
+      if (s) {
+        if (lastC(M[i]) != letras[k])
+          M[i] <- paste0(M[i], letras[k])
+      } else {
+        k <- k + 1
+        cambio <- i
+        cambio1 <- 0
+        ja <- j
+        for (jj in cambio:n)
+          M[jj] <- paste0(M[jj])
+        M[cambio] <- paste0(M[cambio], letras[k])
+        for (v in ja:cambio) {
+          nx <- abs(v - cambio) + 1
+          if (nx == 1)
+            nx <- 2
+          if (snk == 1)
+            Tprob <- qtukey(p = 1 - alpha, nmeans = nx, df = DFerror)
+          if (snk == 2)
+            Tprob <- qtukey(p = (1 - alpha)^(nx - 1), nmeans = nx, df = DFerror)
+          if (snk == 7) {
+            if (nx <= n - 2)
+              Tprob <- qtukey(p = (1 - alpha)^(nx / n), nx, df = DFerror)
+            if (nx > n - 2)
+              Tprob <- qtukey(p = (1 - alpha), nx, df = DFerror)
+          }
+          if (!is.null(vartau)) {
+            ii0 <- w[i, 1]
+            jj0 <- w[j, 1]
+            if (snk == 3 | snk == 4)
+              sdtdif <- sqrt(vartau[ii0, ii0] + vartau[jj0, jj0] - 2 * vartau[ii0, jj0])
+            if (snk == 5 | snk == 6)
+              sdtdif <- sqrt(vartau[ii0, jj0])
+            if (snk == 3 | snk == 5)
+              Tprob <- qt(p = (1 - alpha/2), df = DFerror)
+            if (snk == 4 | snk == 6)
+              Tprob <- qtukey(p = (1 - alpha), nmeans = n, df = DFerror)
+          }
+          if (is.null(sdtdif))
+            minimo <- Tprob * sqrt(parameter * MSerror * (1 / N[i] + 1 / N[j]))
+          if (!is.null(sdtdif))
+            minimo <- Tprob * sdtdif
+          if (abs(w[v, 2] - w[cambio, 2]) > minimo) {
+            j <- j + 1
+              cambio1 <- 1
+          } else {
+            break
+          }
+        }
+        break
+      }
     }
-    w <- data.frame(w, stat = M)
-    trt <- as.character(w$trt)
-    means <- as.numeric(w$means)
-    means1 <- signif(means, 4)
-    N <- as.numeric(w$N)
-    std.err <- as.numeric(w$std.err)
-    replications <- w$replications
-    cmax <- max(nchar(trt))
-    trt <- paste(trt, "                                      ")
-    trt <- substr(trt, 1, cmax)
-    output1 <- cbind(trt, means)
-    rownames(output1) <- M
-    for (i in 1:n) {
-      if (console)
-        cat(rownames(output1)[i], "\t", output1[i, 1], "\t",
-            means1[i], "\n")
-    }
-    output <- data.frame(trt, means, M, N = replications, std.err)
-    invisible(output)
-
+    if (cambio1 == 0)
+      j <- j + 1
   }
-
+  w <- data.frame(w, stat = M)
+  trt <- as.character(w$trt)
+  means <- as.numeric(w$means)
+  means1 <- signif(means, 4)
+  N <- as.numeric(w$N)
+  std.err <- as.numeric(w$std.err)
+  replications <- w$replications
+  cmax <- max(nchar(trt))
+  trt <- paste(trt, "                                      ")
+  trt <- substr(trt, 1, cmax)
+  output1 <- cbind(trt, means)
+  rownames(output1) <- M
+  for (i in 1:n) {
+    if (console)
+      cat(rownames(output1)[i], "\t", output1[i, 1], "\t", means1[i], "\n")
+  }
+  output <- data.frame(trt, means, M, N = replications, std.err)
+  invisible(output)
+}
 
 #' A modified version of Analysis of the Partially Balanced Incomplete Block Design
 #' @description This modified version of PBIB.test (agricolae pkg) aims to analyze alpha design experiment, in case, it
@@ -176,10 +162,10 @@ order.group.mod <- function (trt, means, N, MSerror, Tprob, std.err, parameter =
 #' @param group logical, groups
 #' @export
 
-PBIB.test.mod <- function (block, trt, replication, y, k,
-                           method = c("REML", "ML", "VC"),
-                           test = c("lsd", "tukey"),
-                           alpha = 0.05, console = FALSE, group = TRUE) {
+PBIB.test.mod <- function(block, trt, replication, y, k,
+                          method = c("REML", "ML", "VC"),
+                          test = c("lsd", "tukey"),
+                          alpha = 0.05, console = FALSE, group = TRUE) {
 
   test <- match.arg(test)
   if (test == "lsd")
@@ -209,45 +195,41 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
   indice <- rownames(mean.trt)
   ntr <- nlevels(trt.adj)
   r <- nlevels(replication)
-  s <- ntr/k
+  s <- ntr / k
   obs <- length(na.omit(y))
   if (method == "VC" & obs != r * ntr) {
     if (console)
       cat("\nWarning.. incomplete repetition. Please you use method REML or ML\n")
     return()
   }
-  modelo <- formula(paste(name.y, "~ replication + trt.adj+ block.adj%in%replication"))
+  modelo <- formula(paste(name.y, "~ replication + trt.adj + block.adj %in% replication"))
   model <- lm(modelo)
   glerror <- df.residual(model)
   ANOVA <- anova(model)
   rownames(ANOVA)[2] <- name.t
-  CMerror <- as.numeric(deviance(model)/glerror)
+  CMerror <- as.numeric(deviance(model) / glerror)
   Mean <- mean(y, na.rm = TRUE)
-  if (method == "VC") {
-    rownames(ANOVA) <- c(name.r, paste0(name.t, ".unadj"),
-                         paste0(name.b, "/", name.r), "Residual")
-  }
+  if (method == "VC")
+    rownames(ANOVA) <- c(name.r, paste0(name.t, ".unadj"), paste0(name.b, "/", name.r), "Residual")
   if (method == "REML" | method == "ML") {
     if (requireNamespace("nlme", quietly = TRUE)) {
       trt.adj <- as.factor(trt)
       if (method == "REML") {
-        modlmer <- nlme::lme(y ~ 0 + trt.adj, random = ~1 |
-                               replication/block.adj, method = "REML", na.action = na.omit)
-        model <- nlme::lme(y ~ trt.adj, random = ~1 |
-                             replication/block.adj, method = "REML", na.action = na.omit)
+        modlmer <- nlme::lme(y ~ 0 + trt.adj, random = ~ 1 | replication/block.adj,
+                             method = "REML", na.action = na.omit)
+        model <- nlme::lme(y ~ trt.adj, random = ~ 1 | replication/block.adj,
+                           method = "REML", na.action = na.omit)
       }
       if (method == "ML") {
-        modlmer <- nlme::lme(y ~ 0 + trt.adj, random = ~1 |
-                               replication/block.adj, method = "ML", na.action = na.omit)
-        model <- nlme::lme(y ~ trt.adj, random = ~1 |
-                             replication/block.adj, method = "ML", na.action = na.omit)
+        modlmer <- nlme::lme(y ~ 0 + trt.adj, random = ~ 1 | replication/block.adj,
+                             method = "ML", na.action = na.omit)
+        model <- nlme::lme(y ~ trt.adj, random = ~ 1 | replication/block.adj,
+                           method = "ML", na.action = na.omit)
       }
       Afm <- anova(model)
       VarRand <- matrix(rep(0, 3), nrow = 3)
-      VarRand[c(1, 3), 1] <- as.numeric(nlme::VarCorr(model)[4:5,
-                                                             1])
-      VarRand[2, 1] <- as.numeric(nlme::VarCorr(model)[2,
-                                                       1])
+      VarRand[c(1, 3), 1] <- as.numeric(nlme::VarCorr(model)[4:5, 1])
+      VarRand[2, 1] <- as.numeric(nlme::VarCorr(model)[2, 1])
       CMerror <- as.numeric(VarRand[3, 1])
       VarRand <- data.frame(VarRand)
       names(VarRand) <- "Variance"
@@ -264,8 +246,7 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
       vartau <- vcov(modlmer)
       DIA <- as.matrix(vartau)
       dvar <- sqrt(diag(DIA))
-    }
-    else {
+    } else {
       return("Please install nlme package for lme and VarCorr functions")
     }
   }
@@ -274,7 +255,7 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
   if (method == "VC") {
     if (requireNamespace("MASS", quietly = TRUE)) {
       SCt <- anova(model)[2, 2]
-      Ee <- deviance(model)/glerror
+      Ee <- deviance(model) / glerror
       Eb <- anova(model)[3, 3]
       X <- rep(0, obs * ntr)
       dim(X) <- c(obs, ntr)
@@ -303,23 +284,19 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
       Js <- matrix(1, s, s)
       Ib <- diag(b)
       Iv <- diag(ntr)
-      q <- k - floor(k/s) * s
+      q <- k - floor(k / s) * s
       if (q <= s/2)
-        g <- floor(k/s)
+        g <- floor(k / s)
       if (q > s/2)
-        g <- floor(k/s) + 1
-      phi <- r * (Eb - Ee)/((r - 1) * Ee)
-      lambda <- 1/(r * k * (1/phi + 1) - k)
-      W <- t(N) %*% N - k * Ib - g * kronecker((Jr - Ir),
-                                               Js)
+        g <- floor(k / s) + 1
+      phi <- r * (Eb - Ee) / ((r - 1) * Ee)
+      lambda <- 1 / (r * k * (1 / phi + 1) - k)
+      W <- t(N) %*% N - k * Ib - g * kronecker((Jr - Ir), Js)
       inversa <- MASS::ginv(Ib - lambda * W)
-      tauIntra <- t(X) %*% y/r - lambda * N %*% inversa %*%
-        c0
-      vartau <- (Ee/r) * (Iv + lambda * N %*% inversa %*%
-                            t(N))
+      tauIntra <- t(X) %*% y / r - lambda * N %*% inversa %*% c0
+      vartau <- (Ee / r) * (Iv + lambda * N %*% inversa %*% t(N))
       dvar <- sqrt(diag(vartau))
-    }
-    else {
+    } else {
       return("Please install MASS package for ginv function")
     }
   }
@@ -335,8 +312,7 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
   vardif <- matrix(0, ntr, ntr)
   for (i in 1:(ntr - 1)) {
     for (j in (i + 1):ntr) {
-      vardif[i, j] <- vartau[i, i] + vartau[j, j] - 2 *
-        vartau[i, j]
+      vardif[i, j] <- vartau[i, i] + vartau[j, j] - 2 * vartau[i, j]
       vardif[j, i] <- vardif[i, j]
     }
   }
@@ -364,10 +340,10 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
     print(Fstat)
     cat("\n")
   }
-  CV <- sqrt(CMerror) * 100/media
-  design <- data.frame(. = c(ntr, k, b/r, r))
+  CV <- sqrt(CMerror) * 100 / media
+  design <- data.frame(. = c(ntr, k, b / r, r))
   rownames(design) <- c(name.t, paste(name.b, "size"), paste0(name.b, "/", name.r), name.r)
-  E <- (ntr - 1) * (r - 1)/((ntr - 1) * (r - 1) + r * (s - 1))
+  E <- (ntr - 1) * (r - 1) / ((ntr - 1) * (r - 1) + r * (s - 1))
   if (console) {
     print(ANOVA)
     cat("\ncoefficient of variation:", round(CV, 1), "%\n")
@@ -377,9 +353,8 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
     cat("\nEfficiency factor", E, "\n")
     cat("\nComparison test", test, "\n")
   }
-  parameters <- data.frame(treatments = ntr, blockSize = k,
-                           blocks = s, r = r, alpha = alpha, test = paste("PBIB",
-                                                                          test, sep = "-"), name.t = name.t)
+  parameters <- data.frame(treatments = ntr, blockSize = k, blocks = s, r = r, alpha = alpha,
+                           test = paste("PBIB", test, sep = "-"), name.t = name.t)
   statistics <- data.frame(Efficiency = E, Mean = Mean, CV = CV)
   rownames(parameters) <- " "
   rownames(statistics) <- " "
@@ -392,22 +367,20 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
     i <- comb[1, k]
     j <- comb[2, k]
     dif[k] <- tauIntra[i] - tauIntra[j]
-    stdt[k] <- sqrt(vartau[i, i] + vartau[j, j] - 2 * vartau[i,
-                                                             j])
-    tc <- abs(dif[k])/stdt[k]
+    stdt[k] <- sqrt(vartau[i, i] + vartau[j, j] - 2 * vartau[i, j])
+    tc <- abs(dif[k]) / stdt[k]
     if (test == "lsd")
       pvalue[k] <- 2 * round(1 - pt(tc, glerror), 4)
     if (test == "tukey")
-      pvalue[k] <- round(1 - ptukey(tc, ntr, glerror),
-                         4)
+      pvalue[k] <- round(1 - ptukey(tc, ntr, glerror), 4)
   }
   tr.i <- comb[1, ]
   tr.j <- comb[2, ]
   groups <- NULL
   if (group) {
     groups <- order.group.mod(trt = 1:ntr, tauIntra, n.rep, MSerror = NULL,
-                           Tprob = NULL, std.err = dvar, parameter = 1, snk,
-                           DFerror = glerror, alpha, sdtdif = 1, vartau, console = FALSE)
+                              Tprob = NULL, std.err = dvar, parameter = 1, snk,
+                              DFerror = glerror, alpha, sdtdif = 1, vartau, console = FALSE)
     names(groups)[2] <- "mean.adj"
     rownames(groups) <- groups$trt
     indices <- as.numeric(as.character(groups$trt))
@@ -416,13 +389,11 @@ PBIB.test.mod <- function (block, trt, replication, y, k,
     groups <- groups[, 1:3]
   }
   cat("\n<<< to see the objects: means, comparison and groups. >>>\n\n")
-  comparison <- data.frame(Difference = dif, stderr = stdt,
-                           pvalue = pvalue)
+  comparison <- data.frame(Difference = dif, stderr = stdt, pvalue = pvalue)
   means <- data.frame(means = mean.trt, trt = 1:ntr, mean.adj = as.numeric(tauIntra),
                       SE = dvar, r = n.rep, std, Min = mi, Max = ma)
   names(means)[1] <- name.y
-  rownames(comparison) <- paste(indice[tr.i], indice[tr.j],
-                                sep = " - ")
+  rownames(comparison) <- paste(indice[tr.i], indice[tr.j], sep = " - ")
   output <- list(ANOVA = ANOVA, method = nMethod, parameters = parameters,
                  statistics = statistics, Fstat = Fstat, comparison = comparison,
                  means = means, groups = groups, vartau = vartau)

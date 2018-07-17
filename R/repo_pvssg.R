@@ -67,9 +67,14 @@ repo.pvssg <- function(traits,
 
   if (!server) {
 
-    if (format == "html_document") try(browseURL(fileURL))
-    if (format == "word_document") try(system(paste("open", fileDOCX)))
-    if (format == "pdf_document") try(system(paste("open", filePDF)))
+    if (format == "html_document")
+      try(browseURL(fileURL))
+
+    if (format == "word_document")
+      try(system(paste("open", fileDOCX)))
+
+    if (format == "pdf_document")
+      try(system(paste("open", filePDF)))
 
   } else {
 
@@ -78,4 +83,3 @@ repo.pvssg <- function(traits,
   }
 
 }
-
