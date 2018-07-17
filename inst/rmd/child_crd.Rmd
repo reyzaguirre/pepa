@@ -2,7 +2,7 @@
 
 # {{i+1}}. Analysis for trait `r traits[i]`
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 lc <- ck.crd(traits[i], geno, data)
 model <- aov(data[, traits[i]] ~ data[, geno])
 model$terms[[2]] <- traits[i]
@@ -14,7 +14,7 @@ rownames(at)[1] <- geno
 
 You have fitted a linear model for a CRD. The ANOVA table for your model is:
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 at
 ```
 
@@ -26,7 +26,7 @@ The p-value for genotypes is `r format(at[1, 5], digits = 4)`
 
 Don't forget the assumptions of the model. It is supposed that the errors are independent with a normal distribution and with the same variance for all the genotypes. The following residuals plots must help you evaluate this:
 
-```{r, echo = FALSE, fig.height = 5, fig.width = 10}
+```{r echo = FALSE, fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
 plot(model, which = 1)
 plot(model, which = 2)
@@ -38,23 +38,26 @@ Any trend in the residuals in the left plot would violate the assumption of inde
 
 `r if(at[1, 5] < 0.05) {"Below are the sorted means for each genotype with letters indicating if there are significant differences using the multiple comparisons method of Tukey at the 5% level."} else {"The means of your genotypes are:"}`
 
-```{r, echo = FALSE}
-if (at[1, 5] < 0.05)
-  agricolae::HSD.test(data[, traits[i]], data[, geno], at[2, 1], at[2, 3])$groups else
-    tapply(data[, traits[i]], data[, geno], mean, na.rm = TRUE)
+```{r echo = FALSE}
+if (at[1, 5] < 0.05) {
+  agricolae::HSD.test(data[, traits[i]], data[, geno], at[2, 1], at[2, 3])$groups
+} else {
+  tapply(data[, traits[i]], data[, geno], mean, na.rm = TRUE)
+}
 ```
 
 `r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of genotypes in your experiment is not so big, we can plot the data for each genotypes:"}`
 
-```{r, echo = FALSE}
-if (lc$nt < 10) msdplot(traits[i], geno, data, conf = 1)
+```{r echo = FALSE}
+if (lc$nt < 10)
+  msdplot(traits[i], geno, data, conf = 1)
 ```
 
 ## {{i+1}}.4. Variance components
 
 Below are the variance components for this model, under the assumption that genotypes are random. Here the model is fitted using REML.
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 y <- data[, traits[i]]
 fg <- data[, geno]
 ff <- as.formula(y ~ (1|fg))

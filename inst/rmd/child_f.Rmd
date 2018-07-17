@@ -1,13 +1,13 @@
 `r i = {{i}}`
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 lc <- ck.f(traits[i], factors, rep, data)
 if (lc$c4 == 0) {
   trait.est <- paste0(traits[i], ".est")
   data$est <- mve.f(traits[i], factors, rep, design, data, maxp)[, trait.est]
-  } else {
-    data$est <- data[, traits[i]]
-  }
+} else {
+  data$est <- data[, traits[i]]
+}
 ```
     
 # {{i+1}}. Analysis for trait `r traits[i]`
@@ -20,15 +20,14 @@ if (lc$c4 == 0) {
 
 ### {{i+1}}.1.1. Means by individual factor levels
 
-```{r, echo = FALSE}
-for (j in 1:nf) {
+```{r echo = FALSE}
+for (j in 1:nf)
   print(tapply(data$est, data[, factors[j]], mean))
-}
 ```
 
 ### {{i+1}}.1.2. Means by factor levels combinations
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 # Create expression for list of factors
   
 lf.expr <- 'list(data[, factors[1]]'
@@ -49,7 +48,7 @@ tapply(data$est, eval(parse(text = lf.expr)), mean)
 
 As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the combinations among the levels of the factors. The following plots help to evaluate this assumptions:
 
-```{r, echo = FALSE, fig.height = 5, fig.width = 10}
+```{r echo = FALSE, fig.height = 5, fig.width = 10}
 # ANOVA
   
 expr <- paste(traits[i], '~', factors[1])
@@ -76,7 +75,7 @@ Funnel shapes for the first plot may suggest heterogeneity of variances while de
 
 ### {{i+1}}.2.2. ANOVA table
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 at <- suppressWarnings(aov.f(traits[i], factors, rep, design, data, maxp))
 at
 ```

@@ -20,7 +20,7 @@ params:
   author: "no data"
 ---
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 trait <- params$trait
 geno <- params$geno
 env <- params$env
@@ -32,13 +32,13 @@ lc <- ck.f(trait, c(geno, env), rep, data)
 at <- suppressWarnings(aov.met(trait, geno, env, rep, data, maxp))
 if (lc$c4 == 0)
   data[, trait] <- mve.met(trait, geno, env, rep, data, maxp)[, 5]
-model <- aov(data[, trait] ~ data[, geno] + data[, env]
-             + data[, rep] %in% data[, env] + data[, geno]:data[, env])
+model <- aov(data[, trait] ~ data[, geno] + data[, env] +
+               data[, rep] %in% data[, env] + data[, geno]:data[, env])
 ```
 
 `r if(lc$c1 == 1 & lc$c2 == 1) {"You have fitted a linear model for a multi environment trial (MET) with a RCBD in each environment. The ANOVA table for your model is:"}`
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 at
 ```
 
@@ -54,7 +54,7 @@ The p-values for your model are:
 
 Below you can see a table of means for genotypes, environments, and interaction:
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 tapply(data[, trait], data[, geno], mean)
 tapply(data[, trait], data[, env], mean)
 tapply(data[, trait], list(data[, geno], data[, env]), mean)
@@ -62,7 +62,7 @@ tapply(data[, trait], list(data[, geno], data[, env]), mean)
 
 Don't forget the assumptions of the model. It is supposed that the error has a normal distribution with the same variance for all the genotypes and evironments. The following plots must help you evaluate this:
 
-```{r, echo = FALSE, fig.height = 5, fig.width = 10}
+```{r echo = FALSE, fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
 plot(model, which = 1)
 plot(model, which = 2)

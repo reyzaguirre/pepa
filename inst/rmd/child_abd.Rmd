@@ -2,18 +2,18 @@
 
 # {{i+1}}. Analysis for trait `r traits[i]`
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 lc <- ck.abd(traits[i], geno, rep, data)
 
 if (lc$nt.check.0 > 0) {
-    cond <- !(data[, geno] %in% lc$check.0) & !is.na(data[, traits[i]])
-    temp <- subset(data, cond)
-  } else {
-    cond <- !is.na(data[, traits[i]])
-    temp <- subset(data, cond)
-  }
+  cond <- !(data[, geno] %in% lc$check.0) & !is.na(data[, traits[i]])
+  temp <- subset(data, cond)
+} else {
+  cond <- !is.na(data[, traits[i]])
+  temp <- subset(data, cond)
+}
 
-if (lc$nt.check.1 > 0){
+if (lc$nt.check.1 > 0) {
   cond <- !(temp[, geno] %in% lc$check.1)
   temp <- subset(temp, cond)
 }
@@ -31,32 +31,34 @@ model <- agricolae::DAU.test(temp[, rep], temp[, geno], y)
 
 `r if(lc$nt.check.0 == 1) paste0("There is one check without data: ", lc$check.0, ". This check has been removed.")`
 `r if(lc$nt.check.0 > 1) paste0("There are ", lc$nt.check.0, " checks without data: ")`
-```{r, echo = FALSE}
-if(lc$nt.check.0 > 1) lc$check.0
+```{r echo = FALSE}
+if(lc$nt.check.0 > 1)
+  lc$check.0
 ```
 `r if(lc$nt.check.0 > 1) {"These checks have been removed."}`
 
 `r if(lc$nt.check.1 == 1) paste0("There is one check with data in only one block: ", lc$check.1, ". Checks need at least two replications so this check has been removed.")`
 `r if(lc$nt.check.1 > 1) paste0("There are ", lc$nt.check.1, " checks with data in only one block: ")`
-```{r, echo = FALSE}
-if(lc$nt.check.1 > 1) lc$check.1
+```{r echo = FALSE}
+if(lc$nt.check.1 > 1)
+  lc$check.1
 ```
 `r if(lc$nt.check.1 > 1) {"Checks need at least two replications so these checks have been removed."}`
 
 ## {{i+1}}.2. Adjusted means
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 model$means
 ```
 
 ## {{i+1}}.3. Overall mean and CV
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 model$statistics
 ```
 
 ## {{i+1}}.4. LSD test
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 model$groups
 ```
