@@ -4,8 +4,8 @@
 #' package \code{"agricolae"} for the analysis of a Lina x Tester genetic design.
 #'
 #' @param trait The trait to analyze.
-#' @param lines The lines.
-#' @param testers The testers.
+#' @param line The lines.
+#' @param tester The testers.
 #' @param rep The replication.
 #' @param data The name of the data frame containing the data.
 #' @author Raul Eyzaguirre.
@@ -17,42 +17,42 @@
 #' @importFrom stats aov pf
 #' @export
 
-aov.lxt <- function(trait, lines, testers, rep, data) {
+aov.lxt <- function(trait, line, tester, rep, data) {
 
   # Internal data frame
 
   ddd <- data.frame(trait = data[, trait],
-                    lines = data[, lines],
-                    testers = data[, testers],
+                    line = data[, line],
+                    tester = data[, tester],
                     rep = data[, rep])
 
   # Everything as character
 
-  ddd$lines <- as.character(ddd$lines)
-  ddd$testers <- as.character(ddd$testers)
+  ddd$line <- as.character(ddd$line)
+  ddd$tester <- as.character(ddd$tester)
   ddd$rep <- as.character(ddd$rep)
 
   # Number of lines, testers and reps
 
-  nl <- length(unique(ddd$lines))
-  nt <- length(unique(ddd$testers))
+  nl <- length(unique(ddd$line))
+  nt <- length(unique(ddd$tester))
   nr <- length(unique(ddd$rep))
 
   # Models
 
-  ddd$treat <- paste(ddd$lines, ddd$testers)
+  ddd$treat <- paste(ddd$line, ddd$tester)
 
   model.1 <- aov(trait ~ rep + treat, data = ddd)
   anova.1 <- as.matrix(anova(model.1))
 
-  model.4 <- aov(trait ~ lines * testers, data = ddd)
+  model.4 <- aov(trait ~ line * tester, data = ddd)
   anova.4 <- as.matrix(anova(model.4))
 
   # SCA and GCA
 
   ddd.2 <- na.omit(ddd)
 
-  mm <- tapply(ddd.2$trait, ddd.2[, c("lines", "testers")], mean, na.rm = TRUE)
+  mm <- tapply(ddd.2$trait, ddd.2[, c("line", "tester")], mean, na.rm = TRUE)
   cmm <- ncol(mm)
   rmm <- nrow(mm)
   SCA <- mm
@@ -61,18 +61,18 @@ aov.lxt <- function(trait, lines, testers, rep, data) {
       SCA[i, j] <- mm[i, j] - mean(mm[, j], na.rm = TRUE) -
                    mean(mm[i, ], na.rm = TRUE) + mean(mm, na.rm = TRUE)
 
-  mm <- tapply(ddd.2$trait, ddd.2$lines, mean, na.rm = TRUE)
-  GCA.lines <- mm - mean(ddd.2$trait, na.rm = TRUE)
+  mm <- tapply(ddd.2$trait, ddd.2$line, mean, na.rm = TRUE)
+  GCA.line <- mm - mean(ddd.2$trait, na.rm = TRUE)
 
-  mm <- tapply(ddd.2$trait, ddd.2$testers, mean, na.rm = TRUE)
-  GCA.testers <- mm - mean(ddd.2$trait, na.rm = TRUE)
+  mm <- tapply(ddd.2$trait, ddd.2$tester, mean, na.rm = TRUE)
+  GCA.tester <- mm - mean(ddd.2$trait, na.rm = TRUE)
 
   # More anovas
 
   model.3 <- aov(trait ~ treat, data = ddd.2)
   anova.3 <- as.matrix(anova(model.3))
 
-  ddd.3 <- ddd[is.na(ddd$lines) | is.na(ddd$testers), ]
+  ddd.3 <- ddd[is.na(ddd$line) | is.na(ddd$tester), ]
 
   model.2 <- aov(trait ~ treat, data = ddd.3)
   anova.2 <- as.matrix(anova(model.2))
@@ -123,15 +123,15 @@ aov.lxt <- function(trait, lines, testers, rep, data) {
 
   # P values
 
-  GCA.lines.p <- round(pt(abs(GCA.lines) / s1, matriz[9, 1], lower.tail = FALSE) * 2, 4)
-  GCA.testers.p <- round(pt(abs(GCA.testers) / s2, matriz[9, 1], lower.tail = FALSE) * 2, 4)
+  GCA.line.p <- round(pt(abs(GCA.line) / s1, matriz[9, 1], lower.tail = FALSE) * 2, 4)
+  GCA.tester.p <- round(pt(abs(GCA.tester) / s2, matriz[9, 1], lower.tail = FALSE) * 2, 4)
 
-  GCA.le <- t(matrix(c(GCA.lines, GCA.lines.p), nrow = 2, byrow = TRUE))
-  rownames(GCA.le) <- names(GCA.lines)
+  GCA.le <- t(matrix(c(GCA.line, GCA.line.p), nrow = 2, byrow = TRUE))
+  rownames(GCA.le) <- names(GCA.line)
   colnames(GCA.le) <- c("Effects", "p-values")
 
-  GCA.te <- t(matrix(c(GCA.testers, GCA.testers.p), nrow = 2, byrow = TRUE))
-  rownames(GCA.te) <- names(GCA.testers)
+  GCA.te <- t(matrix(c(GCA.tester, GCA.tester.p), nrow = 2, byrow = TRUE))
+  rownames(GCA.te) <- names(GCA.tester)
   colnames(GCA.te) <- c("Effects", "p-values")
 
   SCA.p <- round(pt(abs(SCA) / s3, matriz[9, 1], lower.tail = FALSE) * 2, 4)

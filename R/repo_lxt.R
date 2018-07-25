@@ -2,8 +2,8 @@
 #'
 #' Produces an automatic report for a Line x Tester genetic design analysis.
 #' @param traits The traits to analize.
-#' @param lines The lines.
-#' @param testers The testers.
+#' @param line The lines.
+#' @param tester The testers.
 #' @param rep The replications.
 #' @param data The name of the data frame.
 #' @param title The title.
@@ -23,7 +23,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.lxt <- function(traits, lines, testers, rep, data,
+repo.lxt <- function(traits, line, tester, rep, data,
                      title = "Automatic report for a Line x Tester genetic design",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -57,8 +57,8 @@ repo.lxt <- function(traits, lines, testers, rep, data,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                  lines = lines,
-                                  testers = testers,
+                                  line = line,
+                                  tester = tester,
                                   rep = rep,
                                   data = data,
                                   title = title,

@@ -4,14 +4,14 @@
 \alias{aov.lxt}
 \title{Analysis for a Line x Tester genetic design.}
 \usage{
-aov.lxt(trait, lines, testers, rep, data)
+aov.lxt(trait, line, tester, rep, data)
 }
 \arguments{
 \item{trait}{The trait to analyze.}
 
-\item{lines}{The lines.}
+\item{line}{The lines.}
 
-\item{testers}{The testers.}
+\item{tester}{The testers.}
 
 \item{rep}{The replication.}
 
