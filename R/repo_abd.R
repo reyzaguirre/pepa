@@ -19,7 +19,7 @@
 #' @return It returns an explanation about the ABD fitted model.
 #' @examples
 #' # A subset that looks like an ABD
-#' temp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50, 203, 204), ]
+#' temp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50, 169, 170), ]
 #' repo.abd(c("trw", "vw"), "geno", "rep", temp)
 #'
 #' # With some missing values

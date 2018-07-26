@@ -46,10 +46,10 @@ if (at[1, 5] < 0.05) {
 }
 ```
 
-`r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of genotypes in your experiment is not so big, we can plot the data for each genotypes:"}`
+`r if(lc$ng < 10) {"It is always good to have some visualization of the data. Because the number of genotypes in your experiment is not so big, we can plot the data for each genotypes:"}`
 
 ```{r echo = FALSE}
-if (lc$nt < 10)
+if (lc$ng < 10)
   msdplot(traits[i], geno, data, conf = 1)
 ```
 

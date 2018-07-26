@@ -58,12 +58,12 @@ if (at[1, 5] > 0.05)
     tapply(data[, traits[i]], data[, geno], mean)
 ```
 
-`r if (lc$nt < 10 & at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".3.3. Plot of means")}`
+`r if (lc$ng < 10 & at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".3.3. Plot of means")}`
 
-`r if(lc$nt < 10) {"It is always good to have some visualization of the data. Because the number of genotypes in your experiment is not so big, we can plot the data for each genotype:"}`
+`r if(lc$ng < 10) {"It is always good to have some visualization of the data. Because the number of genotypes in your experiment is not so big, we can plot the data for each genotype:"}`
 
 ```{r echo = FALSE}
-if (lc$nt < 10) msdplot(traits[i], geno, data, conf = 1)
+if (lc$ng < 10) msdplot(traits[i], geno, data, conf = 1)
 ```
 
 ## {{i+1}}.4. Variance components

@@ -39,7 +39,7 @@ lc <- ck.abd(traits[1], geno, rep, data)
 
 # 1. Model specification and data description
 
-There are data for `r lc$nt.new` genotypes tested using an augmented block design with `r lc$nr` blocks and `r lc$nt.check` checks in each block. The statistical model is
+There are data for `r lc$ng` genotypes tested using an augmented block design with `r lc$nr` blocks and `r lc$ng.check` checks in each block. The statistical model is
 $$
 y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
 $$
@@ -60,7 +60,7 @@ for (i in 1:length(traits)) {
   
   lc <- ck.abd(traits[i], geno, rep, data)
 
-  if (lc$nt.check.2 > 1) {
+  if (lc$n.check.2 > 1) {
     out <- c(out, knit_expand('child_abd.Rmd'))
   } else {
     out <- c(out, knit_expand('child_abd_fail.Rmd'))
