@@ -3,14 +3,14 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r echo = FALSE}
-lc <- ck.crd(traits[i], geno, data)
+lc <- ck.crd(traits[i], geno, dfr)
 ```
 
-`r if (lc$c2 == 0) {"There is only one replication. Analysis is not possible with one replication."}`
+`r if (lc$nrep == 1) {"There is only one replication. Analysis is not possible with one replication."}`
 
-`r if (lc$c1 == 0 & lc$c2 == 1) {"There is at least one genotype without data. The table below shows the frequencies of valid data for each genotype. The analysis cannot be produced if there are genotypes without data. Solve this to proceed."}`
+`r if (lc$ng.0 > 0 & lc$nrep > 1) {"There is at least one genotype without data. The table below shows the frequencies of valid data for each genotype. The analysis cannot be produced if there are genotypes without data."}`
 
 ```{r echo = FALSE}
-if (lc$c2 == 1)
-  lc$tfreq
+if (lc$nrep > 1)
+  lc$tf
 ```

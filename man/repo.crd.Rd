@@ -4,7 +4,7 @@
 \alias{repo.crd}
 \title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
-repo.crd(traits, geno, data, maxp = 0.1,
+repo.crd(traits, geno, dfr, maxp = 0.1,
   title = "Automatic report for a Completely Randomized Design (CRD)",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
@@ -15,15 +15,15 @@ repo.crd(traits, geno, data, maxp = 0.1,
 
 \item{geno}{The genotypes.}
 
-\item{data}{The name of the data frame.}
+\item{dfr}{The name of the data frame.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
-\item{title}{The title.}
+\item{title}{Report title.}
 
-\item{subtitle}{The subtitle.}
+\item{subtitle}{Report subtitle.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
@@ -53,7 +53,6 @@ variance components are shown.
 }
 \examples{
 repo.crd(c("trw", "vw"), "geno", pjpz09)
-
 # With a small data set
 temp <- pjpz09[1:18, ]
 repo.crd(c("trw", "vw", "crw"), "geno", temp)

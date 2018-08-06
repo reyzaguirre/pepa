@@ -3,8 +3,8 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r echo = FALSE}
-lc <- ck.crd(traits[i], geno, data)
-model <- aov(data[, traits[i]] ~ data[, geno])
+lc <- ck.crd(traits[i], geno, dfr)
+model <- aov(dfr[, traits[i]] ~ dfr[, geno])
 model$terms[[2]] <- traits[i]
 at <- anova(model)
 rownames(at)[1] <- geno
@@ -40,9 +40,9 @@ Any trend in the residuals in the left plot would violate the assumption of inde
 
 ```{r echo = FALSE}
 if (at[1, 5] < 0.05) {
-  agricolae::HSD.test(data[, traits[i]], data[, geno], at[2, 1], at[2, 3])$groups
+  agricolae::HSD.test(dfr[, traits[i]], dfr[, geno], at[2, 1], at[2, 3])$groups
 } else {
-  tapply(data[, traits[i]], data[, geno], mean, na.rm = TRUE)
+  tapply(dfr[, traits[i]], dfr[, geno], mean, na.rm = TRUE)
 }
 ```
 
@@ -50,7 +50,7 @@ if (at[1, 5] < 0.05) {
 
 ```{r echo = FALSE}
 if (lc$ng < 10)
-  msdplot(traits[i], geno, data, conf = 1)
+  msdplot(traits[i], geno, dfr, conf = 1, xlab = 'Genotype', ylab = traits[i])
 ```
 
 ## {{i+1}}.4. Variance components
@@ -58,9 +58,9 @@ if (lc$ng < 10)
 Below are the variance components for this model, under the assumption that genotypes are random. Here the model is fitted using REML.
 
 ```{r echo = FALSE}
-y <- data[, traits[i]]
-fg <- data[, geno]
-ff <- as.formula(y ~ (1|fg))
+y <- dfr[, traits[i]]
+g <- dfr[, geno]
+ff <- as.formula(y ~ (1|g))
 model <- lme4::lmer(ff)
 vc <- data.frame(lme4::VarCorr(model))
 vc[1, 1] <- geno
