@@ -15,7 +15,7 @@ params:
   geno: "no data"
   env: "no data"
   rep: "no data"
-  data: "no data"
+  dfr: "no data"
   means: "no data"
   dgg: "no data"
   units: "no data"
@@ -28,13 +28,13 @@ traits <- params$traits
 geno <- params$geno
 env <- params$env
 rep <- params$rep
-data <- params$data
+dfr <- params$dfr
 means <- params$means
 dgg <- params$dgg
 units <- params$units
 sf <- params$sf
 
-pbindex <- pesekbaker(traits, geno, env, rep, data, means, dgg, units, sf)
+pbindex <- pesekbaker(traits, geno, env, rep, dfr, means, dgg, units, sf)
 ```
 
 ### Desired genetic gains

@@ -22,7 +22,7 @@ params:
   rep: "no data"
   block: "no data"
   k: "no data"
-  data: "no data"
+  dfr: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
@@ -36,12 +36,25 @@ geno <- params$geno
 rep <- params$rep
 block <- params$block
 k <- params$k
-data <- params$data
+dfr <- params$dfr
+
+out <- rm.fna(c('geno', 'block', 'rep'), dfr)
+dfr <- out$dfr
+nmis.fac <- out$nmis.fac
+
+lc <- ck.fs(c('geno', 'block'), 'rep', dfr)
+ng <- lc$nl[[1]]
+nrep <- lc$nrep
+nib <- lc$nl[[2]]
+
+block <- dfr[, block]
+geno <- dfr[, geno]
+rep <- dfr[, rep]
 ```
 
 # 1. Model specification and data description
 
-There are data for `r nlevels(as.factor(data[, geno]))` genotypes tested using an alpha (0,1) design with `r nlevels(as.factor(data[, rep]))` replications and `r nlevels(as.factor(data[, block]))` incomplete blocks. In this design each replication is a complete block for the genotypes that is splitted in several incomplete blocks. The statistical model is
+There are data for `r ng` genotypes tested using an alpha (0,1) design with `r nrep` replications and `r nib` incomplete blocks. In this design each replication is a complete block for the genotypes that is splitted in several incomplete blocks. The statistical model is
 $$
 y_{ijk} = \mu + \tau_i + \gamma_j + \rho_{k(j)} + \epsilon_{ijk}
 $$

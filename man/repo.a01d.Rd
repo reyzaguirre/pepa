@@ -2,9 +2,9 @@
 % Please edit documentation in R/repo_a01d.R
 \name{repo.a01d}
 \alias{repo.a01d}
-\title{Automatic report for an alpha (0,1) design.}
+\title{Automatic report for an alpha (0,1) design}
 \usage{
-repo.a01d(traits, geno, rep, block, k, data,
+repo.a01d(traits, geno, rep, block, k, dfr,
   title = "Automatic report for an alpha (0,1) design", subtitle = NULL,
   author = "International Potato Center", format = c("html", "word", "pdf"),
   server = FALSE, server_dir_name = "directory",
@@ -21,13 +21,13 @@ repo.a01d(traits, geno, rep, block, k, data,
 
 \item{k}{The size of the blocks.}
 
-\item{data}{The name of the data frame.}
+\item{dfr}{The name of the data frame.}
 
-\item{title}{The title.}
+\item{title}{Report title.}
 
-\item{subtitle}{The subtitle.}
+\item{subtitle}{Report subtitle.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
