@@ -4,7 +4,7 @@
 \alias{repo.abd}
 \title{Automatic report for an augmented block design (ABD)}
 \usage{
-repo.abd(traits, geno, rep, data,
+repo.abd(traits, geno, rep, dfr,
   title = "Automatic report for an Augmented Block Design (ABD)",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
@@ -17,13 +17,13 @@ repo.abd(traits, geno, rep, data,
 
 \item{rep}{The replications.}
 
-\item{data}{The name of the data frame.}
+\item{dfr}{The name of the data frame.}
 
-\item{title}{The title.}
+\item{title}{Report title.}
 
-\item{subtitle}{The subtitle.}
+\item{subtitle}{Report subtitle.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
@@ -48,7 +48,6 @@ It fits a linear model for an ABD and explains the results.
 # A subset that looks like an ABD
 temp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50, 169, 170), ]
 repo.abd(c("trw", "vw"), "geno", "rep", temp)
-
 # With some missing values
 temp[c(1, 2, 3), "trw"] <- NA
 temp[c(1, 10, 15), "vw"] <- NA

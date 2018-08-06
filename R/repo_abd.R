@@ -4,24 +4,23 @@
 #' @param traits The traits to analize.
 #' @param geno The genotypes.
 #' @param rep The replications.
-#' @param data The name of the data frame.
-#' @param title The title.
-#' @param subtitle The subtitle.
-#' @param author Author.
+#' @param dfr The name of the data frame.
+#' @param title Report title.
+#' @param subtitle Report subtitle.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @param server Logical. If \code{"FALSE"} works with local machines.
 #' Otherwise works in server environments.
 #' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
-#' @author Raul Eyzaguirre.
 #' @details It fits a linear model for an ABD and explains the results.
 #' @return It returns an explanation about the ABD fitted model.
+#' @author Raul Eyzaguirre.
 #' @examples
 #' # A subset that looks like an ABD
 #' temp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50, 169, 170), ]
 #' repo.abd(c("trw", "vw"), "geno", "rep", temp)
-#'
 #' # With some missing values
 #' temp[c(1, 2, 3), "trw"] <- NA
 #' temp[c(1, 10, 15), "vw"] <- NA
@@ -30,7 +29,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.abd <- function(traits, geno, rep, data,
+repo.abd <- function(traits, geno, rep, dfr,
                      title = "Automatic report for an Augmented Block Design (ABD)",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -66,7 +65,7 @@ repo.abd <- function(traits, geno, rep, data,
                     params = list(traits = traits,
                                   geno = geno,
                                   rep = rep,
-                                  data = data,
+                                  dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

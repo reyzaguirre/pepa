@@ -3,18 +3,18 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r echo = FALSE}
-lc <- ck.abd(traits[i], geno, rep, data)
+lc <- ck.abd(traits[i], geno, rep, dfr)
 
-if (lc$n.check.0 > 0) {
-  cond <- !(data[, geno] %in% lc$check.0) & !is.na(data[, traits[i]])
-  temp <- subset(data, cond)
+if (lc$nck.0 > 0) {
+  cond <- !(dfr[, geno] %in% lc$ck.0) & !is.na(dfr[, traits[i]])
+  temp <- subset(dfr, cond)
 } else {
-  cond <- !is.na(data[, traits[i]])
-  temp <- subset(data, cond)
+  cond <- !is.na(dfr[, traits[i]])
+  temp <- subset(dfr, cond)
 }
 
-if (lc$n.check.1 > 0) {
-  cond <- !(temp[, geno] %in% lc$check.1)
+if (lc$nck.1 > 0) {
+  cond <- !(temp[, geno] %in% lc$ck.1)
   temp <- subset(temp, cond)
 }
 
@@ -24,26 +24,26 @@ model <- agricolae::DAU.test(temp[, rep], temp[, geno], y)
 
 ## {{i+1}}.1. General setting
 
-`r if(lc$nmis == 0 & lc$nmis.check == 0) {"For this trait there is no missing values."}`
+`r if(lc$nmis == 0 & lc$nmis.ck == 0) {"For this trait there are no missing values."}`
 `r if(lc$nmis == 1) {"There is one genotype with missing value. This genotype has been removed."}`
 `r if(lc$nmis > 1) paste("There are", lc$nmis, "genotypes with missing values. These genotypes have been removed.")`
 `r if(lc$nmis > 0) paste("Therefore, there are", lc$ng - lc$nmis, "genotypes included in the analysis.")`
 
-`r if(lc$n.check.0 == 1) paste0("There is one check without data: ", lc$check.0, ". This check has been removed.")`
-`r if(lc$n.check.0 > 1) paste0("There are ", lc$n.check.0, " checks without data: ")`
+`r if(lc$nck.0 == 1) paste0("There is one check without data: ", lc$ck.0, ". This check has been removed.")`
+`r if(lc$nck.0 > 1) paste0("There are ", lc$nck.0, " checks without data: ")`
 ```{r echo = FALSE}
-if(lc$n.check.0 > 1)
-  lc$check.0
+if(lc$nck.0 > 1)
+  lc$ck.0
 ```
-`r if(lc$n.check.0 > 1) {"These checks have been removed."}`
+`r if(lc$nck.0 > 1) {"These checks have been removed."}`
 
-`r if(lc$n.check.1 == 1) paste0("There is one check with data in only one block: ", lc$check.1, ". Checks need at least two replications so this check has been removed.")`
-`r if(lc$n.check.1 > 1) paste0("There are ", lc$n.check.1, " checks with data in only one block: ")`
+`r if(lc$nck.1 == 1) paste0("There is one check with data in only one block: ", lc$ck.1, ". Checks need at least two replications so this check has been removed.")`
+`r if(lc$nck.1 > 1) paste0("There are ", lc$nck.1, " checks with data in only one block: ")`
 ```{r echo = FALSE}
-if(lc$n.check.1 > 1)
-  lc$check.1
+if(lc$nck.1 > 1)
+  lc$ck.1
 ```
-`r if(lc$n.check.1 > 1) {"Checks need at least two replications so these checks have been removed."}`
+`r if(lc$nck.1 > 1) {"Checks need at least two replications so these checks have been removed."}`
 
 ## {{i+1}}.2. Adjusted means
 
