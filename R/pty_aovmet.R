@@ -6,24 +6,24 @@
 #' @param geno The genotypes.
 #' @param env The environments.
 #' @param rep The replications.
-#' @param data The name of the data frame containing the data.
+#' @param dfr The name of the data frame containing the data.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
-#' @param author Author.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
-#' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a MET with a RCBD and explains the results.
 #' If data is unbalanced, missing values are estimated up to an specified maximum
 #' proportion, 10\% by default. Genotypes and environments are considered as fixed
 #' factors while the blocks are considered as random and nested into the environments.
 #' @return It returns an explanation about the MET with a RCBD fitted model.
+#' @author Raul Eyzaguirre.
 #' @examples
 #' pty.aovmet("y", "geno", "env", "rep", met8x12)
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-pty.aovmet <- function(trait, geno, env, rep, data, maxp = 0.1,
+pty.aovmet <- function(trait, geno, env, rep, dfr, maxp = 0.1,
                        author = "International Potato Center",
                        format = c("html", "word", "pdf")) {
 
@@ -40,7 +40,7 @@ pty.aovmet <- function(trait, geno, env, rep, data, maxp = 0.1,
                                   geno = geno,
                                   env = env,
                                   rep = rep,
-                                  data = data,
+                                  dfr = dfr,
                                   maxp = maxp,
                                   author = author))
 

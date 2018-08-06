@@ -4,7 +4,7 @@
 \alias{pty.aovmet}
 \title{Pepa tells you about a MET with a RCBD}
 \usage{
-pty.aovmet(trait, geno, env, rep, data, maxp = 0.1,
+pty.aovmet(trait, geno, env, rep, dfr, maxp = 0.1,
   author = "International Potato Center", format = c("html", "word", "pdf"))
 }
 \arguments{
@@ -16,11 +16,11 @@ pty.aovmet(trait, geno, env, rep, data, maxp = 0.1,
 
 \item{rep}{The replications.}
 
-\item{data}{The name of the data frame containing the data.}
+\item{dfr}{The name of the data frame containing the data.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
