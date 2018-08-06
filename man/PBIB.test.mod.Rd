@@ -8,9 +8,9 @@ PBIB.test.mod(block, trt, replication, y, k, method = c("REML", "ML", "VC"),
   test = c("lsd", "tukey"), alpha = 0.05, console = FALSE, group = TRUE)
 }
 \arguments{
-\item{block}{type of UI element, deault is a tab in a shinydashboard}
+\item{block}{Type of UI element, deault is a tab in a shinydashboard}
 
-\item{trt}{diaply title name}
+\item{trt}{Diaply title name}
 
 \item{replication}{UI TabName}
 
@@ -24,14 +24,13 @@ PBIB.test.mod(block, trt, replication, y, k, method = c("REML", "ML", "VC"),
 
 \item{alpha}{Significant test}
 
-\item{console}{logical, print output}
+\item{console}{Logical, print output}
 
-\item{group}{logical, groups}
+\item{group}{Logical, groups}
 }
 \description{
-This modified version of PBIB.test (agricolae pkg) aims to analyze alpha design experiment, in case, it
-surpass 50 treatments.
-using alpha design experiment
+This modified version of PBIB.test (agricolae pkg) aims to analyze alpha design experiment,
+in case, it surpass 50 treatments, using alpha design experiment.
 }
 \author{
 Omar Benites

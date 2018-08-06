@@ -1,27 +1,26 @@
-# order.group2: funcion que genera las letras
-
 #' A modified version of order.group of agricolae package
 #' @description Extesion of the collection of letters and numbers for comparison means.
+#' @param trt Treatments
+#' @param means Means of treatment
+#' @param N Replications
+#' @param MSerror Mean square error
+#' @param Tprob Minimum value for the comparison
+#' @param std.err Standard error
+#' @param parameter Constante 1 (Sd), 0.5 (Sx)
+#' @param snk Constante = 1 (Student Newman Keuls)
+#' @param DFerror Degrees of freedom of the experimental error
+#' @param alpha Level of risk for the test
+#' @param sdtdif Standard deviation of difference in BIB
+#' @param vartau Matrix var-cov in PBIB
+#' @param console Logical, print output
 #' @author Omar Benites
-#' @param trt	Treatments
-#' @param means	Means of treatment
-#' @param N	Replications
-#' @param MSerror	Mean square error
-#' @param Tprob	minimum value for the comparison
-#' @param std.err	standard error
-#' @param parameter	Constante 1 (Sd), 0.5 (Sx)
-#' @param snk	Constante = 1 (Student Newman Keuls)
-#' @param DFerror	Degrees of freedom of the experimental error
-#' @param alpha	Level of risk for the test
-#' @param sdtdif standard deviation of difference in BIB
-#' @param vartau matrix var-cov in PBIB
-#' @param console logical, print output
 #' @importFrom stats formula lm na.omit pt ptukey qt qtukey sd vcov AIC BIC anova deviance df.residual
 #' @export
 
 order.group.mod <- function(trt, means, N, MSerror, Tprob, std.err, parameter = 1,
                             snk = 0, DFerror = NULL, alpha = NULL, sdtdif = NULL,
                             vartau = NULL, console) {
+
   replications <- N
   n <- length(means)
   z <- data.frame(trt, means, N = N, std.err, replications)
@@ -143,23 +142,23 @@ order.group.mod <- function(trt, means, N, MSerror, Tprob, std.err, parameter = 
   }
   output <- data.frame(trt, means, M, N = replications, std.err)
   invisible(output)
+
 }
 
 #' A modified version of Analysis of the Partially Balanced Incomplete Block Design
-#' @description This modified version of PBIB.test (agricolae pkg) aims to analyze alpha design experiment, in case, it
-#' surpass 50 treatments.
-#' using alpha design experiment
-#' @author Omar Benites
-#' @param block type of UI element, deault is a tab in a shinydashboard
-#' @param trt diaply title name
+#' @description This modified version of PBIB.test (agricolae pkg) aims to analyze alpha design experiment,
+#' in case, it surpass 50 treatments, using alpha design experiment.
+#' @param block Type of UI element, deault is a tab in a shinydashboard
+#' @param trt Diaply title name
 #' @param replication UI TabName
 #' @param y Response
 #' @param k Block size
 #' @param method Estimation method: REML, ML and VC
 #' @param test Comparison treatments
 #' @param alpha Significant test
-#' @param console logical, print output
-#' @param group logical, groups
+#' @param console Logical, print output
+#' @param group Logical, groups
+#' @author Omar Benites
 #' @export
 
 PBIB.test.mod <- function(block, trt, replication, y, k,

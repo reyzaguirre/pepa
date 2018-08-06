@@ -17,9 +17,9 @@ order.group.mod(trt, means, N, MSerror, Tprob, std.err, parameter = 1,
 
 \item{MSerror}{Mean square error}
 
-\item{Tprob}{minimum value for the comparison}
+\item{Tprob}{Minimum value for the comparison}
 
-\item{std.err}{standard error}
+\item{std.err}{Standard error}
 
 \item{parameter}{Constante 1 (Sd), 0.5 (Sx)}
 
@@ -29,11 +29,11 @@ order.group.mod(trt, means, N, MSerror, Tprob, std.err, parameter = 1,
 
 \item{alpha}{Level of risk for the test}
 
-\item{sdtdif}{standard deviation of difference in BIB}
+\item{sdtdif}{Standard deviation of difference in BIB}
 
-\item{vartau}{matrix var-cov in PBIB}
+\item{vartau}{Matrix var-cov in PBIB}
 
-\item{console}{logical, print output}
+\item{console}{Logical, print output}
 }
 \description{
 Extesion of the collection of letters and numbers for comparison means.

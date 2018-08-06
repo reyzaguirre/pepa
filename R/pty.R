@@ -1,15 +1,15 @@
 #' Pepa tells you
 #'
-#' Explain an R object in plain English if she knows about it
+#' Explain an R object in plain English if she knows about it.
 #' @param x An R object.
-#' @param author Author.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
-#' @author Raul Eyzaguirre.
 #' @details It uses a set of templates to explain R objects in plain English.
 #' It aims to produce automatic reports for some standard statistical procedures, most
 #' of them included in the \code{st4gi} package.
 #' @return It returns an explanation about the selected R object.
+#' @author Raul Eyzaguirre.
 #' @examples
 #' # Pepa tells you something about a data frame:
 #' pty(pjpz09)

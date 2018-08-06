@@ -10,7 +10,7 @@ pty(x, author = "International Potato Center", format = c("html", "word",
 \arguments{
 \item{x}{An R object.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
@@ -19,7 +19,7 @@ Other options are \code{"word"} and \code{"pdf"}.}
 It returns an explanation about the selected R object.
 }
 \description{
-Explain an R object in plain English if she knows about it
+Explain an R object in plain English if she knows about it.
 }
 \details{
 It uses a set of templates to explain R objects in plain English.
