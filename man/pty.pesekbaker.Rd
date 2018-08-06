@@ -4,7 +4,7 @@
 \alias{pty.pesekbaker}
 \title{Pepa tells you about the Pesek-Baker index}
 \usage{
-pty.pesekbaker(traits, geno, env, rep = NULL, data, means = "single",
+pty.pesekbaker(traits, geno, env, rep = NULL, dfr, means = "single",
   dgg = NULL, units = "sdu", sf = 0.1,
   author = "International Potato Center", format = c("html", "word", "pdf"))
 }
@@ -17,18 +17,19 @@ pty.pesekbaker(traits, geno, env, rep = NULL, data, means = "single",
 
 \item{rep}{The replications. Must be defined if \code{model = "gxe"}.}
 
-\item{data}{The name of the data frame containing the data.}
+\item{dfr}{The name of the data frame containing the data.}
 
-\item{means}{The genotypic means to compute the index, \code{"single"}
-or \code{"fitted"}. The default is \code{"single"}. See details for more information.}
+\item{means}{The genotypic means to compute the index, \code{"single"} or
+\code{"fitted"}. The default is \code{"single"}. See details for more information.}
 
 \item{dgg}{Desired genetic gains. The default is one standard deviation for each trait.}
 
-\item{units}{Units for dgg, \code{"actual"} or \code{"sdu"}. See details for more information.}
+\item{units}{Units for dgg, \code{"actual"} or \code{"sdu"}.
+See details for more information.}
 
 \item{sf}{Selected fraction. The default is 0.1.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
