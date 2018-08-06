@@ -5,24 +5,24 @@
 #' @param geno The genotypes.
 #' @param env The environments.
 #' @param rep The replications.
-#' @param data The name of the data frame containing the data.
-#' @param means The genotypic means to compute the index, \code{"single"}
-#' or \code{"fitted"}. The default is \code{"single"}. See details for more information.
+#' @param dfr The name of the data frame containing the data.
+#' @param means The genotypic means to compute the index, \code{"single"} or
+#' \code{"fitted"}. The default is \code{"single"}. See details for more information.
 #' @param lb Lower bound. \code{1} for \eqn{k = min(x)} and \code{2} for
-#' \eqn{k = (n \times min(x) - max(x)) / (n - 1)}
-#' @param author Author.
+#' \eqn{k = (n \times min(x) - max(x)) / (n - 1)}.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
-#' @author Raul Eyzaguirre.
 #' @details Type \code{?elston} for additional details.
 #' @return It returns an explanation about the Elston index.
+#' @author Raul Eyzaguirre.
 #' @examples
-#' pty.elston(c("rytha", "bc", "dm", "star", "nocr"), "geno", data = spg)
+#' pty.elston(c("rytha", "bc", "dm", "star", "nocr"), "geno", dfr = spg)
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-pty.elston <- function(traits, geno, env = NULL, rep = NULL, data,
+pty.elston <- function(traits, geno, env = NULL, rep = NULL, dfr,
                        means = "single", lb = 1,
                        author = "International Potato Center",
                        format = c("html", "word", "pdf")) {
@@ -40,7 +40,7 @@ pty.elston <- function(traits, geno, env = NULL, rep = NULL, data,
                                   geno = geno,
                                   env = env,
                                   rep = rep,
-                                  data = data,
+                                  dfr = dfr,
                                   means = means,
                                   lb = lb,
                                   author = author))
