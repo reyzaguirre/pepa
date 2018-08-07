@@ -4,7 +4,7 @@
 \alias{repo.pvssg}
 \title{Report for PVS - Global summary}
 \usage{
-repo.pvssg(traits, data, title = "Automatic report for PVS",
+repo.pvssg(traits, dfr, title = "Automatic report for PVS",
   subtitle = "Global summary data", author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
   server_dir_name = "directory", server_file_name = "filename")
@@ -12,13 +12,13 @@ repo.pvssg(traits, data, title = "Automatic report for PVS",
 \arguments{
 \item{traits}{A list of traits to be included in the report.}
 
-\item{data}{A data frame with data for a pvs global summary form.}
+\item{dfr}{A data frame with data for a pvs global summary form.}
 
-\item{title}{The title.}
+\item{title}{Report title.}
 
-\item{subtitle}{The subtitle.}
+\item{subtitle}{Report subtitle.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
@@ -34,7 +34,7 @@ Otherwise works in server environments.}
 It returns an automatic report.
 }
 \description{
-Produce a report for PVS data global summary sheet
+Produce a report for PVS data global summary sheet.
 }
 \details{
 It produces a report for global summary sheet of the Mother & Baby methodology

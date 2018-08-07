@@ -1,21 +1,21 @@
 #' Report for PVS - Global summary
 #'
-#' Produce a report for PVS data global summary sheet
+#' Produce a report for PVS data global summary sheet.
 #' @param traits A list of traits to be included in the report.
-#' @param data A data frame with data for a pvs global summary form.
-#' @param title The title.
-#' @param subtitle The subtitle.
-#' @param author Author.
+#' @param dfr A data frame with data for a pvs global summary form.
+#' @param title Report title.
+#' @param subtitle Report subtitle.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @param server Logical. If \code{"FALSE"} works with local machines.
 #' Otherwise works in server environments.
 #' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
-#' @author Raul Eyzaguirre.
 #' @details It produces a report for global summary sheet of the Mother & Baby methodology
 #' implemented by CIP.
 #' @return It returns an automatic report.
+#' @author Raul Eyzaguirre.
 #' @examples
 #' traits <- c("NMTP_Mean_mother", "TNTP_Mean_mother", "PPH_Mean_mother", "TTYA_Mean_mother")
 #' repo.pvssg(traits, pvssg)
@@ -26,7 +26,7 @@
 #' @export
 
 repo.pvssg <- function(traits,
-                       data,
+                       dfr,
                        title = "Automatic report for PVS",
                        subtitle = "Global summary data",
                        author = "International Potato Center",
@@ -60,7 +60,7 @@ repo.pvssg <- function(traits,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                  data = data,
+                                  dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))
