@@ -50,7 +50,7 @@ if (at[1, 5] < 0.05) {
 
 ```{r echo = FALSE}
 if (lc$ng < 10)
-  msdplot(traits[i], geno, dfr, conf = 1, xlab = 'Genotype', ylab = traits[i])
+  msdplot(traits[i], geno, dfr, conf = 1, xlab = 'Genotype', ylab = traits[i], pch = 4)
 ```
 
 ## {{i+1}}.4. Variance components
