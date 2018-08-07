@@ -6,32 +6,31 @@
 #' @param geno The genotypes.
 #' @param env The environments.
 #' @param rep The replications.
-#' @param data The name of the data frame containing the data.
+#' @param dfr The name of the data frame containing the data.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
-#' @param title The title.
-#' @param subtitle The subtitle.
-#' @param author Author.
+#' @param title Report title.
+#' @param subtitle Report subtitle.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @param server Logical. If \code{"FALSE"} works with local machines.
 #' Otherwise works in server environments.
 #' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
-#' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a MET with a RCBD for the selected trait.
 #' If data is unbalanced, missing values are estimated up to an specified maximum
 #' proportion, 10\% by default. Genotypes and environments are considered as fixed
 #' factors while the blocks are considered as random and nested into the environments
-#' for ANOVA. For variance components estimation all the factors
-#' are treated as random.
+#' for ANOVA. For variance components estimation all the factors are treated as random.
 #' @return It returns an automatic report about the MET with a RCBD fitted model.
+#' @author Raul Eyzaguirre.
 #' @examples
 #' repo.met(c("rytha", "fytha"), "geno", "env", "rep", megaclones)
 #' @import agricolae
 #' @importFrom utils browseURL
 #' @export
 
-repo.met <- function(traits, geno, env, rep, data, maxp = 0.1,
+repo.met <- function(traits, geno, env, rep, dfr, maxp = 0.1,
                      title = "Automatic report for a MET with a RCBD",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -68,7 +67,7 @@ repo.met <- function(traits, geno, env, rep, data, maxp = 0.1,
                                   geno = geno,
                                   env = env,
                                   rep = rep,
-                                  data = data,
+                                  dfr = dfr,
                                   maxp = maxp,
                                   title = title,
                                   subtitle = subtitle,
