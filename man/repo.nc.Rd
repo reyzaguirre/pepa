@@ -4,7 +4,7 @@
 \alias{repo.nc}
 \title{Automatic report for a North Carolina genetic design.}
 \usage{
-repo.nc(traits, set, male, female, progeny = NULL, rep, model = NULL, data,
+repo.nc(traits, set, male, female, progeny = NULL, rep, model, dfr,
   title = NULL, subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
   server_dir_name = "directory", server_file_name = "filename")
@@ -24,13 +24,13 @@ repo.nc(traits, set, male, female, progeny = NULL, rep, model = NULL, data,
 
 \item{model}{1, 2 or 3.}
 
-\item{data}{The data frame.}
+\item{dfr}{The data frame.}
 
-\item{title}{The title.}
+\item{title}{Report title.}
 
-\item{subtitle}{The subtitle.}
+\item{subtitle}{Report subtitle.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
@@ -47,10 +47,6 @@ It returns an ANOVA and related quantities.
 }
 \description{
 Produces an automatic report for a North Carolina I, II or III genetic design analysis.
-}
-\details{
-It fits a linear model to data from a North Carolina I, II or III
-genetic design.
 }
 \examples{
 library(agricolae)

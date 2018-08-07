@@ -8,20 +8,18 @@
 #' @param progeny The progeny (only for Carolina I design).
 #' @param rep The replication.
 #' @param model 1, 2 or 3.
-#' @param data The data frame.
-#' @param title The title.
-#' @param subtitle The subtitle.
-#' @param author Author.
+#' @param dfr The data frame.
+#' @param title Report title.
+#' @param subtitle Report subtitle.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @param server Logical. If \code{"FALSE"} works with local machines.
 #' Otherwise works in server environments.
 #' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
-#' @author Raul Eyzaguirre.
-#' @details It fits a linear model to data from a North Carolina I, II or III
-#' genetic design.
 #' @return It returns an ANOVA and related quantities.
+#' @author Raul Eyzaguirre.
 #' @examples
 #' library(agricolae)
 #' data(DC)
@@ -36,7 +34,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.nc <- function(traits, set, male, female, progeny = NULL, rep, model = NULL, data,
+repo.nc <- function(traits, set, male, female, progeny = NULL, rep, model, dfr,
                     title = NULL, subtitle = NULL,
                     author = "International Potato Center",
                     format = c("html", "word", "pdf"),
@@ -82,7 +80,7 @@ repo.nc <- function(traits, set, male, female, progeny = NULL, rep, model = NULL
                                   progeny = progeny,
                                   rep = rep,
                                   model = model,
-                                  data = data,
+                                  dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))
