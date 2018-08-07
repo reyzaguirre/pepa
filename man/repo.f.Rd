@@ -4,7 +4,7 @@
 \alias{repo.f}
 \title{Automatic report for a factorial experiment}
 \usage{
-repo.f(traits, factors, rep, design, data, maxp = 0.1,
+repo.f(traits, factors, rep, design, dfr, maxp = 0.1,
   title = "Automatic report for a factorial experiment", subtitle = NULL,
   author = "International Potato Center", format = c("html", "word", "pdf"),
   server = FALSE, server_dir_name = "directory",
@@ -19,15 +19,15 @@ repo.f(traits, factors, rep, design, data, maxp = 0.1,
 
 \item{design}{The statistical design, \code{crd} or \code{rcbd}.}
 
-\item{data}{The name of the data frame containing the data.}
+\item{dfr}{The name of the data frame containing the data.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
-\item{title}{The title.}
+\item{title}{Report title.}
 
-\item{subtitle}{The subtitle.}
+\item{subtitle}{Report subtitle.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
@@ -53,15 +53,14 @@ the selected traits. If data is unbalanced, missing values are estimated up to a
 specified maximum proportion, 10\% by default. All factors are considered as fixed.
 }
 \examples{
+## Example 1: Two factors factorial
 repo.f(c("asc.dw", "asc.fw"), c("geno", "treat"), "rep", "crd", asc)
 
+## Example 2: Three factors factorial
 # Create design with 3 factors
 fnames <- c('A', 'B', 'C')
 flevels <- list(c('a1', 'a2'), c('b1', 'b2'), c('c1', 'c2', 'c3'))
-design <- 'rcbd'
-nrep <- 2
-nc <- 10
-temp <- cr.f(fnames, flevels, design, nrep, nc)$book
+temp <- cr.f(fnames, flevels, 'rcbd', 2, 10)$book
 # Simulate random data
 temp$y <- rnorm(24)
 # Run report

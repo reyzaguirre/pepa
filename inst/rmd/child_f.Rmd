@@ -1,28 +1,28 @@
 `r i = {{i}}`
 
 ```{r echo = FALSE}
-lc <- ck.f(traits[i], factors, rep, data)
-if (lc$c4 == 0) {
+lc <- ck.f(traits[i], factors, rep, dfr)
+if (lc$nmis > 0) {
   trait.est <- paste0(traits[i], ".est")
-  data$est <- mve.f(traits[i], factors, rep, design, data, maxp)[, trait.est]
+  dfr$est <- mve.f(traits[i], factors, rep, design, dfr, maxp)[, trait.est]
 } else {
-  data$est <- data[, traits[i]]
+  dfr$est <- dfr[, traits[i]]
 }
 ```
     
 # {{i+1}}. Analysis for trait `r traits[i]`
 
-`r if (lc$c4 == 1) {"There are no missing values for this trait; the design is balanced."}`
+`r if (lc$nmis == 0) {"There are no missing values for this trait; the design is balanced."}`
 
-`r if (lc$c4 == 0) paste0("There are some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated for the descriptive statistics and ANOVA.")`
+`r if (lc$nmis > 0) paste0("There are some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated for the descriptive statistics and ANOVA.")`
 
 ## {{i+1}}.1. Descriptive statistics
 
 ### {{i+1}}.1.1. Means by individual factor levels
 
 ```{r echo = FALSE}
-for (j in 1:nf)
-  print(tapply(data$est, data[, factors[j]], mean))
+for (j in 1:lc$nf)
+  print(tapply(dfr$est, dfr[, factors[j]], mean))
 ```
 
 ### {{i+1}}.1.2. Means by factor levels combinations
@@ -30,16 +30,16 @@ for (j in 1:nf)
 ```{r echo = FALSE}
 # Create expression for list of factors
   
-lf.expr <- 'list(data[, factors[1]]'
+lf.expr <- 'list(dfr[, factors[1]]'
   
-for (j in 2:nf)
-  lf.expr <- paste0(lf.expr, ', data[, factors[', j, ']]')
+for (j in 2:lc$nf)
+  lf.expr <- paste0(lf.expr, ', dfr[, factors[', j, ']]')
   
 lf.expr <- paste0(lf.expr, ')')
 
 # Compute means over replications
 
-tapply(data$est, eval(parse(text = lf.expr)), mean)
+tapply(dfr$est, eval(parse(text = lf.expr)), mean)
 ```
 
 ## {{i+1}}.2. ANOVA
@@ -57,13 +57,13 @@ for (j in 2:lc$nf)
 
 if (design == "crd") {
   ff <- as.formula(expr)
-  model <- aov(ff, data = data)
+  model <- aov(ff, dfr)
 }
   
 if (design == "rcbd") {
   expr <- paste(expr, '+', rep)
   ff <- as.formula(expr)
-  model <- aov(ff, data = data)
+  model <- aov(ff, dfr)
 }
 
 par(mfrow = c(1, 2))
@@ -76,6 +76,6 @@ Funnel shapes for the first plot may suggest heterogeneity of variances while de
 ### {{i+1}}.2.2. ANOVA table
 
 ```{r echo = FALSE}
-at <- suppressWarnings(aov.f(traits[i], factors, rep, design, data, maxp))
+at <- suppressWarnings(aov.f(traits[i], factors, rep, design, dfr, maxp))
 at
 ```
