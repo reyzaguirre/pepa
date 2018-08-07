@@ -17,7 +17,7 @@ output:
     toc_depth: 3
     highlight: "tango"
 params:
-  data: "no data"
+  dfr: "no data"
   form: "no data"
   title: "no data"
   subtitle: "no data"
@@ -27,17 +27,17 @@ params:
 ```{r echo=FALSE}
 ## Data
 
-data <- params$data
-data <- data[, c("PHASE", "IDENTIFIED_CRITERIA", "SCORE_MEN", "SCORE_WOMEN", "SCORE_GLOBAL")]
-data$IDENTIFIED_CRITERIA <- as.character(data$IDENTIFIED_CRITERIA)
-colnames(data) <- c("phase", "Criteria", "Men", "Women", "Global")
-data <- tidyr::gather(data, group, value, Men:Global)
+dfr <- params$dfr
+dfr <- dfr[, c("PHASE", "IDENTIFIED_CRITERIA", "SCORE_MEN", "SCORE_WOMEN", "SCORE_GLOBAL")]
+dfr$IDENTIFIED_CRITERIA <- as.character(dfr$IDENTIFIED_CRITERIA)
+colnames(dfr) <- c("phase", "Criteria", "Men", "Women", "Global")
+dfr <- tidyr::gather(dfr, group, value, Men:Global)
 
 ## Split by phase
 
-flow <- data[data$phase == "Flowering", ]
-harv <- data[data$phase == "Harvest", ]
-stor <- data[data$phase == "Storage", ]
+flow <- dfr[dfr$phase == "Flowering", ]
+harv <- dfr[dfr$phase == "Harvest", ]
+stor <- dfr[dfr$phase == "Storage", ]
 
 ## Sort by number of votes
 

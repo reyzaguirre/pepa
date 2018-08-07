@@ -4,21 +4,21 @@
 \alias{repo.pvs}
 \title{Report for PVS}
 \usage{
-repo.pvs(data, form, title = "Automatic report for PVS", subtitle = NULL,
+repo.pvs(dfr, form, title = "Automatic report for PVS", subtitle = NULL,
   author = "International Potato Center", format = c("html", "word", "pdf"),
   server = FALSE, server_dir_name = "directory",
   server_file_name = "filename")
 }
 \arguments{
-\item{data}{A data frame with data for a pvs form.}
+\item{dfr}{A data frame with data for a pvs form.}
 
 \item{form}{Form number.}
 
-\item{title}{The title.}
+\item{title}{Report title.}
 
-\item{subtitle}{The subtitle.}
+\item{subtitle}{Report subtitle.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
@@ -34,11 +34,7 @@ Otherwise works in server environments.}
 It returns automatic reports for the different forms on a PVS book.
 }
 \description{
-Produce standard reports for PVS data
-}
-\details{
-It produces a report for different forms of the Mother & Baby methodology
-implemented by CIP.
+Produce standard reports for PVS data.
 }
 \examples{
 repo.pvs(pvsf1, 1)

@@ -17,7 +17,7 @@ output:
     toc_depth: 3
     highlight: "tango"
 params:
-  data: "no data"
+  dfr: "no data"
   form: "no data"
   title: "no data"
   subtitle: "no data"
@@ -27,20 +27,20 @@ params:
 ```{r echo = FALSE}
 ## Data
 
-data <- params$data
-colnames(data)[2:4] <- c("Appe", "Tast", "Text")
+dfr <- params$dfr
+colnames(dfr)[2:4] <- c("Appe", "Tast", "Text")
 
 ## Count number of men and women
 
-temp <- data[data$Sex == "M" | data$Sex == "Male", ]
+temp <- dfr[dfr$Sex == "M" | dfr$Sex == "Male", ]
 nm <- length(unique(temp$PanelNo))
-temp <- data[data$Sex == "F" | data$Sex == "Female", ]
+temp <- dfr[dfr$Sex == "F" | dfr$Sex == "Female", ]
 nw <- length(unique(temp$PanelNo))
 
 ## Aggregate data for principal components
 
-adg <- docomp("sum", c("Appe", "Tast", "Text"), "INSTN", data = data)
-temp <- docomp("sum", c("Appe", "Tast", "Text"), c("INSTN", "Sex"), data = data)
+adg <- docomp("sum", c("Appe", "Tast", "Text"), "INSTN", dfr = dfr)
+temp <- docomp("sum", c("Appe", "Tast", "Text"), c("INSTN", "Sex"), dfr = dfr)
 adm <- temp[temp$Sex == "M" | temp$Sex == "Male", ]
 adf <- temp[temp$Sex == "F" | temp$Sex == "Female", ]
 colnames(adm)[3:5] <- c("Appe-M", "Tast-M", "Text-M")
@@ -103,29 +103,29 @@ factoextra::fviz_pca(princip, repel = TRUE,
 ## 3.1. Analysis for appearance
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(PanelNo, INSTN, Appe, group = TRUE)) 
+ft <- with(dfr, friedman(PanelNo, INSTN, Appe, group = TRUE)) 
 ft$statistics
 ft$groups
-ft <- with(data, friedman(PanelNo, INSTN, Appe, group = FALSE)) 
+ft <- with(dfr, friedman(PanelNo, INSTN, Appe, group = FALSE)) 
 ft$comparison
 ```
 
 ## 3.2. Analysis for taste
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(PanelNo, INSTN, Tast, group = TRUE)) 
+ft <- with(dfr, friedman(PanelNo, INSTN, Tast, group = TRUE)) 
 ft$statistics
 ft$groups
-ft <- with(data, friedman(PanelNo, INSTN, Tast, group = FALSE)) 
+ft <- with(dfr, friedman(PanelNo, INSTN, Tast, group = FALSE)) 
 ft$comparison
 ```
 
 ## 3.3. Analysis for texture
 
 ```{r echo = FALSE}
-ft <- with(data, friedman(PanelNo, INSTN, Text, group = TRUE)) 
+ft <- with(dfr, friedman(PanelNo, INSTN, Text, group = TRUE)) 
 ft$statistics
 ft$groups
-ft <- with(data, friedman(PanelNo, INSTN, Text, group = FALSE)) 
+ft <- with(dfr, friedman(PanelNo, INSTN, Text, group = FALSE)) 
 ft$comparison
 ```

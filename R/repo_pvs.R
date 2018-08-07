@@ -1,21 +1,19 @@
 #' Report for PVS
 #'
-#' Produce standard reports for PVS data
-#' @param data A data frame with data for a pvs form.
+#' Produce standard reports for PVS data.
+#' @param dfr A data frame with data for a pvs form.
 #' @param form Form number.
-#' @param title The title.
-#' @param subtitle The subtitle.
-#' @param author Author.
+#' @param title Report title.
+#' @param subtitle Report subtitle.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @param server Logical. If \code{"FALSE"} works with local machines.
 #' Otherwise works in server environments.
 #' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
-#' @author Raul Eyzaguirre.
-#' @details It produces a report for different forms of the Mother & Baby methodology
-#' implemented by CIP.
 #' @return It returns automatic reports for the different forms on a PVS book.
+#' @author Raul Eyzaguirre.
 #' @examples
 #' repo.pvs(pvsf1, 1)
 #' repo.pvs(pvsf2, 2)
@@ -27,7 +25,7 @@
 #' @importFrom factoextra fviz_pca
 #' @export
 
-repo.pvs <- function(data, form,
+repo.pvs <- function(dfr, form,
                      title = "Automatic report for PVS",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -85,7 +83,7 @@ repo.pvs <- function(data, form,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(data = data,
+                    params = list(dfr = dfr,
                                   form = form,
                                   title = title,
                                   subtitle = subtitle,
