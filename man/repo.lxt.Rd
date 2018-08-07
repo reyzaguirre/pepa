@@ -4,7 +4,7 @@
 \alias{repo.lxt}
 \title{Automatic report for a Line x Tester genetic design.}
 \usage{
-repo.lxt(traits, line, tester, rep, data,
+repo.lxt(traits, line, tester, rep, dfr,
   title = "Automatic report for a Line x Tester genetic design",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
@@ -19,13 +19,13 @@ repo.lxt(traits, line, tester, rep, data,
 
 \item{rep}{The replications.}
 
-\item{data}{The name of the data frame.}
+\item{dfr}{The name of the data frame.}
 
-\item{title}{The title.}
+\item{title}{Report title.}
 
-\item{subtitle}{The subtitle.}
+\item{subtitle}{Report subtitle.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
@@ -38,13 +38,10 @@ Otherwise works in server environments.}
 \item{server_file_name}{If \code{"server = TRUE"}, this is the file name in the server.}
 }
 \value{
-It returns an ANOVA and related quantities.
+It returns an automatic report for a Line by Tester genetic design.
 }
 \description{
 Produces an automatic report for a Line x Tester genetic design analysis.
-}
-\details{
-It fits a linear model to data from a Line x Tester genetic design.
 }
 \examples{
 repo.lxt("yield", "line", "tester", "rep", lxt)

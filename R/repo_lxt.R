@@ -5,25 +5,24 @@
 #' @param line The lines.
 #' @param tester The testers.
 #' @param rep The replications.
-#' @param data The name of the data frame.
-#' @param title The title.
-#' @param subtitle The subtitle.
-#' @param author Author.
+#' @param dfr The name of the data frame.
+#' @param title Report title.
+#' @param subtitle Report subtitle.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @param server Logical. If \code{"FALSE"} works with local machines.
 #' Otherwise works in server environments.
 #' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
+#' @return It returns an automatic report for a Line by Tester genetic design.
 #' @author Raul Eyzaguirre.
-#' @details It fits a linear model to data from a Line x Tester genetic design.
-#' @return It returns an ANOVA and related quantities.
 #' @examples
 #' repo.lxt("yield", "line", "tester", "rep", lxt)
 #' @importFrom utils browseURL
 #' @export
 
-repo.lxt <- function(traits, line, tester, rep, data,
+repo.lxt <- function(traits, line, tester, rep, dfr,
                      title = "Automatic report for a Line x Tester genetic design",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -60,7 +59,7 @@ repo.lxt <- function(traits, line, tester, rep, data,
                                   line = line,
                                   tester = tester,
                                   rep = rep,
-                                  data = data,
+                                  dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))
