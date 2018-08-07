@@ -4,18 +4,17 @@
 #' @param traits The traits to analize.
 #' @param geno The genotypes.
 #' @param rep The replications.
-#' @param data The name of the data frame.
+#' @param dfr The name of the data frame.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
-#' @param title The title.
-#' @param subtitle The subtitle.
-#' @param author Author.
+#' @param title Report title.
+#' @param subtitle Report subtitle.
+#' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @param server Logical. If \code{"FALSE"} works with local machines.
 #' Otherwise works in server environments.
 #' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
-#' @author Raul Eyzaguirre.
 #' @details It fits a linear model for a RCBD and explains the results.
 #'
 #' Under the assumption of fixed effects an ANOVA table is computed with missing values
@@ -26,9 +25,9 @@
 #' Under the assumption of random effects the model is estimated using REML and the
 #' variance components are shown. Missing values are not estimated in this case.
 #' @return It returns an explanation about the RCBD fitted model.
+#' @author Raul Eyzaguirre.
 #' @examples
 #' repo.rcbd(c("trw", "vw"), "geno", "rep", pjpz09)
-#'
 #' # With a small data set
 #' temp <- pjpz09[1:18, ]
 #' repo.rcbd(c("trw", "vw", "crw"), "geno", "rep", temp)
@@ -36,7 +35,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.rcbd <- function(traits, geno, rep, data, maxp = 0.1,
+repo.rcbd <- function(traits, geno, rep, dfr, maxp = 0.1,
                       title = "Automatic report for a Randomized Complete Block Design (RCBD)",
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -72,7 +71,7 @@ repo.rcbd <- function(traits, geno, rep, data, maxp = 0.1,
                     params = list(traits = traits,
                                   geno = geno,
                                   rep = rep,
-                                  data = data,
+                                  dfr = dfr,
                                   maxp = maxp,
                                   title = title,
                                   subtitle = subtitle,

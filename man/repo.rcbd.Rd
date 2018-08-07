@@ -4,7 +4,7 @@
 \alias{repo.rcbd}
 \title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
-repo.rcbd(traits, geno, rep, data, maxp = 0.1,
+repo.rcbd(traits, geno, rep, dfr, maxp = 0.1,
   title = "Automatic report for a Randomized Complete Block Design (RCBD)",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
@@ -17,15 +17,15 @@ repo.rcbd(traits, geno, rep, data, maxp = 0.1,
 
 \item{rep}{The replications.}
 
-\item{data}{The name of the data frame.}
+\item{dfr}{The name of the data frame.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
-\item{title}{The title.}
+\item{title}{Report title.}
 
-\item{subtitle}{The subtitle.}
+\item{subtitle}{Report subtitle.}
 
-\item{author}{Author.}
+\item{author}{Report author.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
@@ -56,7 +56,6 @@ variance components are shown. Missing values are not estimated in this case.
 }
 \examples{
 repo.rcbd(c("trw", "vw"), "geno", "rep", pjpz09)
-
 # With a small data set
 temp <- pjpz09[1:18, ]
 repo.rcbd(c("trw", "vw", "crw"), "geno", "rep", temp)
