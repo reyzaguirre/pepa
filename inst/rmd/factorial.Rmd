@@ -75,7 +75,8 @@ dfr[, rep] <- as.character(dfr[, rep])
 The data frame has data for a full factorial with `r nf` factors with `r text.levels` levels. The experimental design is a `r text.design` with `r nrep` replications. 
 In this model we assume that the errors are independent and have a normal distribution with common variance.
 
-`r if (nmis.fac > 0) paste("Note: There are", nmis.fac, "rows with missing values for classifications factors. These rows have been deleted.")`
+`r if (nmis.fac == 1) paste("Note: There is", nmis.fac, "row with missing values for classifications factors. This row has been deleted.")`
+`r if (nmis.fac > 1) paste("Note: There are", nmis.fac, "rows with missing values for classifications factors. These rows have been deleted.")`
 
 ```{r include = FALSE}
 out <- NULL
