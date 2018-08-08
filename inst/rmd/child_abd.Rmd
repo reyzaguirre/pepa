@@ -5,18 +5,19 @@
 ```{r echo = FALSE}
 lc <- ck.abd(traits[i], geno, rep, dfr)
 
-if (lc$nck.0 > 0) {
-  cond <- !(dfr[, geno] %in% lc$ck.0) & !is.na(dfr[, traits[i]])
-  temp <- subset(dfr, cond)
+# Remove checks without data or with only one datum
+
+if (lc$nck.0 > 0 | lc$nck.1 > 0) {
+  temp <- dfr[!(dfr[, geno] %in% c(lc$ck.0, lc$ck.1)), ]
 } else {
-  cond <- !is.na(dfr[, traits[i]])
-  temp <- subset(dfr, cond)
+  temp <- dfr
 }
 
-if (lc$nck.1 > 0) {
-  cond <- !(temp[, geno] %in% lc$ck.1)
-  temp <- subset(temp, cond)
-}
+# Remove missing values for DAU.test
+
+temp <- temp[!is.na(temp[, traits[i]]), ]
+
+# Fit model
 
 y <- temp[, traits[i]]
 model <- agricolae::DAU.test(temp[, rep], temp[, geno], y)
