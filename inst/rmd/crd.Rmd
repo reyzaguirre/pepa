@@ -38,7 +38,7 @@ maxp <- params$maxp
 
 # Check factors structure
 
-out <- ck.fs('geno', NULL, dfr)
+out <- ck.fs(geno, NULL, dfr)
 ng <- out$nl[[1]]
 dfr <- out$dfr
 nmis.fac <- out$nmis.fac

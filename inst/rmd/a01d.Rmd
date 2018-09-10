@@ -42,7 +42,7 @@ dfr <- params$dfr
 
 # Check factors structure
 
-out <- ck.fs(c('geno', 'block'), 'rep', dfr)
+out <- ck.fs(c(geno, block), rep, dfr)
 ng <- out$nl[[1]]
 nrep <- out$nrep
 nib <- out$nl[[2]]

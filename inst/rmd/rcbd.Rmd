@@ -40,7 +40,7 @@ maxp <- params$maxp
 
 # Check factors structure
 
-out <- ck.fs('geno', 'rep', dfr)
+out <- ck.fs(geno, rep, dfr)
 ng <- out$nl[[1]]
 nrep <- out$nrep
 dfr <- out$dfr
