@@ -5,7 +5,8 @@
 \title{Pepa tells you about a MET with a RCBD}
 \usage{
 pty.aovmet(trait, geno, env, rep, dfr, maxp = 0.1,
-  author = "International Potato Center", format = c("html", "word", "pdf"))
+  author = "International Potato Center", format = c("html", "word",
+  "pdf"))
 }
 \arguments{
 \item{trait}{The trait to analize.}

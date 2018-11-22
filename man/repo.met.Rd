@@ -6,8 +6,8 @@
 \usage{
 repo.met(traits, geno, env, rep, dfr, maxp = 0.1,
   title = "Automatic report for a MET with a RCBD", subtitle = NULL,
-  author = "International Potato Center", format = c("html", "word", "pdf"),
-  server = FALSE, server_dir_name = "directory",
+  author = "International Potato Center", format = c("html", "word",
+  "pdf"), server = FALSE, server_dir_name = "directory",
   server_file_name = "filename")
 }
 \arguments{

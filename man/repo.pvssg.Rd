@@ -5,9 +5,10 @@
 \title{Report for PVS - Global summary}
 \usage{
 repo.pvssg(traits, dfr, title = "Automatic report for PVS",
-  subtitle = "Global summary data", author = "International Potato Center",
-  format = c("html", "word", "pdf"), server = FALSE,
-  server_dir_name = "directory", server_file_name = "filename")
+  subtitle = "Global summary data",
+  author = "International Potato Center", format = c("html", "word",
+  "pdf"), server = FALSE, server_dir_name = "directory",
+  server_file_name = "filename")
 }
 \arguments{
 \item{traits}{A list of traits to be included in the report.}

@@ -4,10 +4,10 @@
 \alias{repo.pvs}
 \title{Report for PVS}
 \usage{
-repo.pvs(dfr, form, title = "Automatic report for PVS", subtitle = NULL,
-  author = "International Potato Center", format = c("html", "word", "pdf"),
-  server = FALSE, server_dir_name = "directory",
-  server_file_name = "filename")
+repo.pvs(dfr, form, title = "Automatic report for PVS",
+  subtitle = NULL, author = "International Potato Center",
+  format = c("html", "word", "pdf"), server = FALSE,
+  server_dir_name = "directory", server_file_name = "filename")
 }
 \arguments{
 \item{dfr}{A data frame with data for a pvs form.}

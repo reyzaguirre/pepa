@@ -5,10 +5,10 @@
 \title{Automatic report for a factorial experiment}
 \usage{
 repo.f(traits, factors, rep, design, dfr, maxp = 0.1,
-  title = "Automatic report for a factorial experiment", subtitle = NULL,
-  author = "International Potato Center", format = c("html", "word", "pdf"),
-  server = FALSE, server_dir_name = "directory",
-  server_file_name = "filename")
+  title = "Automatic report for a factorial experiment",
+  subtitle = NULL, author = "International Potato Center",
+  format = c("html", "word", "pdf"), server = FALSE,
+  server_dir_name = "directory", server_file_name = "filename")
 }
 \arguments{
 \item{traits}{The traits to analize.}

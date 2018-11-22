@@ -5,8 +5,8 @@
 \title{A modified version of order.group of agricolae package}
 \usage{
 order.group.mod(trt, means, N, MSerror, Tprob, std.err, parameter = 1,
-  snk = 0, DFerror = NULL, alpha = NULL, sdtdif = NULL, vartau = NULL,
-  console)
+  snk = 0, DFerror = NULL, alpha = NULL, sdtdif = NULL,
+  vartau = NULL, console)
 }
 \arguments{
 \item{trt}{Treatments}

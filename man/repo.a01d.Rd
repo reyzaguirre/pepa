@@ -5,10 +5,10 @@
 \title{Automatic report for an alpha (0,1) design}
 \usage{
 repo.a01d(traits, geno, rep, block, k, dfr,
-  title = "Automatic report for an alpha (0,1) design", subtitle = NULL,
-  author = "International Potato Center", format = c("html", "word", "pdf"),
-  server = FALSE, server_dir_name = "directory",
-  server_file_name = "filename")
+  title = "Automatic report for an alpha (0,1) design",
+  subtitle = NULL, author = "International Potato Center",
+  format = c("html", "word", "pdf"), server = FALSE,
+  server_dir_name = "directory", server_file_name = "filename")
 }
 \arguments{
 \item{traits}{The traits to analize.}

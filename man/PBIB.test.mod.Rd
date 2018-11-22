@@ -4,8 +4,9 @@
 \alias{PBIB.test.mod}
 \title{A modified version of Analysis of the Partially Balanced Incomplete Block Design}
 \usage{
-PBIB.test.mod(block, trt, replication, y, k, method = c("REML", "ML", "VC"),
-  test = c("lsd", "tukey"), alpha = 0.05, console = FALSE, group = TRUE)
+PBIB.test.mod(block, trt, replication, y, k, method = c("REML", "ML",
+  "VC"), test = c("lsd", "tukey"), alpha = 0.05, console = FALSE,
+  group = TRUE)
 }
 \arguments{
 \item{block}{Type of UI element, deault is a tab in a shinydashboard}

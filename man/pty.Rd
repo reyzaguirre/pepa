@@ -4,8 +4,8 @@
 \alias{pty}
 \title{Pepa tells you}
 \usage{
-pty(x, author = "International Potato Center", format = c("html", "word",
-  "pdf"))
+pty(x, author = "International Potato Center", format = c("html",
+  "word", "pdf"))
 }
 \arguments{
 \item{x}{An R object.}

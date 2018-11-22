@@ -5,9 +5,10 @@
 \title{Automatic report for a North Carolina genetic design.}
 \usage{
 repo.nc(traits, set, male, female, progeny = NULL, rep, model, dfr,
-  title = NULL, subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"), server = FALSE,
-  server_dir_name = "directory", server_file_name = "filename")
+  title = NULL, subtitle = NULL,
+  author = "International Potato Center", format = c("html", "word",
+  "pdf"), server = FALSE, server_dir_name = "directory",
+  server_file_name = "filename")
 }
 \arguments{
 \item{traits}{The traits to analize.}

@@ -6,7 +6,8 @@
 \usage{
 pty.pesekbaker(traits, geno, env, rep = NULL, dfr, means = "single",
   dgg = NULL, units = "sdu", sf = 0.1,
-  author = "International Potato Center", format = c("html", "word", "pdf"))
+  author = "International Potato Center", format = c("html", "word",
+  "pdf"))
 }
 \arguments{
 \item{traits}{List of traits.}
