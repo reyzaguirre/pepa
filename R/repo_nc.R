@@ -42,11 +42,11 @@ repo.nc <- function(traits, set, male, female, progeny = NULL, rep, model, dfr,
                     server_dir_name = "directory",
                     server_file_name = "filename") {
 
-  if (model == 1)
+  if (model == 1 & is.null(title))
     title <- "Automatic report for a North Carolina I genetic design"
-  if (model == 2)
+  if (model == 2 & is.null(title))
     title <- "Automatic report for a North Carolina II genetic design"
-  if (model == 3)
+  if (model == 3 & is.null(title))
     title <- "Automatic report for a North Carolina III genetic design"
 
   format <- paste0(match.arg(format), "_document")
