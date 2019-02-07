@@ -50,10 +50,10 @@ It fits a linear model for a strip plot design and explains the results.
 \examples{
 # Create design
 rowf <- paste0("rf", 1:3)
-colf <- paste0("cf", 1:3)
+colf <- paste0("cf", 1:4)
 design <- cr.strd(rowf, colf, 3)$book
 # Some random data
-design$yield <- rnorm(27, 10)
+design$yield <- rnorm(36, 10)
 repo.strd("yield", "A", "B", "block", design)
 }
 \author{

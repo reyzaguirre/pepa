@@ -18,8 +18,9 @@ output:
     toc_depth: 3
 params: 
   traits: "no data"
-  rowf: "no data"
-  colf: "no data"
+  mpf: "no data"
+  spf: "no data"
+  sspf: "no data"
   rep: "no data"
   dfr: "no data"
   title: "no data"
@@ -33,43 +34,43 @@ library(knitr)
 # Pass arguments
 
 traits <- params$traits
-rowf <- params$rowf
-colf <- params$colf
+mpf <- params$mpf
+spf <- params$spf
 rep <- params$rep
 dfr <- params$dfr
 
 # Check factors structure
 
-out <- ck.fs(c(rowf, colf), rep, dfr)
-nrf <- out$nl[[1]]
-ncf <- out$nl[[2]]
+out <- ck.fs(c(mpf, spf), rep, dfr)
+nmpf <- out$nl[[1]]
+nspf <- out$nl[[2]]
 nrep <- out$nrep
 dfr <- out$dfr
 nmis.fac <- out$nmis.fac
 
 # Define internal variables
 
-rowf <- dfr[, rowf]
-colf <- dfr[, colf]
+mpf <- dfr[, mpf]
+spf <- dfr[, spf]
 rep <- dfr[, rep]
 ```
 
 # 1. Model specification and data description
 
-There are data for a strip plot design with `r nrf` level for the row factor, `r ncf` levels for the column factor, and `r nrep` replications. In this design each replication is a complete block for the levels of each factor. The statistical model is
+There are data for a split-plot design with `r nmpf` levels for the main plot factor, `r nspf` levels for the sub-plot factor, and `r nrep` replications for the main plot factor. The statistical model is
 $$
 y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_k + (\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk} + (\alpha\beta\gamma)_{ijk}
 $$
 where
 
-* $y_{ijk}$ is the observed response with level $i$ of the row factor, level $j$ of the column factor, and replication $k$.
+* $y_{ijk}$ is the observed response with level $i$ of the main plot factor, level $j$ of the sub-plot factor, and replication $k$.
 * $\mu$ is the mean response over all levels of factors and replications.
-* $\alpha_i$ is the effect for level $i$ of the row factor.
-* $\beta_j$ is the effect for level $j$ of the column factor.
+* $\alpha_i$ is the effect for level $i$ of the main plot factor.
+* $\beta_j$ is the effect for level $j$ of the sub-plot factor.
 * $\gamma_k$ is the effect of replication $k$.
-* $(\alpha\beta)_{ij}$, $(\alpha\gamma)_{ik}$, $(\beta\gamma)_{jk}$, and $(\alpha\beta\gamma)_{ijk}$ the corresponding interactions.
+* $(\alpha\beta)_{ij}$, $(\alpha\gamma)_{ik}$, $(\beta\gamma)_{jk}$, $(\beta\gamma)_{jk}$, and $(\alpha\beta\gamma)_{ijk}$ the corresponding interactions.
 
-In this model $(\alpha\gamma)_{ik}$, $(\beta\gamma)_{jk}$, and $(\alpha\beta\gamma)_{ijk}$ are the errors used to test the row factor, the column factor, and the row and column factors interaction respectively.
+In this model $(\alpha\gamma)_{ik}$ is the error term for the main plot factor, and $(\beta\gamma)_{jk}$ and $(\alpha\beta\gamma)_{ijk}$ are pooled to form the error term for the split-plot factor.
 
 `r if (nmis.fac == 1) paste("Note: There is", nmis.fac, "data row with missing values for classifications factors. This row has been deleted.")`
 `r if (nmis.fac > 1) paste("Note: There are", nmis.fac, "data rows with missing values for classifications factors. These rows have been deleted.")`
@@ -77,7 +78,7 @@ In this model $(\alpha\gamma)_{ik}$, $(\beta\gamma)_{jk}$, and $(\alpha\beta\gam
 ```{r include = FALSE}
 out <- NULL
 for (i in 1:length(traits))
-  out <- c(out, knit_expand('child_strd.Rmd'))
+  out <- c(out, knit_expand('child_spld.Rmd'))
 ```
 
 `r paste(knit(text = out), collapse = '\n')`
