@@ -4,7 +4,7 @@
 \alias{repo.f}
 \title{Automatic report for a factorial experiment}
 \usage{
-repo.f(traits, factors, rep, design, dfr, maxp = 0.1,
+repo.f(traits, factors, rep, dfr, maxp = 0.1,
   title = "Automatic report for a factorial experiment",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
@@ -15,9 +15,7 @@ repo.f(traits, factors, rep, design, dfr, maxp = 0.1,
 
 \item{factors}{The factors.}
 
-\item{rep}{The replications or blocks.}
-
-\item{design}{The statistical design, \code{crd} or \code{rcbd}.}
+\item{rep}{The replications or blocks, \code{NULL} for a CRD.}
 
 \item{dfr}{The name of the data frame containing the data.}
 
@@ -54,7 +52,7 @@ specified maximum proportion, 10\% by default. All factors are considered as fix
 }
 \examples{
 ## Example 1: Two factors factorial
-repo.f(c("asc.dw", "asc.fw"), c("geno", "treat"), "rep", "crd", asc)
+repo.f(c("asc.dw", "asc.fw"), c("geno", "treat"), NULL, asc)
 
 ## Example 2: Three factors factorial
 # Create design with 3 factors
@@ -64,7 +62,7 @@ temp <- cr.f(fnames, flevels, 'rcbd', 2, 10)$book
 # Simulate random data
 temp$y <- rnorm(24)
 # Run report
-repo.f('y', c('A', 'B', 'C'), 'block', 'rcbd', temp)
+repo.f('y', c('A', 'B', 'C'), 'block', temp)
 }
 \author{
 Raul Eyzaguirre.

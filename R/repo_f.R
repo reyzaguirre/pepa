@@ -4,8 +4,7 @@
 #' a CRD or RCBD.
 #' @param traits The traits to analize.
 #' @param factors The factors.
-#' @param rep The replications or blocks.
-#' @param design The statistical design, \code{crd} or \code{rcbd}.
+#' @param rep The replications or blocks, \code{NULL} for a CRD.
 #' @param dfr The name of the data frame containing the data.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param title Report title.
@@ -25,7 +24,7 @@
 #' @author Raul Eyzaguirre.
 #' @examples
 #' ## Example 1: Two factors factorial
-#' repo.f(c("asc.dw", "asc.fw"), c("geno", "treat"), "rep", "crd", asc)
+#' repo.f(c("asc.dw", "asc.fw"), c("geno", "treat"), NULL, asc)
 #'
 #' ## Example 2: Three factors factorial
 #' # Create design with 3 factors
@@ -35,12 +34,12 @@
 #' # Simulate random data
 #' temp$y <- rnorm(24)
 #' # Run report
-#' repo.f('y', c('A', 'B', 'C'), 'block', 'rcbd', temp)
+#' repo.f('y', c('A', 'B', 'C'), 'block', temp)
 #' @import agricolae
 #' @importFrom utils browseURL
 #' @export
 
-repo.f <- function(traits, factors, rep, design, dfr, maxp = 0.1,
+repo.f <- function(traits, factors, rep, dfr, maxp = 0.1,
                    title = "Automatic report for a factorial experiment",
                    subtitle = NULL,
                    author = "International Potato Center",
@@ -58,9 +57,9 @@ repo.f <- function(traits, factors, rep, design, dfr, maxp = 0.1,
 
   # Select names for files
 
-  if (design == "crd" & nf == 2)
+  if (is.null(rep) & nf == 2)
     fn <- "2fcrd"
-  if (design == "rcbd" & nf == 2)
+  if (!is.null(rep) & nf == 2)
     fn <- "2frcbd"
   if (nf > 2)
     fn <- "factorial"
@@ -89,7 +88,6 @@ repo.f <- function(traits, factors, rep, design, dfr, maxp = 0.1,
                     params = list(traits = traits,
                                   factors = factors,
                                   rep = rep,
-                                  design = design,
                                   dfr = dfr,
                                   maxp = maxp,
                                   title = title,
