@@ -4,7 +4,7 @@
 \alias{repo.crd}
 \title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
-repo.crd(traits, trt, trt.lab, dfr, maxp = 0.1,
+repo.crd(traits, trt, trt.lab = "treatment", dfr, maxp = 0.1,
   title = "Automatic report for a Completely Randomized Design (CRD)",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,

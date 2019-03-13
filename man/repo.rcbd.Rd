@@ -4,7 +4,7 @@
 \alias{repo.rcbd}
 \title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
-repo.rcbd(traits, trt, trt.lab, rep, dfr, maxp = 0.1,
+repo.rcbd(traits, trt, trt.lab = "treatment", rep, dfr, maxp = 0.1,
   title = "Automatic report for a Randomized Complete Block Design (RCBD)",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,

@@ -34,7 +34,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.crd <- function(traits, trt, trt.lab, dfr, maxp = 0.1,
+repo.crd <- function(traits, trt, trt.lab = "treatment", dfr, maxp = 0.1,
                      title = "Automatic report for a Completely Randomized Design (CRD)",
                      subtitle = NULL,
                      author = "International Potato Center",

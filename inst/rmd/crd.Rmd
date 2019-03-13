@@ -45,14 +45,14 @@ maxp <- params$maxp
 # Check factors structure
 
 out <- ck.fs(trt, NULL, dfr)
-ng <- out$nl[[1]]
+nt <- out$nl[[1]]
 dfr <- out$dfr
 nmis.fac <- out$nmis.fac
 ```
 
 # 1. Model specification and data description
 
-There are data from `r ng` `r trt.lab.s` evaluated using a completely randomized design. The statistical model is
+There are data from `r nt` `r trt.lab.s` evaluated using a completely randomized design. The statistical model is
 $$
 y_{ij} = \mu + \tau_i + \epsilon_{ij}
 $$

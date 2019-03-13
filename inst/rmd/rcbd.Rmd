@@ -47,7 +47,7 @@ maxp <- params$maxp
 # Check factors structure
 
 out <- ck.fs(trt, rep, dfr)
-ng <- out$nl[[1]]
+nt <- out$nl[[1]]
 nrep <- out$nrep
 dfr <- out$dfr
 nmis.fac <- out$nmis.fac
@@ -57,7 +57,7 @@ nmis.fac <- out$nmis.fac
 
 # 1. Model specification and data description
 
-There are data from `r ng` `r trt.lab.s` evaluated using a randomize complete block design with `r nrep` blocks. The statistical model is
+There are data from `r nt` `r trt.lab.s` evaluated using a randomize complete block design with `r nrep` blocks. The statistical model is
 $$
 y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
 $$

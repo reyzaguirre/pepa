@@ -36,7 +36,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.rcbd <- function(traits, trt, trt.lab, rep, dfr, maxp = 0.1,
+repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, dfr, maxp = 0.1,
                       title = "Automatic report for a Randomized Complete Block Design (RCBD)",
                       subtitle = NULL,
                       author = "International Potato Center",
