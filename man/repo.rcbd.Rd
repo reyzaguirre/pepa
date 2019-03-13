@@ -4,7 +4,7 @@
 \alias{repo.rcbd}
 \title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
-repo.rcbd(traits, geno, rep, dfr, maxp = 0.1,
+repo.rcbd(traits, trt, trt.lab, rep, dfr, maxp = 0.1,
   title = "Automatic report for a Randomized Complete Block Design (RCBD)",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
@@ -13,7 +13,9 @@ repo.rcbd(traits, geno, rep, dfr, maxp = 0.1,
 \arguments{
 \item{traits}{The traits to analize.}
 
-\item{geno}{The genotypes.}
+\item{trt}{The treatments.}
+
+\item{trt.lab}{The labels for treatments.}
 
 \item{rep}{The replications.}
 
@@ -48,17 +50,17 @@ It fits a linear model for a RCBD and explains the results.
 
 Under the assumption of fixed effects an ANOVA table is computed with missing values
 estimated up to a specified percentage (10\% by default). If the ANOVA results in
-a significant value for genotypes then the Tukey HSD method for pairwise differences
+a significant value for treatments then the Tukey HSD method for pairwise differences
 is applied. Assumptions of the model are evaluated with residual plots.
 
 Under the assumption of random effects the model is estimated using REML and the
 variance components are shown. Missing values are not estimated in this case.
 }
 \examples{
-repo.rcbd(c("trw", "vw"), "geno", "rep", pjpz09)
+repo.rcbd(c("trw", "vw"), "geno", "genotype", "rep", pjpz09)
 # With a small data set
 temp <- pjpz09[1:18, ]
-repo.rcbd(c("trw", "vw", "crw"), "geno", "rep", temp)
+repo.rcbd(c("trw", "vw", "crw"), "geno", "genotype", "rep", temp)
 }
 \author{
 Raul Eyzaguirre.

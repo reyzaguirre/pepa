@@ -2,7 +2,8 @@
 #'
 #' Produces an automatic report for selected traits in an experiment with a CRD.
 #' @param traits The traits to analize.
-#' @param geno The genotypes.
+#' @param trt The treatments.
+#' @param trt.lab The labels for treatments.
 #' @param dfr The name of the data frame.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param title Report title.
@@ -25,15 +26,15 @@
 #' @return It returns an explanation about the CRD fitted model.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' repo.crd(c("trw", "vw"), "geno", pjpz09)
+#' repo.crd(c("trw", "vw"), "geno", "genotype", pjpz09)
 #' # With a small data set
 #' temp <- pjpz09[1:18, ]
-#' repo.crd(c("trw", "vw", "crw"), "geno", temp)
+#' repo.crd(c("trw", "vw", "crw"), "geno", "genotypes", temp)
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-repo.crd <- function(traits, geno, dfr, maxp = 0.1,
+repo.crd <- function(traits, trt, trt.lab, dfr, maxp = 0.1,
                      title = "Automatic report for a Completely Randomized Design (CRD)",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -67,7 +68,8 @@ repo.crd <- function(traits, geno, dfr, maxp = 0.1,
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
-                                  geno = geno,
+                                  trt = trt,
+                                  trt.lab = trt.lab,
                                   dfr = dfr,
                                   maxp = maxp,
                                   title = title,
