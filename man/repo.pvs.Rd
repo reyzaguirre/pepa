@@ -41,7 +41,7 @@ repo.pvs(pvsf1, 1)
 repo.pvs(pvsf2, 2)
 repo.pvs(pvsf3, 3)
 repo.pvs(pvsf6, 6)
-repo.pvs(pvsf7, 7)
+repo.pvs(pvsf6, 7)
 repo.pvs(pvsf9, 9)
 }
 \author{
