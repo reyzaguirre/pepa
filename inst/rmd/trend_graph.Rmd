@@ -1,0 +1,59 @@
+---
+title: "`r params$title`"
+subtitle: '`r params$subtitle`'
+author: '`r params$author`'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output: 
+  html_document:
+    theme: united
+    toc: false
+    toc_depth: 3
+  pdf_document:
+    toc: false
+    toc_depth: 3
+    highlight: zenburn
+  word_document:
+    toc: false
+    toc_depth: 3
+    highlight: "tango"
+params:
+  response: "no data"
+  treat: "no data"
+  rep: "no data"
+  dap: "no data"
+  dfr: "no data"
+  average: "no data"
+  se: "no data"
+  title: "no data"
+  subtitle: "no data"
+  author: "no data"
+---
+
+```{r echo = FALSE}
+
+## Data
+
+dfr <- params$dfr
+
+dfr <- dfr[, c(response, treat, rep, dap)]
+colnames(dfr) <- c("y", "Treatment", "rep", "dap")
+
+if (average)
+  dfr <- docomp("mean", "y", c("Treatment", "rep", "dap"), dfr = dfr)
+
+
+```
+
+```{r echo = FALSE, fig.height = 5, fig.width = 8, warning = FALSE}
+if (se) {
+  ggplot(dfr, aes(dap, y, colour = Treatment)) +
+    geom_point() + 
+    labs(x = dap, y = response) +
+    geom_smooth(se = TRUE)
+} else {
+  ggplot(dfr, aes(dap, y, colour = Treatment)) +
+    geom_point() + 
+    labs(x = dap, y = response) +
+    geom_smooth(se = FALSE)
+}
+```

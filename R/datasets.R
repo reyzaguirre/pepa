@@ -76,3 +76,12 @@ NULL
 #' @format A data frame with 163 columns and 6 rows.
 #' @source International Potato Center, potato data.
 NULL
+#' @name trend.data
+#' @title Repeated measures data
+#' @docType data
+#' @aliases trend.data
+#' @description Repeated measures data for trait yield.
+#' @usage trend.data
+#' @format A data frame with 8 columns and 32 rows.
+#' @source Dummy data.
+NULL
