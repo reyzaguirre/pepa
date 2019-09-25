@@ -3,10 +3,10 @@
 #' Produce a ggplot2 graph for data over time.
 #' @param response Response variable.
 #' @param treat The treatments.
-#' @param rep The replications.
+#' @param eu The experimental unit. Must be defined in case of subsamples.
 #' @param dap Days after planting measuring time.
 #' @param dfr The name of the data frame.
-#' @param average If \code{"TRUE"}, it computes average over replications
+#' @param average If \code{"TRUE"}, it computes average over experimental units
 #' (for subsampling data).
 #' @param se If \code{"TRUE"}, standard errors are ploted.
 #' @param title Report title.
@@ -21,13 +21,13 @@
 #' @return It returns a ggplot2 graph for repeated measures data.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' repo.trend("yield", "treat", "rep", "date", trend.data)
-#' repo.trend("yield", "treat", "rep", "date", trend.data, FALSE)
-#' repo.trend("yield", "treat", "rep", "date", trend.data, FALSE, FALSE)
+#' repo.trend("yield", "treat", "plot", "date", trend.data)
+#' repo.trend("yield", "treat", "plot", "date", trend.data, FALSE)
+#' repo.trend("yield", "treat", "plot", "date", trend.data, FALSE, FALSE)
 #' @import ggplot2
 #' @export
 
-repo.trend <- function(response, treat, rep, dap, dfr, average = TRUE, se = TRUE,
+repo.trend <- function(response, treat, eu, dap, dfr, average = TRUE, se = TRUE,
                        title = "Automatic report for repeated measures data",
                        subtitle = "Dispersion plot with a fitted smoothing function",
                        author = "International Potato Center",
@@ -62,7 +62,7 @@ repo.trend <- function(response, treat, rep, dap, dfr, average = TRUE, se = TRUE
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(response = response,
                                   treat = treat,
-                                  rep = rep,
+                                  eu = eu,
                                   dap = dap,
                                   dfr = dfr,
                                   average = average,

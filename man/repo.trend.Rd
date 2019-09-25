@@ -4,7 +4,7 @@
 \alias{repo.trend}
 \title{Report for repeated measures data}
 \usage{
-repo.trend(response, treat, rep, dap, dfr, average = TRUE, se = TRUE,
+repo.trend(response, treat, eu, dap, dfr, average = TRUE, se = TRUE,
   title = "Automatic report for repeated measures data",
   subtitle = "Dispersion plot with a fitted smoothing function",
   author = "International Potato Center", format = c("html", "word",
@@ -16,13 +16,13 @@ repo.trend(response, treat, rep, dap, dfr, average = TRUE, se = TRUE,
 
 \item{treat}{The treatments.}
 
-\item{rep}{The replications.}
+\item{eu}{The experimental unit. Must be defined in case of subsamples.}
 
 \item{dap}{Days after planting measuring time.}
 
 \item{dfr}{The name of the data frame.}
 
-\item{average}{If \code{"TRUE"}, it computes average over replications
+\item{average}{If \code{"TRUE"}, it computes average over experimental units
 (for subsampling data).}
 
 \item{se}{If \code{"TRUE"}, standard errors are ploted.}
@@ -50,9 +50,9 @@ It returns a ggplot2 graph for repeated measures data.
 Produce a ggplot2 graph for data over time.
 }
 \examples{
-repo.trend("yield", "treat", "rep", "date", trend.data)
-repo.trend("yield", "treat", "rep", "date", trend.data, FALSE)
-repo.trend("yield", "treat", "rep", "date", trend.data, FALSE, FALSE)
+repo.trend("yield", "treat", "plot", "date", trend.data)
+repo.trend("yield", "treat", "plot", "date", trend.data, FALSE)
+repo.trend("yield", "treat", "plot", "date", trend.data, FALSE, FALSE)
 }
 \author{
 Raul Eyzaguirre.

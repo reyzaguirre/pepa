@@ -19,7 +19,7 @@ output:
 params:
   response: "no data"
   treat: "no data"
-  rep: "no data"
+  eu: "no data"
   dap: "no data"
   dfr: "no data"
   average: "no data"
@@ -35,11 +35,11 @@ params:
 
 dfr <- params$dfr
 
-dfr <- dfr[, c(response, treat, rep, dap)]
-colnames(dfr) <- c("y", "Treatment", "rep", "dap")
+dfr <- dfr[, c(response, treat, eu, dap)]
+colnames(dfr) <- c("y", "Treatment", "eu", "dap")
 
 if (average)
-  dfr <- docomp("mean", "y", c("Treatment", "rep", "dap"), dfr = dfr)
+  dfr <- docomp("mean", "y", c("Treatment", "eu", "dap"), dfr = dfr)
 
 
 ```
