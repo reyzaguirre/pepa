@@ -6,6 +6,7 @@
 #' @param trt.lab The labels for treatments.
 #' @param rep The replications.
 #' @param dfr The name of the data frame.
+#' @param eu The experimental unit. Must be defined in case of subsamples.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
@@ -18,10 +19,14 @@
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
 #' @details It fits a linear model for a RCBD and explains the results.
 #'
-#' Under the assumption of fixed effects an ANOVA table is computed with missing values
-#' estimated up to a specified percentage (10\% by default). If the ANOVA results in
-#' a significant value for treatments then the Tukey HSD method for pairwise differences
-#' is applied. Assumptions of the model are evaluated with residual plots.
+#' Under the assumption of fixed effects an ANOVA table is computed with missing
+#' values estimated up to a specified percentage (10\% by default).
+#' In case of subsampling the ANOVA table is computed over the means for each
+#' experimental unit, and a second ANOVA table is computed considering subsampling
+#' only if there are no missing values.
+#' If the ANOVA results in a significant value for treatments then the Tukey HSD
+#' method for pairwise differences is applied. Assumptions of the model are evaluated
+#' with residual plots.
 #'
 #' Under the assumption of random effects the model is estimated using REML and the
 #' variance components are shown. Missing values are not estimated in this case.
@@ -36,7 +41,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, dfr, maxp = 0.1,
+repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, dfr, eu = NULL, maxp = 0.1,
                       title = "Automatic report for a Randomized Complete Block Design (RCBD)",
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -74,6 +79,7 @@ repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, dfr, maxp = 0.1,
                                   trt.lab = trt.lab,
                                   rep = rep,
                                   dfr = dfr,
+                                  eu = eu,
                                   maxp = maxp,
                                   title = title,
                                   subtitle = subtitle,

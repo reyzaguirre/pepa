@@ -17,9 +17,11 @@
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
 #' @details It fits a linear model for a CRD and explains the results.
 #'
-#' Under the assumption of fixed effects an ANOVA table is computed. If the ANOVA
-#' results in a significant value then the Tukey HSD method for pairwise differences
-#' is applied. Assumptions of the model are evaluated with residual plots.
+#' Under the assumption of fixed effects an ANOVA table is computed.
+#' In case of subsampling the ANOVA table is computed over the means for each
+#' experimental unit, and a second ANOVA table is computed considering subsampling.
+#' If the ANOVA results in a significant value then the Tukey HSD method for pairwise
+#' differences is applied. Assumptions of the model are evaluated with residual plots.
 #'
 #' Under the assumption of random effects the model is estimated using REML and the
 #' variance components are shown.
