@@ -5,7 +5,7 @@
 #' @param trt The treatments.
 #' @param trt.lab The labels for treatments.
 #' @param dfr The name of the data frame.
-#' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
+#' @param eu The experimental unit. Must be defined in case of subsamples.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -34,7 +34,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.crd <- function(traits, trt, trt.lab = "treatment", dfr, maxp = 0.1,
+repo.crd <- function(traits, trt, trt.lab = "treatment", dfr, eu = NULL,
                      title = "Automatic report for a Completely Randomized Design (CRD)",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -71,7 +71,7 @@ repo.crd <- function(traits, trt, trt.lab = "treatment", dfr, maxp = 0.1,
                                   trt = trt,
                                   trt.lab = trt.lab,
                                   dfr = dfr,
-                                  maxp = maxp,
+                                  eu = eu,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

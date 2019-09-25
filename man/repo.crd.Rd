@@ -4,7 +4,7 @@
 \alias{repo.crd}
 \title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
-repo.crd(traits, trt, trt.lab = "treatment", dfr, maxp = 0.1,
+repo.crd(traits, trt, trt.lab = "treatment", dfr, eu = NULL,
   title = "Automatic report for a Completely Randomized Design (CRD)",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
@@ -19,7 +19,7 @@ repo.crd(traits, trt, trt.lab = "treatment", dfr, maxp = 0.1,
 
 \item{dfr}{The name of the data frame.}
 
-\item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
+\item{eu}{The experimental unit. Must be defined in case of subsamples.}
 
 \item{title}{Report title.}
 

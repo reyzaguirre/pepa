@@ -4,7 +4,7 @@
 \name{trend.data}
 \alias{trend.data}
 \title{Repeated measures data}
-\format{A data frame with 8 columns and 32 rows.}
+\format{A data frame with 8 columns and 48 rows.}
 \source{
 Dummy data.
 }

@@ -82,6 +82,6 @@ NULL
 #' @aliases trend.data
 #' @description Repeated measures data for trait yield.
 #' @usage trend.data
-#' @format A data frame with 8 columns and 32 rows.
+#' @format A data frame with 8 columns and 48 rows.
 #' @source Dummy data.
 NULL
