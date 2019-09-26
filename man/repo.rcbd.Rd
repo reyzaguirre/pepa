@@ -4,7 +4,7 @@
 \alias{repo.rcbd}
 \title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
-repo.rcbd(traits, trt, trt.lab = "treatment", rep, dfr, eu = NULL,
+repo.rcbd(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr,
   maxp = 0.1,
   title = "Automatic report for a Randomized Complete Block Design (RCBD)",
   subtitle = NULL, author = "International Potato Center",
@@ -20,9 +20,9 @@ repo.rcbd(traits, trt, trt.lab = "treatment", rep, dfr, eu = NULL,
 
 \item{rep}{The replications.}
 
-\item{dfr}{The name of the data frame.}
-
 \item{eu}{The experimental unit. Must be defined in case of subsamples.}
+
+\item{dfr}{The name of the data frame.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
@@ -64,10 +64,10 @@ Under the assumption of random effects the model is estimated using REML and the
 variance components are shown. Missing values are not estimated in this case.
 }
 \examples{
-repo.rcbd(c("trw", "vw"), "geno", "genotype", "rep", pjpz09)
+repo.rcbd(c("trw", "vw"), "geno", "genotype", "rep", dfr = pjpz09)
 # With a small data set
 temp <- pjpz09[1:18, ]
-repo.rcbd(c("trw", "vw", "crw"), "geno", "genotype", "rep", temp)
+repo.rcbd(c("trw", "vw", "crw"), "geno", "genotype", "rep", dfr = temp)
 }
 \author{
 Raul Eyzaguirre.

@@ -4,7 +4,7 @@
 \alias{repo.crd}
 \title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
-repo.crd(traits, trt, trt.lab = "treatment", dfr, eu = NULL,
+repo.crd(traits, trt, trt.lab = "treatment", eu = NULL, dfr,
   title = "Automatic report for a Completely Randomized Design (CRD)",
   subtitle = NULL, author = "International Potato Center",
   format = c("html", "word", "pdf"), server = FALSE,
@@ -17,9 +17,9 @@ repo.crd(traits, trt, trt.lab = "treatment", dfr, eu = NULL,
 
 \item{trt.lab}{The labels for treatments.}
 
-\item{dfr}{The name of the data frame.}
-
 \item{eu}{The experimental unit. Must be defined in case of subsamples.}
+
+\item{dfr}{The name of the data frame.}
 
 \item{title}{Report title.}
 
@@ -56,10 +56,10 @@ Under the assumption of random effects the model is estimated using REML and the
 variance components are shown.
 }
 \examples{
-repo.crd(c("trw", "vw"), "geno", "genotype", pjpz09)
+repo.crd(c("trw", "vw"), "geno", "genotype", dfr = pjpz09)
 # With a small data set
 temp <- pjpz09[1:18, ]
-repo.crd(c("trw", "vw", "crw"), "geno", "genotypes", temp)
+repo.crd(c("trw", "vw", "crw"), "geno", "genotypes", dfr = temp)
 }
 \author{
 Raul Eyzaguirre.

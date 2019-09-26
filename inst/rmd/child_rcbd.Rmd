@@ -35,7 +35,7 @@ cv <- (at[3, 3])^0.5 / mean(dfr[, trait.est]) * 100
 show.anova.sub <- FALSE
 
 if (!is.null(eu))
-  if (sum(is.na(dfr2[, traits[i]])) == 0) {
+  if (sum(is.na(dfr2[, traits[i]])) == 0 & dim(dfr)[1] < dim(dfr2)[1]) {
     model2 <- aov(dfr2[, traits[i]] ~ dfr2[, trt] + dfr2[, rep] + dfr2[, eu] %in% dfr2[, trt])
     model2$terms[[2]] <- traits[i]
     at2 <- anova(model2)

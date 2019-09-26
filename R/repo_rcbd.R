@@ -5,8 +5,8 @@
 #' @param trt The treatments.
 #' @param trt.lab The labels for treatments.
 #' @param rep The replications.
-#' @param dfr The name of the data frame.
 #' @param eu The experimental unit. Must be defined in case of subsamples.
+#' @param dfr The name of the data frame.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
@@ -33,15 +33,15 @@
 #' @return It returns an explanation about the RCBD fitted model.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' repo.rcbd(c("trw", "vw"), "geno", "genotype", "rep", pjpz09)
+#' repo.rcbd(c("trw", "vw"), "geno", "genotype", "rep", dfr = pjpz09)
 #' # With a small data set
 #' temp <- pjpz09[1:18, ]
-#' repo.rcbd(c("trw", "vw", "crw"), "geno", "genotype", "rep", temp)
+#' repo.rcbd(c("trw", "vw", "crw"), "geno", "genotype", "rep", dfr = temp)
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, dfr, eu = NULL, maxp = 0.1,
+repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr, maxp = 0.1,
                       title = "Automatic report for a Randomized Complete Block Design (RCBD)",
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -78,8 +78,8 @@ repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, dfr, eu = NULL, m
                                   trt = trt,
                                   trt.lab = trt.lab,
                                   rep = rep,
-                                  dfr = dfr,
                                   eu = eu,
+                                  dfr = dfr,
                                   maxp = maxp,
                                   title = title,
                                   subtitle = subtitle,

@@ -11,13 +11,17 @@ rownames(at)[1] <- trt
 
 # ANOVA with subsampling
 
-if (!is.null(eu)) {
-  model2 <- aov(dfr2[, traits[i]] ~ dfr2[, trt] + dfr2[, eu] %in% dfr2[, trt])
-  model2$terms[[2]] <- traits[i]
-  at2 <- anova(model2)
-  at2[1, 4] <- at2[1, 3] / at2[2, 3]
-  at2[1, 5] <- pf(at2[1, 4], at2[1, 1], at2[2, 1], lower.tail = FALSE)
-  rownames(at2) <- c(trt, "Exp. Error", "Sampling Error")
+show.anova.sub <- FALSE
+
+if (!is.null(eu))
+  if (dim(dfr)[1] < dim(dfr2)[1]) {
+    model2 <- aov(dfr2[, traits[i]] ~ dfr2[, trt] + dfr2[, eu] %in% dfr2[, trt])
+    model2$terms[[2]] <- traits[i]
+    at2 <- anova(model2)
+    at2[1, 4] <- at2[1, 3] / at2[2, 3]
+    at2[1, 5] <- pf(at2[1, 4], at2[1, 1], at2[2, 1], lower.tail = FALSE)
+    rownames(at2) <- c(trt, "Exp. Error", "Sampling Error")
+    show.anova.sub <- TRUE
 }
   
 ```
@@ -34,10 +38,10 @@ The coefficient of variation for this experiment is `r format(agricolae::cv.mode
 The p-value for `r trt.lab.s` is `r format(at[1, 5], digits = 4)`
 `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
 
-`r if(!is.null(eu)) {"At the subsample level, the ANOVA table is:"}`
+`r if(show.anova.sub) {"At the subsample level, the ANOVA table is:"}`
 
 ```{r echo = FALSE}
-if (!is.null(eu))
+if (show.anova.sub)
   at2
 ```
 

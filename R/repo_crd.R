@@ -4,8 +4,8 @@
 #' @param traits The traits to analize.
 #' @param trt The treatments.
 #' @param trt.lab The labels for treatments.
-#' @param dfr The name of the data frame.
 #' @param eu The experimental unit. Must be defined in case of subsamples.
+#' @param dfr The name of the data frame.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -28,15 +28,15 @@
 #' @return It returns an explanation about the CRD fitted model.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' repo.crd(c("trw", "vw"), "geno", "genotype", pjpz09)
+#' repo.crd(c("trw", "vw"), "geno", "genotype", dfr = pjpz09)
 #' # With a small data set
 #' temp <- pjpz09[1:18, ]
-#' repo.crd(c("trw", "vw", "crw"), "geno", "genotypes", temp)
+#' repo.crd(c("trw", "vw", "crw"), "geno", "genotypes", dfr = temp)
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-repo.crd <- function(traits, trt, trt.lab = "treatment", dfr, eu = NULL,
+repo.crd <- function(traits, trt, trt.lab = "treatment", eu = NULL, dfr,
                      title = "Automatic report for a Completely Randomized Design (CRD)",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -72,8 +72,8 @@ repo.crd <- function(traits, trt, trt.lab = "treatment", dfr, eu = NULL,
                     params = list(traits = traits,
                                   trt = trt,
                                   trt.lab = trt.lab,
-                                  dfr = dfr,
                                   eu = eu,
+                                  dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))
