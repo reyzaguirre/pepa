@@ -72,6 +72,10 @@ if (show.anova.sub)
   at2
 ```
 
+`r if(show.anova.sub) {if (at2[3, 5] > 0.05) {"The p-value for the experimental error is non significant which implies that plot to plot variation is low. Thus, fewer plots with more subsamples could be used."}}`
+
+`r if(show.anova.sub) {if (at2[3, 5] < 0.05) {"The p-value for the experimental error is significant which implies that plot to plot variation is high. Thus, more plots could be used."}}`
+
 ## {{i+1}}.2. Assumptions
 
 Don't forget the assumptions of the model. It is supposed that the errors are independent with a normal distribution and with the same variance for all the `r trt.lab.s`. The following plots must help you evaluate this:
