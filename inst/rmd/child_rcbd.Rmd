@@ -99,7 +99,8 @@ Any trend in the residuals in the left plot would violate the assumption of inde
 ```{r echo = FALSE}
 
 if (at[1, 5] < 0.05)
-  agricolae::LSD.test(dfr[, trait.est], dfr[, trt], at[3, 1], at[3, 3])$groups
+  means <- dfr[, trait.est]
+  agricolae::LSD.test(means, dfr[, trt], at[3, 1], at[3, 3])$groups
 
 ```
 
@@ -108,7 +109,7 @@ if (at[1, 5] < 0.05)
 ```{r echo = FALSE}
 
 if (at[1, 5] < 0.05)
-  agricolae::HSD.test(dfr[, trait.est], dfr[, trt], at[3, 1], at[3, 3])$groups
+  agricolae::HSD.test(means, dfr[, trt], at[3, 1], at[3, 3])$groups
 
 ```
 
