@@ -27,6 +27,12 @@ params:
   author: "no data"
 ---
 
+```{r global_options, include = FALSE}
+
+knitr::opts_chunk$set(comment = NA)
+
+```
+
 ```{r echo = FALSE}
 library(knitr)
 
@@ -59,7 +65,7 @@ nmis.fac <- out$nmis.fac
 
 # 1. Model specification and data description
 
-There are data from `r nt` `r trt.lab.s` evaluated using a completely randomized design. The statistical model is
+Data from `r nt` `r trt.lab.s` have been evaluated using a completely randomized design. The statistical model is
 $$
 y_{ij} = \mu + \tau_i + \epsilon_{ij}
 $$

@@ -72,13 +72,13 @@ if (show.anova.sub)
   at2
 ```
 
-`r if(show.anova.sub) {if (at2[3, 5] > 0.05) {"The p-value for the experimental error is non significant which implies that plot to plot variation is low. Thus, fewer plots with more subsamples could be used."}}`
+`r if(show.anova.sub) {if (at2[3, 5] > 0.05) {"The p-value for the experimental error is non-significant which implies that plot to plot variation is low. Thus, fewer plots with more subsamples could be used."}}`
 
 `r if(show.anova.sub) {if (at2[3, 5] < 0.05) {"The p-value for the experimental error is significant which implies that plot to plot variation is high. Thus, more plots could be used."}}`
 
 ## {{i+1}}.2. Assumptions
 
-Don't forget the assumptions of the model. It is supposed that the errors are independent with a normal distribution and with the same variance for all the `r trt.lab.s`. The following plots must help you evaluate this:
+Don't forget the assumptions of the model. It is supposed that the errors are independent with a normal distribution and with the same variance for all the `r trt.lab.s`. The following plots can help you evaluate this:
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 10}
 
@@ -92,7 +92,7 @@ Any trend in the residuals in the left plot would violate the assumption of inde
 
 ## {{i+1}}.3. `r trt.lab.c` means
 
-`r if(at[1, 5] < 0.05) {paste("Below are the sorted means for each", trt.lab, "with letters indicating if there are significant differences using the least significance difference method and the multiple comparisons method of Tukey, both at the 5% level.")} else {paste("Because the effect of", trt.lab.s, "was not significant in the ANOVA, multiple comparison tests are not presented. The means of your", trt.lab.s, "are:")}`
+`r if(at[1, 5] < 0.05) {paste("Below are the sorted means for each", trt.lab, "using the least significance difference method and the multiple comparisons method of Tukey, both at the 5% level. Letters indicate if there are significant differences.")} else {paste("Because the effect of", trt.lab.s, "was not significant in the ANOVA, multiple comparison tests are not presented. The means of your", trt.lab.s, "are:")}`
 
 `r if (at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".3.1. LSD test")}`
 
@@ -123,7 +123,7 @@ if (at[1, 5] > 0.05)
 
 `r if (lc$ng < 10 & at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".3.3. Plot of means")}`
 
-`r if(lc$ng < 10) {paste0("It is always good to have some visualization of the data. Because the number of" , trt.lab.s, " in your experiment is not so big, we can plot the data for each ", trt.lab, ":")}`
+`r if(lc$ng < 10) {paste0("It is always good to have some visualization of your data. Since the number of" , trt.lab.s, " in your experiment is reasonable, we can plot the data for each ", trt.lab, ":")}`
 
 ```{r echo = FALSE}
 
