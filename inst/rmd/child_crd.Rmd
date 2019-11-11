@@ -23,22 +23,36 @@ if (!is.null(eu))
     rownames(at2) <- c(trt, "Exp. Error", "Sampling Error")
     show.anova.sub <- TRUE
 }
-  
 ```
 
 ## {{i+1}}.1. Exploratory analysis
 
 It is always good to have some visualization of your data. Below a histogram and a boxplot are shown.
 
-```{r echo = FALSE, fig.height = 5, fig.width = 10}
+```{r include = !is.null(eu), echo = TRUE, eval = FALSE}
+# Keep a copy of full data
+mydata.full <- mydata
+# Get means for subsampling
+mydata <- st4gi::docomp("mean", trait, c(treatment, experimental.unit), dfr = mydata)
+```
 
+```{r echo = TRUE, eval = FALSE}
+par(mfrow = c(1, 2))
+hist(mydata$trait)
+boxplot(mydata$trait)
+```
+
+```{r echo = FALSE, fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
 hist(dfr[, traits[i]], main = paste("Histogram of", traits[i]), xlab = traits[i])
 boxplot(dfr[, traits[i]], ylab = traits[i])
-
 ```
 
 `r if (lc$ng < 10) {paste0("Since the number of ", trt.lab.s, " in your experiment is not so large, we can plot the data for each ", trt.lab, ":")}`
+
+```{r include = lc$ng < 10, echo = TRUE, eval = FALSE}
+st4gi::msdplot(trait, treatment, mydata, conf = 1, pch = 4)
+```
 
 ```{r echo = FALSE}
 if (lc$ng < 10)
@@ -49,6 +63,13 @@ if (lc$ng < 10)
 
 You have fitted a linear model for a CRD. The ANOVA table for your model is:
 
+```{r echo = TRUE, eval = FALSE}
+model <- aov(trait ~ treatment, data = mydata)
+# Anova table
+at <- anova(model)
+at
+```
+
 ```{r echo = FALSE}
 at
 ```
@@ -58,6 +79,16 @@ The p-value for `r trt.lab.s` is `r format(at[1, 5], digits = 4)`
 `r if(at[1, 5] < 0.05) {"which is significant at the 5% level."} else {"which is not significant at the 5% level."}`
 
 `r if(show.anova.sub) {"At the subsample level, the ANOVA table is:"}`
+
+```{r include = show.anova.sub, echo = TRUE, eval = FALSE}
+model.sub <- aov(trait ~ treatment + experimental.unit %in% treatment, data = mydata.full)
+# Anova table with subsampling
+at.sub <- anova(model.sub)
+at.sub[1, 4] <- at.sub[1, 3] / at.sub[2, 3]
+at.sub[1, 5] <- pf(at.sub[1, 4], at.sub[1, 1], at.sub[2, 1], lower.tail = FALSE)
+rownames(at.sub)[2:3] <- c("Exp. Error", "Sampling Error")
+at.sub
+```
 
 ```{r echo = FALSE}
 if (show.anova.sub)
@@ -71,6 +102,12 @@ if (show.anova.sub)
 ## {{i+1}}.3. Assumptions
 
 Don't forget the assumptions of the model. It is supposed that the errors are independent with a normal distribution and with the same variance for all the `r trt.lab.s`. The following residuals plots can help you evaluate this:
+
+```{r echo = TRUE, eval = FALSE}
+par(mfrow = c(1, 2))
+plot(model, which = 1)
+plot(model, which = 2)
+```
 
 ```{r echo = FALSE, fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
@@ -86,8 +123,11 @@ Any trend in the residuals in the left plot would violate the assumption of inde
 
 `r if (at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".3.1. LSD test")}`
 
-```{r echo = FALSE}
+```{r include = at[1, 5] < 0.05, echo = TRUE, eval = FALSE}
+agricolae::LSD.test(mydata$trait, mydata$treatment, at[2, 1], at[2, 3])$groups
+```
 
+```{r echo = FALSE}
 if (at[1, 5] < 0.05) {
   means <- dfr[, traits[i]]
   agricolae::LSD.test(means, dfr[, trt], at[2, 1], at[2, 3])$groups
@@ -96,23 +136,33 @@ if (at[1, 5] < 0.05) {
 
 `r if (at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".3.2. Tukey test")}`
 
-```{r echo = FALSE}
-
-if (at[1, 5] < 0.05)
-  agricolae::HSD.test(means, dfr[, trt], at[2, 1], at[2, 3])$groups
-
+```{r include = at[1, 5] < 0.05, echo = TRUE, eval = FALSE}
+agricolae::HSD.test(mydata$trait, mydata$treatment, at[2, 1], at[2, 3])$groups
 ```
 
 ```{r echo = FALSE}
+if (at[1, 5] < 0.05)
+  agricolae::HSD.test(means, dfr[, trt], at[2, 1], at[2, 3])$groups
+```
 
+```{r include = at[1, 5] > 0.05, echo = TRUE, eval = FALSE}
+tapply(mydata$trait, mydata$treatment, mean, na.rm = TRUE)
+```
+
+```{r echo = FALSE}
 if (at[1, 5] > 0.05)
   tapply(dfr[, traits[i]], dfr[, trt], mean, na.rm = TRUE)
-
 ```
 
 ## {{i+1}}.5. Variance components
 
 Below are the variance components for this model, under the assumption that `r trt.lab.s` are random. Here the model is fitted using REML.
+
+```{r echo = TRUE, eval = FALSE}
+model <- lme4::lmer(trait ~ (1|treatment), data = mydata)
+vc <- data.frame(lme4::VarCorr(model))
+vc[, c(1, 4, 5)]
+```
 
 ```{r echo = FALSE}
 y <- dfr[, traits[i]]

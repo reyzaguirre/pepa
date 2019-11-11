@@ -6,9 +6,9 @@
 y <- dfr[, traits[i]]
 
 if (ng >= 50) {
-  model <- pepa::PBIB.test.mod(block, geno, rep, y, k, method = "VC")
+  model <- pepa::PBIB.test.mod(block, geno, rep, y, k, method = "REML")
 } else {
-  model <- agricolae::PBIB.test(block, geno, rep, y, k, method = "VC")
+  model <- agricolae::PBIB.test(block, geno, rep, y, k, method = "REML")
 }
 ```
 
