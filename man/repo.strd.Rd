@@ -4,11 +4,20 @@
 \alias{repo.strd}
 \title{Automatic report for a strip plot design}
 \usage{
-repo.strd(traits, rowf, colf, rep, dfr,
-  title = "Automatic report for a strip plot design", subtitle = NULL,
-  author = "International Potato Center", format = c("html", "word",
-  "pdf"), server = FALSE, server_dir_name = "directory",
-  server_file_name = "filename")
+repo.strd(
+  traits,
+  rowf,
+  colf,
+  rep,
+  dfr,
+  title = "Automatic report for a strip plot design",
+  subtitle = NULL,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf"),
+  server = FALSE,
+  server_dir_name = "directory",
+  server_file_name = "filename"
+)
 }
 \arguments{
 \item{traits}{The traits to analize.}

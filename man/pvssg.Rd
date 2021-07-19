@@ -4,7 +4,9 @@
 \name{pvssg}
 \alias{pvssg}
 \title{PVS summary global}
-\format{A data frame with 163 columns and 6 rows.}
+\format{
+A data frame with 163 columns and 6 rows.
+}
 \source{
 International Potato Center, potato data.
 }

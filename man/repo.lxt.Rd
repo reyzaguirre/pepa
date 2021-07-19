@@ -4,11 +4,20 @@
 \alias{repo.lxt}
 \title{Automatic report for a Line x Tester genetic design.}
 \usage{
-repo.lxt(traits, line, tester, rep, dfr,
+repo.lxt(
+  traits,
+  line,
+  tester,
+  rep,
+  dfr,
   title = "Automatic report for a Line x Tester genetic design",
-  subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"), server = FALSE,
-  server_dir_name = "directory", server_file_name = "filename")
+  subtitle = NULL,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf"),
+  server = FALSE,
+  server_dir_name = "directory",
+  server_file_name = "filename"
+)
 }
 \arguments{
 \item{traits}{The traits to analize.}

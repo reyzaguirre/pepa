@@ -4,10 +4,21 @@
 \alias{repo.spld}
 \title{Automatic report for a split plot design}
 \usage{
-repo.spld(traits, mpf, spf, sspf = NULL, rep, dfr, title = NULL,
-  subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"), server = FALSE,
-  server_dir_name = "directory", server_file_name = "filename")
+repo.spld(
+  traits,
+  mpf,
+  spf,
+  sspf = NULL,
+  rep,
+  dfr,
+  title = NULL,
+  subtitle = NULL,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf"),
+  server = FALSE,
+  server_dir_name = "directory",
+  server_file_name = "filename"
+)
 }
 \arguments{
 \item{traits}{The traits to analize.}

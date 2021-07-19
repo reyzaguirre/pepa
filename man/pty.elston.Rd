@@ -4,9 +4,17 @@
 \alias{pty.elston}
 \title{Pepa tells you about the Elston index}
 \usage{
-pty.elston(traits, geno, env = NULL, rep = NULL, dfr,
-  means = "single", lb = 1, author = "International Potato Center",
-  format = c("html", "word", "pdf"))
+pty.elston(
+  traits,
+  geno,
+  env = NULL,
+  rep = NULL,
+  dfr,
+  means = "single",
+  lb = 1,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf")
+)
 }
 \arguments{
 \item{traits}{List of traits.}

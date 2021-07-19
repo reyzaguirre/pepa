@@ -4,12 +4,22 @@
 \alias{repo.rcbd}
 \title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
-repo.rcbd(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr,
+repo.rcbd(
+  traits,
+  trt,
+  trt.lab = "treatment",
+  rep,
+  eu = NULL,
+  dfr,
   maxp = 0.1,
   title = "Automatic report for a Randomized Complete Block Design (RCBD)",
-  subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"), server = FALSE,
-  server_dir_name = "directory", server_file_name = "filename")
+  subtitle = NULL,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf"),
+  server = FALSE,
+  server_dir_name = "directory",
+  server_file_name = "filename"
+)
 }
 \arguments{
 \item{traits}{The traits to analize.}

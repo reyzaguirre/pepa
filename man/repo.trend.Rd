@@ -4,11 +4,23 @@
 \alias{repo.trend}
 \title{Report for repeated measures data}
 \usage{
-repo.trend(response, treat, rep = NULL, eu, dap, dfr, average = TRUE,
-  se = TRUE, title = "Automatic report for repeated measures data",
-  subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"), server = FALSE,
-  server_dir_name = "directory", server_file_name = "filename")
+repo.trend(
+  response,
+  treat,
+  rep = NULL,
+  eu,
+  dap,
+  dfr,
+  average = TRUE,
+  se = TRUE,
+  title = "Automatic report for repeated measures data",
+  subtitle = NULL,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf"),
+  server = FALSE,
+  server_dir_name = "directory",
+  server_file_name = "filename"
+)
 }
 \arguments{
 \item{response}{Response variable.}

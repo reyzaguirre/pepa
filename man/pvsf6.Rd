@@ -4,7 +4,9 @@
 \name{pvsf6}
 \alias{pvsf6}
 \title{Organoleptic scores at mother trial}
-\format{A data frame with 6 columns and 50 rows.}
+\format{
+A data frame with 6 columns and 50 rows.
+}
 \source{
 International Potato Center, potato data.
 }

@@ -4,11 +4,19 @@
 \alias{repo.abd}
 \title{Automatic report for an augmented block design (ABD)}
 \usage{
-repo.abd(traits, geno, rep, dfr,
+repo.abd(
+  traits,
+  geno,
+  rep,
+  dfr,
   title = "Automatic report for an Augmented Block Design (ABD)",
-  subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"), server = FALSE,
-  server_dir_name = "directory", server_file_name = "filename")
+  subtitle = NULL,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf"),
+  server = FALSE,
+  server_dir_name = "directory",
+  server_file_name = "filename"
+)
 }
 \arguments{
 \item{traits}{The traits to analize.}

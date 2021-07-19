@@ -4,7 +4,9 @@
 \name{pvsf1}
 \alias{pvsf1}
 \title{Voting for selection criteria}
-\format{A data frame with 5 columns and 15 rows.}
+\format{
+A data frame with 5 columns and 15 rows.
+}
 \source{
 International Potato Center, potato data.
 }

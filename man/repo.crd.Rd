@@ -4,11 +4,20 @@
 \alias{repo.crd}
 \title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
-repo.crd(traits, trt, trt.lab = "treatment", eu = NULL, dfr,
+repo.crd(
+  traits,
+  trt,
+  trt.lab = "treatment",
+  eu = NULL,
+  dfr,
   title = "Automatic report for a Completely Randomized Design (CRD)",
-  subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"), server = FALSE,
-  server_dir_name = "directory", server_file_name = "filename")
+  subtitle = NULL,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf"),
+  server = FALSE,
+  server_dir_name = "directory",
+  server_file_name = "filename"
+)
 }
 \arguments{
 \item{traits}{The traits to analize.}

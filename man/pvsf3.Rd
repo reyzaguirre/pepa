@@ -4,7 +4,9 @@
 \name{pvsf3}
 \alias{pvsf3}
 \title{Voting for best clones at harvest}
-\format{A data frame with 8 columns and 18 rows.}
+\format{
+A data frame with 8 columns and 18 rows.
+}
 \source{
 International Potato Center, potato data.
 }

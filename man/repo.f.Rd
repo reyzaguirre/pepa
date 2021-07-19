@@ -4,11 +4,20 @@
 \alias{repo.f}
 \title{Automatic report for a factorial experiment}
 \usage{
-repo.f(traits, factors, rep, dfr, maxp = 0.1,
+repo.f(
+  traits,
+  factors,
+  rep,
+  dfr,
+  maxp = 0.1,
   title = "Automatic report for a factorial experiment",
-  subtitle = NULL, author = "International Potato Center",
-  format = c("html", "word", "pdf"), server = FALSE,
-  server_dir_name = "directory", server_file_name = "filename")
+  subtitle = NULL,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf"),
+  server = FALSE,
+  server_dir_name = "directory",
+  server_file_name = "filename"
+)
 }
 \arguments{
 \item{traits}{The traits to analize.}
