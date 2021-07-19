@@ -4,11 +4,22 @@
 \alias{repo.met}
 \title{Automatic report for a MET with a RCBD}
 \usage{
-repo.met(traits, geno, env, rep, dfr, maxp = 0.1,
-  title = "Automatic report for a MET with a RCBD", subtitle = NULL,
-  author = "International Potato Center", format = c("html", "word",
-  "pdf"), server = FALSE, server_dir_name = "directory",
-  server_file_name = "filename")
+repo.met(
+  traits,
+  geno,
+  env,
+  rep,
+  dfr,
+  maxp = 0.1,
+  pe = FALSE,
+  title = "Automatic report for a MET with a RCBD",
+  subtitle = NULL,
+  author = "International Potato Center",
+  format = c("html", "word", "pdf"),
+  server = FALSE,
+  server_dir_name = "directory",
+  server_file_name = "filename"
+)
 }
 \arguments{
 \item{traits}{The traits to analize.}
@@ -22,6 +33,9 @@ repo.met(traits, geno, env, rep, dfr, maxp = 0.1,
 \item{dfr}{The name of the data frame containing the data.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
+
+\item{pe}{Logical. If \code{"pe = TRUE"} multiple comparison tests for principal effects
+are included even if interaction is significat. Default to \code{"pe = FALSE"}.}
 
 \item{title}{Report title.}
 

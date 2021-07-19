@@ -8,6 +8,8 @@
 #' @param rep The replications.
 #' @param dfr The name of the data frame containing the data.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
+#' @param pe Logical. If \code{"pe = TRUE"} multiple comparison tests for principal effects
+#' are included even if interaction is significat. Default to \code{"pe = FALSE"}.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -30,7 +32,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.met <- function(traits, geno, env, rep, dfr, maxp = 0.1,
+repo.met <- function(traits, geno, env, rep, dfr, maxp = 0.1, pe = FALSE,
                      title = "Automatic report for a MET with a RCBD",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -69,6 +71,7 @@ repo.met <- function(traits, geno, env, rep, dfr, maxp = 0.1,
                                   rep = rep,
                                   dfr = dfr,
                                   maxp = maxp,
+                                  pe = pe,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))
