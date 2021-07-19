@@ -45,17 +45,6 @@ NULL
 #' @format A data frame with 6 columns and 50 rows.
 #' @source International Potato Center, potato data.
 NULL
-#' @name pvsf7
-#' @title Organoleptic scores at baby trials
-#' @docType data
-#' @aliases pvsf7
-#' @description This data set has the scores given by men and women to several clones
-#' (\code{INSTN}), for attributes \code{APPEARANCE}, \code{TASTE}, and \code{TEXTURE}
-#' at the baby trials.
-#' @usage pvsf7
-#' @format A data frame with 6 columns and 50 rows.
-#' @source International Potato Center, potato data.
-NULL
 #' @name pvsf9
 #' @title Voting for best clones at post-harvest
 #' @docType data
