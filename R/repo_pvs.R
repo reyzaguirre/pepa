@@ -38,27 +38,33 @@ repo.pvs <- function(dfr, form,
   dirfiles <- system.file(package = "pepa")
 
   if (form == 1) {
-    subtitle <- "Identification of selection criteria for genotypes"
+    if (is.null(subtitle))
+      subtitle <- "Identification of selection criteria for genotypes"
     fn <- "pvs1"
   }
   if (form == 2) {
-    subtitle <- "Best genotypes at flowering"
+    if (is.null(subtitle))
+      subtitle <- "Best genotypes at flowering"
     fn <- "pvs23"
   }
   if (form == 3) {
-    subtitle <- "Best genotypes at harvest"
+    if (is.null(subtitle))
+      subtitle <- "Best genotypes at harvest"
     fn <- "pvs23"
   }
   if (form == 6) {
-    subtitle <- "Organoleptic analysis at mother trial"
+    if (is.null(subtitle))
+      subtitle <- "Organoleptic analysis at mother trial"
     fn <- "pvs67"
   }
   if (form == 7) {
-    subtitle <- "Organoleptic analysis at baby trials"
+    if (is.null(subtitle))
+      subtitle <- "Organoleptic analysis at baby trials"
     fn <- "pvs67"
   }
   if (form == 9) {
-    subtitle <- "Best genotypes at post-harvest"
+    if (is.null(subtitle))
+      subtitle <- "Best genotypes at post-harvest"
     fn <- "pvs9"
   }
 
