@@ -23,19 +23,21 @@ pty <- function(x, author = "International Potato Center",
   classlist <- c("data.frame", "numeric", "aov", "lm")
   dirfiles <- system.file(package = "pepa")
 
-  if (!(class(x) %in% classlist)) {
+  type <- class(x)
+
+  if (!(type %in% classlist)) {
     fileRmd <- paste0(dirfiles, "/rmd/na.Rmd")  # Not available yet
     output <- "na"
   }
-  if (class(x) == "data.frame") {
+  if (type == "data.frame") {
     fileRmd <- paste0(dirfiles, "/rmd/df.Rmd")  # for data.frames
     output <- "df"
   }
-  if (class(x) == "numeric") {
+  if (type == "numeric") {
     fileRmd <- paste0(dirfiles, "/rmd/nt.Rmd")  # for numeric traits
     output <- "nt"
   }
-  if (sum(class(x) %in% c("aov", "lm")) > 0) {
+  if (sum(type %in% c("aov", "lm")) > 0) {
     fileRmd <- paste0(dirfiles, "/rmd/aov.Rmd") # for linear models with aov or lm
     output <- "aov"
   }
