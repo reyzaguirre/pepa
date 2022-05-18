@@ -7,6 +7,7 @@
 #' @param rep The replications.
 #' @param block The blocks.
 #' @param k The size of the blocks.
+#' @param method The estimation method, REML or VC (Variance Components).
 #' @param dfr The name of the data frame.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
@@ -23,12 +24,12 @@
 #' @return It returns an explanation about the alpha (0,1) design fitted model.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' repo.a01d("yield", "geno", "rep", "block", k = 3, a01data)
+#' repo.a01d("yield", "geno", "rep", "block", 3, dfr = a01data)
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-repo.a01d <- function(traits, geno, rep, block, k, dfr,
+repo.a01d <- function(traits, geno, rep, block, k, method = c("REML", "VC"), dfr,
                       title = "Automatic report for an alpha (0,1) design",
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -37,6 +38,7 @@ repo.a01d <- function(traits, geno, rep, block, k, dfr,
                       server_dir_name = "directory",
                       server_file_name = "filename") {
 
+  method <- match.arg(method)
   format <- paste0(match.arg(format), "_document")
   dirfiles <- system.file(package = "pepa")
 
@@ -66,6 +68,7 @@ repo.a01d <- function(traits, geno, rep, block, k, dfr,
                                   rep = rep,
                                   block = block,
                                   k = k,
+                                  method = method,
                                   dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
