@@ -3,6 +3,14 @@
 #' Produce standard reports for PVS data.
 #' @param dfr A data frame with data for a pvs form.
 #' @param form Form number.
+#'  \itemize{
+#'  \item 1: Identification of selection criteria for genotypes.
+#'  \item 2: Best genotypes at flowering.
+#'  \item 3: Best genotypes at harvest.
+#'  \item 6: Organoleptic analysis at mother trial.
+#'  \item 7: Organoleptic analysis at baby trial.
+#'  \item 9: Best genotypes at post-harvest.
+#'  }
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
