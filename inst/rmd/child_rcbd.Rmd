@@ -185,8 +185,6 @@ if (at[1, 5] > 0.05)
     tapply(dfr[, trait.est], dfr[, trt], mean)
 ```
 
-`r if (lc$ng < 10 & at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".4.3. Plot of means")}`
-
 ## {{i+1}}.5. Variance components
 
 Below are the variance components for this model, under the assumption that `r trt.lab.s` and blocks are random. Here the model is fitted using REML and missing values are not estimated.
