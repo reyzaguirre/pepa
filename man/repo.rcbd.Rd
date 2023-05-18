@@ -12,6 +12,7 @@ repo.rcbd(
   eu = NULL,
   dfr,
   maxp = 0.1,
+  mc = FALSE,
   title = "Automatic report for a Randomized Complete Block Design (RCBD)",
   subtitle = NULL,
   author = "International Potato Center",
@@ -35,6 +36,9 @@ repo.rcbd(
 \item{dfr}{The name of the data frame.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
+
+\item{mc}{Logical. If \code{"mc = TRUE"} multiple comparison tests are included
+even if the factor effect is not significat. Default to \code{"mc = FALSE"}.}
 
 \item{title}{Report title.}
 

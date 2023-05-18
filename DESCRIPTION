@@ -1,15 +1,15 @@
 Package: pepa
 Type: Package
 Title: Package for the Execution of Pre Cooked Analysis
-Version: 1.4.0
-Date: 2021-07-16
+Version: 1.4.1
+Date: 2023-05-18
 Author: Raul Eyzaguirre
 Contributor: Omar Benites
 Maintainer: Raul Eyzaguirre <R.EYZAGUIRRE@CGIAR.ORG>
 Description: This packages creates automatic reports for different types of
     statistical methodologies.
 Depends:
-    R (>= 3.4.0),
+    R (>= 4.0.0),
     st4gi,
     ggplot2
 Imports:
@@ -26,4 +26,4 @@ LazyData: true
 Suggests:
     testthat
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3

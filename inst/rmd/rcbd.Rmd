@@ -24,6 +24,7 @@ params:
   eu: "no data"
   dfr: "no data"
   maxp: "no data"
+  mc: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
@@ -51,6 +52,7 @@ rep <- params$rep
 eu <- params$eu
 dfr <- params$dfr
 maxp <- params$maxp
+mc <- params$mc
 
 # Get means if subsamples
 

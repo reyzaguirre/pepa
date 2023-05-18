@@ -8,6 +8,8 @@
 #' @param eu The experimental unit. Must be defined in case of subsamples.
 #' @param dfr The name of the data frame.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
+#' @param mc Logical. If \code{"mc = TRUE"} multiple comparison tests are included
+#' even if the factor effect is not significat. Default to \code{"mc = FALSE"}.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -41,7 +43,8 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr, maxp = 0.1,
+repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr,
+                      maxp = 0.1, mc = FALSE,
                       title = "Automatic report for a Randomized Complete Block Design (RCBD)",
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -81,6 +84,7 @@ repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr, m
                                   eu = eu,
                                   dfr = dfr,
                                   maxp = maxp,
+                                  mc = mc,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

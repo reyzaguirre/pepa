@@ -145,11 +145,11 @@ Any trend in the residuals in the left plot would violate the assumption of inde
 
 ## {{i+1}}.4. `r trt.lab.c` means
 
-`r if(at[1, 5] < 0.05) {paste("Below are the sorted means for each", trt.lab, "using the Fisher's Least Significant Difference method and the multiple comparisons method of Tukey, both at the 5% level. Letters indicate if there are significant differences.")} else {paste("Because the effect of", trt.lab.s, "was not significant in the ANOVA, multiple comparison tests are not presented. The means of your", trt.lab.s, "are:")}`
+`r if(at[1, 5] < 0.05 | mc) {paste("Below are the sorted means for each", trt.lab, "using the Fisher's Least Significant Difference method and the multiple comparisons method of Tukey, both at the 5% level. Letters indicate if there are significant differences.")} else {paste("Because the effect of", trt.lab.s, "was not significant in the ANOVA, multiple comparison tests are not presented. The means of your", trt.lab.s, "are:")}`
 
-`r if (at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".4.1. LSD test")}`
+`r if (at[1, 5] < 0.05 | mc) {paste0("### ", {{i+1}}, ".4.1. LSD test")}`
 
-```{r include = at[1, 5] < 0.05, echo = TRUE, eval = FALSE}
+```{r include = at[1, 5] < 0.05 | mc, echo = TRUE, eval = FALSE}
 # If there are no missing values, get a copy for further use
 mydata$trait.est <- mydata.trait
 # If there are missing values, get estimates
@@ -159,29 +159,29 @@ agricolae::LSD.test(mydata$trait.est, mydata$treatment, at[3, 1], at[3, 3])$grou
 ```
 
 ```{r echo = FALSE}
-if (at[1, 5] < 0.05) {
+if (at[1, 5] < 0.05 | mc) {
   means <- dfr[, trait.est]
   agricolae::LSD.test(means, dfr[, trt], at[3, 1], at[3, 3])$groups
 }
 ```
 
-`r if (at[1, 5] < 0.05) {paste0("### ", {{i+1}}, ".4.2. Tukey test")}`
+`r if (at[1, 5] < 0.05 | mc) {paste0("### ", {{i+1}}, ".4.2. Tukey test")}`
 
-```{r include = at[1, 5] < 0.05, echo = TRUE, eval = FALSE}
+```{r include = at[1, 5] < 0.05 | mc, echo = TRUE, eval = FALSE}
 agricolae::HSD.test(mydata$trait.est, mydata$treatment, at[3, 1], at[3, 3])$groups
 ```
 
 ```{r echo = FALSE}
-if (at[1, 5] < 0.05)
+if (at[1, 5] < 0.05 | mc)
   agricolae::HSD.test(means, dfr[, trt], at[3, 1], at[3, 3])$groups
 ```
 
-```{r include = at[1, 5] > 0.05, echo = TRUE, eval = FALSE}
+```{r include = at[1, 5] > 0.05 & !mc, echo = TRUE, eval = FALSE}
 tapply(mydata$trait.est, mydata$treatment, mean, na.rm = TRUE)
 ```
 
 ```{r echo = FALSE}
-if (at[1, 5] > 0.05)
+if (at[1, 5] > 0.05 & !mc)
     tapply(dfr[, trait.est], dfr[, trt], mean)
 ```
 
