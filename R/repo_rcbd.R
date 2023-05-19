@@ -15,10 +15,6 @@
 #' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
-#' @param server Logical. If \code{"FALSE"} works with local machines.
-#' Otherwise works in server environments.
-#' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
-#' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
 #' @details It fits a linear model for a RCBD and explains the results.
 #'
 #' Under the assumption of fixed effects an ANOVA table is computed with missing
@@ -48,33 +44,15 @@ repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr,
                       title = "Automatic report for a Randomized Complete Block Design (RCBD)",
                       subtitle = NULL,
                       author = "International Potato Center",
-                      format = c("html", "word", "pdf"),
-                      server = FALSE,
-                      server_dir_name = "directory",
-                      server_file_name = "filename") {
+                      format = c("html", "word", "pdf")) {
 
   format <- paste0(match.arg(format), "_document")
   dirfiles <- system.file(package = "pepa")
 
-  if (!server) {
-
-    fileRmd <- paste0(dirfiles, "/rmd/rcbd.Rmd")
-    fileURL <- paste0(dirfiles, "/rmd/rcbd.html")
-    fileDOCX <- paste0(dirfiles, "/rmd/rcbd.docx")
-    filePDF <- paste0(dirfiles, "/rmd/rcbd.pdf")
-
-  } else {
-
-    dirfiles <- server_dir_name
-
-    # Only Markdown and Word files
-
-    fileRmd <- paste0(dirfiles, "rcbd.Rmd")
-    fileRmd_server_name <- paste0(dirfiles, server_file_name, ".Rmd")
-    fileDOCX <- paste0(dirfiles, "rcbd.docx")
-    fileDOCX_server_name <- paste0(dirfiles, server_file_name, ".docx")
-
-  }
+  fileRmd <- paste0(dirfiles, "/rmd/rcbd.Rmd")
+  fileURL <- paste0(dirfiles, "/rmd/rcbd.html")
+  fileDOCX <- paste0(dirfiles, "/rmd/rcbd.docx")
+  filePDF <- paste0(dirfiles, "/rmd/rcbd.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(traits = traits,
@@ -89,21 +67,13 @@ repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr,
                                   subtitle = subtitle,
                                   author = author))
 
-  if (!server) {
+  if (format == "html_document")
+    try(browseURL(fileURL))
 
-    if (format == "html_document")
-      try(browseURL(fileURL))
+  if (format == "word_document")
+    try(system(paste("open", fileDOCX)))
 
-    if (format == "word_document")
-      try(system(paste("open", fileDOCX)))
-
-    if (format == "pdf_document")
-      try(system(paste("open", filePDF)))
-
-  } else {
-
-    file.copy(fileDOCX, fileDOCX_server_name, overwrite = TRUE)
-
-  }
+  if (format == "pdf_document")
+    try(system(paste("open", filePDF)))
 
 }
