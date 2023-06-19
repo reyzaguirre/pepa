@@ -31,9 +31,7 @@ params:
 ---
 
 ```{r global_options, include = FALSE}
-
 knitr::opts_chunk$set(comment = NA)
-
 ```
 
 ```{r echo = FALSE}

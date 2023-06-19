@@ -10,13 +10,11 @@ repo.crd(
   trt.lab = "treatment",
   eu = NULL,
   dfr,
+  mc = FALSE,
   title = "Automatic report for a Completely Randomized Design (CRD)",
   subtitle = NULL,
   author = "International Potato Center",
-  format = c("html", "word", "pdf"),
-  server = FALSE,
-  server_dir_name = "directory",
-  server_file_name = "filename"
+  format = c("html", "word", "pdf")
 )
 }
 \arguments{
@@ -30,6 +28,9 @@ repo.crd(
 
 \item{dfr}{The name of the data frame.}
 
+\item{mc}{Logical. If \code{"mc = TRUE"} multiple comparison tests are included
+even if the factor effect is not significat. Default to \code{"mc = FALSE"}.}
+
 \item{title}{Report title.}
 
 \item{subtitle}{Report subtitle.}
@@ -38,13 +39,6 @@ repo.crd(
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
-
-\item{server}{Logical. If \code{"FALSE"} works with local machines.
-Otherwise works in server environments.}
-
-\item{server_dir_name}{If \code{"server = TRUE"}, this is the directory name in the server.}
-
-\item{server_file_name}{If \code{"server = TRUE"}, this is the file name in the server.}
 }
 \value{
 It returns an explanation about the CRD fitted model.

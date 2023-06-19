@@ -22,15 +22,14 @@ params:
   trt.lab: "no data"
   eu: "no data"
   dfr: "no data"
+  mc: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
 ---
 
 ```{r global_options, include = FALSE}
-
 knitr::opts_chunk$set(comment = NA)
-
 ```
 
 ```{r echo = FALSE}
@@ -47,6 +46,7 @@ trt.lab.c <- paste0(toupper(substr(trt.lab, 1, 1)), substr(trt.lab, 2, nct))
 trt.lab.sc <- paste0(toupper(substr(trt.lab, 1, 1)), substr(trt.lab, 2, nct), "s")
 eu <- params$eu
 dfr <- params$dfr
+mc <- params$mc
 
 # Get means if subsamples
 

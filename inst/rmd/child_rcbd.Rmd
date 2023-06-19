@@ -3,7 +3,6 @@
 # {{i+1}}. Analysis for trait `r traits[i]`
 
 ```{r echo = FALSE}
-
 # Check design
 
 lc <- ck.rcbd(traits[i], trt, rep, dfr)
@@ -46,7 +45,6 @@ if (!is.null(eu))
     rownames(at2) <- c(trt, rep, "Exp. Error", "Sampling Error")
     show.anova.sub <- TRUE
   }
-
 ```
 
 ## {{i+1}}.1. Exploratory analysis
