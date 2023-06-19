@@ -10,13 +10,11 @@ repo.f(
   rep,
   dfr,
   maxp = 0.1,
+  pe = FALSE,
   title = "Automatic report for a factorial experiment",
   subtitle = NULL,
   author = "International Potato Center",
-  format = c("html", "word", "pdf"),
-  server = FALSE,
-  server_dir_name = "directory",
-  server_file_name = "filename"
+  format = c("html", "word", "pdf")
 )
 }
 \arguments{
@@ -30,6 +28,10 @@ repo.f(
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
+\item{pe}{Logical. If \code{"pe = TRUE"} multiple comparison tests for principal effects
+are included even if interaction is significat, only in the case of 2 factors.
+Default to \code{"pe = FALSE"}.}
+
 \item{title}{Report title.}
 
 \item{subtitle}{Report subtitle.}
@@ -38,13 +40,6 @@ repo.f(
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
-
-\item{server}{Logical. If \code{"FALSE"} works with local machines.
-Otherwise works in server environments.}
-
-\item{server_dir_name}{If \code{"server = TRUE"}, this is the directory name in the server.}
-
-\item{server_file_name}{If \code{"server = TRUE"}, this is the file name in the server.}
 }
 \value{
 It returns an automatic report for the factorial experiment with a CRD or
