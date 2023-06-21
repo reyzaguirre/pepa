@@ -1,6 +1,6 @@
 `r i = {{i}}`
 
-```{r echo = FALSE}
+```{r}
 # Check design
 
 lc <- ck.f(traits[i], factors, rep, dfr)
@@ -51,14 +51,16 @@ cv <- (at[rr, 3])^0.5 / mean(dfr[, trait.est]) * 100
 
 ### {{i+1}}.1.1. Means by individual factor levels
 
-```{r echo = FALSE}
-for (j in 1:lc$nf)
+```{r}
+for (j in 1:lc$nf) {
   print(tapply(dfr[, trait.est], dfr[, factors[j]], mean))
+  cat("\n")
+}
 ```
 
 ### {{i+1}}.1.2. Means by factor levels combinations
 
-```{r echo = FALSE}
+```{r}
 # Create expression for list of factors
   
 lf.expr <- 'list(dfr[, factors[1]]'
@@ -79,7 +81,7 @@ tapply(dfr[, trait.est], eval(parse(text = lf.expr)), mean)
 
 As it was stated in section 1, it is supposed that the error has a normal distribution with the same variance for all the combinations among the levels of the factors. The following plots help to evaluate these assumptions:
 
-```{r echo = FALSE, fig.height = 5, fig.width = 10}
+```{r fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
 suppressWarnings(plot(model, which = 1))
 suppressWarnings(plot(model, which = 2))
@@ -89,14 +91,13 @@ Funnel shapes for the first plot may suggest heterogeneity of variances while de
 
 ### {{i+1}}.2.2. ANOVA table
 
-```{r echo = FALSE}
+```{r}
 at
 ```
 
 The coefficient of variation for this experiment is `r format(cv, digits = 4)`%.
 
-
-```{r echo = FALSE}
+```{r}
 nf <- lc$nf
 
 if (is.null(rep)) {
@@ -116,7 +117,7 @@ if (is.null(rep)) {
 
 `r if (nf == 2 & (pv.gen < 0.05 | pv.int < 0.05)) {paste0("### ", {{i+1}}, ".2.3. LSD test for ", factors[1])}`
 
-```{r echo = FALSE}
+```{r}
 if (nf == 2 & pv.gen < 0.05 & (pv.int > 0.05 | pe)) {
   y <- dfr[, trait.est]
   agricolae::LSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups
@@ -128,13 +129,14 @@ if (nf == 2 & pv.int < 0.05) {
     y <- temp[, trait.est]
     print(paste("LSD test for", factors[2], unique(dfr[, factors[2]])[j]))
     print(agricolae::LSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
+    cat("\n")
   }
 }
 ```
 
 `r if (nf == 2 & (pv.gen < 0.05 | pv.int < 0.05)) {paste0("### ", {{i+1}}, ".2.4. Tukey test for ", factors[1])}`
 
-```{r echo = FALSE}
+```{r}
 if (nf == 2 & pv.gen < 0.05 & (pv.int > 0.05 | pe)) {
   y <- dfr[, trait.est]
   agricolae::HSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups
@@ -146,6 +148,47 @@ if (nf == 2 & pv.int < 0.05) {
     y <- temp[, trait.est]
     print(paste("HSD Tukey test for", factors[2], unique(dfr[, factors[2]])[j]))
     print(agricolae::HSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
+    cat("\n")
+  }
+}
+```
+
+`r if (nf == 2 & (pv.loc < 0.05 & pv.gen > 0.05 & pv.int > 0.05)) {paste0("### ", {{i+1}}, ".2.3. LSD test for ", factors[2])}`
+`r if (nf == 2 & (pv.int < 0.05 | (pv.gen < 0.05 & pv.loc < 0.05))) {paste0("### ", {{i+1}}, ".2.5. LSD test for ", factors[2])}`
+
+```{r}
+if (nf == 2 & pv.loc < 0.05 & (pv.int > 0.05 | pe)) {
+  y <- dfr[, trait.est]
+  agricolae::LSD.test(y, dfr[, factors[2]], df.res, ms.res)$groups
+}
+
+if (nf == 2 & pv.int < 0.05) {
+  for (j in 1:lc$nl[1]) {
+    temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
+    y <- temp[, trait.est]
+    print(paste("LSD test for ", factors[1], unique(dfr[, factors[1]])[j]))
+    print(agricolae::LSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
+    cat("\n")
+  }
+}
+```
+
+`r if (nf == 2 & (pv.loc < 0.05 & pv.gen > 0.05 & pv.int > 0.05)) {paste0("### ", {{i+1}}, ".2.4. Tukey test for ", factors[2])}`
+`r if (nf == 2 & (pv.int < 0.05 | (pv.gen < 0.05 & pv.loc < 0.05))) {paste0("### ", {{i+1}}, ".2.6. Tukey test for ", factors[2])}`
+
+```{r}
+if (nf == 2 & pv.loc < 0.05 & (pv.int > 0.05 | pe)) {
+  y <- dfr[, trait.est]
+  agricolae::HSD.test(y, dfr[, factors[2]], df.res, ms.res)$groups
+}
+
+if (nf == 2 & pv.int < 0.05) {
+  for (j in 1:lc$nl[1]) {
+    temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
+    y <- temp[, trait.est]
+    print(paste("HSD Tukey test for ", factors[1], unique(dfr[, factors[1]])[j]))
+    print(agricolae::HSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
+    cat("\n")
   }
 }
 ```
