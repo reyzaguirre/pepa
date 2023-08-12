@@ -16,7 +16,13 @@ if (is.null(sspf)) {
 
 ```{r}
 at <- model$ANOVA
-rownames(at) <- c(rep, mpf, 'Ea', spf, paste(mpf, spf, sep = ':'), 'Eb')
+if (is.null(sspf)) {
+  rownames(at) <- c(rep, mpf, 'Ea', spf, paste(mpf, spf, sep = ':'), 'Eb')
+} else {
+  rownames(at) <- c(rep, mpf, 'Ea', spf, paste(mpf, spf, sep = ':'), 'Eb',
+                    sspf, paste(mpf, sspf, sep = ':'), paste(spf, sspf, sep = ':'),
+                    paste(mpf, spf, sspf, sep = ':'), 'Ec')
+}
 at
 ```
 
