@@ -26,7 +26,21 @@ if (is.null(sspf)) {
 at
 ```
 
-`r if (is.null(sspf) & (at[2, 5] < 0.05 | at[5, 5] < 0.05)) {paste0("## ", {{i+1}}, ".2. LSD test for ", mpf)}`
+## {{i+1}}.2. Tukey test for full treatments
+
+Note: This test is produced regardless of the significance of any term in the ANOVA model. The main purpose here is to show a sorted table of means as reference.
+
+```{r}
+if (is.null(sspf)) {
+  dfr$t.full <- paste(dfr[, mpf], dfr[, spf], sep = '_')
+  agricolae::HSD.test(y, dfr$t.full, at[6, 1], at[6, 3])$groups
+} else {
+  dfr$t.full <- paste(dfr[, mpf], dfr[, spf], dfr[, sspf], sep = '_')
+  agricolae::HSD.test(y, dfr$t.full, at[11, 1], at[11, 3])$groups
+}
+```
+
+`r if (is.null(sspf) & (at[2, 5] < 0.05 | at[5, 5] < 0.05)) {paste0("## ", {{i+1}}, ".3. LSD test for ", mpf)}`
 
 ```{r}
 if (is.null(sspf) & at[2, 5] < 0.05 & (at[5, 5] > 0.05 | pe)) {
@@ -45,7 +59,7 @@ if (is.null(sspf) & at[5, 5] < 0.05) {
 }
 ```
 
-`r if (is.null(sspf) & (at[2, 5] < 0.05 | at[5, 5] < 0.05)) {paste0("## ", {{i+1}}, ".3. Tukey test for ", mpf)}`
+`r if (is.null(sspf) & (at[2, 5] < 0.05 | at[5, 5] < 0.05)) {paste0("## ", {{i+1}}, ".4. Tukey test for ", mpf)}`
 
 ```{r}
 if (is.null(sspf) & at[2, 5] < 0.05 & (at[5, 5] > 0.05 | pe)) {
@@ -64,8 +78,8 @@ if (is.null(sspf) & at[5, 5] < 0.05) {
 }
 ```
 
-`r if (is.null(sspf) & (at[4, 5] < 0.05 & at[2, 5] > 0.05 & at[5, 5] > 0.05)) {paste0("## ", {{i+1}}, ".2. LSD test for ", spf)}`
-`r if (is.null(sspf) & (at[5, 5] < 0.05 | (at[2, 5] < 0.05 & at[4, 5] < 0.05))) {paste0("## ", {{i+1}}, ".4. LSD test for ", spf)}`
+`r if (is.null(sspf) & (at[4, 5] < 0.05 & at[2, 5] > 0.05 & at[5, 5] > 0.05)) {paste0("## ", {{i+1}}, ".3. LSD test for ", spf)}`
+`r if (is.null(sspf) & (at[5, 5] < 0.05 | (at[2, 5] < 0.05 & at[4, 5] < 0.05))) {paste0("## ", {{i+1}}, ".5. LSD test for ", spf)}`
 
 ```{r}
 if (is.null(sspf) & at[4, 5] < 0.05 & (at[5, 5] > 0.05 | pe)) {
@@ -84,8 +98,8 @@ if (is.null(sspf) & at[5, 5] < 0.05) {
 }
 ```
 
-`r if (is.null(sspf) & (at[4, 5] < 0.05 & at[2, 5] > 0.05 & at[5, 5] > 0.05)) {paste0("## ", {{i+1}}, ".3. Tukey test for ", spf)}`
-`r if (is.null(sspf) & (at[5, 5] < 0.05 | (at[2, 5] < 0.05 & at[4, 5] < 0.05))) {paste0("## ", {{i+1}}, ".5. Tukey test for ", spf)}`
+`r if (is.null(sspf) & (at[4, 5] < 0.05 & at[2, 5] > 0.05 & at[5, 5] > 0.05)) {paste0("## ", {{i+1}}, ".4. Tukey test for ", spf)}`
+`r if (is.null(sspf) & (at[5, 5] < 0.05 | (at[2, 5] < 0.05 & at[4, 5] < 0.05))) {paste0("## ", {{i+1}}, ".6. Tukey test for ", spf)}`
 
 ```{r}
 if (is.null(sspf) & at[4, 5] < 0.05 & (at[5, 5] > 0.05 | pe)) {
