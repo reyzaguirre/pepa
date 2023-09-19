@@ -79,15 +79,19 @@ at
 
 The coefficient of variation for this experiment is `r format(cv, digits = 4)`%. The p-values for the model are: `r format(at[1, 5], digits = 4)` for genotypes `r if (at[1, 5] < 0.05) {" which is significant at the 5% level, "} else {" which is not significant at the 5% level, "}` `r format(at[2, 5], digits = 4)` for environments `r if (at[2, 5] < 0.05) {" which is significant at the 5% level,"} else {" which is not significant at the 5% level,"}` and `r format(at[4, 5], digits = 4)` for the genotypes by environments interaction `r if (at[4, 5] < 0.05) {" which is significant at the 5% level."} else {" which is not significant at the 5% level."}`
 
-`r if (at[1, 5] < 0.05 | at[4, 5] < 0.05) {paste0("### ", {{i+1}}, ".2.3. LSD test for genotypes")}`
+```{r}
+sec.xxx <- 3
+```
+
+`r if (at[1, 5] < 0.05 | at[4, 5] < 0.05 | pe | se) {paste0("### ", {{i+1}}, ".2.", sec.xxx, ". LSD test for genotypes")}`
 
 ```{r}
-if (at[1, 5] < 0.05 & (at[4, 5] > 0.05 | pe)) {
+if ((at[1, 5] < 0.05 & at[4, 5] > 0.05) | pe) {
   y <- dfr[, trait.est]
   agricolae::LSD.test(y, dfr[, geno], at[5, 1], at[5, 3])$groups
 }
 
-if (at[4, 5] < 0.05) {
+if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[2]) {
     temp <- dfr[dfr[, env] == unique(dfr[, env])[j], ]
     y <- temp[, trait.est]
@@ -98,15 +102,16 @@ if (at[4, 5] < 0.05) {
 }
 ```
 
-`r if (at[1, 5] < 0.05 | at[4, 5] < 0.05) {paste0("### ", {{i+1}}, ".2.4. Tukey test for genotypes")}`
+`r if (at[1, 5] < 0.05 | at[4, 5] < 0.05 | pe | se) {paste0("### ", {{i+1}}, ".2.", sec.xxx + 1, ". Tukey test for genotypes")}`
 
 ```{r}
-if (at[1, 5] < 0.05 & (at[4, 5] > 0.05 | pe)) {
+if ((at[1, 5] < 0.05 & at[4, 5] > 0.05) | pe) {
   y <- dfr[, trait.est]
   agricolae::HSD.test(y, dfr[, geno], at[5, 1], at[5, 3])$groups
+  sec.xxx <- 5
 }
 
-if (at[4, 5] < 0.05) {
+if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[2]) {
     temp <- dfr[dfr[, env] == unique(dfr[, env])[j], ]
     y <- temp[, trait.est]
@@ -114,19 +119,19 @@ if (at[4, 5] < 0.05) {
     print(agricolae::HSD.test(y, temp[, geno], at[5, 1], at[5, 3])$groups)
     cat("\n")
   }
+  sec.xxx <- 5
 }
 ```
 
-`r if (at[2, 5] < 0.05 & at[1, 5] > 0.05 & at[4, 5] > 0.05) {paste0("### ", {{i+1}}, ".2.3. LSD test for environments")}`
-`r if (at[4, 5] < 0.05 | (at[1, 5] < 0.05 & at[2, 5] < 0.05)) {paste0("### ", {{i+1}}, ".2.5. LSD test for environments")}`
+`r if (at[2, 5] < 0.05 | at[4, 5] < 0.05 | pe | se) {paste0("### ", {{i+1}}, ".2.", sec.xxx, ". LSD test for environments")}`
 
 ```{r}
-if (at[2, 5] < 0.05 & (at[4, 5] > 0.05 | pe)) {
+if ((at[2, 5] < 0.05 & at[4, 5] > 0.05) | pe) {
   y <- dfr[, trait.est]
   agricolae::LSD.test(y, dfr[, env], at[3, 1], at[3, 3])$groups
 }
 
-if (at[4, 5] < 0.05) {
+if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[1]) {
     temp <- dfr[dfr[, geno] == unique(dfr[, geno])[j], ]
     y <- temp[, trait.est]
@@ -137,16 +142,15 @@ if (at[4, 5] < 0.05) {
 }
 ```
 
-`r if (at[2, 5] < 0.05 & at[1, 5] > 0.05 & at[4, 5] > 0.05) {paste0("### ", {{i+1}}, ".2.4. Tukey test for environments")}`
-`r if (at[4, 5] < 0.05 | (at[1, 5] < 0.05 & at[2, 5] < 0.05)) {paste0("### ", {{i+1}}, ".2.6. Tukey test for environments")}`
+`r if (at[2, 5] < 0.05 | at[4, 5] < 0.05 | pe | se) {paste0("### ", {{i+1}}, ".2.", sec.xxx + 1, ". Tukey test for environments")}`
 
 ```{r}
-if (at[2, 5] < 0.05 & (at[4, 5] > 0.05 | pe)) {
+if ((at[2, 5] < 0.05 & at[4, 5] > 0.05) | pe) {
   y <- dfr[, trait.est]
   agricolae::HSD.test(y, dfr[, env], at[3, 1], at[3, 3])$groups
 }
 
-if (at[4, 5] < 0.05) {
+if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[1]) {
     temp <- dfr[dfr[, geno] == unique(dfr[, geno])[j], ]
     y <- temp[, trait.est]

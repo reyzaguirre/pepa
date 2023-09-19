@@ -24,6 +24,7 @@ params:
   dfr: "no data"
   maxp: "no data"
   pe: "no data"
+  se: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
@@ -44,6 +45,7 @@ rep <- params$rep
 dfr <- params$dfr
 maxp <- params$maxp
 pe <- params$pe
+se <- params$se
 
 # Check factors structure
 

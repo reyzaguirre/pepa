@@ -12,6 +12,7 @@ repo.met(
   dfr,
   maxp = 0.1,
   pe = FALSE,
+  se = FALSE,
   title = "Automatic report for a MET with a RCBD",
   subtitle = NULL,
   author = "International Potato Center",
@@ -36,6 +37,9 @@ repo.met(
 
 \item{pe}{Logical. If \code{"pe = TRUE"} multiple comparison tests for principal effects
 are included even if interaction is significat. Default to \code{"pe = FALSE"}.}
+
+\item{se}{Logical. If \code{"se = TRUE"} multiple comparison tests for simple effects
+are included even if interaction is not significat. Default to \code{"se = FALSE"}.}
 
 \item{title}{Report title.}
 
