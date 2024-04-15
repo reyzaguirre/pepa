@@ -126,7 +126,7 @@ if (is.null(rep)) {
 ```{r}
 if (!is.nan(pv.gen) & !is.nan(pv.int)) {
   
-  if (nf == 2 & pv.gen < 0.05 & (pv.int > 0.05 | pe)) {
+  if (nf == 2 & ((pv.gen < 0.05 & pv.int > 0.05) | pe)) {
     y <- dfr[, trait.est]
     print(agricolae::LSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups)
     cat("\n")
@@ -136,7 +136,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.int)) {
     for (j in 1:lc$nl[2]) {
       temp <- dfr[dfr[, factors[2]] == unique(dfr[, factors[2]])[j], ]
       y <- temp[, trait.est]
-      print(paste("LSD test for", factors[2], unique(dfr[, factors[2]])[j]))
+      print(paste("LSD test at", factors[2], unique(dfr[, factors[2]])[j]))
       print(agricolae::LSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
       cat("\n")
     }
@@ -149,7 +149,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.int)) {
 ```{r}
 if (!is.nan(pv.gen) & !is.nan(pv.int)) {
 
-  if (nf == 2 & pv.gen < 0.05 & (pv.int > 0.05 | pe)) {
+  if (nf == 2 & ((pv.gen < 0.05 & pv.int > 0.05) | pe)) {
     y <- dfr[, trait.est]
     print(agricolae::HSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups)
     cat("\n")
@@ -159,7 +159,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.int)) {
     for (j in 1:lc$nl[2]) {
       temp <- dfr[dfr[, factors[2]] == unique(dfr[, factors[2]])[j], ]
       y <- temp[, trait.est]
-      print(paste("HSD Tukey test for", factors[2], unique(dfr[, factors[2]])[j]))
+      print(paste("HSD Tukey test at", factors[2], unique(dfr[, factors[2]])[j]))
       print(agricolae::HSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
       cat("\n")
     }
@@ -183,7 +183,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {
     for (j in 1:lc$nl[1]) {
       temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
       y <- temp[, trait.est]
-      print(paste("LSD test for ", factors[1], unique(dfr[, factors[1]])[j]))
+      print(paste("LSD test at", factors[1], unique(dfr[, factors[1]])[j]))
       print(agricolae::LSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
       cat("\n")
     }
@@ -207,7 +207,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {
     for (j in 1:lc$nl[1]) {
       temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
       y <- temp[, trait.est]
-      print(paste("HSD Tukey test for ", factors[1], unique(dfr[, factors[1]])[j]))
+      print(paste("HSD Tukey test at", factors[1], unique(dfr[, factors[1]])[j]))
       print(agricolae::HSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
       cat("\n")
     }
