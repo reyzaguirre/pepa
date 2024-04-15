@@ -86,7 +86,7 @@ sec.xxx <- 3
 `r if (at[1, 5] < 0.05 | at[4, 5] < 0.05 | pe | se) {paste0("### ", {{i+1}}, ".2.", sec.xxx, ". LSD test for genotypes")}`
 
 ```{r}
-if ((at[1, 5] < 0.05 & at[4, 5] > 0.05) | pe) {
+if (at[1, 5] < 0.05 & at[4, 5] > 0.05 | pe) {
   y <- dfr[, trait.est]
   agricolae::LSD.test(y, dfr[, geno], at[5, 1], at[5, 3])$groups
 }
@@ -105,10 +105,10 @@ if (at[4, 5] < 0.05 | se) {
 `r if (at[1, 5] < 0.05 | at[4, 5] < 0.05 | pe | se) {paste0("### ", {{i+1}}, ".2.", sec.xxx + 1, ". Tukey test for genotypes")}`
 
 ```{r}
-if ((at[1, 5] < 0.05 & at[4, 5] > 0.05) | pe) {
+if (at[1, 5] < 0.05 & at[4, 5] > 0.05 | pe) {
+  sec.xxx <- 5
   y <- dfr[, trait.est]
   agricolae::HSD.test(y, dfr[, geno], at[5, 1], at[5, 3])$groups
-  sec.xxx <- 5
 }
 
 if (at[4, 5] < 0.05 | se) {
@@ -126,7 +126,7 @@ if (at[4, 5] < 0.05 | se) {
 `r if (at[2, 5] < 0.05 | at[4, 5] < 0.05 | pe | se) {paste0("### ", {{i+1}}, ".2.", sec.xxx, ". LSD test for environments")}`
 
 ```{r}
-if ((at[2, 5] < 0.05 & at[4, 5] > 0.05) | pe) {
+if (at[2, 5] < 0.05 & at[4, 5] > 0.05 | pe) {
   y <- dfr[, trait.est]
   agricolae::LSD.test(y, dfr[, env], at[3, 1], at[3, 3])$groups
 }
@@ -145,7 +145,7 @@ if (at[4, 5] < 0.05 | se) {
 `r if (at[2, 5] < 0.05 | at[4, 5] < 0.05 | pe | se) {paste0("### ", {{i+1}}, ".2.", sec.xxx + 1, ". Tukey test for environments")}`
 
 ```{r}
-if ((at[2, 5] < 0.05 & at[4, 5] > 0.05) | pe) {
+if (at[2, 5] < 0.05 & at[4, 5] > 0.05 | pe) {
   y <- dfr[, trait.est]
   agricolae::HSD.test(y, dfr[, env], at[3, 1], at[3, 3])$groups
 }

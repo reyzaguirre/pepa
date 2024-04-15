@@ -83,8 +83,14 @@ As it was stated in section 1, it is supposed that the error has a normal distri
 
 ```{r fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
-suppressWarnings(plot(model, which = 1))
-suppressWarnings(plot(model, which = 2))
+tryCatch(
+  suppressWarnings(plot(model, which = 1)),
+    error = function(e) {}
+)
+tryCatch(
+  suppressWarnings(plot(model, which = 2)),
+    error = function(e) {}
+)
 ```
 
 Funnel shapes for the first plot may suggest heterogeneity of variances while departures from the theoretical normal line are symptoms of lack of normality.
@@ -115,80 +121,96 @@ if (is.null(rep)) {
 }
 ```
 
-`r if (nf == 2 & (pv.gen < 0.05 | pv.int < 0.05)) {paste0("### ", {{i+1}}, ".2.3. LSD test for ", factors[1])}`
+`r if (!is.nan(pv.gen) & !is.nan(pv.int)) {if (nf == 2 & (pv.gen < 0.05 | pv.int < 0.05 | pe | se)) {paste0("### ", {{i+1}}, ".2.3. LSD test for ", factors[1])}}`
 
 ```{r}
-if (nf == 2 & pv.gen < 0.05 & (pv.int > 0.05 | pe)) {
-  y <- dfr[, trait.est]
-  agricolae::LSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups
-}
-
-if (nf == 2 & pv.int < 0.05) {
-  for (j in 1:lc$nl[2]) {
-    temp <- dfr[dfr[, factors[2]] == unique(dfr[, factors[2]])[j], ]
-    y <- temp[, trait.est]
-    print(paste("LSD test for", factors[2], unique(dfr[, factors[2]])[j]))
-    print(agricolae::LSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
+if (!is.nan(pv.gen) & !is.nan(pv.int)) {
+  
+  if (nf == 2 & pv.gen < 0.05 & (pv.int > 0.05 | pe)) {
+    y <- dfr[, trait.est]
+    print(agricolae::LSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups)
     cat("\n")
+  }
+  
+  if (nf == 2 & pv.int < 0.05 | se) {
+    for (j in 1:lc$nl[2]) {
+      temp <- dfr[dfr[, factors[2]] == unique(dfr[, factors[2]])[j], ]
+      y <- temp[, trait.est]
+      print(paste("LSD test for", factors[2], unique(dfr[, factors[2]])[j]))
+      print(agricolae::LSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
+      cat("\n")
+    }
   }
 }
 ```
 
-`r if (nf == 2 & (pv.gen < 0.05 | pv.int < 0.05)) {paste0("### ", {{i+1}}, ".2.4. Tukey test for ", factors[1])}`
+`r if (!is.nan(pv.gen) & !is.nan(pv.int)) {if (nf == 2 & (pv.gen < 0.05 | pv.int < 0.05 | pe | se)) {paste0("### ", {{i+1}}, ".2.4. Tukey test for ", factors[1])}}`
 
 ```{r}
-if (nf == 2 & pv.gen < 0.05 & (pv.int > 0.05 | pe)) {
-  y <- dfr[, trait.est]
-  agricolae::HSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups
-}
+if (!is.nan(pv.gen) & !is.nan(pv.int)) {
 
-if (nf == 2 & pv.int < 0.05) {
-  for (j in 1:lc$nl[2]) {
-    temp <- dfr[dfr[, factors[2]] == unique(dfr[, factors[2]])[j], ]
-    y <- temp[, trait.est]
-    print(paste("HSD Tukey test for", factors[2], unique(dfr[, factors[2]])[j]))
-    print(agricolae::HSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
+  if (nf == 2 & pv.gen < 0.05 & (pv.int > 0.05 | pe)) {
+    y <- dfr[, trait.est]
+    print(agricolae::HSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups)
     cat("\n")
+  }
+  
+  if (nf == 2 & pv.int < 0.05 | se) {
+    for (j in 1:lc$nl[2]) {
+      temp <- dfr[dfr[, factors[2]] == unique(dfr[, factors[2]])[j], ]
+      y <- temp[, trait.est]
+      print(paste("HSD Tukey test for", factors[2], unique(dfr[, factors[2]])[j]))
+      print(agricolae::HSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
+      cat("\n")
+    }
   }
 }
 ```
 
-`r if (nf == 2 & (pv.loc < 0.05 & pv.gen > 0.05 & pv.int > 0.05)) {paste0("### ", {{i+1}}, ".2.3. LSD test for ", factors[2])}`
-`r if (nf == 2 & (pv.int < 0.05 | (pv.gen < 0.05 & pv.loc < 0.05))) {paste0("### ", {{i+1}}, ".2.5. LSD test for ", factors[2])}`
+`r if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {if (nf == 2 & (pv.loc < 0.05 & pv.gen > 0.05 & pv.int > 0.05 & !pe & !se)) {paste0("### ", {{i+1}}, ".2.3. LSD test for ", factors[2])}}`
+`r if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {if (nf == 2 & (pv.int < 0.05 | (pv.gen < 0.05 & pv.loc < 0.05) | pe | se)) {paste0("### ", {{i+1}}, ".2.5. LSD test for ", factors[2])}}`
 
 ```{r}
-if (nf == 2 & pv.loc < 0.05 & (pv.int > 0.05 | pe)) {
-  y <- dfr[, trait.est]
-  agricolae::LSD.test(y, dfr[, factors[2]], df.res, ms.res)$groups
-}
-
-if (nf == 2 & pv.int < 0.05) {
-  for (j in 1:lc$nl[1]) {
-    temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
-    y <- temp[, trait.est]
-    print(paste("LSD test for ", factors[1], unique(dfr[, factors[1]])[j]))
-    print(agricolae::LSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
+if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {
+  
+  if (nf == 2 & ((pv.loc < 0.05 & pv.int > 0.05) | pe)) {
+    y <- dfr[, trait.est]
+    print(agricolae::LSD.test(y, dfr[, factors[2]], df.res, ms.res)$groups)
     cat("\n")
+  }
+  
+  if (nf == 2 & (pv.int < 0.05 | se)) {
+    for (j in 1:lc$nl[1]) {
+      temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
+      y <- temp[, trait.est]
+      print(paste("LSD test for ", factors[1], unique(dfr[, factors[1]])[j]))
+      print(agricolae::LSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
+      cat("\n")
+    }
   }
 }
 ```
 
-`r if (nf == 2 & (pv.loc < 0.05 & pv.gen > 0.05 & pv.int > 0.05)) {paste0("### ", {{i+1}}, ".2.4. Tukey test for ", factors[2])}`
-`r if (nf == 2 & (pv.int < 0.05 | (pv.gen < 0.05 & pv.loc < 0.05))) {paste0("### ", {{i+1}}, ".2.6. Tukey test for ", factors[2])}`
+`r if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {if (nf == 2 & (pv.loc < 0.05 & pv.gen > 0.05 & pv.int > 0.05 & !pe & !se)) {paste0("### ", {{i+1}}, ".2.4. Tukey test for ", factors[2])}}`
+`r if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {if (nf == 2 & (pv.int < 0.05 | (pv.gen < 0.05 & pv.loc < 0.05) | pe | se)) {paste0("### ", {{i+1}}, ".2.6. Tukey test for ", factors[2])}}`
 
 ```{r}
-if (nf == 2 & pv.loc < 0.05 & (pv.int > 0.05 | pe)) {
-  y <- dfr[, trait.est]
-  agricolae::HSD.test(y, dfr[, factors[2]], df.res, ms.res)$groups
-}
-
-if (nf == 2 & pv.int < 0.05) {
-  for (j in 1:lc$nl[1]) {
-    temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
-    y <- temp[, trait.est]
-    print(paste("HSD Tukey test for ", factors[1], unique(dfr[, factors[1]])[j]))
-    print(agricolae::HSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
+if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {
+  
+  if (nf == 2 & ((pv.loc < 0.05 & pv.int > 0.05) | pe)) {
+    y <- dfr[, trait.est]
+    print(agricolae::HSD.test(y, dfr[, factors[2]], df.res, ms.res)$groups)
     cat("\n")
+  }
+  
+  if (nf == 2 & (pv.int < 0.05 | se)) {
+    for (j in 1:lc$nl[1]) {
+      temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
+      y <- temp[, trait.est]
+      print(paste("HSD Tukey test for ", factors[1], unique(dfr[, factors[1]])[j]))
+      print(agricolae::HSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
+      cat("\n")
+    }
   }
 }
 ```

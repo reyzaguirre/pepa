@@ -59,7 +59,7 @@ boxplot(dfr[, traits[i]], ylab = traits[i])
 
 `r if(lc$ng < 10) {paste0(" Since the number of " , trt.lab.s, " in your experiment is not so large, we can plot the data for each ", trt.lab, ":")}`
 
-```{r}
+```{r fig.height = 5, fig.width = 10}
 if (lc$ng < 10) msdplot(traits[i], trt, dfr, conf = 1, pch = 4)
 ```
 

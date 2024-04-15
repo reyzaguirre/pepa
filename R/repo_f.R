@@ -10,6 +10,9 @@
 #' @param pe Logical. If \code{"pe = TRUE"} multiple comparison tests for principal effects
 #' are included even if interaction is significat, only in the case of 2 factors.
 #' Default to \code{"pe = FALSE"}.
+#' @param se Logical. If \code{"se = TRUE"} multiple comparison tests for simple effects
+#' are included even if interaction is not significat, only in the case of 2 factors.
+#' Default to \code{"se = FALSE"}.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -38,7 +41,8 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.f <- function(traits, factors, rep, dfr, maxp = 0.1, pe = FALSE,
+repo.f <- function(traits, factors, rep, dfr, maxp = 0.1,
+                   pe = FALSE, se = FALSE,
                    title = "Automatic report for a factorial experiment",
                    subtitle = NULL,
                    author = "International Potato Center",
@@ -72,6 +76,7 @@ repo.f <- function(traits, factors, rep, dfr, maxp = 0.1, pe = FALSE,
                                   dfr = dfr,
                                   maxp = maxp,
                                   pe = pe,
+                                  se = se,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))
