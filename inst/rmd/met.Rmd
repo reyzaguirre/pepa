@@ -17,7 +17,7 @@ output:
     toc_depth: 3
     highlight: "tango"
 params:
-  traits: "no data"
+  vars: "no data"
   geno: "no data"
   env: "no data"
   rep: "no data"
@@ -38,7 +38,7 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
-traits <- params$traits
+vars <- params$vars
 geno <- params$geno
 env <- params$env
 rep <- params$rep
@@ -85,8 +85,8 @@ In this model we assume that the errors are independent and have a normal distri
 
 ```{r include = FALSE}
 out <- NULL
-for (i in 1:length(traits)) {
-  lc <- ck.f(traits[i], c(geno, env), rep, dfr)
+for (i in 1:length(vars)) {
+  lc <- ck.f(vars[i], c(geno, env), rep, dfr)
   if (lc$nt.0 == 0 & lc$nrep > 1 & lc$nt.mult == 0 & lc$pmis <= maxp) {
     out <- c(out, knit_expand('child_met.Rmd'))
   } else {

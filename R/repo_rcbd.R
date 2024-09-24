@@ -1,7 +1,7 @@
 #' Automatic report for a Randomized Complete Block Design (RCBD)
 #'
-#' Produces an automatic report for selected traits in an experiment with a RCBD.
-#' @param traits The traits to analize.
+#' Produces an automatic report for selected variables in an experiment with a RCBD.
+#' @param vars The variables to analize.
 #' @param trt The treatments.
 #' @param trt.lab The labels for treatments.
 #' @param rep The replications.
@@ -39,7 +39,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr,
+repo.rcbd <- function(vars, trt, trt.lab = "treatment", rep, eu = NULL, dfr,
                       maxp = 0.1, mc = FALSE,
                       title = "Automatic report for a Randomized Complete Block Design (RCBD)",
                       subtitle = NULL,
@@ -55,7 +55,7 @@ repo.rcbd <- function(traits, trt, trt.lab = "treatment", rep, eu = NULL, dfr,
   filePDF <- paste0(dirfiles, "/rmd/rcbd.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(traits = traits,
+                    params = list(vars = vars,
                                   trt = trt,
                                   trt.lab = trt.lab,
                                   rep = rep,

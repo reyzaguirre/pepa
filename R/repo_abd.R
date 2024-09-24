@@ -1,7 +1,7 @@
 #' Automatic report for an augmented block design (ABD)
 #'
-#' Produces an automatic report for selected traits in an experiment with an ABD.
-#' @param traits The traits to analize.
+#' Produces an automatic report for selected variables in an experiment with an ABD.
+#' @param vars The variables to analize.
 #' @param geno The genotypes.
 #' @param rep The replications.
 #' @param dfr The name of the data frame.
@@ -29,7 +29,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.abd <- function(traits, geno, rep, dfr,
+repo.abd <- function(vars, geno, rep, dfr,
                      title = "Automatic report for an Augmented Block Design (ABD)",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -62,7 +62,7 @@ repo.abd <- function(traits, geno, rep, dfr,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(traits = traits,
+                    params = list(vars = vars,
                                   geno = geno,
                                   rep = rep,
                                   dfr = dfr,

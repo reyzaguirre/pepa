@@ -1,8 +1,8 @@
 #' Automatic report for a MET with a RCBD
 #'
-#' Produces an automatic report for selected traits in a multi environment
+#' Produces an automatic report for selected variables in a multi environment
 #' trial (MET) with a RCBD in each environment.
-#' @param traits The traits to analize.
+#' @param vars The variables to analize.
 #' @param trt The treatments.
 #' @param env The environments.
 #' @param rep The replications.
@@ -17,7 +17,7 @@
 #' Otherwise works in server environments.
 #' @param server_dir_name If \code{"server = TRUE"}, this is the directory name in the server.
 #' @param server_file_name If \code{"server = TRUE"}, this is the file name in the server.
-#' @details It fits a linear model for a MET with a RCBD for the selected traits.
+#' @details It fits a linear model for a MET with a RCBD for the selected variables.
 #' If data is unbalanced, missing values are estimated up to an specified maximum
 #' proportion, 10\% by default. Treatments and environments are considered as fixed
 #' factors while the blocks are considered as random and nested into the environments
@@ -26,11 +26,11 @@
 #' @author Raul Eyzaguirre.
 #' @examples
 #' repo.met.agro(c("rytha", "fytha"), "geno", "env", "rep", megaclones)
-#' @import agricolae
+#' @importFrom agricolae LSD.test HSD.test
 #' @importFrom utils browseURL
 #' @export
 
-repo.met.agro <- function(traits, trt, env, rep, dfr, maxp = 0.1,
+repo.met.agro <- function(vars, trt, env, rep, dfr, maxp = 0.1,
                           title = "Automatic report for a MET with a RCBD",
                           subtitle = NULL,
                           author = "International Potato Center",
@@ -63,7 +63,7 @@ repo.met.agro <- function(traits, trt, env, rep, dfr, maxp = 0.1,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(traits = traits,
+                    params = list(vars = vars,
                                   trt = trt,
                                   env = env,
                                   rep = rep,

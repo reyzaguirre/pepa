@@ -17,7 +17,7 @@ output:
     toc: true
     toc_depth: 3
 params: 
-  traits: "no data"
+  vars: "no data"
   trt: "no data"
   trt.lab: "no data"
   rep: "no data"
@@ -38,7 +38,7 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
-traits <- params$traits
+vars <- params$vars
 trt <- params$trt
 trt.lab <- params$trt.lab
 nct <- nchar(trt.lab)
@@ -55,7 +55,7 @@ mc <- params$mc
 
 if (!is.null(eu)) {
   dfr2 <- dfr
-  dfr <- docomp("mean", traits, c(trt, eu), rep, dfr)
+  dfr <- docomp("mean", vars, c(trt, eu), rep, dfr)
 }
 
 # Check factors structure
@@ -89,8 +89,8 @@ In this model we assume that the errors are independent and have a normal distri
 
 ```{r include = FALSE}
 out <- NULL
-for (i in 1:length(traits)) {
-  lc <- ck.rcbd(traits[i], trt, rep, dfr)
+for (i in 1:length(vars)) {
+  lc <- ck.rcbd(vars[i], trt, rep, dfr)
   if (lc$ng.0 == 0 & lc$nrep > 1 & lc$ng.mult == 0 & lc$pmis <= maxp) {
     out <- c(out, knit_expand('child_rcbd.Rmd'))
   } else {

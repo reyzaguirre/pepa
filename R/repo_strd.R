@@ -1,8 +1,8 @@
 #' Automatic report for a strip plot design
 #'
-#' Produces an automatic report for selected traits in an experiment
+#' Produces an automatic report for selected variables in an experiment
 #' with a strip plot design.
-#' @param traits The traits to analize.
+#' @param vars The variables to analize.
 #' @param rowf The row factor.
 #' @param colf The column factor.
 #' @param rep The replications.
@@ -31,7 +31,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.strd <- function(traits, rowf, colf, rep, dfr,
+repo.strd <- function(vars, rowf, colf, rep, dfr,
                       title = "Automatic report for a strip plot design",
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -64,7 +64,7 @@ repo.strd <- function(traits, rowf, colf, rep, dfr,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(traits = traits,
+                    params = list(vars = vars,
                                   rowf = rowf,
                                   colf = colf,
                                   rep = rep,

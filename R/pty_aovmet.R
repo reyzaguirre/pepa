@@ -2,7 +2,7 @@
 #'
 #' Explain a fitted model for a multi environment trial (MET) with a RCBD
 #' in each environment in plain English.
-#' @param trait The trait to analize.
+#' @param y The variable to analize.
 #' @param geno The genotypes.
 #' @param env The environments.
 #' @param rep The replications.
@@ -23,7 +23,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-pty.aovmet <- function(trait, geno, env, rep, dfr, maxp = 0.1,
+pty.aovmet <- function(y, geno, env, rep, dfr, maxp = 0.1,
                        author = "International Potato Center",
                        format = c("html", "word", "pdf")) {
 
@@ -36,7 +36,7 @@ pty.aovmet <- function(trait, geno, env, rep, dfr, maxp = 0.1,
   filePDF <- paste0(dirfiles, "/rmd/aovmet.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(trait = trait,
+                    params = list(y = y,
                                   geno = geno,
                                   env = env,
                                   rep = rep,

@@ -60,7 +60,7 @@ NULL
 #' @title PVS summary global
 #' @docType data
 #' @aliases pvssg
-#' @description This data set has summaries (means, standard deviations) for several traits.
+#' @description This data set has summaries (means, standard deviations) for several variables.
 #' @usage pvssg
 #' @format A data frame with 163 columns and 6 rows.
 #' @source International Potato Center, potato data.
@@ -69,7 +69,7 @@ NULL
 #' @title Repeated measures data
 #' @docType data
 #' @aliases trend.data
-#' @description Repeated measures data for trait yield.
+#' @description Repeated measures data for variable yield.
 #' @usage trend.data
 #' @format A data frame with 8 columns and 48 rows.
 #' @source Dummy data.

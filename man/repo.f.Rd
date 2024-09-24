@@ -5,7 +5,7 @@
 \title{Automatic report for a factorial experiment}
 \usage{
 repo.f(
-  traits,
+  vars,
   factors,
   rep,
   dfr,
@@ -19,7 +19,7 @@ repo.f(
 )
 }
 \arguments{
-\item{traits}{The traits to analize.}
+\item{vars}{The variables to analize.}
 
 \item{factors}{The factors.}
 
@@ -51,12 +51,12 @@ It returns an automatic report for the factorial experiment with a CRD or
 RCBD fitted model.
 }
 \description{
-Produces an automatic report for selected traits in a factorial experiment with
+Produces an automatic report for selected variables in a factorial experiment with
 a CRD or RCBD.
 }
 \details{
 It fits a linear model for a factorial experiment with a CRD or RCBD for
-the selected traits. If data is unbalanced, missing values are estimated up to an
+the selected variables. If data is unbalanced, missing values are estimated up to an
 specified maximum proportion, 10\% by default. All factors are considered as fixed.
 }
 \examples{

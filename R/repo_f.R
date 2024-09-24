@@ -1,8 +1,8 @@
 #' Automatic report for a factorial experiment
 #'
-#' Produces an automatic report for selected traits in a factorial experiment with
+#' Produces an automatic report for selected variables in a factorial experiment with
 #' a CRD or RCBD.
-#' @param traits The traits to analize.
+#' @param vars The variables to analize.
 #' @param factors The factors.
 #' @param rep The replications or blocks, \code{NULL} for a CRD.
 #' @param dfr The name of the data frame containing the data.
@@ -19,7 +19,7 @@
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @details It fits a linear model for a factorial experiment with a CRD or RCBD for
-#' the selected traits. If data is unbalanced, missing values are estimated up to an
+#' the selected variables. If data is unbalanced, missing values are estimated up to an
 #' specified maximum proportion, 10\% by default. All factors are considered as fixed.
 #' @return It returns an automatic report for the factorial experiment with a CRD or
 #' RCBD fitted model.
@@ -37,11 +37,11 @@
 #' temp$y <- rnorm(24)
 #' # Run report
 #' repo.f('y', c('A', 'B', 'C'), 'block', temp)
-#' @import agricolae
+#' @importFrom agricolae LSD.test HSD.test
 #' @importFrom utils browseURL
 #' @export
 
-repo.f <- function(traits, factors, rep, dfr, maxp = 0.1,
+repo.f <- function(vars, factors, rep, dfr, maxp = 0.1,
                    pe = FALSE, se = FALSE,
                    title = "Automatic report for a factorial experiment",
                    subtitle = NULL,
@@ -70,7 +70,7 @@ repo.f <- function(traits, factors, rep, dfr, maxp = 0.1,
   filePDF <- paste0(dirfiles, "/rmd/", fn, ".pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(traits = traits,
+                    params = list(vars = vars,
                                   factors = factors,
                                   rep = rep,
                                   dfr = dfr,

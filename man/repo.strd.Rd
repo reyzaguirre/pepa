@@ -5,7 +5,7 @@
 \title{Automatic report for a strip plot design}
 \usage{
 repo.strd(
-  traits,
+  vars,
   rowf,
   colf,
   rep,
@@ -20,7 +20,7 @@ repo.strd(
 )
 }
 \arguments{
-\item{traits}{The traits to analize.}
+\item{vars}{The variables to analize.}
 
 \item{rowf}{The row factor.}
 
@@ -50,7 +50,7 @@ Otherwise works in server environments.}
 It returns an explanation about the strip plot design fitted model.
 }
 \description{
-Produces an automatic report for selected traits in an experiment
+Produces an automatic report for selected variables in an experiment
 with a strip plot design.
 }
 \details{

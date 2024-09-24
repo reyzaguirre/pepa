@@ -17,7 +17,7 @@ output:
     toc: true
     toc_depth: 3
 params: 
-  traits: "no data"
+  vars: "no data"
   rowf: "no data"
   colf: "no data"
   rep: "no data"
@@ -35,7 +35,7 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
-traits <- params$traits
+vars <- params$vars
 rowf <- params$rowf
 colf <- params$colf
 rep <- params$rep
@@ -79,7 +79,7 @@ In this model $(\alpha\gamma)_{ik}$, $(\beta\gamma)_{jk}$, and $(\alpha\beta\gam
 
 ```{r include = FALSE}
 out <- NULL
-for (i in 1:length(traits))
+for (i in 1:length(vars))
   out <- c(out, knit_expand('child_strd.Rmd'))
 ```
 

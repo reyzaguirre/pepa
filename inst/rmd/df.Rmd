@@ -27,4 +27,4 @@ head(params$x)
 Remember that the table is the standard format for data analysis; it is the kind of data structure that any statistical package prefers. In a table you have:
 
 * one row for each observation (e.g. a plot, a pot or a plant) and
-* one column for each variable (e.g. a trait like root yield or a factor like genotypes).
+* one column for each variable (e.g. a variable like root yield or a factor like genotypes).

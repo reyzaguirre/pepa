@@ -14,5 +14,5 @@ International Potato Center, potato data.
 pvssg
 }
 \description{
-This data set has summaries (means, standard deviations) for several traits.
+This data set has summaries (means, standard deviations) for several variables.
 }

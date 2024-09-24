@@ -71,7 +71,7 @@ order.group.mod <- function(trt, means, N, MSerror, Tprob, std.err, parameter = 
         minimo <- Tprob * sdtdif
       s <- abs(w[i, 2] - w[j, 2]) <= minimo
       if (s) {
-        if (lastC(M[i]) != letras[k])
+        # if (lastC(M[i]) != letras[k])
           M[i] <- paste0(M[i], letras[k])
       } else {
         k <- k + 1

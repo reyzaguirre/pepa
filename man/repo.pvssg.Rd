@@ -5,7 +5,7 @@
 \title{Report for PVS - Global summary}
 \usage{
 repo.pvssg(
-  traits,
+  vars,
   dfr,
   title = "Automatic report for PVS",
   subtitle = "Global summary data",
@@ -17,7 +17,7 @@ repo.pvssg(
 )
 }
 \arguments{
-\item{traits}{A list of traits to be included in the report.}
+\item{vars}{A list of variables to be included in the report.}
 
 \item{dfr}{A data frame with data for a pvs global summary form.}
 
@@ -48,8 +48,8 @@ It produces a report for global summary sheet of the Mother & Baby methodology
 implemented by CIP.
 }
 \examples{
-traits <- c("NMTP_Mean_mother", "TNTP_Mean_mother", "PPH_Mean_mother", "TTYA_Mean_mother")
-repo.pvssg(traits, pvssg)
+vars <- c("NMTP_Mean_mother", "TNTP_Mean_mother", "PPH_Mean_mother", "TTYA_Mean_mother")
+repo.pvssg(vars, pvssg)
 }
 \author{
 Raul Eyzaguirre.

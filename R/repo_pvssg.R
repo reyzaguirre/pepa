@@ -1,7 +1,7 @@
 #' Report for PVS - Global summary
 #'
 #' Produce a report for PVS data global summary sheet.
-#' @param traits A list of traits to be included in the report.
+#' @param vars A list of variables to be included in the report.
 #' @param dfr A data frame with data for a pvs global summary form.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
@@ -17,15 +17,15 @@
 #' @return It returns an automatic report.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' traits <- c("NMTP_Mean_mother", "TNTP_Mean_mother", "PPH_Mean_mother", "TTYA_Mean_mother")
-#' repo.pvssg(traits, pvssg)
+#' vars <- c("NMTP_Mean_mother", "TNTP_Mean_mother", "PPH_Mean_mother", "TTYA_Mean_mother")
+#' repo.pvssg(vars, pvssg)
 #' @import ggplot2
 #' @importFrom factoextra fviz_pca
 #' @importFrom magrittr %>%
 #' @importFrom purrr map
 #' @export
 
-repo.pvssg <- function(traits,
+repo.pvssg <- function(vars,
                        dfr,
                        title = "Automatic report for PVS",
                        subtitle = "Global summary data",
@@ -59,7 +59,7 @@ repo.pvssg <- function(traits,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(traits = traits,
+                    params = list(vars = vars,
                                   dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,

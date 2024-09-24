@@ -5,7 +5,7 @@
 \title{Automatic report for an alpha (0,1) design}
 \usage{
 repo.a01d(
-  traits,
+  vars,
   geno,
   rep,
   block,
@@ -22,7 +22,7 @@ repo.a01d(
 )
 }
 \arguments{
-\item{traits}{The traits to analize.}
+\item{vars}{The variables to analize.}
 
 \item{geno}{The genotypes.}
 
@@ -56,7 +56,7 @@ Otherwise works in server environments.}
 It returns an explanation about the alpha (0,1) design fitted model.
 }
 \description{
-Produces an automatic report for selected traits in an experiment with an
+Produces an automatic report for selected variables in an experiment with an
 alpha (0,1) design.
 }
 \details{

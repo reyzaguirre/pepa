@@ -5,7 +5,7 @@
 \title{Pepa tells you about a MET with a RCBD}
 \usage{
 pty.aovmet(
-  trait,
+  y,
   geno,
   env,
   rep,
@@ -16,7 +16,7 @@ pty.aovmet(
 )
 }
 \arguments{
-\item{trait}{The trait to analize.}
+\item{y}{The variable to analize.}
 
 \item{geno}{The genotypes.}
 

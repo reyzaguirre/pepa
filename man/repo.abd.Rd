@@ -5,7 +5,7 @@
 \title{Automatic report for an augmented block design (ABD)}
 \usage{
 repo.abd(
-  traits,
+  vars,
   geno,
   rep,
   dfr,
@@ -19,7 +19,7 @@ repo.abd(
 )
 }
 \arguments{
-\item{traits}{The traits to analize.}
+\item{vars}{The variables to analize.}
 
 \item{geno}{The genotypes.}
 
@@ -47,7 +47,7 @@ Otherwise works in server environments.}
 It returns an explanation about the ABD fitted model.
 }
 \description{
-Produces an automatic report for selected traits in an experiment with an ABD.
+Produces an automatic report for selected variables in an experiment with an ABD.
 }
 \details{
 It fits a linear model for an ABD and explains the results.

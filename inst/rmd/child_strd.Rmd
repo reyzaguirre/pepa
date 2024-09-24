@@ -1,9 +1,9 @@
 `r i = {{i}}`
 
-# {{i+1}}. Analysis for trait `r traits[i]`
+# {{i+1}}. Analysis for variable `r vars[i]`
 
 ```{r results = 'hide'}
-y <- dfr[, traits[i]]
+y <- dfr[, vars[i]]
 
 model <- agricolae::strip.plot(rep, rowf, colf, y)
 ```

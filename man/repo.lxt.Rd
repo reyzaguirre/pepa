@@ -5,7 +5,7 @@
 \title{Automatic report for a Line x Tester genetic design.}
 \usage{
 repo.lxt(
-  traits,
+  vars,
   line,
   tester,
   rep,
@@ -20,7 +20,7 @@ repo.lxt(
 )
 }
 \arguments{
-\item{traits}{The traits to analize.}
+\item{vars}{The variables to analize.}
 
 \item{line}{The lines.}
 

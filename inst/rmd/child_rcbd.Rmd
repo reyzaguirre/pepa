@@ -1,42 +1,42 @@
 `r i = {{i}}`
 
-# {{i+1}}. Analysis for trait `r traits[i]`
+# {{i+1}}. Analysis for variable `r vars[i]`
 
 ```{r}
 # Check design
 
-lc <- ck.rcbd(traits[i], trt, rep, dfr)
+lc <- ck.rcbd(vars[i], trt, rep, dfr)
 
 # Fit a model for assumptions plots
 
-model <- aov(dfr[, traits[i]] ~ dfr[, trt] + dfr[, rep])
+model <- aov(dfr[, vars[i]] ~ dfr[, trt] + dfr[, rep])
 
 # Estimate missing values
 
-trait.est <- paste0(traits[i], ".est")
+y.est <- paste0(vars[i], ".est")
 
 if (lc$nmis > 0) {
-  dfr[, trait.est] <- mve.rcbd(traits[i], trt, rep, dfr, maxp)[, trait.est]
+  dfr[, y.est] <- mve.rcbd(vars[i], trt, rep, dfr, maxp)[, y.est]
 } else {
-  dfr[, trait.est] <- dfr[, traits[i]]
+  dfr[, y.est] <- dfr[, vars[i]]
 }
 
 # Get anova table with estimated missing values
 
-at <- suppressWarnings(aov.rcbd(traits[i], trt, rep, dfr, maxp))
+at <- suppressWarnings(aov.rcbd(vars[i], trt, rep, dfr, maxp))
 
 # CV
 
-cv <- (at[3, 3])^0.5 / mean(dfr[, trait.est]) * 100
+cv <- (at[3, 3])^0.5 / mean(dfr[, y.est]) * 100
 
 # ANOVA with subsampling
 
 show.anova.sub <- FALSE
 
 if (!is.null(eu))
-  if (sum(is.na(dfr2[, traits[i]])) == 0 & dim(dfr)[1] < dim(dfr2)[1]) {
-    model2 <- aov(dfr2[, traits[i]] ~ dfr2[, trt] + dfr2[, rep] + dfr2[, eu] %in% dfr2[, trt])
-    model2$terms[[2]] <- traits[i]
+  if (sum(is.na(dfr2[, vars[i]])) == 0 & dim(dfr)[1] < dim(dfr2)[1]) {
+    model2 <- aov(dfr2[, vars[i]] ~ dfr2[, trt] + dfr2[, rep] + dfr2[, eu] %in% dfr2[, trt])
+    model2$terms[[2]] <- vars[i]
     at2 <- anova(model2)
     at2[1, 4] <- at2[1, 3] / at2[3, 3]
     at2[2, 4] <- at2[2, 3] / at2[3, 3]
@@ -53,14 +53,14 @@ It is always good to have some visualization of your data. Below a histogram and
 
 ```{r fig.height = 5, fig.width = 10}
 par(mfrow = c(1, 2))
-hist(dfr[, traits[i]], main = paste("Histogram of", traits[i]), xlab = traits[i])
-boxplot(dfr[, traits[i]], ylab = traits[i])
+hist(dfr[, vars[i]], main = paste("Histogram of", vars[i]), xlab = vars[i])
+boxplot(dfr[, vars[i]], ylab = vars[i])
 ```
 
 `r if(lc$ng < 10) {paste0(" Since the number of " , trt.lab.s, " in your experiment is not so large, we can plot the data for each ", trt.lab, ":")}`
 
 ```{r fig.height = 5, fig.width = 10}
-if (lc$ng < 10) msdplot(traits[i], trt, dfr, conf = 1, pch = 4)
+if (lc$ng < 10) msdplot(vars[i], trt, dfr, conf = 1, pch = 4)
 ```
 
 ## {{i+1}}.2. ANOVA
@@ -108,7 +108,7 @@ Any trend in the residuals in the left plot would violate the assumption of inde
 
 ```{r}
 if (at[1, 5] < 0.05 | mc) {
-  means <- dfr[, trait.est]
+  means <- dfr[, y.est]
   agricolae::LSD.test(means, dfr[, trt], at[3, 1], at[3, 3])$groups
 }
 ```
@@ -122,7 +122,7 @@ if (at[1, 5] < 0.05 | mc)
 
 ```{r}
 if (at[1, 5] > 0.05 & !mc)
-    tapply(dfr[, trait.est], dfr[, trt], mean)
+    tapply(dfr[, y.est], dfr[, trt], mean)
 ```
 
 ## {{i+1}}.5. Variance components
@@ -130,7 +130,7 @@ if (at[1, 5] > 0.05 & !mc)
 Below are the variance components for this model, under the assumption that `r trt.lab.s` and blocks are random. Here the model is fitted using REML and missing values are not estimated.
 
 ```{r}
-y <- dfr[, traits[i]]
+y <- dfr[, vars[i]]
 fg <- dfr[, trt]
 fr <- dfr[, rep]
 ff <- as.formula(y ~ (1|fg) + (1|fr))

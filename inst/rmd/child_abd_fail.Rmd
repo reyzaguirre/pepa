@@ -1,5 +1,5 @@
 `r i = {{i}}`
 
-# {{i+1}}. Analysis for trait `r traits[i]`
+# {{i+1}}. Analysis for variable `r vars[i]`
 
 You need at least two checks with at least two valid replications to run ABD.

@@ -17,7 +17,7 @@ output:
     toc: true
     toc_depth: 3
 params: 
-  traits: "no data"
+  vars: "no data"
   geno: "no data"
   rep: "no data"
   dfr: "no data"
@@ -34,7 +34,7 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
-traits <- params$traits
+vars <- params$vars
 geno <- params$geno
 rep <- params$rep
 dfr <- params$dfr
@@ -80,9 +80,9 @@ In this model we assume that the errors are independent and have a normal distri
 ```{r include = FALSE}
 out <- NULL
 
-for (i in 1:length(traits)) {
+for (i in 1:length(vars)) {
   
-  lc <- ck.abd(traits[i], geno, rep, dfr)
+  lc <- ck.abd(vars[i], geno, rep, dfr)
 
   if (lc$nck.2 > 1) {
     out <- c(out, knit_expand('child_abd.Rmd'))

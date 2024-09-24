@@ -1,8 +1,8 @@
 #' Automatic report for a split plot design
 #'
-#' Produces an automatic report for selected traits in an experiment
+#' Produces an automatic report for selected variables in an experiment
 #' with a split-plot or a split-split-plot design.
-#' @param traits The traits to analize.
+#' @param vars The variables to analize.
 #' @param mpf The main plots factor.
 #' @param spf The sub plots factor.
 #' @param sspf The sub sub plot factor (if any).
@@ -38,7 +38,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.spld <- function(traits, mpf, spf, sspf = NULL, rep, dfr, pe = FALSE,
+repo.spld <- function(vars, mpf, spf, sspf = NULL, rep, dfr, pe = FALSE,
                       title = NULL,
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -65,7 +65,7 @@ repo.spld <- function(traits, mpf, spf, sspf = NULL, rep, dfr, pe = FALSE,
   filePDF <- paste0(dirfiles, "/rmd/", fn, ".pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(traits = traits,
+                    params = list(vars = vars,
                                   mpf = mpf,
                                   spf = spf,
                                   sspf = sspf,

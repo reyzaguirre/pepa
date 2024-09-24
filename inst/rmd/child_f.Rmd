@@ -3,11 +3,11 @@
 ```{r}
 # Check design
 
-lc <- ck.f(traits[i], factors, rep, dfr)
+lc <- ck.f(vars[i], factors, rep, dfr)
 
 # Fit a model for assumptions plots
 
-expr <- paste(traits[i], '~', factors[1])
+expr <- paste(vars[i], '~', factors[1])
 for (j in 2:lc$nf)
   expr <- paste(expr, '*', factors[j])
 
@@ -23,27 +23,27 @@ model <- aov(ff, dfr)
 
 # Estimate missing values
 
-trait.est <- paste0(traits[i], ".est")
+y.est <- paste0(vars[i], ".est")
 
 if (lc$nmis > 0) {
-  dfr[, trait.est] <- mve.f(traits[i], factors, rep, dfr, maxp)[, trait.est]
+  dfr[, y.est] <- mve.f(vars[i], factors, rep, dfr, maxp)[, y.est]
 } else {
-  dfr[, trait.est] <- dfr[, traits[i]]
+  dfr[, y.est] <- dfr[, vars[i]]
 }
 
 # Get anova table with estimated missing values
 
-at <- suppressWarnings(aov.f(traits[i], factors, rep, dfr, maxp))
+at <- suppressWarnings(aov.f(vars[i], factors, rep, dfr, maxp))
 
 # CV
 
 rr <- dim(at)[1]
-cv <- (at[rr, 3])^0.5 / mean(dfr[, trait.est]) * 100
+cv <- (at[rr, 3])^0.5 / mean(dfr[, y.est]) * 100
 ```
     
-# {{i+1}}. Analysis for trait `r traits[i]`
+# {{i+1}}. Analysis for variable `r vars[i]`
 
-`r if (lc$nmis == 0) {"There are no missing values for this trait; the design is balanced."}`
+`r if (lc$nmis == 0) {"There are no missing values for this variable; the design is balanced."}`
 
 `r if (lc$nmis > 0) paste0("There are some missing values (", format(lc$pmis * 100, digits = 3), "%) and they have been estimated for the descriptive statistics and ANOVA.")`
 
@@ -53,7 +53,7 @@ cv <- (at[rr, 3])^0.5 / mean(dfr[, trait.est]) * 100
 
 ```{r}
 for (j in 1:lc$nf) {
-  print(tapply(dfr[, trait.est], dfr[, factors[j]], mean))
+  print(tapply(dfr[, y.est], dfr[, factors[j]], mean))
   cat("\n")
 }
 ```
@@ -72,7 +72,7 @@ lf.expr <- paste0(lf.expr, ')')
 
 # Compute means over replications
 
-tapply(dfr[, trait.est], eval(parse(text = lf.expr)), mean)
+tapply(dfr[, y.est], eval(parse(text = lf.expr)), mean)
 ```
 
 ## {{i+1}}.2. ANOVA
@@ -127,7 +127,7 @@ if (is.null(rep)) {
 if (!is.nan(pv.gen) & !is.nan(pv.int)) {
   
   if (nf == 2 & ((pv.gen < 0.05 & pv.int > 0.05) | pe)) {
-    y <- dfr[, trait.est]
+    y <- dfr[, y.est]
     print(agricolae::LSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups)
     cat("\n")
   }
@@ -135,7 +135,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.int)) {
   if (nf == 2 & pv.int < 0.05 | se) {
     for (j in 1:lc$nl[2]) {
       temp <- dfr[dfr[, factors[2]] == unique(dfr[, factors[2]])[j], ]
-      y <- temp[, trait.est]
+      y <- temp[, y.est]
       print(paste("LSD test at", factors[2], unique(dfr[, factors[2]])[j]))
       print(agricolae::LSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
       cat("\n")
@@ -150,7 +150,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.int)) {
 if (!is.nan(pv.gen) & !is.nan(pv.int)) {
 
   if (nf == 2 & ((pv.gen < 0.05 & pv.int > 0.05) | pe)) {
-    y <- dfr[, trait.est]
+    y <- dfr[, y.est]
     print(agricolae::HSD.test(y, dfr[, factors[1]], df.res, ms.res)$groups)
     cat("\n")
   }
@@ -158,7 +158,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.int)) {
   if (nf == 2 & pv.int < 0.05 | se) {
     for (j in 1:lc$nl[2]) {
       temp <- dfr[dfr[, factors[2]] == unique(dfr[, factors[2]])[j], ]
-      y <- temp[, trait.est]
+      y <- temp[, y.est]
       print(paste("HSD Tukey test at", factors[2], unique(dfr[, factors[2]])[j]))
       print(agricolae::HSD.test(y, temp[, factors[1]], df.res, ms.res)$groups)
       cat("\n")
@@ -174,7 +174,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.int)) {
 if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {
   
   if (nf == 2 & ((pv.loc < 0.05 & pv.int > 0.05) | pe)) {
-    y <- dfr[, trait.est]
+    y <- dfr[, y.est]
     print(agricolae::LSD.test(y, dfr[, factors[2]], df.res, ms.res)$groups)
     cat("\n")
   }
@@ -182,7 +182,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {
   if (nf == 2 & (pv.int < 0.05 | se)) {
     for (j in 1:lc$nl[1]) {
       temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
-      y <- temp[, trait.est]
+      y <- temp[, y.est]
       print(paste("LSD test at", factors[1], unique(dfr[, factors[1]])[j]))
       print(agricolae::LSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
       cat("\n")
@@ -198,7 +198,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {
 if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {
   
   if (nf == 2 & ((pv.loc < 0.05 & pv.int > 0.05) | pe)) {
-    y <- dfr[, trait.est]
+    y <- dfr[, y.est]
     print(agricolae::HSD.test(y, dfr[, factors[2]], df.res, ms.res)$groups)
     cat("\n")
   }
@@ -206,7 +206,7 @@ if (!is.nan(pv.gen) & !is.nan(pv.loc) & !is.nan(pv.int)) {
   if (nf == 2 & (pv.int < 0.05 | se)) {
     for (j in 1:lc$nl[1]) {
       temp <- dfr[dfr[, factors[1]] == unique(dfr[, factors[1]])[j], ]
-      y <- temp[, trait.est]
+      y <- temp[, y.est]
       print(paste("HSD Tukey test at", factors[1], unique(dfr[, factors[1]])[j]))
       print(agricolae::HSD.test(y, temp[, factors[2]], df.res, ms.res)$groups)
       cat("\n")

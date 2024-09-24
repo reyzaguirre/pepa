@@ -5,7 +5,7 @@
 \title{Automatic report for a split plot design}
 \usage{
 repo.spld(
-  traits,
+  vars,
   mpf,
   spf,
   sspf = NULL,
@@ -19,7 +19,7 @@ repo.spld(
 )
 }
 \arguments{
-\item{traits}{The traits to analize.}
+\item{vars}{The variables to analize.}
 
 \item{mpf}{The main plots factor.}
 
@@ -49,7 +49,7 @@ It returns an explanation about the split-plot or a split-split-plot design
 fitted model.
 }
 \description{
-Produces an automatic report for selected traits in an experiment
+Produces an automatic report for selected variables in an experiment
 with a split-plot or a split-split-plot design.
 }
 \details{

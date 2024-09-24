@@ -1,8 +1,8 @@
 #' Automatic report for an alpha (0,1) design
 #'
-#' Produces an automatic report for selected traits in an experiment with an
+#' Produces an automatic report for selected variables in an experiment with an
 #' alpha (0,1) design.
-#' @param traits The traits to analize.
+#' @param vars The variables to analize.
 #' @param geno The genotypes.
 #' @param rep The replications.
 #' @param block The blocks.
@@ -29,7 +29,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.a01d <- function(traits, geno, rep, block, k, method = c("REML", "VC"), dfr,
+repo.a01d <- function(vars, geno, rep, block, k, method = c("REML", "VC"), dfr,
                       title = "Automatic report for an alpha (0,1) design",
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -63,7 +63,7 @@ repo.a01d <- function(traits, geno, rep, block, k, method = c("REML", "VC"), dfr
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(traits = traits,
+                    params = list(vars = vars,
                                   geno = geno,
                                   rep = rep,
                                   block = block,

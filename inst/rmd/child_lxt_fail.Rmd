@@ -1,10 +1,10 @@
 `r i = {{i}}`
 
-# {{i}}. Analysis for trait `r traits[i]`
+# {{i}}. Analysis for variable `r vars[i]`
 
 ```{r}
 lc.gd <- ck.lxt(line, tester, dfr)
-lc <- ck.rcbd(traits[i], 'geno', rep, dfr)
+lc <- ck.rcbd(vars[i], 'geno', rep, dfr)
 ```
 
 `r if (!lc.gd$c1) {"There is at least one line that does not appear as parent."}`

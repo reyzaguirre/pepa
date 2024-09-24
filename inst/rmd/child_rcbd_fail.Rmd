@@ -1,9 +1,9 @@
 `r i = {{i}}`
 
-# {{i+1}}. Analysis for trait `r traits[i]`
+# {{i+1}}. Analysis for variable `r vars[i]`
 
 ```{r}
-lc <- ck.rcbd(traits[i], trt, rep, dfr)
+lc <- ck.rcbd(vars[i], trt, rep, dfr)
 ```
 
 `r if (lc$nrep == 1) {"There is only one replication. Analysis is not possible with one replication."}`

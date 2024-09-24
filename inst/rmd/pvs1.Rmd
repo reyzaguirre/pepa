@@ -115,7 +115,7 @@ storp$value <- round(storp$value * 100, 1)
 
 A group of farmers, men and women, and other stakeholders are gathered and, after explanation of the overall objectives of the trial, they are asked: What do you look for in a new variety of potato when the crop is at the flowering/harvest/post-harvest stage? In other words: When do you say that a variety is good or bad, when evaluating at this stage?
 
-A list is compiled of all the criteria mentioned by the different participants (i.e. free listing). Each criterium is listed and written on a paper bag (or card with accompanying container). Then, in order to select the most important traits for farmers a voting process is conducted.
+A list is compiled of all the criteria mentioned by the different participants (i.e. free listing). Each criterium is listed and written on a paper bag (or card with accompanying container). Then, in order to select the most important variables for farmers a voting process is conducted.
 
 Farmers are requested to select the three criteria that each considers the most important with the following scheme. They can give:
 

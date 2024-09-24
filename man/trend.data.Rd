@@ -14,5 +14,5 @@ Dummy data.
 trend.data
 }
 \description{
-Repeated measures data for trait yield.
+Repeated measures data for variable yield.
 }

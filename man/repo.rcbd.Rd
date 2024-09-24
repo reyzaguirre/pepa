@@ -5,7 +5,7 @@
 \title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
 repo.rcbd(
-  traits,
+  vars,
   trt,
   trt.lab = "treatment",
   rep,
@@ -20,7 +20,7 @@ repo.rcbd(
 )
 }
 \arguments{
-\item{traits}{The traits to analize.}
+\item{vars}{The variables to analize.}
 
 \item{trt}{The treatments.}
 
@@ -50,7 +50,7 @@ Other options are \code{"word"} and \code{"pdf"}.}
 It returns an explanation about the RCBD fitted model.
 }
 \description{
-Produces an automatic report for selected traits in an experiment with a RCBD.
+Produces an automatic report for selected variables in an experiment with a RCBD.
 }
 \details{
 It fits a linear model for a RCBD and explains the results.

@@ -34,7 +34,7 @@ pty <- function(x, author = "International Potato Center",
     output <- "df"
   }
   if (type == "numeric") {
-    fileRmd <- paste0(dirfiles, "/rmd/nt.Rmd")  # for numeric traits
+    fileRmd <- paste0(dirfiles, "/rmd/nt.Rmd")  # for numeric variables
     output <- "nt"
   }
   if (sum(type %in% c("aov", "lm")) > 0) {

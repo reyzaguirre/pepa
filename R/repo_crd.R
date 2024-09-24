@@ -1,7 +1,7 @@
 #' Automatic report for a Completely Randomized Design (CRD)
 #'
-#' Produces an automatic report for selected traits in an experiment with a CRD.
-#' @param traits The traits to analize.
+#' Produces an automatic report for selected variables in an experiment with a CRD.
+#' @param vars The variables to analize.
 #' @param trt The treatments.
 #' @param trt.lab The labels for treatments.
 #' @param eu The experimental unit. Must be defined in case of subsamples.
@@ -34,7 +34,7 @@
 #' @importFrom utils browseURL
 #' @export
 
-repo.crd <- function(traits, trt, trt.lab = "treatment", eu = NULL, dfr, mc = FALSE,
+repo.crd <- function(vars, trt, trt.lab = "treatment", eu = NULL, dfr, mc = FALSE,
                      title = "Automatic report for a Completely Randomized Design (CRD)",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -49,7 +49,7 @@ repo.crd <- function(traits, trt, trt.lab = "treatment", eu = NULL, dfr, mc = FA
   filePDF <- paste0(dirfiles, "/rmd/crd.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(traits = traits,
+                    params = list(vars = vars,
                                   trt = trt,
                                   trt.lab = trt.lab,
                                   eu = eu,

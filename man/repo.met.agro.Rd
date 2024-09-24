@@ -5,7 +5,7 @@
 \title{Automatic report for a MET with a RCBD}
 \usage{
 repo.met.agro(
-  traits,
+  vars,
   trt,
   env,
   rep,
@@ -21,7 +21,7 @@ repo.met.agro(
 )
 }
 \arguments{
-\item{traits}{The traits to analize.}
+\item{vars}{The variables to analize.}
 
 \item{trt}{The treatments.}
 
@@ -53,11 +53,11 @@ Otherwise works in server environments.}
 It returns an automatic report about the MET with a RCBD fitted model.
 }
 \description{
-Produces an automatic report for selected traits in a multi environment
+Produces an automatic report for selected variables in a multi environment
 trial (MET) with a RCBD in each environment.
 }
 \details{
-It fits a linear model for a MET with a RCBD for the selected traits.
+It fits a linear model for a MET with a RCBD for the selected variables.
 If data is unbalanced, missing values are estimated up to an specified maximum
 proportion, 10\% by default. Treatments and environments are considered as fixed
 factors while the blocks are considered as random and nested into the environments

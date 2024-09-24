@@ -1,9 +1,9 @@
 `r i = {{i}}`
 
-# {{i+1}}. Analysis for trait `r traits[i]`
+# {{i+1}}. Analysis for variable `r vars[i]`
 
 ```{r}
-lc <- ck.abd(traits[i], geno, rep, dfr)
+lc <- ck.abd(vars[i], geno, rep, dfr)
 
 # Remove checks without data or with only one datum
 
@@ -15,17 +15,17 @@ if (lc$nck.0 > 0 | lc$nck.1 > 0) {
 
 # Remove missing values for DAU.test
 
-temp <- temp[!is.na(temp[, traits[i]]), ]
+temp <- temp[!is.na(temp[, vars[i]]), ]
 
 # Fit model
 
-y <- temp[, traits[i]]
+y <- temp[, vars[i]]
 model <- agricolae::DAU.test(temp[, rep], temp[, geno], y)
 ```
 
 ## {{i+1}}.1. General setting
 
-`r if(lc$nmis == 0 & lc$nmis.ck == 0) {"For this trait there are no missing values."}`
+`r if(lc$nmis == 0 & lc$nmis.ck == 0) {"For this variable there are no missing values."}`
 `r if(lc$nmis == 1) {"There is one genotype with missing value. This genotype has been removed."}`
 `r if(lc$nmis > 1) paste("There are", lc$nmis, "genotypes with missing values. These genotypes have been removed.")`
 `r if(lc$nmis > 0) paste("Therefore, there are", lc$ng - lc$nmis, "genotypes included in the analysis.")`

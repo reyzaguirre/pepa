@@ -17,7 +17,7 @@ output:
     toc: true
     toc_depth: 3
 params: 
-  traits: "no data"
+  vars: "no data"
   mpf: "no data"
   spf: "no data"
   sspf: "no data"
@@ -37,7 +37,7 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
-traits <- params$traits
+vars <- params$vars
 mpf <- params$mpf
 spf <- params$spf
 sspf <- params$sspf
@@ -79,7 +79,7 @@ In this model $(\alpha\delta)_{il}$ is the error term for the main plot factor, 
 
 ```{r include = FALSE}
 out <- NULL
-for (i in 1:length(traits))
+for (i in 1:length(vars))
   out <- c(out, knit_expand('child_spld.Rmd'))
 ```
 
