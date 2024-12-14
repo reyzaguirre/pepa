@@ -2,11 +2,11 @@
 #'
 #' Explain a fitted model for a multi environment trial (MET) with a RCBD
 #' in each environment in plain English.
+#' @param dfr The name of the data frame containing the data.
 #' @param y The variable to analize.
 #' @param geno The genotypes.
 #' @param env The environments.
 #' @param rep The replications.
-#' @param dfr The name of the data frame containing the data.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param author Report author.
 #' @param format The output file format for the report, \code{"html"} by default.
@@ -18,12 +18,12 @@
 #' @return It returns an explanation about the MET with a RCBD fitted model.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' pty.aovmet("y", "geno", "env", "rep", met8x12)
+#' pty.aovmet(met8x12, "y", "geno", "env", "rep")
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-pty.aovmet <- function(y, geno, env, rep, dfr, maxp = 0.1,
+pty.aovmet <- function(dfr, y, geno, env, rep, maxp = 0.1,
                        author = "International Potato Center",
                        format = c("html", "word", "pdf")) {
 
@@ -36,11 +36,11 @@ pty.aovmet <- function(y, geno, env, rep, dfr, maxp = 0.1,
   filePDF <- paste0(dirfiles, "/rmd/aovmet.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(y = y,
+                    params = list(dfr = dfr,
+                                  y = y,
                                   geno = geno,
                                   env = env,
                                   rep = rep,
-                                  dfr = dfr,
                                   maxp = maxp,
                                   author = author))
 

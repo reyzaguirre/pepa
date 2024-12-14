@@ -5,17 +5,19 @@
 \title{Pepa tells you about a MET with a RCBD}
 \usage{
 pty.aovmet(
+  dfr,
   y,
   geno,
   env,
   rep,
-  dfr,
   maxp = 0.1,
   author = "International Potato Center",
   format = c("html", "word", "pdf")
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame containing the data.}
+
 \item{y}{The variable to analize.}
 
 \item{geno}{The genotypes.}
@@ -23,8 +25,6 @@ pty.aovmet(
 \item{env}{The environments.}
 
 \item{rep}{The replications.}
-
-\item{dfr}{The name of the data frame containing the data.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
@@ -47,7 +47,7 @@ proportion, 10\% by default. Genotypes and environments are considered as fixed
 factors while the blocks are considered as random and nested into the environments.
 }
 \examples{
-pty.aovmet("y", "geno", "env", "rep", met8x12)
+pty.aovmet(met8x12, "y", "geno", "env", "rep")
 }
 \author{
 Raul Eyzaguirre.

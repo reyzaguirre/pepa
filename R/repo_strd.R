@@ -2,11 +2,11 @@
 #'
 #' Produces an automatic report for selected variables in an experiment
 #' with a strip plot design.
+#' @param dfr The name of the data frame.
 #' @param vars The variables to analize.
 #' @param rowf The row factor.
 #' @param colf The column factor.
 #' @param rep The replications.
-#' @param dfr The name of the data frame.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -26,12 +26,12 @@
 #' design <- cr.strd(rowf, colf, 3)$book
 #' # Some random data
 #' design$yield <- rnorm(36, 10)
-#' repo.strd("yield", "A", "B", "block", design)
+#' repo.strd(design, "yield", "A", "B", "block")
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-repo.strd <- function(vars, rowf, colf, rep, dfr,
+repo.strd <- function(dfr, vars, rowf, colf, rep,
                       title = "Automatic report for a strip plot design",
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -64,11 +64,11 @@ repo.strd <- function(vars, rowf, colf, rep, dfr,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(vars = vars,
+                    params = list(dfr = dfr,
+                                  vars = vars,
                                   rowf = rowf,
                                   colf = colf,
                                   rep = rep,
-                                  dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

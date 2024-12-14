@@ -17,13 +17,13 @@ output:
     toc: true
     toc_depth: 3
 params: 
+  dfr: "no data"
   vars: "no data"
   geno: "no data"
   rep: "no data"
   block: "no data"
   k: "no data"
   method: "no data"
-  dfr: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
@@ -37,21 +37,21 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
+dfr <- params$dfr
 vars <- params$vars
 geno <- params$geno
 rep <- params$rep
 block <- params$block
 k <- params$k
 method <- params$method
-dfr <- params$dfr
 
 # Check factors structure
 
-out <- ck.fs(c(geno, block), rep, dfr)
+out <- ck.fs(dfr, c(geno, block), rep)
+dfr <- out$dfr
 ng <- out$nl[[1]]
 nrep <- out$nrep
 nib <- out$nl[[2]]
-dfr <- out$dfr
 nmis.fac <- out$nmis.fac
 
 # Define internal variables

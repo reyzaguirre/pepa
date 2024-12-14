@@ -17,10 +17,10 @@ output:
     toc_depth: 3
     highlight: "tango"
 params:
+  dfr: "no data"
   vars: "no data"
   factors: "no data"
   rep: "no data"
-  dfr: "no data"
   maxp: "no data"
   pe: "no data"
   se: "no data"
@@ -37,17 +37,17 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
+dfr <- params$dfr
 vars <- params$vars
 factors <- params$factors
 rep <- params$rep
-dfr <- params$dfr
 maxp <- params$maxp
 pe <- params$pe
 se <- params$se
 
 # Check factors structure
 
-out <- ck.fs(factors, rep, dfr)
+out <- ck.fs(dfr, factors, rep)
 dfr <- out$dfr
 nf <- out$nf
 nl <- out$nl
@@ -87,7 +87,7 @@ In this model we assume that the errors are independent and have a normal distri
 ```{r include = FALSE}
 out <- NULL
 for (i in 1:length(vars)) {
-  lc <- ck.f(vars[i], factors, rep, dfr)
+  lc <- ck.f(dfr, vars[i], factors, rep)
   if (lc$nt.0 == 0 & lc$nrep > 1 & lc$nt.mult == 0 & lc$pmis <= maxp) {
     out <- c(out, knit_expand('child_f.Rmd'))
   } else {

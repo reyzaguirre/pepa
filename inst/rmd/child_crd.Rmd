@@ -3,7 +3,7 @@
 # {{i+1}}. Analysis for variable `r vars[i]`
 
 ```{r}
-lc <- ck.crd(vars[i], trt, dfr)
+lc <- ck.crd(dfr, vars[i], trt)
 model <- aov(dfr[, vars[i]] ~ dfr[, trt])
 model$terms[[2]] <- vars[i]
 at <- anova(model)
@@ -39,7 +39,7 @@ boxplot(dfr[, vars[i]], ylab = vars[i])
 
 ```{r}
 if (lc$ng < 10)
-  msdplot(vars[i], trt, dfr, conf = 1, xlab = trt.lab.sc, ylab = vars[i], pch = 4)
+  msdplot(dfr, vars[i], trt, conf = 1, xlab = trt.lab.sc, ylab = vars[i], pch = 4)
 ```
 
 ## {{i+1}}.2. ANOVA

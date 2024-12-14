@@ -37,17 +37,17 @@ colnames(dfr)[2:4] <- c("Appe", "Tast", "Text")
 
 ## Count number of men and women
 
-temp <- dfr[dfr$Sex == "M" | dfr$Sex == "Male", ]
-nm <- length(unique(temp$PanelNo))
-temp <- dfr[dfr$Sex == "F" | dfr$Sex == "Female", ]
-nw <- length(unique(temp$PanelNo))
+tmp <- dfr[dfr$Sex == "M" | dfr$Sex == "Male", ]
+nm <- length(unique(tmp$PanelNo))
+tmp <- dfr[dfr$Sex == "F" | dfr$Sex == "Female", ]
+nw <- length(unique(tmp$PanelNo))
 
 ## Aggregate data for principal components
 
-adg <- docomp("sum", c("Appe", "Tast", "Text"), "INSTN", dfr = dfr)
-temp <- docomp("sum", c("Appe", "Tast", "Text"), c("INSTN", "Sex"), dfr = dfr)
-adm <- temp[temp$Sex == "M" | temp$Sex == "Male", ]
-adf <- temp[temp$Sex == "F" | temp$Sex == "Female", ]
+adg <- docomp(dfr, "sum", c("Appe", "Tast", "Text"), "INSTN")
+tmp <- docomp(dfr, "sum", c("Appe", "Tast", "Text"), c("INSTN", "Sex"))
+adm <- tmp[tmp$Sex == "M" | tmp$Sex == "Male", ]
+adf <- tmp[tmp$Sex == "F" | tmp$Sex == "Female", ]
 colnames(adm)[3:5] <- c("Appe-M", "Tast-M", "Text-M")
 colnames(adf)[3:5] <- c("Appe-F", "Tast-F", "Text-F")
 ads <- cbind(adm[, c(1, 3:5)], adf[, 3:5])
@@ -108,17 +108,17 @@ factoextra::fviz_pca(princip, repel = TRUE,
 ## 3.1. Analysis for appearance
 
 ```{r}
-friedman.t('Appe', 'INSTN', 'PanelNo', dfr)
+friedman.t(dfr, 'Appe', 'INSTN', 'PanelNo')
 ```
 
 ## 3.2. Analysis for taste
 
 ```{r}
-friedman.t('Tast', 'INSTN', 'PanelNo', dfr)
+friedman.t(dfr, 'Tast', 'INSTN', 'PanelNo')
 ```
 
 ## 3.3. Analysis for texture
 
 ```{r}
-friedman.t('Text', 'INSTN', 'PanelNo', dfr)
+friedman.t(dfr, 'Text', 'INSTN', 'PanelNo')
 ```

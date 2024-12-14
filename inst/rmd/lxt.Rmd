@@ -17,11 +17,11 @@ output:
     toc: true
     toc_depth: 3
 params: 
+  dfr: "no data"
   vars: "no data"
   line: "no data"
   tester: "no data"
   rep: "no data"
-  dfr: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
@@ -35,11 +35,11 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
+dfr <- params$dfr
 vars <- params$vars
 line <- params$line
 tester <- params$tester
 rep <- params$rep
-dfr <- params$dfr
 
 # Define genotypes id
 
@@ -47,11 +47,11 @@ dfr[, 'geno'] <- paste(dfr[, line], dfr[, tester])
 ```
 
 ```{r include = FALSE}
-lc.gd <- ck.lxt(line, tester, dfr)
+lc.gd <- ck.lxt(dfr, line, tester)
 
 out <- NULL
 for (i in 1:length(vars)) {
-  lc <- ck.rcbd(vars[i], 'geno', rep, dfr)
+  lc <- ck.rcbd(dfr, vars[i], 'geno', rep)
   if (lc$ng.0 == 0 & lc$nrep > 1 & lc$ng.mult == 0 & lc$nmis == 0 &
       lc.gd$c1 == TRUE & lc.gd$c2 == TRUE & lc.gd$c3 == TRUE) {
     out <- c(out, knit_expand('child_lxt.Rmd'))

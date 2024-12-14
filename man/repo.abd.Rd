@@ -5,10 +5,10 @@
 \title{Automatic report for an augmented block design (ABD)}
 \usage{
 repo.abd(
+  dfr,
   vars,
   geno,
   rep,
-  dfr,
   title = "Automatic report for an Augmented Block Design (ABD)",
   subtitle = NULL,
   author = "International Potato Center",
@@ -19,13 +19,13 @@ repo.abd(
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame.}
+
 \item{vars}{The variables to analize.}
 
 \item{geno}{The genotypes.}
 
 \item{rep}{The replications.}
-
-\item{dfr}{The name of the data frame.}
 
 \item{title}{Report title.}
 
@@ -54,12 +54,12 @@ It fits a linear model for an ABD and explains the results.
 }
 \examples{
 # A subset that looks like an ABD
-temp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50, 169, 170), ]
-repo.abd(c("trw", "vw"), "geno", "rep", temp)
+tmp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50, 169, 170), ]
+repo.abd(tmp, c("trw", "vw"), "geno", "rep")
 # With some missing values
-temp[c(1, 2, 3), "trw"] <- NA
-temp[c(1, 10, 15), "vw"] <- NA
-repo.abd(c("nocr", "trw", "vw"), "geno", "rep", temp)
+tmp[c(1, 2, 3), "trw"] <- NA
+tmp[c(1, 10, 15), "vw"] <- NA
+repo.abd(tmp, c("nocr", "trw", "vw"), "geno", "rep")
 }
 \author{
 Raul Eyzaguirre.

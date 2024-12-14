@@ -1,11 +1,11 @@
 #' Automatic report for a Completely Randomized Design (CRD)
 #'
 #' Produces an automatic report for selected variables in an experiment with a CRD.
+#' @param dfr The name of the data frame.
 #' @param vars The variables to analize.
 #' @param trt The treatments.
 #' @param trt.lab The labels for treatments.
 #' @param eu The experimental unit. Must be defined in case of subsamples.
-#' @param dfr The name of the data frame.
 #' @param mc Logical. If \code{"mc = TRUE"} multiple comparison tests are included
 #' even if the factor effect is not significat. Default to \code{"mc = FALSE"}.
 #' @param title Report title.
@@ -26,15 +26,15 @@
 #' @return It returns an explanation about the CRD fitted model.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' repo.crd(c("trw", "vw"), "geno", "genotype", dfr = pjpz09)
+#' repo.crd(pjpz09, c("trw", "vw"), "geno", "genotype")
 #' # With a small data set
-#' temp <- pjpz09[1:18, ]
-#' repo.crd(c("trw", "vw", "crw"), "geno", "genotypes", dfr = temp)
+#' tmp <- pjpz09[1:18, ]
+#' repo.crd(tmp, c("trw", "vw", "crw"), "geno", "genotypes")
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-repo.crd <- function(vars, trt, trt.lab = "treatment", eu = NULL, dfr, mc = FALSE,
+repo.crd <- function(dfr, vars, trt, trt.lab = "treatment", eu = NULL, mc = FALSE,
                      title = "Automatic report for a Completely Randomized Design (CRD)",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -49,11 +49,11 @@ repo.crd <- function(vars, trt, trt.lab = "treatment", eu = NULL, dfr, mc = FALS
   filePDF <- paste0(dirfiles, "/rmd/crd.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(vars = vars,
+                    params = list(dfr = dfr,
+                                  vars = vars,
                                   trt = trt,
                                   trt.lab = trt.lab,
                                   eu = eu,
-                                  dfr = dfr,
                                   mc = mc,
                                   title = title,
                                   subtitle = subtitle,

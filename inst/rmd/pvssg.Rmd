@@ -17,8 +17,8 @@ output:
     toc_depth: 3
     highlight: "tango"
 params:
-  vars: "no data"
   dfr: "no data"
+  vars: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
@@ -32,8 +32,8 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 ## Data
 
-vars <- params$vars
 dfr <- params$dfr
+vars <- params$vars
 rownames(dfr) <- dfr[, "INSTN"]
 dfr <- dfr[, vars]
 

@@ -17,11 +17,11 @@ output:
     toc_depth: 3
     highlight: "tango"
 params:
+  dfr: "no data"
   vars: "no data"
   geno: "no data"
   env: "no data"
   rep: "no data"
-  dfr: "no data"
   maxp: "no data"
   pe: "no data"
   se: "no data"
@@ -38,18 +38,18 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
+dfr <- params$dfr
 vars <- params$vars
 geno <- params$geno
 env <- params$env
 rep <- params$rep
-dfr <- params$dfr
 maxp <- params$maxp
 pe <- params$pe
 se <- params$se
 
 # Check factors structure
 
-out <- ck.fs(c(geno, env), rep, dfr)
+out <- ck.fs(dfr, c(geno, env), rep)
 dfr <- out$dfr
 nl <- out$nl
 nrep <- out$nrep
@@ -86,7 +86,7 @@ In this model we assume that the errors are independent and have a normal distri
 ```{r include = FALSE}
 out <- NULL
 for (i in 1:length(vars)) {
-  lc <- ck.f(vars[i], c(geno, env), rep, dfr)
+  lc <- ck.f(dfr, vars[i], c(geno, env), rep)
   if (lc$nt.0 == 0 & lc$nrep > 1 & lc$nt.mult == 0 & lc$pmis <= maxp) {
     out <- c(out, knit_expand('child_met.Rmd'))
   } else {

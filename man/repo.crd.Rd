@@ -5,11 +5,11 @@
 \title{Automatic report for a Completely Randomized Design (CRD)}
 \usage{
 repo.crd(
+  dfr,
   vars,
   trt,
   trt.lab = "treatment",
   eu = NULL,
-  dfr,
   mc = FALSE,
   title = "Automatic report for a Completely Randomized Design (CRD)",
   subtitle = NULL,
@@ -18,6 +18,8 @@ repo.crd(
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame.}
+
 \item{vars}{The variables to analize.}
 
 \item{trt}{The treatments.}
@@ -25,8 +27,6 @@ repo.crd(
 \item{trt.lab}{The labels for treatments.}
 
 \item{eu}{The experimental unit. Must be defined in case of subsamples.}
-
-\item{dfr}{The name of the data frame.}
 
 \item{mc}{Logical. If \code{"mc = TRUE"} multiple comparison tests are included
 even if the factor effect is not significat. Default to \code{"mc = FALSE"}.}
@@ -59,10 +59,10 @@ Under the assumption of random effects the model is estimated using REML and the
 variance components are shown.
 }
 \examples{
-repo.crd(c("trw", "vw"), "geno", "genotype", dfr = pjpz09)
+repo.crd(pjpz09, c("trw", "vw"), "geno", "genotype")
 # With a small data set
-temp <- pjpz09[1:18, ]
-repo.crd(c("trw", "vw", "crw"), "geno", "genotypes", dfr = temp)
+tmp <- pjpz09[1:18, ]
+repo.crd(tmp, c("trw", "vw", "crw"), "geno", "genotypes")
 }
 \author{
 Raul Eyzaguirre.

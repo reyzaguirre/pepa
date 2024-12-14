@@ -38,11 +38,11 @@ if (params$form == 3) stage <- "harvest"
 ## Data
 
 dfr <- params$dfr
-temp <- dfr[!is.na(dfr$MSGLO), ]
-nrm <- length(unique(temp$REP))
-temp <- dfr[!is.na(dfr$BSGLO), ]
-nrb <- length(unique(temp$REP))
-ds <- docomp("sum", c("MSM", "MSWM", "MSGLO", "BSM", "BSWM", "BSGLO"), "INSTN", dfr = dfr)
+tmp <- dfr[!is.na(dfr$MSGLO), ]
+nrm <- length(unique(tmp$REP))
+tmp <- dfr[!is.na(dfr$BSGLO), ]
+nrb <- length(unique(tmp$REP))
+ds <- docomp(dfr, "sum", c("MSM", "MSWM", "MSGLO", "BSM", "BSWM", "BSGLO"), "INSTN")
 ds <- tidyr::gather(ds, group, value, MSM:BSGLO)
 ds[ds$group %in% c("MSM", "MSWM", "MSGLO"), "trial"] <- "mother"
 ds[ds$group %in% c("BSM", "BSWM", "BSGLO"), "trial"] <- "baby"
@@ -54,20 +54,20 @@ ds[ds$group %in% c("MSGLO", "BSGLO"), "group"] <- "Global"
 
 moth <- ds[ds$trial == "mother", -4]
 baby <- ds[ds$trial == "baby", -4]
-both <- docomp("sum", "value", c("INSTN", "group"), dfr = ds)
+both <- docomp(ds, "sum", "value", c("INSTN", "group"))
 
 ## Sort by number of votes
 
-temp <- moth[moth$group == "Global", c("INSTN", "value")]
-orden <- temp$INSTN[sort(temp$value, decreasing = TRUE, index.return = TRUE)$ix]
+tmp <- moth[moth$group == "Global", c("INSTN", "value")]
+orden <- tmp$INSTN[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix]
 moth$INSTN <- factor(moth$INSTN, levels = orden)
 
-temp <- baby[baby$group == "Global", c("INSTN", "value")]
-orden <- temp$INSTN[sort(temp$value, decreasing = TRUE, index.return = TRUE)$ix]
+tmp <- baby[baby$group == "Global", c("INSTN", "value")]
+orden <- tmp$INSTN[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix]
 baby$INSTN <- factor(baby$INSTN, levels = orden)
 
-temp <- both[both$group == "Global", c("INSTN", "value")]
-orden <- temp$INSTN[sort(temp$value, decreasing = TRUE, index.return = TRUE)$ix]
+tmp <- both[both$group == "Global", c("INSTN", "value")]
+orden <- tmp$INSTN[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix]
 both$INSTN <- factor(both$INSTN, levels = orden)
 
 ## Count number of votes
@@ -92,32 +92,32 @@ nwbaby <- round(nvwbaby / 6 / nrb)
 
 mothp <- moth[moth$group == "Global", ]
 mothp$value <- mothp$value / (nvmmoth + nvwmoth)
-temp <- moth[moth$group != "Global", ]
-temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvmmoth / 2
-temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvwmoth / 2
-temp <- docomp("sum", "value", "INSTN", dfr = temp)
-temp$group <- "Global adjusted"
-mothp <- rbind(mothp, temp)
+tmp <- moth[moth$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmmoth / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwmoth / 2
+tmp <- docomp(tmp, "sum", "value", "INSTN")
+tmp$group <- "Global adjusted"
+mothp <- rbind(mothp, tmp)
 mothp$value <- round(mothp$value * 100, 1)
 
 babyp <- baby[baby$group == "Global", ]
 babyp$value <- babyp$value / (nvmbaby + nvwbaby)
-temp <- baby[baby$group != "Global", ]
-temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvmbaby / 2
-temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvwbaby / 2
-temp <- docomp("sum", "value", "INSTN", dfr = temp)
-temp$group <- "Global adjusted"
-babyp <- rbind(babyp, temp)
+tmp <- baby[baby$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmbaby / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwbaby / 2
+tmp <- docomp(tmp, "sum", "value", "INSTN")
+tmp$group <- "Global adjusted"
+babyp <- rbind(babyp, tmp)
 babyp$value <- round(babyp$value * 100, 1)
 
 bothp <- both[both$group == "Global", ]
 bothp$value <- bothp$value / (nvmboth + nvwboth)
-temp <- both[both$group != "Global", ]
-temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvmboth / 2
-temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvwboth / 2
-temp <- docomp("sum", "value", "INSTN", dfr = temp)
-temp$group <- "Global adjusted"
-bothp <- rbind(bothp, temp)
+tmp <- both[both$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmboth / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwboth / 2
+tmp <- docomp(tmp, "sum", "value", "INSTN")
+tmp$group <- "Global adjusted"
+bothp <- rbind(bothp, tmp)
 bothp$value <- round(bothp$value * 100, 1)
 ```
 
@@ -228,9 +228,9 @@ if (nrb > 0 & nrm > 0) {
 ## 5.1. Men's votes at mother trial
 
 ```{r}
-lc <- ck.rcbd("MSM", "INSTN", "REP", dfr)
+lc <- ck.rcbd(dfr, "MSM", "INSTN", "REP")
 if (lc$nrep > 1 & lc$nmis == 0)
-  friedman.t('MSM', 'INSTN', 'REP', dfr)
+  friedman.t(dfr, 'MSM', 'INSTN', 'REP')
 ```
 
 `r if (lc$nrep <= 1) {"There were no data for men on the mother plot."}`
@@ -239,9 +239,9 @@ if (lc$nrep > 1 & lc$nmis == 0)
 ## 5.2. Women's votes at mother trial
 
 ```{r}
-lc <- ck.rcbd("MSWM", "INSTN", "REP", dfr)
+lc <- ck.rcbd(dfr, "MSWM", "INSTN", "REP")
 if (lc$nrep > 1 & lc$nmis == 0)
-  friedman.t('MSWM', 'INSTN', 'REP', dfr)
+  friedman.t(dfr, 'MSWM', 'INSTN', 'REP')
 ```
 
 `r if (lc$nrep <= 1) {"There were no data for women on the mother plot."}`
@@ -250,9 +250,9 @@ if (lc$nrep > 1 & lc$nmis == 0)
 ## 5.3. Total votes at mother trial
 
 ```{r}
-lc <- ck.rcbd("MSGLO", "INSTN", "REP", dfr)
+lc <- ck.rcbd(dfr, "MSGLO", "INSTN", "REP")
 if (lc$nrep > 1 & lc$nmis == 0)
-  friedman.t('MSGLO', 'INSTN', 'REP', dfr)
+  friedman.t(dfr, 'MSGLO', 'INSTN', 'REP')
 ```
 
 `r if (lc$nrep <= 1) {"There were no data on the mother plot."}`
@@ -261,9 +261,9 @@ if (lc$nrep > 1 & lc$nmis == 0)
 ## 5.4. Men's votes at baby trials
 
 ```{r}
-lc <- ck.rcbd("BSM", "INSTN", "REP", dfr)
+lc <- ck.rcbd(dfr, "BSM", "INSTN", "REP")
 if (lc$nrep > 1 & lc$nmis == 0)
-  friedman.t('BSM', 'INSTN', 'REP', dfr)
+  friedman.t(dfr, 'BSM', 'INSTN', 'REP')
 ```
 
 `r if (lc$nrep <= 1) {"There were no data for men on the baby plots."}`
@@ -272,9 +272,9 @@ if (lc$nrep > 1 & lc$nmis == 0)
 ## 5.5. Women's votes at baby trials
 
 ```{r}
-lc <- ck.rcbd("BSWM", "INSTN", "REP", dfr)
+lc <- ck.rcbd(dfr, "BSWM", "INSTN", "REP")
 if (lc$nrep > 1 & lc$nmis == 0)
-  friedman.t('BSWM', 'INSTN', 'REP', dfr)
+  friedman.t(dfr, 'BSWM', 'INSTN', 'REP')
 ```
 
 `r if (lc$nrep <= 1) {"There were no data for women on the baby plots."}`
@@ -283,9 +283,9 @@ if (lc$nrep > 1 & lc$nmis == 0)
 ## 5.6. Total votes at baby trials
 
 ```{r}
-lc <- ck.rcbd("BSGLO", "INSTN", "REP", dfr)
+lc <- ck.rcbd(dfr, "BSGLO", "INSTN", "REP")
 if (lc$nrep > 1 & lc$nmis == 0)
-  friedman.t('BSGLO', 'INSTN', 'REP', dfr)
+  friedman.t(dfr, 'BSGLO', 'INSTN', 'REP')
 ```
 
 `r if (lc$nrep <= 1) {"There were no data on the baby plots."}`

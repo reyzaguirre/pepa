@@ -5,12 +5,12 @@
 \title{Automatic report for a split plot design}
 \usage{
 repo.spld(
+  dfr,
   vars,
   mpf,
   spf,
   sspf = NULL,
   rep,
-  dfr,
   pe = FALSE,
   title = NULL,
   subtitle = NULL,
@@ -19,6 +19,8 @@ repo.spld(
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame.}
+
 \item{vars}{The variables to analize.}
 
 \item{mpf}{The main plots factor.}
@@ -28,8 +30,6 @@ repo.spld(
 \item{sspf}{The sub sub plot factor (if any).}
 
 \item{rep}{The replications.}
-
-\item{dfr}{The name of the data frame.}
 
 \item{pe}{Logical. If \code{"pe = TRUE"} multiple comparison tests for principal effects
 are included even if interaction is significat, only in the case of 2 factors.
@@ -67,8 +67,8 @@ d2 <- cr.spld(c("mpf", "spf", "sspf"), list(mpf, spf, sspf), 2)$book
 d1$yield <- rnorm(18, 10)
 d2$yield <- rnorm(48, 10)
 # Fit models
-repo.spld("yield", "mpf", "spf", NULL, "block", d1)
-repo.spld("yield", "mpf", "spf", "sspf", "block", d2)
+repo.spld(d1, "yield", "mpf", "spf", NULL, "block")
+repo.spld(d2, "yield", "mpf", "spf", "sspf", "block")
 }
 \author{
 Raul Eyzaguirre.

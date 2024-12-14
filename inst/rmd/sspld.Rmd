@@ -17,12 +17,12 @@ output:
     toc: true
     toc_depth: 3
 params: 
+  dfr: "no data"
   vars: "no data"
   mpf: "no data"
   spf: "no data"
   sspf: "no data"
   rep: "no data"
-  dfr: "no data"
   pe: "no data"
   title: "no data"
   subtitle: "no data"
@@ -37,21 +37,21 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
+dfr <- params$dfr
 vars <- params$vars
 mpf <- params$mpf
 spf <- params$spf
 sspf <- params$sspf
 rep <- params$rep
-dfr <- params$dfr
 
 # Check factors structure
 
-out <- ck.fs(c(mpf, spf, sspf), rep, dfr)
+out <- ck.fs(dfr, c(mpf, spf, sspf), rep)
+dfr <- out$dfr
 nmpf <- out$nl[[1]]
 nspf <- out$nl[[2]]
 nsspf <- out$nl[[3]]
 nrep <- out$nrep
-dfr <- out$dfr
 nmis.fac <- out$nmis.fac
 ```
 

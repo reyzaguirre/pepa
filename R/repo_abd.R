@@ -1,10 +1,10 @@
 #' Automatic report for an augmented block design (ABD)
 #'
 #' Produces an automatic report for selected variables in an experiment with an ABD.
+#' @param dfr The name of the data frame.
 #' @param vars The variables to analize.
 #' @param geno The genotypes.
 #' @param rep The replications.
-#' @param dfr The name of the data frame.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -19,17 +19,17 @@
 #' @author Raul Eyzaguirre.
 #' @examples
 #' # A subset that looks like an ABD
-#' temp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50, 169, 170), ]
-#' repo.abd(c("trw", "vw"), "geno", "rep", temp)
+#' tmp <- pjpz09[c(1, 2, 9, 10, 13, 14, 27, 29, 31, 33, 35, 37, 40, 42, 44, 46, 48, 50, 169, 170), ]
+#' repo.abd(tmp, c("trw", "vw"), "geno", "rep")
 #' # With some missing values
-#' temp[c(1, 2, 3), "trw"] <- NA
-#' temp[c(1, 10, 15), "vw"] <- NA
-#' repo.abd(c("nocr", "trw", "vw"), "geno", "rep", temp)
+#' tmp[c(1, 2, 3), "trw"] <- NA
+#' tmp[c(1, 10, 15), "vw"] <- NA
+#' repo.abd(tmp, c("nocr", "trw", "vw"), "geno", "rep")
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-repo.abd <- function(vars, geno, rep, dfr,
+repo.abd <- function(dfr, vars, geno, rep,
                      title = "Automatic report for an Augmented Block Design (ABD)",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -62,10 +62,10 @@ repo.abd <- function(vars, geno, rep, dfr,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(vars = vars,
+                    params = list(dfr = dfr,
+                                  vars = vars,
                                   geno = geno,
                                   rep = rep,
-                                  dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

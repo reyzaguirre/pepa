@@ -5,13 +5,13 @@
 \title{Automatic report for an alpha (0,1) design}
 \usage{
 repo.a01d(
+  dfr,
   vars,
   geno,
   rep,
   block,
   k,
   method = c("REML", "VC"),
-  dfr,
   title = "Automatic report for an alpha (0,1) design",
   subtitle = NULL,
   author = "International Potato Center",
@@ -22,6 +22,8 @@ repo.a01d(
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame.}
+
 \item{vars}{The variables to analize.}
 
 \item{geno}{The genotypes.}
@@ -33,8 +35,6 @@ repo.a01d(
 \item{k}{The size of the blocks.}
 
 \item{method}{The estimation method, REML or VC (Variance Components).}
-
-\item{dfr}{The name of the data frame.}
 
 \item{title}{Report title.}
 
@@ -65,7 +65,7 @@ An alpha (0,1) design is an incomplete block design that is resolvable.
 In a resolvable design the incomplete blocks group together in complete replications.
 }
 \examples{
-repo.a01d("yield", "geno", "rep", "block", 3, dfr = a01data)
+repo.a01d(a01data, "yield", "geno", "rep", "block", 3)
 }
 \author{
 Raul Eyzaguirre.

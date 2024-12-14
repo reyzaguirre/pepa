@@ -2,13 +2,13 @@
 #'
 #' Produces an automatic report for selected variables in an experiment with an
 #' alpha (0,1) design.
+#' @param dfr The name of the data frame.
 #' @param vars The variables to analize.
 #' @param geno The genotypes.
 #' @param rep The replications.
 #' @param block The blocks.
 #' @param k The size of the blocks.
 #' @param method The estimation method, REML or VC (Variance Components).
-#' @param dfr The name of the data frame.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -24,12 +24,12 @@
 #' @return It returns an explanation about the alpha (0,1) design fitted model.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' repo.a01d("yield", "geno", "rep", "block", 3, dfr = a01data)
+#' repo.a01d(a01data, "yield", "geno", "rep", "block", 3)
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-repo.a01d <- function(vars, geno, rep, block, k, method = c("REML", "VC"), dfr,
+repo.a01d <- function(dfr, vars, geno, rep, block, k, method = c("REML", "VC"),
                       title = "Automatic report for an alpha (0,1) design",
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -63,13 +63,13 @@ repo.a01d <- function(vars, geno, rep, block, k, method = c("REML", "VC"), dfr,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(vars = vars,
+                    params = list(dfr = dfr,
+                                  vars = vars,
                                   geno = geno,
                                   rep = rep,
                                   block = block,
                                   k = k,
                                   method = method,
-                                  dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

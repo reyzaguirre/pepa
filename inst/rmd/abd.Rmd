@@ -17,10 +17,10 @@ output:
     toc: true
     toc_depth: 3
 params: 
+  dfr: "no data"
   vars: "no data"
   geno: "no data"
   rep: "no data"
-  dfr: "no data"
   title: "no data"
   subtitle: "no data"
   author: "no data"
@@ -34,22 +34,22 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
+dfr <- params$dfr
 vars <- params$vars
 geno <- params$geno
 rep <- params$rep
-dfr <- params$dfr
 
 # Remove rows with missing values for factors
 
-out <- ck.fs(geno, rep, dfr)
+out <- ck.fs(dfr, geno, rep)
 dfr <- out$dfr
 nmis.fac <- out$nmis.fac
 
 # Identify checks and no checks
 
-temp <- data.frame(table(dfr[, geno]))
-lg.ck <- temp[temp$Freq > 1, 1]
-lg <- temp[temp$Freq == 1, 1]
+tmp <- data.frame(table(dfr[, geno]))
+lg.ck <- tmp[tmp$Freq > 1, 1]
+lg <- tmp[tmp$Freq == 1, 1]
 
 # Number of checks, no checks, and replications
 
@@ -82,7 +82,7 @@ out <- NULL
 
 for (i in 1:length(vars)) {
   
-  lc <- ck.abd(vars[i], geno, rep, dfr)
+  lc <- ck.abd(dfr, vars[i], geno, rep)
 
   if (lc$nck.2 > 1) {
     out <- c(out, knit_expand('child_abd.Rmd'))

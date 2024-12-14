@@ -17,11 +17,11 @@ output:
     toc: true
     toc_depth: 3
 params: 
+  dfr: "no data"
   vars: "no data"
   trt: "no data"
   trt.lab: "no data"
   eu: "no data"
-  dfr: "no data"
   mc: "no data"
   title: "no data"
   subtitle: "no data"
@@ -36,6 +36,7 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
+dfr <- params$dfr
 vars <- params$vars
 trt <- params$trt
 trt.lab <- params$trt.lab
@@ -44,21 +45,20 @@ trt.lab.s <- paste0(trt.lab, "s")
 trt.lab.c <- paste0(toupper(substr(trt.lab, 1, 1)), substr(trt.lab, 2, nct))
 trt.lab.sc <- paste0(toupper(substr(trt.lab, 1, 1)), substr(trt.lab, 2, nct), "s")
 eu <- params$eu
-dfr <- params$dfr
 mc <- params$mc
 
 # Get means if subsamples
 
 if (!is.null(eu)) {
   dfr2 <- dfr
-  dfr <- docomp("mean", vars, c(trt, eu), dfr = dfr)
+  dfr <- docomp(dfr, "mean", vars, c(trt, eu))
 }
 
 # Check factors structure
 
-out <- ck.fs(trt, NULL, dfr)
-nt <- out$nl[[1]]
+out <- ck.fs(dfr, trt, NULL)
 dfr <- out$dfr
+nt <- out$nl[[1]]
 nmis.fac <- out$nmis.fac
 ```
 
@@ -84,7 +84,7 @@ In this model we assume that the errors are independent and have a normal distri
 ```{r include = FALSE}
 out <- NULL
 for (i in 1:length(vars)) {
-  lc <- ck.crd(vars[i], trt, dfr)
+  lc <- ck.crd(dfr, vars[i], trt)
   if (lc$ng.0 == 0 & lc$nrep > 1 & lc$ng > 2) {
     out <- c(out, knit_expand('child_crd.Rmd'))
   } else {

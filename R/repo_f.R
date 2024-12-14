@@ -2,10 +2,10 @@
 #'
 #' Produces an automatic report for selected variables in a factorial experiment with
 #' a CRD or RCBD.
+#' @param dfr The name of the data frame containing the data.
 #' @param vars The variables to analize.
 #' @param factors The factors.
-#' @param rep The replications or blocks, \code{NULL} for a CRD.
-#' @param dfr The name of the data frame containing the data.
+#' @param rep The replications or blocks, default is \code{NULL} for a CRD.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param pe Logical. If \code{"pe = TRUE"} multiple comparison tests for principal effects
 #' are included even if interaction is significat, only in the case of 2 factors.
@@ -26,22 +26,22 @@
 #' @author Raul Eyzaguirre.
 #' @examples
 #' ## Example 1: Two factors factorial
-#' repo.f(c("asc.dw", "asc.fw"), c("geno", "treat"), NULL, asc)
+#' repo.f(asc, c("asc.dw", "asc.fw"), c("geno", "treat"))
 #'
 #' ## Example 2: Three factors factorial
 #' # Create design with 3 factors
 #' fnames <- c('A', 'B', 'C')
 #' flevels <- list(c('a1', 'a2'), c('b1', 'b2'), c('c1', 'c2', 'c3'))
-#' temp <- cr.f(fnames, flevels, 'rcbd', 2, 10)$book
+#' tmp <- cr.f(fnames, flevels, 'rcbd', 2, 10)$book
 #' # Simulate random data
-#' temp$y <- rnorm(24)
+#' tmp$y <- rnorm(24)
 #' # Run report
-#' repo.f('y', c('A', 'B', 'C'), 'block', temp)
+#' repo.f(tmp, 'y', c('A', 'B', 'C'), 'block')
 #' @importFrom agricolae LSD.test HSD.test
 #' @importFrom utils browseURL
 #' @export
 
-repo.f <- function(vars, factors, rep, dfr, maxp = 0.1,
+repo.f <- function(dfr, vars, factors, rep = NULL, maxp = 0.1,
                    pe = FALSE, se = FALSE,
                    title = "Automatic report for a factorial experiment",
                    subtitle = NULL,
@@ -70,10 +70,10 @@ repo.f <- function(vars, factors, rep, dfr, maxp = 0.1,
   filePDF <- paste0(dirfiles, "/rmd/", fn, ".pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(vars = vars,
+                    params = list(dfr = dfr,
+                                  vars = vars,
                                   factors = factors,
                                   rep = rep,
-                                  dfr = dfr,
                                   maxp = maxp,
                                   pe = pe,
                                   se = se,

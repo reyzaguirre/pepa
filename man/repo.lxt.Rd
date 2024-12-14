@@ -5,11 +5,11 @@
 \title{Automatic report for a Line x Tester genetic design.}
 \usage{
 repo.lxt(
+  dfr,
   vars,
   line,
   tester,
   rep,
-  dfr,
   title = "Automatic report for a Line x Tester genetic design",
   subtitle = NULL,
   author = "International Potato Center",
@@ -20,6 +20,8 @@ repo.lxt(
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame.}
+
 \item{vars}{The variables to analize.}
 
 \item{line}{The lines.}
@@ -27,8 +29,6 @@ repo.lxt(
 \item{tester}{The testers.}
 
 \item{rep}{The replications.}
-
-\item{dfr}{The name of the data frame.}
 
 \item{title}{Report title.}
 
@@ -53,7 +53,7 @@ It returns an automatic report for a Line by Tester genetic design.
 Produces an automatic report for a Line x Tester genetic design analysis.
 }
 \examples{
-repo.lxt("yield", "line", "tester", "rep", lxt)
+repo.lxt(lxt, "yield", "line", "tester", "rep")
 }
 \author{
 Raul Eyzaguirre.

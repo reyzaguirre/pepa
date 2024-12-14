@@ -3,7 +3,7 @@
 ```{r}
 # Check design
 
-lc <- ck.f(vars[i], c(geno, env), rep, dfr)
+lc <- ck.f(dfr, vars[i], c(geno, env), rep)
 
 # Fit a model for assumptions plots
 
@@ -15,14 +15,14 @@ model <- aov(dfr[, vars[i]] ~ dfr[, geno] + dfr[, env] +
 y.est <- paste0(vars[i], ".est")
 
 if (lc$nmis > 0) {
-  dfr[, y.est] <- mve.met(vars[i], geno, env, rep, dfr, maxp)[, y.est]
+  dfr[, y.est] <- mve.met(dfr, vars[i], geno, env, rep, maxp)[, y.est]
 } else {
   dfr[, y.est] <- dfr[, vars[i]]
 }
 
 # Get anova table with estimated missing values
 
-at <- suppressWarnings(aov.met(vars[i], geno, env, rep, dfr, maxp))
+at <- suppressWarnings(aov.met(dfr, vars[i], geno, env, rep, maxp))
 
 # CV
 
@@ -93,10 +93,10 @@ if (at[1, 5] < 0.05 & at[4, 5] > 0.05 | pe) {
 
 if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[2]) {
-    temp <- dfr[dfr[, env] == unique(dfr[, env])[j], ]
-    y <- temp[, y.est]
+    tmp <- dfr[dfr[, env] == unique(dfr[, env])[j], ]
+    y <- tmp[, y.est]
     print(paste("LSD test for environment", unique(dfr[, env])[j]))
-    print(agricolae::LSD.test(y, temp[, geno], at[5, 1], at[5, 3])$groups)
+    print(agricolae::LSD.test(y, tmp[, geno], at[5, 1], at[5, 3])$groups)
     cat("\n")
   }
 }
@@ -113,10 +113,10 @@ if (at[1, 5] < 0.05 & at[4, 5] > 0.05 | pe) {
 
 if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[2]) {
-    temp <- dfr[dfr[, env] == unique(dfr[, env])[j], ]
-    y <- temp[, y.est]
+    tmp <- dfr[dfr[, env] == unique(dfr[, env])[j], ]
+    y <- tmp[, y.est]
     print(paste("HSD Tukey test for environment", unique(dfr[, env])[j]))
-    print(agricolae::HSD.test(y, temp[, geno], at[5, 1], at[5, 3])$groups)
+    print(agricolae::HSD.test(y, tmp[, geno], at[5, 1], at[5, 3])$groups)
     cat("\n")
   }
   sec.xxx <- 5
@@ -133,10 +133,10 @@ if (at[2, 5] < 0.05 & at[4, 5] > 0.05 | pe) {
 
 if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[1]) {
-    temp <- dfr[dfr[, geno] == unique(dfr[, geno])[j], ]
-    y <- temp[, y.est]
+    tmp <- dfr[dfr[, geno] == unique(dfr[, geno])[j], ]
+    y <- tmp[, y.est]
     print(paste("LSD test for genotype", unique(dfr[, geno])[j]))
-    print(agricolae::LSD.test(y, temp[, env], at[3, 1], at[3, 3])$groups)
+    print(agricolae::LSD.test(y, tmp[, env], at[3, 1], at[3, 3])$groups)
     cat("\n")
   }
 }
@@ -152,10 +152,10 @@ if (at[2, 5] < 0.05 & at[4, 5] > 0.05 | pe) {
 
 if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[1]) {
-    temp <- dfr[dfr[, geno] == unique(dfr[, geno])[j], ]
-    y <- temp[, y.est]
+    tmp <- dfr[dfr[, geno] == unique(dfr[, geno])[j], ]
+    y <- tmp[, y.est]
     print(paste("HSD Tukey test for genotype", unique(dfr[, geno])[j]))
-    print(agricolae::HSD.test(y, temp[, env], at[3, 1], at[3, 3])$groups)
+    print(agricolae::HSD.test(y, tmp[, env], at[3, 1], at[3, 3])$groups)
     cat("\n")
   }
 }
@@ -204,7 +204,7 @@ With these variance estimates, the broad sense heritability results `r paste0(fo
 
 ```{r fig.align = 'center', fig.width = 8, fig.height = 8}
 if (at[4, 5] < 0.05 & lc$nl[2] > 2) {
-  ammimodel <- suppressWarnings(ammi(y.est, geno, env, rep, dfr))
+  ammimodel <- suppressWarnings(ammi(dfr, y.est, geno, env, rep))
   plot(ammimodel, bp.type = 1)
 }
 ```
@@ -247,7 +247,7 @@ if (at[4, 5] < 0.05 & lc$nl[2] > 2)
 
 ```{r fig.align = 'center', fig.height = 8, fig.width = 8}
 if (at[4, 5] < 0.05 & lc$nl[2] > 2) {
-  ggemodel <- suppressWarnings(ammi(y.est, geno, env, rep, dfr, method = "gge"))
+  ggemodel <- suppressWarnings(ammi(dfr, y.est, geno, env, rep, method = "gge"))
   plot(ggemodel, bp.type = 1)
 }
 ```
@@ -282,7 +282,7 @@ if (at[4, 5] < 0.05 & lc$nl[2] > 2)
 
 ```{r}
 if (at[4, 5] < 0.05 & lc$nl[2] > 2)
-  rsamodel <- suppressWarnings(rsa(vars[i], geno, env, rep, dfr))
+  rsamodel <- suppressWarnings(rsa(dfr, vars[i], geno, env, rep))
 ```
 
 `r if (at[4, 5] < 0.05 & lc$nl[2] > 2) {"#### ANOVA"}`
@@ -321,7 +321,7 @@ if (at[4, 5] < 0.05 & lc$nl[2] > 2)
 
 ```{r fig.align = 'center', fig.height = 8, fig.width = 8}
 if (at[4, 5] < 0.05 & lc$nl[2] > 2) {
-  taimodel <- suppressWarnings(tai(y.est, geno, env, rep, dfr))
+  taimodel <- suppressWarnings(tai(dfr, y.est, geno, env, rep))
   plot(taimodel)
 }
 ```

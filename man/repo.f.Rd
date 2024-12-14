@@ -5,10 +5,10 @@
 \title{Automatic report for a factorial experiment}
 \usage{
 repo.f(
+  dfr,
   vars,
   factors,
-  rep,
-  dfr,
+  rep = NULL,
   maxp = 0.1,
   pe = FALSE,
   se = FALSE,
@@ -19,13 +19,13 @@ repo.f(
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame containing the data.}
+
 \item{vars}{The variables to analize.}
 
 \item{factors}{The factors.}
 
-\item{rep}{The replications or blocks, \code{NULL} for a CRD.}
-
-\item{dfr}{The name of the data frame containing the data.}
+\item{rep}{The replications or blocks, default is \code{NULL} for a CRD.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
@@ -61,17 +61,17 @@ specified maximum proportion, 10\% by default. All factors are considered as fix
 }
 \examples{
 ## Example 1: Two factors factorial
-repo.f(c("asc.dw", "asc.fw"), c("geno", "treat"), NULL, asc)
+repo.f(asc, c("asc.dw", "asc.fw"), c("geno", "treat"))
 
 ## Example 2: Three factors factorial
 # Create design with 3 factors
 fnames <- c('A', 'B', 'C')
 flevels <- list(c('a1', 'a2'), c('b1', 'b2'), c('c1', 'c2', 'c3'))
-temp <- cr.f(fnames, flevels, 'rcbd', 2, 10)$book
+tmp <- cr.f(fnames, flevels, 'rcbd', 2, 10)$book
 # Simulate random data
-temp$y <- rnorm(24)
+tmp$y <- rnorm(24)
 # Run report
-repo.f('y', c('A', 'B', 'C'), 'block', temp)
+repo.f(tmp, 'y', c('A', 'B', 'C'), 'block')
 }
 \author{
 Raul Eyzaguirre.

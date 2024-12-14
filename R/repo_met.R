@@ -2,11 +2,11 @@
 #'
 #' Produces an automatic report for selected variables in a multi environment
 #' trial (MET) with a RCBD in each environment.
+#' @param dfr The name of the data frame containing the data.
 #' @param vars The variables to analize.
 #' @param geno The genotypes.
 #' @param env The environments.
 #' @param rep The replications.
-#' @param dfr The name of the data frame containing the data.
 #' @param maxp Maximum allowed proportion of missing values to estimate, default is 10\%.
 #' @param pe Logical. If \code{"pe = TRUE"} multiple comparison tests for principal effects
 #' are included even if interaction is significat. Default to \code{"pe = FALSE"}.
@@ -29,12 +29,12 @@
 #' @return It returns an automatic report about the MET with a RCBD fitted model.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' repo.met(c("rytha", "fytha"), "geno", "env", "rep", megaclones)
+#' repo.met(megaclones, c("rytha", "fytha"), "geno", "env", "rep")
 #' @importFrom agricolae LSD.test HSD.test
 #' @importFrom utils browseURL
 #' @export
 
-repo.met <- function(vars, geno, env, rep, dfr, maxp = 0.1,
+repo.met <- function(dfr, vars, geno, env, rep, maxp = 0.1,
                      pe = FALSE, se = FALSE,
                      title = "Automatic report for a MET with a RCBD",
                      subtitle = NULL,
@@ -68,11 +68,11 @@ repo.met <- function(vars, geno, env, rep, dfr, maxp = 0.1,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(vars = vars,
+                    params = list(dfr = dfr,
+                                  vars = vars,
                                   geno = geno,
                                   env = env,
                                   rep = rep,
-                                  dfr = dfr,
                                   maxp = maxp,
                                   pe = pe,
                                   se = se,

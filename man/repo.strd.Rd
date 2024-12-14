@@ -5,11 +5,11 @@
 \title{Automatic report for a strip plot design}
 \usage{
 repo.strd(
+  dfr,
   vars,
   rowf,
   colf,
   rep,
-  dfr,
   title = "Automatic report for a strip plot design",
   subtitle = NULL,
   author = "International Potato Center",
@@ -20,6 +20,8 @@ repo.strd(
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame.}
+
 \item{vars}{The variables to analize.}
 
 \item{rowf}{The row factor.}
@@ -27,8 +29,6 @@ repo.strd(
 \item{colf}{The column factor.}
 
 \item{rep}{The replications.}
-
-\item{dfr}{The name of the data frame.}
 
 \item{title}{Report title.}
 
@@ -63,7 +63,7 @@ colf <- paste0("cf", 1:4)
 design <- cr.strd(rowf, colf, 3)$book
 # Some random data
 design$yield <- rnorm(36, 10)
-repo.strd("yield", "A", "B", "block", design)
+repo.strd(design, "yield", "A", "B", "block")
 }
 \author{
 Raul Eyzaguirre.

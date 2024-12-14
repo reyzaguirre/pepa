@@ -11,11 +11,11 @@ output:
   word_document:
     highlight: "tango"
 params: 
+  dfr: "no data"
   y: "no data"
   geno: "no data"
   env: "no data"
   rep: "no data"
-  dfr: "no data"
   maxp: "no data"
   author: "no data"
 ---
@@ -26,18 +26,18 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```
 
 ```{r}
+dfr <- params$dfr
 y <- params$y
 geno <- params$geno
 env <- params$env
 rep <- params$rep
-dfr <- params$dfr
 maxp <- params$maxp
 
-lc <- ck.f(y, c(geno, env), rep, dfr)
-at <- suppressWarnings(aov.met(y, geno, env, rep, dfr, maxp))
+lc <- ck.f(dfr, y, c(geno, env), rep)
+at <- suppressWarnings(aov.met(dfr, y, geno, env, rep, maxp))
 if (lc$nmis > 0) {
   y.est <- paste0(y, ".est")
-  dfr[, y] <- mve.met(y, geno, env, rep, dfr, maxp)[, y.est]
+  dfr[, y] <- mve.met(dfr, y, geno, env, rep, maxp)[, y.est]
 }
 model <- aov(dfr[, y] ~ dfr[, geno] + dfr[, env] +
                dfr[, rep] %in% dfr[, env] + dfr[, geno]:dfr[, env])

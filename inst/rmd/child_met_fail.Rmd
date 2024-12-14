@@ -3,7 +3,7 @@
 # {{i+1}}. Analysis for variable `r vars[i]`
 
 ```{r}
-lc <- ck.f(vars[i], c(geno, env), rep, dfr)
+lc <- ck.f(dfr, vars[i], c(geno, env), rep)
 ```
 
 `r if (lc$nrep == 1) {"There is only one replication. Analysis is not possible with one replication."}`

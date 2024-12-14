@@ -1,8 +1,8 @@
 #' Report for PVS - Global summary
 #'
 #' Produce a report for PVS data global summary sheet.
-#' @param vars A list of variables to be included in the report.
 #' @param dfr A data frame with data for a pvs global summary form.
+#' @param vars A list of variables to be included in the report.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -18,15 +18,15 @@
 #' @author Raul Eyzaguirre.
 #' @examples
 #' vars <- c("NMTP_Mean_mother", "TNTP_Mean_mother", "PPH_Mean_mother", "TTYA_Mean_mother")
-#' repo.pvssg(vars, pvssg)
+#' repo.pvssg(pvssg, vars)
 #' @import ggplot2
 #' @importFrom factoextra fviz_pca
 #' @importFrom magrittr %>%
 #' @importFrom purrr map
 #' @export
 
-repo.pvssg <- function(vars,
-                       dfr,
+repo.pvssg <- function(dfr,
+                       vars,
                        title = "Automatic report for PVS",
                        subtitle = "Global summary data",
                        author = "International Potato Center",
@@ -59,8 +59,8 @@ repo.pvssg <- function(vars,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(vars = vars,
-                                  dfr = dfr,
+                    params = list(dfr = dfr,
+                                  vars = vars,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

@@ -5,12 +5,12 @@
 \title{Automatic report for a Randomized Complete Block Design (RCBD)}
 \usage{
 repo.rcbd(
+  dfr,
   vars,
   trt,
   trt.lab = "treatment",
   rep,
   eu = NULL,
-  dfr,
   maxp = 0.1,
   mc = FALSE,
   title = "Automatic report for a Randomized Complete Block Design (RCBD)",
@@ -20,6 +20,8 @@ repo.rcbd(
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame.}
+
 \item{vars}{The variables to analize.}
 
 \item{trt}{The treatments.}
@@ -29,8 +31,6 @@ repo.rcbd(
 \item{rep}{The replications.}
 
 \item{eu}{The experimental unit. Must be defined in case of subsamples.}
-
-\item{dfr}{The name of the data frame.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
@@ -68,10 +68,10 @@ Under the assumption of random effects the model is estimated using REML and the
 variance components are shown. Missing values are not estimated in this case.
 }
 \examples{
-repo.rcbd(c("trw", "vw"), "geno", "genotype", "rep", dfr = pjpz09)
+repo.rcbd(pjpz09, c("trw", "vw"), "geno", "genotype", "rep")
 # With a small data set
-temp <- pjpz09[1:18, ]
-repo.rcbd(c("trw", "vw", "crw"), "geno", "genotype", "rep", dfr = temp)
+tmp <- pjpz09[1:18, ]
+repo.rcbd(tmp, c("trw", "vw", "crw"), "geno", "genotype", "rep")
 }
 \author{
 Raul Eyzaguirre.

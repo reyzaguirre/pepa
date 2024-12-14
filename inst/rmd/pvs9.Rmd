@@ -36,13 +36,13 @@ dfr <- params$dfr
 dfr <- dfr[, c("REP", "INSTN", "STYPE", "SCORE_MEN", "SCORE_WOMEN", "SCORE_GLOBAL")]
 colnames(dfr)[4:6] <- c("Men", "Women", "Global")
 nr <- length(unique(dfr$REP))
-ds <- docomp("sum", c("Men", "Women", "Global"), "INSTN", dfr = dfr)
+ds <- docomp(dfr, "sum", c("Men", "Women", "Global"), "INSTN")
 ds <- tidyr::gather(ds, group, value, Men:Global)
 
 ## Sort by number of votes
 
-temp <- ds[ds$group == "Global", c("INSTN", "value")]
-orden <- temp$INSTN[sort(temp$value, decreasing = TRUE, index.return = TRUE)$ix]
+tmp <- ds[ds$group == "Global", c("INSTN", "value")]
+orden <- tmp$INSTN[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix]
 ds$INSTN <- factor(ds$INSTN, levels = orden)
 
 ## Count number of votes
@@ -59,12 +59,12 @@ nw <- round(nvw / 6 / nr)
 
 dsp <- ds[ds$group == "Global", ]
 dsp$value <- dsp$value / (nvm + nvw)
-temp <- ds[ds$group != "Global", ]
-temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvm / 2
-temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvw / 2
-temp <- docomp("sum", "value", "INSTN", dfr = temp)
-temp$group <- "Global adjusted"
-dsp <- rbind(dsp, temp)
+tmp <- ds[ds$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvm / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvw / 2
+tmp <- docomp(tmp, "sum", "value", "INSTN")
+tmp$group <- "Global adjusted"
+dsp <- rbind(dsp, tmp)
 dsp$value <- round(dsp$value * 100, 1)
 ```
 
@@ -108,17 +108,17 @@ ggplot(dsp, aes(x = group, y = value, fill = INSTN)) +
 ## 3.1. Men's votes
 
 ```{r}
-friedman.t('Men', 'INSTN', 'REP', dfr)
+friedman.t(dfr, 'Men', 'INSTN', 'REP')
 ```
 
 ## 3.2. Women's votes
 
 ```{r}
-friedman.t('Women', 'INSTN', 'REP', dfr)
+friedman.t(dfr, 'Women', 'INSTN', 'REP')
 ```
 
 ## 3.3. Total votes
 
 ```{r}
-friedman.t('Global', 'INSTN', 'REP', dfr)
+friedman.t(dfr, 'Global', 'INSTN', 'REP')
 ```

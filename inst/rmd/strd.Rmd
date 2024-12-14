@@ -43,7 +43,7 @@ dfr <- params$dfr
 
 # Check factors structure
 
-out <- ck.fs(c(rowf, colf), rep, dfr)
+out <- ck.fs(dfr, c(rowf, colf), rep)
 nrf <- out$nl[[1]]
 ncf <- out$nl[[2]]
 nrep <- out$nrep

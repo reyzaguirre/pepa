@@ -1,11 +1,11 @@
 #' Automatic report for a Line x Tester genetic design.
 #'
 #' Produces an automatic report for a Line x Tester genetic design analysis.
+#' @param dfr The name of the data frame.
 #' @param vars The variables to analize.
 #' @param line The lines.
 #' @param tester The testers.
 #' @param rep The replications.
-#' @param dfr The name of the data frame.
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
@@ -18,11 +18,11 @@
 #' @return It returns an automatic report for a Line by Tester genetic design.
 #' @author Raul Eyzaguirre.
 #' @examples
-#' repo.lxt("yield", "line", "tester", "rep", lxt)
+#' repo.lxt(lxt, "yield", "line", "tester", "rep")
 #' @importFrom utils browseURL
 #' @export
 
-repo.lxt <- function(vars, line, tester, rep, dfr,
+repo.lxt <- function(dfr, vars, line, tester, rep,
                      title = "Automatic report for a Line x Tester genetic design",
                      subtitle = NULL,
                      author = "International Potato Center",
@@ -55,11 +55,11 @@ repo.lxt <- function(vars, line, tester, rep, dfr,
   }
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(vars = vars,
+                    params = list(dfr = dfr,
+                                  vars = vars,
                                   line = line,
                                   tester = tester,
                                   rep = rep,
-                                  dfr = dfr,
                                   title = title,
                                   subtitle = subtitle,
                                   author = author))

@@ -5,8 +5,8 @@
 \title{Report for PVS - Global summary}
 \usage{
 repo.pvssg(
-  vars,
   dfr,
+  vars,
   title = "Automatic report for PVS",
   subtitle = "Global summary data",
   author = "International Potato Center",
@@ -17,9 +17,9 @@ repo.pvssg(
 )
 }
 \arguments{
-\item{vars}{A list of variables to be included in the report.}
-
 \item{dfr}{A data frame with data for a pvs global summary form.}
+
+\item{vars}{A list of variables to be included in the report.}
 
 \item{title}{Report title.}
 
@@ -49,7 +49,7 @@ implemented by CIP.
 }
 \examples{
 vars <- c("NMTP_Mean_mother", "TNTP_Mean_mother", "PPH_Mean_mother", "TTYA_Mean_mother")
-repo.pvssg(vars, pvssg)
+repo.pvssg(pvssg, vars)
 }
 \author{
 Raul Eyzaguirre.

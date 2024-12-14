@@ -17,12 +17,12 @@ output:
     toc: true
     toc_depth: 3
 params: 
+  dfr: "no data"
   vars: "no data"
   trt: "no data"
   trt.lab: "no data"
   rep: "no data"
   eu: "no data"
-  dfr: "no data"
   maxp: "no data"
   mc: "no data"
   title: "no data"
@@ -38,6 +38,7 @@ opts_chunk$set(echo = FALSE, comment = NA)
 ```{r}
 # Pass arguments
 
+dfr <- params$dfr
 vars <- params$vars
 trt <- params$trt
 trt.lab <- params$trt.lab
@@ -47,7 +48,6 @@ trt.lab.c <- paste0(toupper(substr(trt.lab, 1, 1)), substr(trt.lab, 2, nct))
 trt.lab.sc <- paste0(toupper(substr(trt.lab, 1, 1)), substr(trt.lab, 2, nct), "s")
 rep <- params$rep
 eu <- params$eu
-dfr <- params$dfr
 maxp <- params$maxp
 mc <- params$mc
 
@@ -55,17 +55,16 @@ mc <- params$mc
 
 if (!is.null(eu)) {
   dfr2 <- dfr
-  dfr <- docomp("mean", vars, c(trt, eu), rep, dfr)
+  dfr <- docomp(dfr, "mean", vars, c(trt, eu), rep)
 }
 
 # Check factors structure
 
-out <- ck.fs(trt, rep, dfr)
+out <- ck.fs(dfr, trt, rep)
+dfr <- out$dfr
 nt <- out$nl[[1]]
 nrep <- out$nrep
-dfr <- out$dfr
 nmis.fac <- out$nmis.fac
-
 ```
 
 # 1. Model specification and data description
@@ -90,7 +89,7 @@ In this model we assume that the errors are independent and have a normal distri
 ```{r include = FALSE}
 out <- NULL
 for (i in 1:length(vars)) {
-  lc <- ck.rcbd(vars[i], trt, rep, dfr)
+  lc <- ck.rcbd(dfr, vars[i], trt, rep)
   if (lc$ng.0 == 0 & lc$nrep > 1 & lc$ng.mult == 0 & lc$pmis <= maxp) {
     out <- c(out, knit_expand('child_rcbd.Rmd'))
   } else {

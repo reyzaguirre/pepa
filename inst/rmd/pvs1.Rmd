@@ -46,16 +46,16 @@ stor <- dfr[dfr$phase == "Storage", ]
 
 ## Sort by number of votes
 
-temp <- flow[flow$group == "Global", c("Criteria", "value")]
-orden <- temp$Criteria[sort(temp$value, decreasing = TRUE, index.return = TRUE)$ix]
+tmp <- flow[flow$group == "Global", c("Criteria", "value")]
+orden <- tmp$Criteria[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix]
 flow$Criteria <- factor(flow$Criteria, levels = orden)
 
-temp <- harv[harv$group == "Global", c("Criteria", "value")]
-orden <- temp$Criteria[sort(temp$value, decreasing = TRUE, index.return = TRUE)$ix]
+tmp <- harv[harv$group == "Global", c("Criteria", "value")]
+orden <- tmp$Criteria[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix]
 harv$Criteria <- factor(harv$Criteria, levels = orden)
 
-temp <- stor[stor$group == "Global", c("Criteria", "value")]
-orden <- temp$Criteria[sort(temp$value, decreasing = TRUE, index.return = TRUE)$ix]
+tmp <- stor[stor$group == "Global", c("Criteria", "value")]
+orden <- tmp$Criteria[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix]
 stor$Criteria <- factor(stor$Criteria, levels = orden)
 
 ## Count number of votes
@@ -82,32 +82,32 @@ nwstor <- round(nvwstor / 6)
 
 flowp <- flow[flow$group == "Global", ]
 flowp$value <- flowp$value / (nvmflow + nvwflow)
-temp <- flow[flow$group != "Global", ]
-temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvmflow / 2
-temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvwflow / 2
-temp <- docomp("sum", "value", "Criteria", "phase", temp)
-temp$group <- "Global adjusted"
-flowp <- rbind(flowp, temp)
+tmp <- flow[flow$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmflow / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwflow / 2
+tmp <- docomp(tmp, "sum", "value", "Criteria", "phase")
+tmp$group <- "Global adjusted"
+flowp <- rbind(flowp, tmp)
 flowp$value <- round(flowp$value * 100, 1)
 
 harvp <- harv[harv$group == "Global", ]
 harvp$value <- harvp$value / (nvmharv + nvwharv)
-temp <- harv[harv$group != "Global", ]
-temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvmharv / 2
-temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvwharv / 2
-temp <- docomp("sum", "value", "Criteria", "phase", temp)
-temp$group <- "Global adjusted"
-harvp <- rbind(harvp, temp)
+tmp <- harv[harv$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmharv / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwharv / 2
+tmp <- docomp(tmp, "sum", "value", "Criteria", "phase")
+tmp$group <- "Global adjusted"
+harvp <- rbind(harvp, tmp)
 harvp$value <- round(harvp$value * 100, 1)
 
 storp <- stor[stor$group == "Global", ]
 storp$value <- storp$value / (nvmstor + nvwstor)
-temp <- stor[stor$group != "Global", ]
-temp[temp$group == "Men", "value"] <- temp[temp$group == "Men", "value"] / nvmstor / 2
-temp[temp$group == "Women", "value"] <- temp[temp$group == "Women", "value"] / nvwstor / 2
-temp <- docomp("sum", "value", "Criteria", "phase", temp)
-temp$group <- "Global adjusted"
-storp <- rbind(storp, temp)
+tmp <- stor[stor$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmstor / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwstor / 2
+tmp <- docomp(tmp, "sum", "value", "Criteria", "phase")
+tmp$group <- "Global adjusted"
+storp <- rbind(storp, tmp)
 storp$value <- round(storp$value * 100, 1)
 ```
 

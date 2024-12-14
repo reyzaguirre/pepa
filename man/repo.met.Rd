@@ -5,11 +5,11 @@
 \title{Automatic report for a MET with a RCBD}
 \usage{
 repo.met(
+  dfr,
   vars,
   geno,
   env,
   rep,
-  dfr,
   maxp = 0.1,
   pe = FALSE,
   se = FALSE,
@@ -23,6 +23,8 @@ repo.met(
 )
 }
 \arguments{
+\item{dfr}{The name of the data frame containing the data.}
+
 \item{vars}{The variables to analize.}
 
 \item{geno}{The genotypes.}
@@ -30,8 +32,6 @@ repo.met(
 \item{env}{The environments.}
 
 \item{rep}{The replications.}
-
-\item{dfr}{The name of the data frame containing the data.}
 
 \item{maxp}{Maximum allowed proportion of missing values to estimate, default is 10\%.}
 
@@ -72,7 +72,7 @@ factors while the blocks are considered as random and nested into the environmen
 for ANOVA. For variance components estimation all the factors are treated as random.
 }
 \examples{
-repo.met(c("rytha", "fytha"), "geno", "env", "rep", megaclones)
+repo.met(megaclones, c("rytha", "fytha"), "geno", "env", "rep")
 }
 \author{
 Raul Eyzaguirre.

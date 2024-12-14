@@ -3,8 +3,8 @@
 # {{i}}. Analysis for variable `r vars[i]`
 
 ```{r}
-lc.gd <- ck.lxt(line, tester, dfr)
-lc <- ck.rcbd(vars[i], 'geno', rep, dfr)
+lc.gd <- ck.lxt(dfr, line, tester)
+lc <- ck.rcbd(dfr, vars[i], 'geno', rep)
 ```
 
 `r if (!lc.gd$c1) {"There is at least one line that does not appear as parent."}`

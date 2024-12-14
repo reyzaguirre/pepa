@@ -2,12 +2,12 @@
 #'
 #' Produces an automatic report for selected variables in an experiment
 #' with a split-plot or a split-split-plot design.
+#' @param dfr The name of the data frame.
 #' @param vars The variables to analize.
 #' @param mpf The main plots factor.
 #' @param spf The sub plots factor.
 #' @param sspf The sub sub plot factor (if any).
 #' @param rep The replications.
-#' @param dfr The name of the data frame.
 #' @param pe Logical. If \code{"pe = TRUE"} multiple comparison tests for principal effects
 #' are included even if interaction is significat, only in the case of 2 factors.
 #' Default to \code{"pe = FALSE"}.
@@ -32,13 +32,13 @@
 #' d1$yield <- rnorm(18, 10)
 #' d2$yield <- rnorm(48, 10)
 #' # Fit models
-#' repo.spld("yield", "mpf", "spf", NULL, "block", d1)
-#' repo.spld("yield", "mpf", "spf", "sspf", "block", d2)
+#' repo.spld(d1, "yield", "mpf", "spf", NULL, "block")
+#' repo.spld(d2, "yield", "mpf", "spf", "sspf", "block")
 #' @import st4gi
 #' @importFrom utils browseURL
 #' @export
 
-repo.spld <- function(vars, mpf, spf, sspf = NULL, rep, dfr, pe = FALSE,
+repo.spld <- function(dfr, vars, mpf, spf, sspf = NULL, rep, pe = FALSE,
                       title = NULL,
                       subtitle = NULL,
                       author = "International Potato Center",
@@ -65,12 +65,12 @@ repo.spld <- function(vars, mpf, spf, sspf = NULL, rep, dfr, pe = FALSE,
   filePDF <- paste0(dirfiles, "/rmd/", fn, ".pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
-                    params = list(vars = vars,
+                    params = list(dfr = dfr,
+                                  vars = vars,
                                   mpf = mpf,
                                   spf = spf,
                                   sspf = sspf,
                                   rep = rep,
-                                  dfr = dfr,
                                   pe = pe,
                                   title = title,
                                   subtitle = subtitle,

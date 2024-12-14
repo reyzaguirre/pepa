@@ -3,7 +3,7 @@
 # {{i}}. Analysis for variable `r vars[i]`
 
 ```{r}
-model <- aov.lxt(vars[i], line, tester, rep, dfr)
+model <- aov.lxt(dfr, vars[i], line, tester, rep)
 ```
 
 #### GCA effects for lines plot
@@ -17,7 +17,7 @@ barplot(model$GCA.le[, 1], col = "lightblue", las = 2, cex.names = 0.8, ylab = "
 ```{r}
 # Means
 
-means <- docomp('mean', vars[i], c(line, tester), dfr = dfr)
+means <- docomp(dfr, 'mean', vars[i], c(line, tester))
 hhh <- means[!is.na(means[, line]) & !is.na(means[, tester]), ]
 line.means <- means[!is.na(means[, line]) & is.na(means[, tester]), ]
 test.means <- means[is.na(means[, line]) & !is.na(means[, tester]), ]
