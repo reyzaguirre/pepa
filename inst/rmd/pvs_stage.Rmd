@@ -1,0 +1,311 @@
+---
+title: "`r params$title`"
+subtitle: '`r params$subtitle`'
+author: '`r params$author`'
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output: 
+  html_document:
+    theme: united
+    toc: true
+    toc_depth: 3
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    highlight: zenburn
+  word_document:
+    toc: true
+    toc_depth: 3
+    highlight: "tango"
+params:
+  dfr: "no data"
+  stage: "no data"
+  geno: "no data"
+  rep: "no data"
+  msm: "no data"
+  msw: "no data"
+  msg: "no data"
+  bsm: "no data"
+  bsw: "no data"
+  bsg: "no data"
+  title: "no data"
+  subtitle: "no data"
+  author: "no data"
+---
+
+```{r global_options, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, comment = NA)
+```
+
+```{r}
+## Data
+
+dfr <- params$dfr
+stage <- params$stage
+geno <- params$geno
+rep <- params$rep
+msm <- params$msm
+msw <- params$msw
+msg <- params$msg
+bsm <- params$bsm
+bsw <- params$bsw
+bsg <- params$bsg
+
+mvars <- c(msm, msw, msg)
+bvars <- c(bsm, bsw, bsg)
+
+tmp <- dfr[!is.na(dfr[, msg]), ]
+nrm <- length(unique(tmp[, rep]))
+
+tmp <- dfr[!is.na(dfr[, bsg]), ]
+nrb <- length(unique(tmp[, rep]))
+
+ds <- docomp(dfr, "sum", c(mvars, bvars), geno)
+ds <- tidyr::gather(ds, group, value, c(mvars, bvars))
+ds[ds$group %in% mvars, "trial"] <- "mother"
+ds[ds$group %in% bvars, "trial"] <- "baby"
+ds[ds$group %in% c(msm, bsm), "group"] <- "Men"
+ds[ds$group %in% c(msw, bsw), "group"] <- "Women"
+ds[ds$group %in% c(msg, bsg), "group"] <- "Global"
+
+## Split by trial
+
+moth <- ds[ds$trial == "mother", -4]
+baby <- ds[ds$trial == "baby", -4]
+both <- docomp(ds, "sum", "value", c(geno, "group"))
+
+## Sort by number of votes
+
+tmp <- moth[moth$group == "Global", c(geno, "value")]
+orden <- tmp[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix, geno]
+moth[, geno] <- factor(moth[, geno], levels = orden)
+
+tmp <- baby[baby$group == "Global", c(geno, "value")]
+orden <- tmp[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix, geno]
+baby[, geno] <- factor(baby[, geno], levels = orden)
+  
+tmp <- both[both$group == "Global", c(geno, "value")]
+orden <- tmp[sort(tmp$value, decreasing = TRUE, index.return = TRUE)$ix, geno]
+both[, geno] <- factor(both[, geno], levels = orden)
+  
+## Count number of votes
+
+nvmmoth <- sum(moth[moth$group == "Men", "value"], na.rm = TRUE)
+nvmbaby <- sum(baby[baby$group == "Men", "value"], na.rm = TRUE)
+nvmboth <- nvmmoth + nvmbaby
+
+nvwmoth <- sum(moth[moth$group == "Women", "value"], na.rm = TRUE)
+nvwbaby <- sum(baby[baby$group == "Women", "value"], na.rm = TRUE)
+nvwboth <- nvwmoth + nvwbaby
+
+## Count number of voters
+
+nmmoth <- round(nvmmoth / 6 / nrm)
+nwmoth <- round(nvwmoth / 6 / nrm)
+
+nmbaby <- round(nvmbaby / 6 / nrb)
+nwbaby <- round(nvwbaby / 6 / nrb)
+
+## Compute percentage adjusted by gender
+
+mothp <- moth[moth$group == "Global", ]
+mothp$value <- mothp$value / (nvmmoth + nvwmoth)
+tmp <- moth[moth$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmmoth / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwmoth / 2
+tmp <- docomp(tmp, "sum", "value", geno)
+tmp$group <- "Global adjusted"
+mothp <- rbind(mothp, tmp)
+mothp$value <- round(mothp$value * 100, 1)
+
+babyp <- baby[baby$group == "Global", ]
+babyp$value <- babyp$value / (nvmbaby + nvwbaby)
+tmp <- baby[baby$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmbaby / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwbaby / 2
+tmp <- docomp(tmp, "sum", "value", geno)
+tmp$group <- "Global adjusted"
+babyp <- rbind(babyp, tmp)
+babyp$value <- round(babyp$value * 100, 1)
+  
+bothp <- both[both$group == "Global", ]
+bothp$value <- bothp$value / (nvmboth + nvwboth)
+tmp <- both[both$group != "Global", ]
+tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmboth / 2
+tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwboth / 2
+tmp <- docomp(tmp, "sum", "value", geno)
+tmp$group <- "Global adjusted"
+bothp <- rbind(bothp, tmp)
+bothp$value <- round(bothp$value * 100, 1)
+  
+```
+
+# 1. Voting process for the identification of best genotypes `r stage`
+
+A group of farmers, men and women, and other stakeholders are gathered and, after explanation of the overall objectives of the trial, they are asked to identify their three personal favorite genotypes. Then, they are requested to vote by giving:
+
+- Three votes for the best genotype.
+- Two votes for the second.
+- One vote for the third.
+
+Votes are recorded for men and women.
+
+# 2. Best genotypes at the mother plot
+
+`r if (nrm == 0) {"There were no data for the mother plot."}`
+`r if (nrm > 0) paste("The genotypes have been planted following a randomized complete block design with", nrm, "blocks. A group of men and women voted independently for the best genotypes at each block, so each men and women voted", nrm, "times.")`
+
+```{r fig.height = 5, fig.width = 8}
+if (nrm > 0) {
+  ggplot(moth, aes(x = group, y = value, fill = geno)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the mother plot"),
+         x = "Group", y = "Number of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
+```
+
+`r if (nrm > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
+
+```{r fig.height = 5, fig.width = 8}
+if (nrm > 0) {
+  ggplot(mothp, aes(x = group, y = value, fill = geno)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the mother plot"),
+         subtitle = "Percentages unadjusted and adjusted by gender",
+         x = "Group", y = "Percentage of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
+```
+
+# 3. Best genotypes at the baby plots
+
+`r if (nrb == 0) {"There were no data for baby plots."}`
+`r if (nrb > 0) paste("The genotypes have been planted in", nrb, "baby plots. At each baby plot the complete set of genotypes is planted. A group of men and women voted independently for the best genotypes at each baby plot.")`
+
+```{r fig.height = 5, fig.width = 8}
+if (nrb > 0) {
+  ggplot(baby, aes(x = group, y = value, fill = geno)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the baby plots"), 
+         x = "Group", y = "Number of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)  
+}
+```
+
+`r if (nrb > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
+
+```{r fig.height = 5, fig.width = 8}
+if (nrb > 0) {
+  ggplot(babyp, aes(x = group, y = value, fill = geno)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the baby plots"),
+         subtitle = "Percentages unadjusted and adjusted by gender",
+         x = "Group", y = "Percentage of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
+```
+
+# 4. Best genotypes at both, mother and baby plots
+
+`r if (nrm == 0) {"There were no data for the mother plot."}`
+`r if (nrb == 0) {"There were no data for baby plots."}`
+
+`r if (nrb > 0 & nrm > 0) {"Here all the votes on the mother and baby plots are pooled together."}`
+
+```{r fig.height = 5, fig.width = 8}
+if (nrb > 0 & nrm > 0) {
+  ggplot(both, aes(x = group, y = value, fill = geno)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the mother and baby plots"),
+         x = "Group", y = "Number of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
+```
+
+`r if (nrb > 0 & nrm > 0) {"Below a percentage graph is shown. On the right panel the percentages are adjusted by gender, thus trying to reflect what would have been obtained if the number of men and women would be the same in the sample."}`
+
+```{r fig.height = 5, fig.width = 8}
+if (nrb > 0 & nrm > 0) {
+  ggplot(bothp, aes(x = group, y = value, fill = geno)) +
+    geom_bar(stat = "identity", position = "dodge", color = "black") + 
+    labs(title = paste("Voting for best genotypes at", stage, "stage in the mother and baby plots"),
+         subtitle = "Percentages unadjusted and adjusted by gender",
+         x = "Group", y = "Percentage of votes") +
+    geom_text(aes(label = value), vjust = 1.6, color = "white",
+              position = position_dodge(0.9), size = 3)
+}
+```
+
+# 5. Friedman test for genotypes
+
+## 5.1. Men's votes at mother trial
+
+```{r}
+lc <- ck.rcbd(dfr, msm, geno, rep)
+if (lc$nrep > 1 & lc$nmis == 0)
+  friedman.t(dfr, msm, geno, rep)
+```
+
+`r if (lc$nrep <= 1) {"There were no data for men on the mother plot."}`
+`r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.2. Women's votes at mother trial
+
+```{r}
+lc <- ck.rcbd(dfr, msw, geno, rep)
+if (lc$nrep > 1 & lc$nmis == 0)
+  friedman.t(dfr, msw, geno, rep)
+```
+
+`r if (lc$nrep <= 1) {"There were no data for women on the mother plot."}`
+`r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.3. Total votes at mother trial
+
+```{r}
+lc <- ck.rcbd(dfr, msg, geno, rep)
+if (lc$nrep > 1 & lc$nmis == 0)
+  friedman.t(dfr, msg, geno, rep)
+```
+
+`r if (lc$nrep <= 1) {"There were no data on the mother plot."}`
+`r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.4. Men's votes at baby trials
+
+```{r}
+lc <- ck.rcbd(dfr, bsm, geno, rep)
+if (lc$nrep > 1 & lc$nmis == 0)
+  friedman.t(dfr, bsm, geno, rep)
+```
+
+`r if (lc$nrep <= 1) {"There were no data for men on the baby plots."}`
+`r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.5. Women's votes at baby trials
+
+```{r}
+lc <- ck.rcbd(dfr, bsw, geno, rep)
+if (lc$nrep > 1 & lc$nmis == 0)
+  friedman.t(dfr, bsw, geno, rep)
+```
+
+`r if (lc$nrep <= 1) {"There were no data for women on the baby plots."}`
+`r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+
+## 5.6. Total votes at baby trials
+
+```{r}
+lc <- ck.rcbd(dfr, bsg, geno, rep)
+if (lc$nrep > 1 & lc$nmis == 0)
+  friedman.t(dfr, bsg, geno, rep)
+```
+
+`r if (lc$nrep <= 1) {"There were no data on the baby plots."}`
+`r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
