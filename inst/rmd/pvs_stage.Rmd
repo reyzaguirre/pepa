@@ -118,25 +118,29 @@ tmp$group <- "Global adjusted"
 mothp <- rbind(mothp, tmp)
 mothp$value <- round(mothp$value * 100, 1)
 
-babyp <- baby[baby$group == "Global", ]
-babyp$value <- babyp$value / (nvmbaby + nvwbaby)
-tmp <- baby[baby$group != "Global", ]
-tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmbaby / 2
-tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwbaby / 2
-tmp <- docomp(tmp, "sum", "value", geno)
-tmp$group <- "Global adjusted"
-babyp <- rbind(babyp, tmp)
-babyp$value <- round(babyp$value * 100, 1)
+if (!is.null(bsg)) {
+
+  babyp <- baby[baby$group == "Global", ]
+  babyp$value <- babyp$value / (nvmbaby + nvwbaby)
+  tmp <- baby[baby$group != "Global", ]
+  tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmbaby / 2
+  tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwbaby / 2
+  tmp <- docomp(tmp, "sum", "value", geno)
+  tmp$group <- "Global adjusted"
+  babyp <- rbind(babyp, tmp)
+  babyp$value <- round(babyp$value * 100, 1)
   
-bothp <- both[both$group == "Global", ]
-bothp$value <- bothp$value / (nvmboth + nvwboth)
-tmp <- both[both$group != "Global", ]
-tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmboth / 2
-tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwboth / 2
-tmp <- docomp(tmp, "sum", "value", geno)
-tmp$group <- "Global adjusted"
-bothp <- rbind(bothp, tmp)
-bothp$value <- round(bothp$value * 100, 1)
+  bothp <- both[both$group == "Global", ]
+  bothp$value <- bothp$value / (nvmboth + nvwboth)
+  tmp <- both[both$group != "Global", ]
+  tmp[tmp$group == "Men", "value"] <- tmp[tmp$group == "Men", "value"] / nvmboth / 2
+  tmp[tmp$group == "Women", "value"] <- tmp[tmp$group == "Women", "value"] / nvwboth / 2
+  tmp <- docomp(tmp, "sum", "value", geno)
+  tmp$group <- "Global adjusted"
+  bothp <- rbind(bothp, tmp)
+  bothp$value <- round(bothp$value * 100, 1)
+  
+}
   
 ```
 
@@ -277,35 +281,35 @@ if (lc$nrep > 1 & lc$nmis == 0)
 `r if (lc$nrep <= 1) {"There were no data on the mother plot."}`
 `r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
 
-## 5.4. Men's votes at baby trials
+`r if (!is.null(bsg)) {"## 5.4. Men's votes at baby trials"}`
 
 ```{r}
 lc <- ck.rcbd(dfr, bsm, geno, rep)
-if (lc$nrep > 1 & lc$nmis == 0)
+if (lc$nrep > 1 & lc$nmis == 0 & !is.null(bsg))
   friedman.t(dfr, bsm, geno, rep)
 ```
 
-`r if (lc$nrep <= 1) {"There were no data for men on the baby plots."}`
-`r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+`r if (lc$nrep <= 1 & !is.null(bsg)) {"There were no data for men on the baby plots."}`
+`r if (lc$nrep > 1 & lc$nmis > 0 & !is.null(bsg)) {"There are some missing values. The design must be balanced to run the Friedman test."}`
 
-## 5.5. Women's votes at baby trials
+`r if (!is.null(bsg)) {"## 5.5. Women's votes at baby trials"}`
 
 ```{r}
 lc <- ck.rcbd(dfr, bsw, geno, rep)
-if (lc$nrep > 1 & lc$nmis == 0)
+if (lc$nrep > 1 & lc$nmis == 0 & !is.null(bsg))
   friedman.t(dfr, bsw, geno, rep)
 ```
 
-`r if (lc$nrep <= 1) {"There were no data for women on the baby plots."}`
-`r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+`r if (lc$nrep <= 1 & !is.null(bsg)) {"There were no data for women on the baby plots."}`
+`r if (lc$nrep > 1 & lc$nmis > 0 & !is.null(bsg)) {"There are some missing values. The design must be balanced to run the Friedman test."}`
 
-## 5.6. Total votes at baby trials
+`r if (!is.null(bsg)) {"## 5.6. Total votes at baby trials"}`
 
 ```{r}
 lc <- ck.rcbd(dfr, bsg, geno, rep)
-if (lc$nrep > 1 & lc$nmis == 0)
+if (lc$nrep > 1 & lc$nmis == 0 & !is.null(bsg))
   friedman.t(dfr, bsg, geno, rep)
 ```
 
-`r if (lc$nrep <= 1) {"There were no data on the baby plots."}`
-`r if (lc$nrep > 1 & lc$nmis > 0) {"There are some missing values. The design must be balanced to run the Friedman test."}`
+`r if (lc$nrep <= 1 & !is.null(bsg)) {"There were no data on the baby plots."}`
+`r if (lc$nrep > 1 & lc$nmis > 0 & !is.null(bsg)) {"There are some missing values. The design must be balanced to run the Friedman test."}`

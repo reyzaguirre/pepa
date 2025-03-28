@@ -27,9 +27,10 @@
 #' @importFrom factoextra fviz_pca
 #' @export
 
-repo.pvs.stage <- function(dfr, stage = NULL, geno = 'geno', rep = 'rep',
+repo.pvs.stage <- function(dfr, stage = NULL,
+                           geno = 'geno', rep = 'rep',
                            msm = 'msm', msw = 'msw', msg = 'msg',
-                           bsm = 'bsm', bsw = 'bsw', bsg = 'bsg',
+                           bsm = NULL, bsw = NULL, bsg = NULL,
                            title = "Automatic report for PVS",
                            subtitle = "Best genotypes at",
                            author = "International Potato Center",
