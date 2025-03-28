@@ -1,8 +1,8 @@
 Package: pepa
 Type: Package
 Title: Package for the Execution of Pre Cooked Analysis
-Version: 2.0.0
-Date: 2024-09-24
+Version: 2.0.1
+Date: 2025-03-27
 Author: Raul Eyzaguirre
 Contributor: Omar Benites
 Maintainer: Raul Eyzaguirre <R.EYZAGUIRRE@CGIAR.ORG>
