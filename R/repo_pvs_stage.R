@@ -15,7 +15,6 @@
 #' @param title Report title.
 #' @param subtitle Report subtitle.
 #' @param author Report author.
-#' @param filename The name of the output file.
 #' @param format The output file format for the report, \code{"html"} by default.
 #' Other options are \code{"word"} and \code{"pdf"}.
 #' @return It returns an automatic report for the PVS data at different stages:
@@ -35,7 +34,6 @@ repo.pvs.stage <- function(dfr, stage = NULL,
                            title = "Automatic report for PVS",
                            subtitle = "Best genotypes at",
                            author = "International Potato Center",
-                           filename = 'pvs_stage',
                            format = c("html", "word", "pdf")) {
 
   format <- paste0(match.arg(format), "_document")
@@ -43,10 +41,10 @@ repo.pvs.stage <- function(dfr, stage = NULL,
 
   subtitle <- paste(subtitle, stage)
 
-  fileRmd <- paste0(dirfiles, "/rmd/", filename, ".Rmd")
-  fileURL <- paste0(dirfiles, "/rmd/", filename, ".html")
-  fileDOCX <- paste0(dirfiles, "/rmd/", filename, ".docx")
-  filePDF <- paste0(dirfiles, "/rmd/", filename, ".pdf")
+  fileRmd <- paste0(dirfiles, "/rmd/pvs_stage.Rmd")
+  fileURL <- paste0(dirfiles, "/rmd/pvs_stage.html")
+  fileDOCX <- paste0(dirfiles, "/rmd/pvs_stage.docx")
+  filePDF <- paste0(dirfiles, "/rmd/pvs_stage.pdf")
 
   rmarkdown::render(fileRmd, output_format = format,
                     params = list(dfr = dfr,
