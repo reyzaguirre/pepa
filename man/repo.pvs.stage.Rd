@@ -18,6 +18,7 @@ repo.pvs.stage(
   title = "Automatic report for PVS",
   subtitle = "Best genotypes at",
   author = "International Potato Center",
+  filename = "pvs_stage",
   format = c("html", "word", "pdf")
 )
 }
@@ -48,6 +49,8 @@ This is only for titles in the report.}
 \item{subtitle}{Report subtitle.}
 
 \item{author}{Report author.}
+
+\item{filename}{The name of the output file.}
 
 \item{format}{The output file format for the report, \code{"html"} by default.
 Other options are \code{"word"} and \code{"pdf"}.}
