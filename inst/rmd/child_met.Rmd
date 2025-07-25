@@ -95,7 +95,7 @@ if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[2]) {
     tmp <- dfr[dfr[, env] == unique(dfr[, env])[j], ]
     y <- tmp[, y.est]
-    print(paste("LSD test for environment", unique(dfr[, env])[j]))
+    print(paste("LSD test in environment", unique(dfr[, env])[j]))
     print(agricolae::LSD.test(y, tmp[, geno], at[5, 1], at[5, 3])$groups)
     cat("\n")
   }
@@ -115,7 +115,7 @@ if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[2]) {
     tmp <- dfr[dfr[, env] == unique(dfr[, env])[j], ]
     y <- tmp[, y.est]
-    print(paste("HSD Tukey test for environment", unique(dfr[, env])[j]))
+    print(paste("HSD Tukey test in environment", unique(dfr[, env])[j]))
     print(agricolae::HSD.test(y, tmp[, geno], at[5, 1], at[5, 3])$groups)
     cat("\n")
   }
@@ -135,7 +135,7 @@ if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[1]) {
     tmp <- dfr[dfr[, geno] == unique(dfr[, geno])[j], ]
     y <- tmp[, y.est]
-    print(paste("LSD test for genotype", unique(dfr[, geno])[j]))
+    print(paste("LSD test in genotype", unique(dfr[, geno])[j]))
     print(agricolae::LSD.test(y, tmp[, env], at[3, 1], at[3, 3])$groups)
     cat("\n")
   }
@@ -154,7 +154,7 @@ if (at[4, 5] < 0.05 | se) {
   for (j in 1:lc$nl[1]) {
     tmp <- dfr[dfr[, geno] == unique(dfr[, geno])[j], ]
     y <- tmp[, y.est]
-    print(paste("HSD Tukey test for genotype", unique(dfr[, geno])[j]))
+    print(paste("HSD Tukey test in genotype", unique(dfr[, geno])[j]))
     print(agricolae::HSD.test(y, tmp[, env], at[3, 1], at[3, 3])$groups)
     cat("\n")
   }
