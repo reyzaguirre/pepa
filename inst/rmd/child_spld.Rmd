@@ -52,7 +52,7 @@ if (is.null(sspf) & at[5, 5] < 0.05) {
   for (j in 1:nspf) {
     tmp <- dfr[dfr[, spf] == unique(dfr[, spf])[j], ]
     y <- tmp[, vars[i]]
-    print(paste("LSD test for", spf, unique(dfr[, spf])[j]))
+    print(paste("LSD test in", spf, unique(dfr[, spf])[j]))
     print(agricolae::LSD.test(y, tmp[, mpf], at[6, 1], at[6, 3])$groups)
     cat("\n")
   }
@@ -71,7 +71,7 @@ if (is.null(sspf) & at[5, 5] < 0.05) {
   for (j in 1:nspf) {
     tmp <- dfr[dfr[, spf] == unique(dfr[, spf])[j], ]
     y <- tmp[, vars[i]]
-    print(paste("HSD Tukey test for", spf, unique(dfr[, spf])[j]))
+    print(paste("HSD Tukey test in", spf, unique(dfr[, spf])[j]))
     print(agricolae::HSD.test(y, tmp[, mpf], at[6, 1], at[6, 3])$groups)
     cat("\n")
   }
@@ -91,7 +91,7 @@ if (is.null(sspf) & at[5, 5] < 0.05) {
   for (j in 1:nmpf) {
     tmp <- dfr[dfr[, mpf] == unique(dfr[, mpf])[j], ]
     y <- tmp[, vars[i]]
-    print(paste("LSD test for ", mpf, unique(dfr[, mpf])[j]))
+    print(paste("LSD test in ", mpf, unique(dfr[, mpf])[j]))
     print(agricolae::LSD.test(y, tmp[, spf], at[6, 1], at[6, 3])$groups)
     cat("\n")
   }
@@ -111,7 +111,7 @@ if (is.null(sspf) & at[5, 5] < 0.05) {
   for (j in 1:nmpf) {
     tmp <- dfr[dfr[, mpf] == unique(dfr[, mpf])[j], ]
     y <- tmp[, vars[i]]
-    print(paste("HSD Tukey test for ", mpf, unique(dfr[, mpf])[j]))
+    print(paste("HSD Tukey test in ", mpf, unique(dfr[, mpf])[j]))
     print(agricolae::HSD.test(y, tmp[, spf], at[6, 1], at[6, 3])$groups)
     cat("\n")
   }
